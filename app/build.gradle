@@ -5,7 +5,7 @@ android {
     defaultConfig {
         applicationId "cn.foxconn.matthew.mobilesafe"
         minSdkVersion 15
-        targetSdkVersion 26
+        targetSdkVersion 21
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -28,4 +28,6 @@ dependencies {
     //注解框架
     implementation 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+    //工具类
+    //implementation 'org.xutils:xutils:3.5.0'
 }

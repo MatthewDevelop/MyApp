@@ -1,19 +1,29 @@
 package cn.foxconn.matthew.mobilesafe.activity;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.lidroid.xutils.HttpUtils;
+import com.lidroid.xutils.exception.HttpException;
+import com.lidroid.xutils.http.ResponseInfo;
+import com.lidroid.xutils.http.callback.RequestCallBack;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -32,12 +42,16 @@ public class SplashActivity extends AppCompatActivity {
     private static final int TYPE_ERR_NET = 1;
     private static final int TYPE_ERR_URL = 2;
     private static final int TYPE_ERR_JSON = 3;
+    private static final int TYPE_ENTER = 4;
     @BindView(R.id.tv_version)
     TextView tvVersion;
+    @BindView(R.id.text_progress)
+    TextView tvProgress;
     private String mVersionName;
     private int mVersionCode;
     private String mDes;
     private String mDownLoadUrl;
+    //TODO 待优化
     private Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -48,12 +62,18 @@ public class SplashActivity extends AppCompatActivity {
                     break;
                 case TYPE_ERR_NET:
                     Toast.makeText(SplashActivity.this, "网络异常", Toast.LENGTH_SHORT).show();
+                    enterHome();
                     break;
                 case TYPE_ERR_URL:
                     Toast.makeText(SplashActivity.this, "Url异常", Toast.LENGTH_SHORT).show();
+                    enterHome();
                     break;
                 case TYPE_ERR_JSON:
                     Toast.makeText(SplashActivity.this, "解析异常", Toast.LENGTH_SHORT).show();
+                    enterHome();
+                    break;
+                case TYPE_ENTER:
+                    enterHome();
                     break;
                 default:
                     break;
@@ -113,10 +133,9 @@ public class SplashActivity extends AppCompatActivity {
      */
     private void checkVersion() {
         new Thread(new Runnable() {
-
-
             @Override
             public void run() {
+                long startTime = System.currentTimeMillis();
                 Message msg = Message.obtain();
                 HttpURLConnection connection = null;
                 try {
@@ -132,6 +151,7 @@ public class SplashActivity extends AppCompatActivity {
                         String result = StreamUtil.readFromStream(inputStream);
                         //LogUtil.e(TAG,result);
                         JSONObject jsonObject = new JSONObject(result);
+                        //TODO 待优化
                         mVersionName = jsonObject.getString("VersionName");
                         mVersionCode = jsonObject.getInt("VersionCode");
                         mDes = jsonObject.getString("Des");
@@ -140,6 +160,9 @@ public class SplashActivity extends AppCompatActivity {
                         if (mVersionCode > getVersionCode()) {
                             //showUpdateDialog();
                             msg.what = TYPE_UPDATE;
+                        } else {
+                            //enterHome();
+                            msg.what = TYPE_ENTER;
                         }
                     }
                 } catch (MalformedURLException e) {
@@ -152,6 +175,15 @@ public class SplashActivity extends AppCompatActivity {
                     msg.what = TYPE_ERR_JSON;
                     e.printStackTrace();
                 } finally {
+                    long endTime = System.currentTimeMillis();
+                    long timeUsed = endTime - startTime;
+                    if (timeUsed < 2000) {
+                        try {
+                            Thread.sleep(2000 - timeUsed);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
                     mHandler.sendMessage(msg);
                     if (connection != null) {
                         connection.disconnect();
@@ -159,6 +191,52 @@ public class SplashActivity extends AppCompatActivity {
                 }
             }
         }).start();
+    }
+
+    /**
+     * 跳转主页面
+     */
+    private void enterHome() {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
+    /**
+     * 下载更新并安装
+     */
+    private void downloadUpdate() {
+        if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
+            tvProgress.setVisibility(View.VISIBLE);
+            String target = Environment.getExternalStorageDirectory() + "/update.apk";
+            HttpUtils httpUtils = new HttpUtils();
+            httpUtils.download(mDownLoadUrl, target, new RequestCallBack<File>() {
+
+                @Override
+                public void onLoading(long total, long current, boolean isUploading) {
+                    super.onLoading(total, current, isUploading);
+                    LogUtil.e(TAG, "current:" + current + ", total:" + total);
+                    tvProgress.setText("下载进度："+current*100/total+"%");
+                }
+
+                @Override
+                public void onSuccess(ResponseInfo<File> responseInfo) {
+                    LogUtil.e(TAG, "成功");
+                    Intent intent=new Intent(Intent.ACTION_VIEW);
+                    intent.addCategory(Intent.CATEGORY_DEFAULT);
+                    intent.setDataAndType(Uri.fromFile(responseInfo.result),
+                            "application/vnd.android.package-archive");
+                    startActivity(intent);
+                }
+
+                @Override
+                public void onFailure(HttpException e, String s) {
+                    LogUtil.e(TAG, "失败");
+                }
+            });
+        } else {
+            Toast.makeText(this, "设备没有Sdcard", Toast.LENGTH_SHORT).show();
+        }
     }
 
     /**
@@ -171,10 +249,15 @@ public class SplashActivity extends AppCompatActivity {
         builder.setPositiveButton("立即更新", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-
+                downloadUpdate();
             }
         });
-        builder.setNegativeButton("以后再说", null);
+        builder.setNegativeButton("以后再说", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                enterHome();
+            }
+        });
         builder.show();
     }
 }
