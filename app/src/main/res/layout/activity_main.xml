@@ -1,12 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="50dp"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="22sp"
         android:gravity="center"
-        android:text="Hello World"/>
+        android:background="@color/colorAccent"
+        android:text="功能列表"/>
+
+    <cn.foxconn.matthew.mobilesafe.view.FocusTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:ellipsize="marquee"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:singleLine="true"
+        android:text="这是一个滚动条~这是一个滚动条~这是一个滚动条~这是一个滚动条~这是一个滚动条~"/>
+
+    <GridView
+        android:id="@+id/gridView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="20dp"
+        android:layout_weight="1"
+        android:numColumns="3"
+        android:verticalSpacing="20dp"
+        />
 
 </LinearLayout>

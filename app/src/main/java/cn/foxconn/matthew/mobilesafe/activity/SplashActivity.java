@@ -226,7 +226,9 @@ public class SplashActivity extends AppCompatActivity {
                     intent.addCategory(Intent.CATEGORY_DEFAULT);
                     intent.setDataAndType(Uri.fromFile(responseInfo.result),
                             "application/vnd.android.package-archive");
-                    startActivity(intent);
+//                    startActivity(intent);
+                    //用户取消安装会回掉onActivityResult
+                    startActivityForResult(intent,0);
                 }
 
                 @Override
@@ -240,9 +242,22 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     /**
+     * activity跳转回调
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        enterHome();
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    /**
      * 升级对话框
      */
     private void showUpdateDialog() {
+        //使用getApplicationContext会出错
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("最新版本：" + mVersionName);
         builder.setMessage(mDes);
@@ -255,6 +270,12 @@ public class SplashActivity extends AppCompatActivity {
         builder.setNegativeButton("以后再说", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
+                enterHome();
+            }
+        });
+        builder.setOnCancelListener(new DialogInterface.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialog) {
                 enterHome();
             }
         });
