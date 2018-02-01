@@ -5,21 +5,18 @@
     android:orientation="vertical">
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="22sp"
-        android:gravity="center"
-        android:background="@color/colorAccent"
+        style="@style/TitleStyle"
         android:text="功能列表"/>
 
-    <cn.foxconn.matthew.mobilesafe.view.FocusTextView
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="16sp"
         android:ellipsize="marquee"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         android:singleLine="true"
         android:text="这是一个滚动条~这是一个滚动条~这是一个滚动条~这是一个滚动条~这是一个滚动条~"/>
 

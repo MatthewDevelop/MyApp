@@ -2,6 +2,7 @@ package cn.foxconn.matthew.mobilesafe.activity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -81,13 +82,20 @@ public class SplashActivity extends AppCompatActivity {
         }
     };
 
+    private SharedPreferences mPref;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         ButterKnife.bind(this);
         tvVersion.setText("版本号：" + getVersionName());
-        checkVersion();
+        mPref=getSharedPreferences("Settings",MODE_PRIVATE);
+        boolean isAutoUpdate=mPref.getBoolean("auto_update",true);
+        if(isAutoUpdate) {
+            checkVersion();
+        }else {
+            mHandler.sendEmptyMessageDelayed(TYPE_ENTER,2000);
+        }
     }
 
     /**

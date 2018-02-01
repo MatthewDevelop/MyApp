@@ -3,6 +3,7 @@ package cn.foxconn.matthew.mobilesafe.utils;
 import android.util.Log;
 
 /**
+ * 控制log输出
  * Created by Matthew on 2017/11/4.
  */
 
