@@ -13,6 +13,8 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -48,6 +50,8 @@ public class SplashActivity extends AppCompatActivity {
     TextView tvVersion;
     @BindView(R.id.text_progress)
     TextView tvProgress;
+    @BindView(R.id.rl_root)
+    RelativeLayout rl_root;
     private String mVersionName;
     private int mVersionCode;
     private String mDes;
@@ -96,6 +100,10 @@ public class SplashActivity extends AppCompatActivity {
         }else {
             mHandler.sendEmptyMessageDelayed(TYPE_ENTER,2000);
         }
+
+        AlphaAnimation anim=new AlphaAnimation(0.3f,1);
+        anim.setDuration(2000);
+        rl_root.startAnimation(anim);
     }
 
     /**

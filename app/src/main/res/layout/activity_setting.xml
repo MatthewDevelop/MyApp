@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -11,6 +12,9 @@
     <cn.foxconn.matthew.mobilesafe.view.SettingItemView
         android:id="@+id/item_update"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        app:des_off="已关闭"
+        app:des_on="已开启"
+        app:title="自动更新设置" />
 
 </LinearLayout>
