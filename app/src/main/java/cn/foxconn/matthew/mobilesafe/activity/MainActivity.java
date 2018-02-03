@@ -21,6 +21,7 @@ import android.widget.Toast;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import cn.foxconn.matthew.mobilesafe.R;
+import cn.foxconn.matthew.mobilesafe.utils.MD5Util;
 
 /**
  * Created by Matthew on 2018/1/31.
@@ -39,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        preferences = getSharedPreferences("Settings", MODE_PRIVATE);
+        preferences = getSharedPreferences("config", MODE_PRIVATE);
         mGridView.setAdapter(new HomeAdapter());
         mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -72,6 +73,9 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * 密码验证对话框
+     */
     private void showPasswordInputDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         final AlertDialog dialog = builder.create();
@@ -93,9 +97,10 @@ public class MainActivity extends AppCompatActivity {
                 String password = et_password.getText().toString();
                 //判空 null和""
                 if (!TextUtils.isEmpty(password)) {
-                    if (password.equals(localPassword)) {
+                    if (MD5Util.encode(password).equals(localPassword)) {
                         Toast.makeText(MainActivity.this, "登录成功！", Toast.LENGTH_SHORT).show();
                         dialog.dismiss();
+                        startActivity(new Intent(MainActivity.this,LostFindActivity.class));
                     } else {
                         Toast.makeText(MainActivity.this, "密码错误", Toast.LENGTH_SHORT).show();
                     }
@@ -107,6 +112,9 @@ public class MainActivity extends AppCompatActivity {
         dialog.show();
     }
 
+    /**
+     * 密码设置对话框
+     */
     private void showPasswordSetDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         final AlertDialog dialog = builder.create();
@@ -131,8 +139,9 @@ public class MainActivity extends AppCompatActivity {
                 if (!TextUtils.isEmpty(password) && !TextUtils.isEmpty(passwordConfirm)) {
                     if (password.equals(passwordConfirm)) {
                         Toast.makeText(MainActivity.this, "密码设置成功", Toast.LENGTH_SHORT).show();
-                        preferences.edit().putString("password", password).commit();
+                        preferences.edit().putString("password", MD5Util.encode(password)).commit();
                         dialog.dismiss();
+                        startActivity(new Intent(MainActivity.this,LostFindActivity.class));
                     } else {
                         Toast.makeText(MainActivity.this, "两次密码不一致", Toast.LENGTH_SHORT).show();
                     }

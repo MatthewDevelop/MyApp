@@ -21,7 +21,7 @@ public class SettingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
         ButterKnife.bind(this);
-        preferences = getSharedPreferences("Settings", MODE_PRIVATE);
+        preferences = getSharedPreferences("config", MODE_PRIVATE);
         //updateItem.setTitle("自动更新设置");
         boolean isAutoUpdate=preferences.getBoolean("auto_update",true);
         updateItem.setChecked(isAutoUpdate);

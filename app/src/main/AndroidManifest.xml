@@ -23,6 +23,8 @@
         </activity>
         <activity android:name=".activity.MainActivity" />
         <activity android:name=".activity.SettingActivity"/>
+        <activity android:name=".activity.LostFindActivity"/>
+        <activity android:name=".activity.Setup1Activity"/>
     </application>
 
 </manifest>

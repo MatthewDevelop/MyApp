@@ -93,7 +93,7 @@ public class SplashActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
         ButterKnife.bind(this);
         tvVersion.setText("版本号：" + getVersionName());
-        mPref=getSharedPreferences("Settings",MODE_PRIVATE);
+        mPref=getSharedPreferences("config",MODE_PRIVATE);
         boolean isAutoUpdate=mPref.getBoolean("auto_update",true);
         if(isAutoUpdate) {
             checkVersion();
