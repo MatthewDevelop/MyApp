@@ -6,7 +6,11 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import cn.foxconn.matthew.mobilesafe.R;
 
 /**
@@ -16,9 +20,11 @@ import cn.foxconn.matthew.mobilesafe.R;
  */
 
 public class LostFindActivity extends AppCompatActivity {
-
+    @BindView(R.id.tv_protect_num)
+    TextView tvProtectNum;
+    @BindView(R.id.iv_isProtect)
+    ImageView ivProtect;
     private SharedPreferences preferences;
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,6 +32,15 @@ public class LostFindActivity extends AppCompatActivity {
         boolean isConfiged = preferences.getBoolean("configed", false);
         if (isConfiged) {
             setContentView(R.layout.activity_lost_find);
+            ButterKnife.bind(this);
+            String phone=preferences.getString("safe_phone","");
+            tvProtectNum.setText(phone);
+            boolean isProtected=preferences.getBoolean("protect",false);
+            if(isProtected){
+                ivProtect.setImageResource(R.drawable.lock);
+            }else {
+                ivProtect.setImageResource(R.drawable.unlock);
+            }
         } else {
             startActivity(new Intent(this, Setup1Activity.class));
             finish();

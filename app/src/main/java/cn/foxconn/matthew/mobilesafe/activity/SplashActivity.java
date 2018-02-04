@@ -147,6 +147,7 @@ public class SplashActivity extends AppCompatActivity {
     /**
      * 检查更新
      */
+    //TODO android.permission.INTERNET
     private void checkVersion() {
         new Thread(new Runnable() {
             @Override
@@ -221,6 +222,7 @@ public class SplashActivity extends AppCompatActivity {
     /**
      * 下载更新并安装
      */
+    //TODO android.permission.WRITE_EXTERNAL_STORAGE
     private void downloadUpdate() {
         if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
             tvProgress.setVisibility(View.VISIBLE);

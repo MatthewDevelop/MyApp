@@ -7,7 +7,6 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -22,6 +21,7 @@ import android.widget.Toast;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import cn.foxconn.matthew.mobilesafe.R;
+import cn.foxconn.matthew.mobilesafe.test.activity.ContactActivity;
 import cn.foxconn.matthew.mobilesafe.utils.MD5Util;
 
 /**
@@ -37,12 +37,12 @@ public class MainActivity extends AppCompatActivity {
             , "软件管理", "进程管理"
             , "流量统计", "手机杀毒"
             , "缓存清理", "高级工具"
-            , "设置中心"};
+            , "设置中心","测试"};
     int[] imagIds=new int[]{R.drawable.home_safe,R.drawable.home_callmsgsafe
             ,R.drawable.home_apps,R.drawable.home_taskmanager
             ,R.drawable.home_netmanager,R.drawable.home_trojan
             ,R.drawable.home_sysoptimize,R.drawable.home_tools
-            ,R.drawable.home_settings};
+            ,R.drawable.home_settings,R.mipmap.ic_launcher};
     private SharedPreferences preferences;
 
     @Override
@@ -63,6 +63,9 @@ public class MainActivity extends AppCompatActivity {
                     case 8:
                         //设置中心
                         startActivity(new Intent(MainActivity.this, SettingActivity.class));
+                        break;
+                    case 9:
+                        //startActivity(new Intent(MainActivity.this, ContactActivity.class));
                         break;
                 }
             }
