@@ -14,14 +14,20 @@ import cn.foxconn.matthew.mobilesafe.R;
  * @email:guocheng0816@163.com
  */
 
-public class Setup1Activity extends AppCompatActivity {
+public class Setup1Activity extends BaseSetupActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setup1);
     }
 
-    public void onClick(View view){
+    @Override
+    public void showPreviousPage() {
+        //doNothing
+    }
+
+    @Override
+    public void showNextPage() {
         startActivity(new Intent(this,Setup2Activity.class));
         finish();
         //设置跳转动画

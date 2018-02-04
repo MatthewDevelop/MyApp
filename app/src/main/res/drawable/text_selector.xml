@@ -1,10 +1,10 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <!--pressed按下的图片-->
     <item android:state_pressed="true"
-        android:drawable="@drawable/text_shape"/>
+        android:drawable="@drawable/shape_narmal"/>
     <!--focused获取焦点的图片-->
     <item android:state_focused="true"
-        android:drawable="@drawable/text_shape"/>
+        android:drawable="@drawable/shape_narmal"/>
     <!--正常的图片-->
     <item android:drawable="@android:color/transparent"/>
 </selector>

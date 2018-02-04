@@ -72,6 +72,6 @@
         <Button
             android:id="@+id/bt_next"
             style="@style/NextStyle"
-            android:onClick="onClick"/>
+            android:onClick="showNext"/>
     </RelativeLayout>
 </LinearLayout>

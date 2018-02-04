@@ -9,7 +9,7 @@
         android:endColor="@color/green"/>-->
     <!--纯色-->
     <solid
-        android:color="@color/lightgray"/>
+        android:color="@color/gray"/>
 
     <!--边框-->
     <!--<stroke

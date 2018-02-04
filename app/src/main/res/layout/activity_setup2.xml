@@ -65,11 +65,11 @@
         <Button
             android:id="@+id/bt_next"
             style="@style/NextStyle"
-            android:onClick="onClick"/>
+            android:onClick="showNext"/>
 
         <Button
             android:id="@+id/bt_previous"
             style="@style/PreviousStyle"
-            android:onClick="onClick"/>
+            android:onClick="showPrevious"/>
     </RelativeLayout>
 </LinearLayout>

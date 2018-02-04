@@ -20,6 +20,7 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="5dp"
         android:hint="请输入或选择安全号码"/>
 
     <Button
@@ -72,11 +73,11 @@
         <Button
             android:id="@+id/bt_next"
             style="@style/NextStyle"
-            android:onClick="onClick"/>
+            android:onClick="showNext"/>
 
         <Button
             android:id="@+id/bt_previous"
             style="@style/PreviousStyle"
-            android:onClick="onClick"/>
+            android:onClick="showPrevious"/>
     </RelativeLayout>
 </LinearLayout>

@@ -15,6 +15,7 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,7 +33,16 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.gridView)
     GridView mGridView;
 
-    String[] names = new String[]{"手机防盗", "手机防盗", "手机防盗", "手机防盗", "手机防盗", "手机防盗", "手机防盗", "手机防盗", "设置中心"};
+    String[] names = new String[]{"手机防盗", "通讯卫士"
+            , "软件管理", "进程管理"
+            , "流量统计", "手机杀毒"
+            , "缓存清理", "高级工具"
+            , "设置中心"};
+    int[] imagIds=new int[]{R.drawable.home_safe,R.drawable.home_callmsgsafe
+            ,R.drawable.home_apps,R.drawable.home_taskmanager
+            ,R.drawable.home_netmanager,R.drawable.home_trojan
+            ,R.drawable.home_sysoptimize,R.drawable.home_tools
+            ,R.drawable.home_settings};
     private SharedPreferences preferences;
 
     @Override
@@ -176,8 +186,10 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             View view = getLayoutInflater().inflate(R.layout.home_grid_item, parent, false);
-            TextView textView = view.findViewById(R.id.item_name);
-            textView.setText(names[position]);
+            TextView itemName = view.findViewById(R.id.item_name);
+            ImageView itemIcon=view.findViewById(R.id.item_icon);
+            itemName.setText(names[position]);
+            itemIcon.setImageResource(imagIds[position]);
             return view;
         }
     }
