@@ -1,0 +1,10 @@
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--pressed按下的图片-->
+    <item android:state_pressed="true"
+        android:drawable="@color/lightyellow"/>
+    <!--focused获取焦点的图片-->
+    <item android:state_focused="true"
+        android:drawable="@color/lightyellow"/>
+    <!--正常的图片-->
+    <item android:drawable="@color/lightgreen"/>
+</selector>

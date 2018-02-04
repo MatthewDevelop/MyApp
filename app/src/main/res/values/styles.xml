@@ -26,4 +26,27 @@
         <item name="android:layout_marginTop">5dp</item>
     </style>
 
+    <style name="NextStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:layout_marginBottom">10dp</item>
+        <item name="android:layout_marginRight">10dp</item>
+        <item name="android:layout_alignParentBottom">true</item>
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:text">下一步</item>
+        <item name="android:background">@drawable/bt_next_selector</item>
+    </style>
+
+    <style name="PreviousStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:layout_marginBottom">10dp</item>
+        <item name="android:layout_marginLeft">10dp</item>
+        <item name="android:layout_alignParentBottom">true</item>
+        <item name="android:layout_alignParentLeft">true</item>
+        <item name="android:text">上一步</item>
+        <item name="android:background">@drawable/bt_next_selector</item>
+    </style>
 </resources>

@@ -1,36 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
     <TextView
         style="@style/TitleStyle"
-        android:text="1.欢迎使用手机防盗" />
+        android:text="2.手机卡绑定" />
 
     <TextView
         style="@style/ContentStyle"
-        android:text="你的手机卫士：" />
+        android:text="下次重启如果发现SIM卡变化" />
 
     <TextView
         style="@style/ContentStyle"
-        android:drawableLeft="@android:drawable/star_big_on"
-        android:text="SIM卡变更预警" />
+        android:text="就会发送报警短信" />
 
-    <TextView
-        style="@style/ContentStyle"
-        android:drawableLeft="@android:drawable/star_big_on"
-        android:text="GPS追踪" />
-
-    <TextView
-        style="@style/ContentStyle"
-        android:drawableLeft="@android:drawable/star_big_on"
-        android:text="远程销毁数据" />
-
-    <TextView
-        style="@style/ContentStyle"
-        android:drawableLeft="@android:drawable/star_big_on"
-        android:text="远程锁屏" />
+    <cn.foxconn.matthew.mobilesafe.view.SettingItemView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:des_off="未绑定"
+        app:des_on="已绑定"
+        app:title="点击绑定SIM卡" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -41,12 +33,13 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@android:drawable/presence_online" />
+            android:src="@android:drawable/presence_invisible" />
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@android:drawable/presence_invisible" />
+            android:src="@android:drawable/presence_online" />
+
 
         <ImageView
             android:layout_width="wrap_content"
@@ -72,6 +65,11 @@
         <Button
             android:id="@+id/bt_next"
             style="@style/NextStyle"
+            android:onClick="onClick"/>
+
+        <Button
+            android:id="@+id/bt_previous"
+            style="@style/PreviousStyle"
             android:onClick="onClick"/>
     </RelativeLayout>
 </LinearLayout>

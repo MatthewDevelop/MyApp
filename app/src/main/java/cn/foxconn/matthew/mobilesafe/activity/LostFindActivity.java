@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 
 import cn.foxconn.matthew.mobilesafe.R;
 
@@ -28,6 +29,15 @@ public class LostFindActivity extends AppCompatActivity {
         } else {
             startActivity(new Intent(this, Setup1Activity.class));
             finish();
+        }
+    }
+
+    public void onClick(View view){
+        switch (view.getId()){
+            case R.id.reEnter:
+                startActivity(new Intent(this,Setup1Activity.class));
+                finish();
+                break;
         }
     }
 }
