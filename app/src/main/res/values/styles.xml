@@ -8,6 +8,26 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="AppThemeNoTitle" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <!--去掉系统默认的标题栏-->
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <!--activity切换样式-->
+        <!--<item name="android:windowAnimationStyle">@style/activityAnimation</item>-->
+    </style>
+
+    <!-- animation 样式 -->
+    <!--<style name="activityAnimation" parent="@android:style/Animation">
+        <item name="android:activityOpenEnterAnimation">@anim/slide_right_in</item>
+        <item name="android:activityOpenExitAnimation">@anim/slide_left_out</item>
+        <item name="android:activityCloseEnterAnimation">@anim/slide_left_in</item>
+        <item name="android:activityCloseExitAnimation">@anim/slide_right_out</item>
+    </style>-->
+
     <style name="TitleStyle">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">50dp</item>
@@ -48,5 +68,14 @@
         <item name="android:layout_alignParentLeft">true</item>
         <item name="android:text">上一步</item>
         <item name="android:background">@drawable/bt_next_selector</item>
+    </style>
+
+    <!--topbar iconfont style-->
+    <style name="top_bar_icon_style" >
+        <item name="android:layout_width">50dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">25sp</item>
     </style>
 </resources>
