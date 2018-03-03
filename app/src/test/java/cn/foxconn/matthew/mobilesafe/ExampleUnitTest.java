@@ -4,6 +4,16 @@ import org.junit.Test;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
+
+import cn.foxconn.matthew.mobilesafe.api.WanService;
+import cn.foxconn.matthew.mobilesafe.model.ResponseData;
+import cn.foxconn.matthew.mobilesafe.model.pojo.BannerBean;
+import cn.foxconn.matthew.mobilesafe.model.pojoVO.ArticleListVO;
+import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
+import retrofit2.converter.gson.GsonConverterFactory;
+import rx.Subscriber;
 
 import static org.junit.Assert.*;
 
@@ -39,6 +49,52 @@ public class ExampleUnitTest {
             System.out.println(sb.length());
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
+        }
+    }
+    @Test
+    public void APITest(){
+        String BASE_URL = "http://wanandroid.com/";
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        WanService movieService = retrofit.create(WanService.class);
+        boolean test=true;
+        if(test){
+        }else {
+            movieService.getHomeBannerList().subscribe(new Subscriber<ResponseData<List<BannerBean>>>() {
+                @Override
+                public void onCompleted() {
+                    System.out.println("finish");
+                }
+
+                @Override
+                public void onError(Throwable e) {
+                    e.printStackTrace();
+                }
+
+                @Override
+                public void onNext(ResponseData<List<BannerBean>> listResponseData) {
+                    System.out.println(listResponseData.toString());
+                }
+            });
+            movieService.getHomeAtricleList(5).subscribe(new Subscriber<ResponseData<ArticleListVO>>() {
+                @Override
+                public void onCompleted() {
+
+                }
+
+                @Override
+                public void onError(Throwable e) {
+
+                }
+
+                @Override
+                public void onNext(ResponseData<ArticleListVO> articleListVOResponseData) {
+                    System.out.println(articleListVOResponseData.toString());
+                }
+            });
         }
     }
 }

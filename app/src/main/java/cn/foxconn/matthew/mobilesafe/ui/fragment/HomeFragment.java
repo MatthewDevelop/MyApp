@@ -1,0 +1,128 @@
+package cn.foxconn.matthew.mobilesafe.ui.fragment;
+
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
+
+import com.chad.library.adapter.base.BaseQuickAdapter;
+
+import java.util.List;
+
+import butterknife.BindView;
+import cn.bingoogolapple.bgabanner.BGABanner;
+import cn.foxconn.matthew.mobilesafe.R;
+import cn.foxconn.matthew.mobilesafe.helper.ImageLoaderManager;
+import cn.foxconn.matthew.mobilesafe.model.pojo.ArticleBean;
+import cn.foxconn.matthew.mobilesafe.model.pojo.BannerBean;
+import cn.foxconn.matthew.mobilesafe.ui.adapter.ArticleListAdapter;
+import cn.foxconn.matthew.mobilesafe.ui.base.BaseFragment;
+import cn.foxconn.matthew.mobilesafe.ui.presenter.HomePresenter;
+import cn.foxconn.matthew.mobilesafe.ui.view.HomeView;
+import cn.foxconn.matthew.mobilesafe.utils.LogUtil;
+
+/**
+ * @author:Matthew
+ * @date:2018/3/3
+ * @email:guocheng0816@163.com
+ */
+
+public class HomeFragment extends BaseFragment<HomeView,HomePresenter>
+                        implements HomeView,SwipeRefreshLayout.OnRefreshListener
+                        ,BaseQuickAdapter.RequestLoadMoreListener{
+    private static final String TAG = "HomeFragment";
+    @BindView(R.id.swipeRefreshLayout)
+    SwipeRefreshLayout mSwipeRefreshLayout;
+    @BindView(R.id.recyclerView)
+    RecyclerView mRecyclerView;
+
+    ArticleListAdapter mAdapter;
+    BGABanner mBGABanner;
+
+    public static HomeFragment newInstance(){
+        return new HomeFragment();
+    }
+
+    @Override
+    protected void initView(View rootView) {
+        super.initView(rootView);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        mAdapter=new ArticleListAdapter(getContext(),null);
+        mRecyclerView.setAdapter(mAdapter);
+        mAdapter.setOnLoadMoreListener(this,mRecyclerView);
+
+        //添加轮播图布局
+        View headView=View.inflate(getContext(),R.layout.layout_banner,null);
+        mBGABanner=headView.findViewById(R.id.bgaBanner);
+        mAdapter.addHeaderView(headView);
+        onRefresh();
+    }
+
+    @Override
+    protected void initDate() {
+        super.initDate();
+        mPresenter.getBannerData();
+    }
+
+    @Override
+    protected int getContentResId() {
+        return R.layout.frag_home;
+    }
+
+    @Override
+    protected HomePresenter createPresenter() {
+        return new HomePresenter();
+    }
+
+    @Override
+    public void onRefresh() {
+        mPresenter.getBannerData();
+        mPresenter.getRefreshData();
+    }
+
+    @Override
+    public void onLoadMoreRequested() {
+
+    }
+
+    @Override
+    public void showRefreshView(Boolean refresh) {
+
+    }
+
+    @Override
+    public void getBannerDataSuccess(List<BannerBean> data) {
+        //设置轮播图
+        mBGABanner.setData(R.layout.item_banner,data,null);
+        mBGABanner.setAdapter(new BGABanner.Adapter<View,BannerBean>() {
+            @Override
+            public void fillBannerItem(BGABanner banner, View itemView, BannerBean model, int position) {
+                ImageView imageView=itemView.findViewById(R.id.imageView);
+                ImageLoaderManager.LoadImage(getContext(),model.getImagePath(),imageView);
+            }
+        });
+        mBGABanner.setDelegate(new BGABanner.Delegate() {
+            @Override
+            public void onBannerItemClick(BGABanner banner, View itemView, Object model, int position) {
+
+            }
+        });
+    }
+
+    @Override
+    public void getDataError(String message) {
+
+    }
+
+    @Override
+    public void getRefreshDataSuccess(List<ArticleBean> data) {
+        mAdapter.setNewData(data);
+    }
+
+    @Override
+    public void getMoreDataSuccess(List<ArticleBean> data) {
+
+    }
+}

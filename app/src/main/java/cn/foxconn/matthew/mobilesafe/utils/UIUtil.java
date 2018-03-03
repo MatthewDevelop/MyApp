@@ -40,4 +40,14 @@ public class UIUtil {
         return getResource().getColor(resourceId);
     }
 
+    /**
+     * 得到string.xml中的字符串
+     *
+     * @param resId
+     * @return
+     */
+    public static String getString(int resId) {
+        return getResource().getString(resId);
+    }
+
 }

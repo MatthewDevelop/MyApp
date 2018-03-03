@@ -1,11 +1,14 @@
 package cn.foxconn.matthew.mobilesafe.ui.activity;
 
 import android.app.Fragment;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -13,6 +16,7 @@ import butterknife.OnClick;
 import cn.foxconn.matthew.mobilesafe.R;
 import cn.foxconn.matthew.mobilesafe.ui.base.BaseActivity;
 import cn.foxconn.matthew.mobilesafe.ui.base.BasePresenter;
+import cn.foxconn.matthew.mobilesafe.ui.fragment.HomeFragment;
 import cn.foxconn.matthew.mobilesafe.utils.UIUtil;
 import cn.foxconn.matthew.mobilesafe.widget.FontTextView;
 
@@ -48,6 +52,7 @@ public class WanAndroidActivity extends BaseActivity {
     @BindView(R.id.viewPager)
     ViewPager viewPager;
 
+    private List<android.support.v4.app.Fragment> mFragments = new ArrayList<>();
 
     @Override
     protected int getContentResId() {
@@ -63,6 +68,33 @@ public class WanAndroidActivity extends BaseActivity {
     protected void initView() {
         super.initView();
         setTabColor(ft_home, tv_home);
+        mFragments.add(HomeFragment.newInstance());
+        //TODO 还需添加其他碎片布局
+        viewPager.setAdapter(new cn.foxconn.matthew.mobilesafe.ui.adapter.PagerAdapter(getSupportFragmentManager(), mFragments));
+        viewPager.setCurrentItem(0, false);
+        viewPager.setOffscreenPageLimit(1);
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                switch (position) {
+                    case 0:
+                        setTabColor(ft_home, tv_home);
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
     }
 
     @OnClick({R.id.ll_home, R.id.ll_type, R.id.ll_user, R.id.ft_search})

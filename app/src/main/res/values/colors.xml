@@ -153,4 +153,11 @@
     <color name="line">#e9efe9</color>
     <color name="tab_bar_normal">#c3c9c3</color>
     <color name="tab_bar_selected">#88dc88</color> <!-- 亮绿色 -->
+    <color name="text0">#464646</color>
+    <color name="text1">#7e7e7e</color>
+    <color name="text2">#969696</color>
+    <color name="text3">#c8969696</color>
+    <color name="text4">#DDDDDD</color>
+    <color name="text5">#EFEFEF</color>
+    <color name="transparent">#0000</color>
 </resources>
