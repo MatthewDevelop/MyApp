@@ -15,6 +15,7 @@ import java.util.List;
 import cn.foxconn.matthew.mobilesafe.R;
 import cn.foxconn.matthew.mobilesafe.app.AppConst;
 import cn.foxconn.matthew.mobilesafe.model.pojo.ArticleBean;
+import cn.foxconn.matthew.mobilesafe.ui.activity.WebViewActivity;
 import cn.foxconn.matthew.mobilesafe.utils.PrefUtil;
 import cn.foxconn.matthew.mobilesafe.utils.ToastUtil;
 import cn.foxconn.matthew.mobilesafe.utils.UIUtil;
@@ -56,6 +57,12 @@ public class ArticleListAdapter extends BaseQuickAdapter<ArticleBean, BaseViewHo
             @Override
             public void onClick(View v) {
                 //collectArticle(tv_collect, item);
+            }
+        });
+        helper.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                WebViewActivity.runActivity(mContext,item.getLink());
             }
         });
     }

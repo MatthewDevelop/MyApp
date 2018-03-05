@@ -44,6 +44,7 @@
         <activity android:name=".activity.ContactActivity"/>
 
         <activity android:theme="@style/AppThemeNoTitle" android:name=".ui.activity.WanAndroidActivity"/>
+        <activity android:theme="@style/AppThemeNoTitle" android:name=".ui.activity.WebViewActivity"/>
     </application>
 
 </manifest>

@@ -17,4 +17,8 @@
     <string name="ic_user">&#xe652; </string> <!--用户-->
     <string name="ic_more">&#xe62b; </string> <!--更多-->
 
+    <string name="action_share">分享</string>
+    <string name="copy_link">复制链接</string>
+    <string name="copy_link_success">已复制链接</string>
+
 </resources>

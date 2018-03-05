@@ -18,6 +18,7 @@ import cn.foxconn.matthew.mobilesafe.R;
 import cn.foxconn.matthew.mobilesafe.helper.ImageLoaderManager;
 import cn.foxconn.matthew.mobilesafe.model.pojo.ArticleBean;
 import cn.foxconn.matthew.mobilesafe.model.pojo.BannerBean;
+import cn.foxconn.matthew.mobilesafe.ui.activity.WebViewActivity;
 import cn.foxconn.matthew.mobilesafe.ui.adapter.ArticleListAdapter;
 import cn.foxconn.matthew.mobilesafe.ui.base.BaseFragment;
 import cn.foxconn.matthew.mobilesafe.ui.presenter.HomePresenter;
@@ -89,18 +90,6 @@ public class HomeFragment extends BaseFragment<HomeView,HomePresenter>
     }
 
     @Override
-    public void showRefreshView(final Boolean refresh) {
-        //mSwipeRefreshLayout.setRefreshing(refresh);
-        //保证首次加载数据时，有加载动画效果
-        mSwipeRefreshLayout.post(new Runnable() {
-            @Override
-            public void run() {
-                mSwipeRefreshLayout.setRefreshing(refresh);
-            }
-        });
-    }
-
-    @Override
     public void getBannerDataSuccess(List<BannerBean> data) {
         //设置轮播图
         mBGABanner.setData(R.layout.item_banner,data,null);
@@ -111,10 +100,22 @@ public class HomeFragment extends BaseFragment<HomeView,HomePresenter>
                 ImageLoaderManager.LoadImage(getContext(),model.getImagePath(),imageView);
             }
         });
-        mBGABanner.setDelegate(new BGABanner.Delegate() {
+        mBGABanner.setDelegate(new BGABanner.Delegate<View,BannerBean>() {
             @Override
-            public void onBannerItemClick(BGABanner banner, View itemView, Object model, int position) {
+            public void onBannerItemClick(BGABanner banner, View itemView, BannerBean model, int position) {
+                WebViewActivity.runActivity(getContext(),model.getUrl());
+            }
+        });
+    }
 
+    @Override
+    public void showRefreshView(final Boolean refresh) {
+        //mSwipeRefreshLayout.setRefreshing(refresh);
+        //保证首次加载数据时，有加载动画效果
+        mSwipeRefreshLayout.post(new Runnable() {
+            @Override
+            public void run() {
+                mSwipeRefreshLayout.setRefreshing(refresh);
             }
         });
     }
