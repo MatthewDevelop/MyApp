@@ -1,5 +1,6 @@
 package cn.foxconn.matthew.mobilesafe.ui.fragment;
 
+import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -21,7 +22,6 @@ import cn.foxconn.matthew.mobilesafe.ui.adapter.ArticleListAdapter;
 import cn.foxconn.matthew.mobilesafe.ui.base.BaseFragment;
 import cn.foxconn.matthew.mobilesafe.ui.presenter.HomePresenter;
 import cn.foxconn.matthew.mobilesafe.ui.view.HomeView;
-import cn.foxconn.matthew.mobilesafe.utils.LogUtil;
 
 /**
  * @author:Matthew
@@ -51,6 +51,7 @@ public class HomeFragment extends BaseFragment<HomeView,HomePresenter>
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         mAdapter=new ArticleListAdapter(getContext(),null);
         mRecyclerView.setAdapter(mAdapter);
+        mSwipeRefreshLayout.setOnRefreshListener(this);
         mAdapter.setOnLoadMoreListener(this,mRecyclerView);
 
         //添加轮播图布局
@@ -63,7 +64,6 @@ public class HomeFragment extends BaseFragment<HomeView,HomePresenter>
     @Override
     protected void initDate() {
         super.initDate();
-        mPresenter.getBannerData();
     }
 
     @Override
@@ -78,18 +78,26 @@ public class HomeFragment extends BaseFragment<HomeView,HomePresenter>
 
     @Override
     public void onRefresh() {
+        Log.e(TAG, "onRefresh: " );
         mPresenter.getBannerData();
         mPresenter.getRefreshData();
     }
 
     @Override
     public void onLoadMoreRequested() {
-
+        mPresenter.getMoreData();
     }
 
     @Override
-    public void showRefreshView(Boolean refresh) {
-
+    public void showRefreshView(final Boolean refresh) {
+        //mSwipeRefreshLayout.setRefreshing(refresh);
+        //保证首次加载数据时，有加载动画效果
+        mSwipeRefreshLayout.post(new Runnable() {
+            @Override
+            public void run() {
+                mSwipeRefreshLayout.setRefreshing(refresh);
+            }
+        });
     }
 
     @Override
@@ -113,7 +121,8 @@ public class HomeFragment extends BaseFragment<HomeView,HomePresenter>
 
     @Override
     public void getDataError(String message) {
-
+        showRefreshView(false);
+        Snackbar.make(mRecyclerView, message, Snackbar.LENGTH_SHORT).show();
     }
 
     @Override
@@ -123,6 +132,11 @@ public class HomeFragment extends BaseFragment<HomeView,HomePresenter>
 
     @Override
     public void getMoreDataSuccess(List<ArticleBean> data) {
-
+        if (data.size()!=0){
+            mAdapter.addData(data);
+            mAdapter.loadMoreComplete();
+        }else {
+            mAdapter.loadMoreEnd();
+        }
     }
 }

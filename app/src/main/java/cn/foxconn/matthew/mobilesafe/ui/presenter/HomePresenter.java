@@ -1,5 +1,7 @@
 package cn.foxconn.matthew.mobilesafe.ui.presenter;
 
+import android.util.Log;
+
 import java.util.List;
 
 import cn.foxconn.matthew.mobilesafe.api.WanService;
@@ -21,6 +23,7 @@ import rx.schedulers.Schedulers;
  */
 
 public class HomePresenter extends BasePresenter<HomeView> {
+    private static final String TAG = "HomePresenter";
 
     private int mCurrentPage;
     /**
@@ -35,17 +38,20 @@ public class HomePresenter extends BasePresenter<HomeView> {
                 .subscribe(new Subscriber<ResponseData<ArticleListVO>>() {
                     @Override
                     public void onStart() {
-
+                        Log.e(TAG, "onStart: " );
+                        getView().showRefreshView(true);
                     }
 
                     @Override
                     public void onCompleted() {
-
+                        Log.e(TAG, "onCompleted: " );
+                        getView().showRefreshView(false);
                     }
 
                     @Override
                     public void onError(Throwable e) {
-
+                        //Log.e(TAG, "onError: " +e.getMessage());
+                        getView().getDataError(e.getMessage());
                     }
 
                     @Override
@@ -72,12 +78,40 @@ public class HomePresenter extends BasePresenter<HomeView> {
 
                     @Override
                     public void onError(Throwable e) {
-
+                        getView().getDataError(e.getMessage());
                     }
 
                     @Override
                     public void onNext(ResponseData<List<BannerBean>> listResponseData) {
                         getView().getBannerDataSuccess(listResponseData.getData());
+                    }
+                });
+    }
+
+
+    /**
+     * 加载更多数据
+     */
+    public void getMoreData(){
+        mCurrentPage=mCurrentPage+1;
+        RetrofitServiceManager.getInstance().create(WanService.class)
+                .getHomeAtricleList(mCurrentPage)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<ResponseData<ArticleListVO>>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        getView().getDataError(e.getMessage());
+                    }
+
+                    @Override
+                    public void onNext(ResponseData<ArticleListVO> articleListVOResponseData) {
+                        getView().getMoreDataSuccess(articleListVOResponseData.getData().getDatas());
                     }
                 });
     }
