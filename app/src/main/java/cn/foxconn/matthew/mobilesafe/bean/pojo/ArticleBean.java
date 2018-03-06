@@ -1,4 +1,4 @@
-package cn.foxconn.matthew.mobilesafe.model.pojo;
+package cn.foxconn.matthew.mobilesafe.bean.pojo;
 
 /**
  * @author:Matthew

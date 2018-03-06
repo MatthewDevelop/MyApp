@@ -3,12 +3,11 @@ package cn.foxconn.matthew.mobilesafe.api;
 
 import java.util.List;
 
-import cn.foxconn.matthew.mobilesafe.model.ResponseData;
-import cn.foxconn.matthew.mobilesafe.model.pojo.BannerBean;
-import cn.foxconn.matthew.mobilesafe.model.pojoVO.ArticleListVO;
+import cn.foxconn.matthew.mobilesafe.bean.ResponseData;
+import cn.foxconn.matthew.mobilesafe.bean.pojo.BannerBean;
+import cn.foxconn.matthew.mobilesafe.bean.pojoVO.ArticleListVO;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
-import retrofit2.http.Query;
 import rx.Observable;
 
 /**

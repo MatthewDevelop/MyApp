@@ -1,4 +1,4 @@
-package cn.foxconn.matthew.mobilesafe.model;
+package cn.foxconn.matthew.mobilesafe.bean;
 
 /**
  * @author:Matthew

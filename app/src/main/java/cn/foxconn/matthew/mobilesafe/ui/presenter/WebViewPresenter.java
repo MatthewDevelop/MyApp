@@ -3,14 +3,11 @@ package cn.foxconn.matthew.mobilesafe.ui.presenter;
 import android.graphics.Bitmap;
 import android.view.View;
 import android.webkit.WebChromeClient;
-import android.webkit.WebResourceRequest;
-import android.webkit.WebResourceResponse;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
 
-import java.util.function.ToDoubleBiFunction;
 
 import cn.foxconn.matthew.mobilesafe.ui.base.BasePresenter;
 import cn.foxconn.matthew.mobilesafe.ui.view.CommonWebView;

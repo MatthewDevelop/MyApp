@@ -1,8 +1,8 @@
-package cn.foxconn.matthew.mobilesafe.model.pojoVO;
+package cn.foxconn.matthew.mobilesafe.bean.pojoVO;
 
 import java.util.List;
 
-import cn.foxconn.matthew.mobilesafe.model.pojo.ArticleBean;
+import cn.foxconn.matthew.mobilesafe.bean.pojo.ArticleBean;
 
 /**
  * @author:Matthew

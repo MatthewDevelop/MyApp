@@ -2,8 +2,8 @@ package cn.foxconn.matthew.mobilesafe.ui.view;
 
 import java.util.List;
 
-import cn.foxconn.matthew.mobilesafe.model.pojo.ArticleBean;
-import cn.foxconn.matthew.mobilesafe.model.pojo.BannerBean;
+import cn.foxconn.matthew.mobilesafe.bean.pojo.ArticleBean;
+import cn.foxconn.matthew.mobilesafe.bean.pojo.BannerBean;
 
 /**
  * @author:Matthew

@@ -7,9 +7,9 @@ import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 import cn.foxconn.matthew.mobilesafe.api.WanService;
-import cn.foxconn.matthew.mobilesafe.model.ResponseData;
-import cn.foxconn.matthew.mobilesafe.model.pojo.BannerBean;
-import cn.foxconn.matthew.mobilesafe.model.pojoVO.ArticleListVO;
+import cn.foxconn.matthew.mobilesafe.bean.ResponseData;
+import cn.foxconn.matthew.mobilesafe.bean.pojo.BannerBean;
+import cn.foxconn.matthew.mobilesafe.bean.pojoVO.ArticleListVO;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;

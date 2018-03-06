@@ -2,7 +2,6 @@ package cn.foxconn.matthew.mobilesafe.ui.adapter;
 
 import android.content.Context;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.view.View;
 import android.widget.TextView;
@@ -14,7 +13,7 @@ import java.util.List;
 
 import cn.foxconn.matthew.mobilesafe.R;
 import cn.foxconn.matthew.mobilesafe.app.AppConst;
-import cn.foxconn.matthew.mobilesafe.model.pojo.ArticleBean;
+import cn.foxconn.matthew.mobilesafe.bean.pojo.ArticleBean;
 import cn.foxconn.matthew.mobilesafe.ui.activity.WebViewActivity;
 import cn.foxconn.matthew.mobilesafe.utils.PrefUtil;
 import cn.foxconn.matthew.mobilesafe.utils.ToastUtil;
