@@ -7,6 +7,7 @@ import cn.foxconn.matthew.mobilesafe.api.WanService;
 import cn.foxconn.matthew.mobilesafe.bean.ResponseData;
 import cn.foxconn.matthew.mobilesafe.bean.pojo.BannerBean;
 import cn.foxconn.matthew.mobilesafe.bean.pojoVO.ArticleListVO;
+import cn.foxconn.matthew.mobilesafe.bean.pojoVO.TypeTagVO;
 import cn.foxconn.matthew.mobilesafe.helper.RetrofitServiceManager;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
@@ -20,17 +21,16 @@ import rx.schedulers.Schedulers;
 
 public class DataModelImpl implements DataModel {
 
-    private int mCurrentPage;
 
     @Override
-    public void getRefreshData(Subscriber<ResponseData<ArticleListVO>> subscriber) {
-        mCurrentPage=0;
+    public void getHomeDataList(int page, Subscriber<ResponseData<ArticleListVO>> subscriber) {
         RetrofitServiceManager.getInstance().create(WanService.class)
-                .getHomeAtricleList(mCurrentPage)
+                .getHomeAtricleList(page)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(subscriber);
     }
+
 
     @Override
     public void getBannerData(Subscriber<ResponseData<List<BannerBean>>> subscriber) {
@@ -41,13 +41,25 @@ public class DataModelImpl implements DataModel {
                 .subscribe(subscriber);
     }
 
+
+
     @Override
-    public void getMoreData(Subscriber<ResponseData<ArticleListVO>> subscriber) {
-        mCurrentPage=mCurrentPage+1;
+    public void getTagData(Subscriber<ResponseData<List<TypeTagVO>>> subscriber) {
         RetrofitServiceManager.getInstance().create(WanService.class)
-                .getHomeAtricleList(mCurrentPage)
+                .getTagData()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(subscriber);
     }
+
+    @Override
+    public void getTypeDataById(int page,int cid,Subscriber<ResponseData<ArticleListVO>> subscriber) {
+        RetrofitServiceManager.getInstance().create(WanService.class)
+                .getTypeDataById(page,cid)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
+
 }

@@ -10,6 +10,8 @@ import cn.foxconn.matthew.mobilesafe.api.WanService;
 import cn.foxconn.matthew.mobilesafe.bean.ResponseData;
 import cn.foxconn.matthew.mobilesafe.bean.pojo.BannerBean;
 import cn.foxconn.matthew.mobilesafe.bean.pojoVO.ArticleListVO;
+import cn.foxconn.matthew.mobilesafe.bean.pojoVO.TypeTagVO;
+import cn.foxconn.matthew.mobilesafe.model.DataModelImpl;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -63,6 +65,22 @@ public class ExampleUnitTest {
         boolean test=true;
         if(test){
         }else {
+            movieService.getTagData().subscribe(new Subscriber<ResponseData<List<TypeTagVO>>>() {
+                @Override
+                public void onCompleted() {
+
+                }
+
+                @Override
+                public void onError(Throwable e) {
+
+                }
+
+                @Override
+                public void onNext(ResponseData<List<TypeTagVO>> listResponseData) {
+                    System.out.println(listResponseData.toString());
+                }
+            });
             movieService.getHomeBannerList().subscribe(new Subscriber<ResponseData<List<BannerBean>>>() {
                 @Override
                 public void onCompleted() {

@@ -78,4 +78,9 @@
         <item name="android:textColor">@color/white</item>
         <item name="android:textSize">25sp</item>
     </style>
+
+    <!--TabLayout-->
+    <style name="MyTabLayoutTextAppearance" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="android:textSize">12sp</item>
+    </style>
 </resources>

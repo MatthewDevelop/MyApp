@@ -27,6 +27,7 @@ public class HomePresenter extends BasePresenter<HomeView> {
     private static final String TAG = "HomePresenter";
 
     DataModel mDataModel;
+    private int mCurrentPage;
 
     public HomePresenter(){
         mDataModel=new DataModelImpl();
@@ -36,7 +37,8 @@ public class HomePresenter extends BasePresenter<HomeView> {
      * 刷新首页列表
      */
     public void getRefreshData() {
-        mDataModel.getRefreshData(new Subscriber<ResponseData<ArticleListVO>>() {
+        mCurrentPage=0;
+        mDataModel.getHomeDataList(mCurrentPage,new Subscriber<ResponseData<ArticleListVO>>() {
             @Override
             public void onStart() {
                 Log.e(TAG, "onStart: " );
@@ -89,7 +91,8 @@ public class HomePresenter extends BasePresenter<HomeView> {
      * 加载更多数据
      */
     public void getMoreData(){
-        mDataModel.getMoreData(new Subscriber<ResponseData<ArticleListVO>>() {
+        mCurrentPage=mCurrentPage+1;
+        mDataModel.getHomeDataList(mCurrentPage,new Subscriber<ResponseData<ArticleListVO>>() {
             @Override
             public void onCompleted() {
 

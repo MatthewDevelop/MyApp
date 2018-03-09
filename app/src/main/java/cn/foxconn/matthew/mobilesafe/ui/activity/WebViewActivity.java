@@ -14,8 +14,6 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import java.net.URL;
-
 import butterknife.BindView;
 import butterknife.OnClick;
 import cn.foxconn.matthew.mobilesafe.R;
@@ -27,7 +25,6 @@ import cn.foxconn.matthew.mobilesafe.utils.SharesUtils;
 import cn.foxconn.matthew.mobilesafe.widget.CustomPopWindow;
 import cn.foxconn.matthew.mobilesafe.widget.FontTextView;
 import cn.foxconn.matthew.mobilesafe.widget.WebViewFragment;
-import retrofit2.http.Url;
 
 /**
  * @author:Matthew
@@ -120,7 +117,7 @@ public class WebViewActivity
     }
 
     /**
-     * 处理点击返回按钮
+     * 处理页面回退
      * @param keyCode
      * @param event
      * @return
@@ -145,6 +142,7 @@ public class WebViewActivity
                 finish();
                 break;
             case R.id.ft_more:
+                //TODO Android PobWindow
                 View popView=View.inflate(this,R.layout.pupup_webview_more,null);
                 mMorePopWindow=new CustomPopWindow.PopupWindowBuilder(this)
                                 .setView(popView)
@@ -176,6 +174,7 @@ public class WebViewActivity
                 popView.findViewById(R.id.tv_open_out).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        //TODO open with system Browser
                         Intent intent=new Intent(Intent.ACTION_VIEW, Uri.parse(mWebView.getUrl()));
                         startActivity(intent);
                         mMorePopWindow.dissmiss();

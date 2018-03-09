@@ -160,4 +160,14 @@
     <color name="text4">#DDDDDD</color>
     <color name="text5">#EFEFEF</color>
     <color name="transparent">#0000</color>
+
+    <color name="color_tab">#7fda7f</color>
+
+    <color name= "tab_nor_color">#969696</color>
+    <color name= "tab_sel_color">#2395FF</color>
+
+    <!--TabLayout-->
+    <color name="TabTextColor">#FFFFFF</color>
+    <color name="TabSelectColor">#FAFAFA</color>
+    <color name="TabIndicatorColor">#FFFFFF</color>
 </resources>
