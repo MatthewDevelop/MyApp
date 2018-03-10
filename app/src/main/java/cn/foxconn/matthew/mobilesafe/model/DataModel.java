@@ -6,6 +6,7 @@ import cn.foxconn.matthew.mobilesafe.bean.ResponseData;
 import cn.foxconn.matthew.mobilesafe.bean.pojo.BannerBean;
 import cn.foxconn.matthew.mobilesafe.bean.pojoVO.ArticleListVO;
 import cn.foxconn.matthew.mobilesafe.bean.pojoVO.TypeTagVO;
+import cn.foxconn.matthew.mobilesafe.helper.RxSubscribeHelper;
 import rx.Subscriber;
 
 /**
@@ -16,11 +17,11 @@ import rx.Subscriber;
 
 public interface DataModel {
 
-    void getHomeDataList(int page,Subscriber<ResponseData<ArticleListVO>> subscriber);
+    void getHomeDataList(int page,RxSubscribeHelper<ArticleListVO> subscriber);
 
-    void getBannerData(Subscriber<ResponseData<List<BannerBean>>> subscriber);
+    void getBannerData(RxSubscribeHelper<List<BannerBean>> subscriber);
 
-    void getTagData(Subscriber<ResponseData<List<TypeTagVO>>> subscriber);
+    void getTagData(RxSubscribeHelper<List<TypeTagVO>> subscriber);
 
-    void getTypeDataById(int page,int cid,Subscriber<ResponseData<ArticleListVO>> subscriber);
+    void getTypeDataById(int page,int cid,RxSubscribeHelper<ArticleListVO> subscriber);
 }

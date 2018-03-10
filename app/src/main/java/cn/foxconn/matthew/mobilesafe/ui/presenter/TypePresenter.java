@@ -1,9 +1,7 @@
 package cn.foxconn.matthew.mobilesafe.ui.presenter;
 
-import android.app.Activity;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -15,6 +13,7 @@ import cn.foxconn.matthew.mobilesafe.R;
 import cn.foxconn.matthew.mobilesafe.bean.ResponseData;
 import cn.foxconn.matthew.mobilesafe.bean.pojoVO.ArticleListVO;
 import cn.foxconn.matthew.mobilesafe.bean.pojoVO.TypeTagVO;
+import cn.foxconn.matthew.mobilesafe.helper.RxSubscribeHelper;
 import cn.foxconn.matthew.mobilesafe.model.DataModel;
 import cn.foxconn.matthew.mobilesafe.model.DataModelImpl;
 import cn.foxconn.matthew.mobilesafe.ui.adapter.ArticleListAdapter;
@@ -22,7 +21,6 @@ import cn.foxconn.matthew.mobilesafe.ui.base.BasePresenter;
 import cn.foxconn.matthew.mobilesafe.ui.view.TypeView;
 import cn.foxconn.matthew.mobilesafe.utils.UIUtil;
 import cn.foxconn.matthew.mobilesafe.widget.AutoLinefeedLayout;
-import dalvik.annotation.TestTarget;
 import rx.Subscriber;
 
 /**
@@ -55,24 +53,19 @@ public class TypePresenter extends BasePresenter<TypeView> {
 
     public void getTagData() {
         mTypeView=getView();
-        mDataModel.getTagData(new Subscriber<ResponseData<List<TypeTagVO>>>() {
+        mDataModel.getTagData(new RxSubscribeHelper<List<TypeTagVO>>() {
             @Override
-            public void onCompleted() {
-
-            }
-
-            @Override
-            public void onError(Throwable e) {
-
-            }
-
-            @Override
-            public void onNext(ResponseData<List<TypeTagVO>> listResponseData) {
-                mDatas=listResponseData.getData();
+            protected void _onNext(List<TypeTagVO> typeTagVOS) {
+                mDatas=typeTagVOS;
                 setTabUi();
                 mTabSelect=0;
                 mTagSelect=0;
                 getServerData(mDatas.get(0).getChildren().get(0).getId());
+            }
+
+            @Override
+            protected void _onError(String message) {
+                System.out.println(message);
             }
         });
     }
@@ -161,23 +154,18 @@ public class TypePresenter extends BasePresenter<TypeView> {
     private void getServerData(int id) {
         mCurrentPage=0;
         mAdapter=getView().getAdapter();
-        mDataModel.getTypeDataById(mCurrentPage, id, new Subscriber<ResponseData<ArticleListVO>>() {
+        mDataModel.getTypeDataById(mCurrentPage, id, new RxSubscribeHelper<ArticleListVO>() {
             @Override
-            public void onCompleted() {
-
-            }
-
-            @Override
-            public void onError(Throwable e) {
-                getView().getDataError(e.getMessage());
-            }
-
-            @Override
-            public void onNext(ResponseData<ArticleListVO> articleListVOResponseData) {
-                if (articleListVOResponseData.getData().getDatas()!=null){
-                    getView().getRefreshDataSuccess(articleListVOResponseData.getData().getDatas());
+            protected void _onNext(ArticleListVO articleListVO) {
+                if (articleListVO.getDatas()!=null){
+                    getView().getRefreshDataSuccess(articleListVO.getDatas());
                     mTypeView.getTagLayout().setVisibility(View.GONE);
                 }
+            }
+
+            @Override
+            protected void _onError(String message) {
+                getView().getDataError(message);
             }
         });
     }
@@ -187,20 +175,15 @@ public class TypePresenter extends BasePresenter<TypeView> {
      */
     public void getMoreData() {
         mCurrentPage=mCurrentPage+1;
-        mDataModel.getTypeDataById(mCurrentPage, mId, new Subscriber<ResponseData<ArticleListVO>>() {
+        mDataModel.getTypeDataById(mCurrentPage, mId, new RxSubscribeHelper<ArticleListVO>() {
             @Override
-            public void onCompleted() {
-
+            protected void _onNext(ArticleListVO articleListVO) {
+                getView().getMoreDataSuccess(articleListVO.getDatas());
             }
 
             @Override
-            public void onError(Throwable e) {
-                getView().getDataError(e.getMessage());
-            }
-
-            @Override
-            public void onNext(ResponseData<ArticleListVO> articleListVOResponseData) {
-                getView().getMoreDataSuccess(articleListVOResponseData.getData().getDatas());
+            protected void _onError(String message) {
+                getView().getDataError(message);
             }
         });
     }

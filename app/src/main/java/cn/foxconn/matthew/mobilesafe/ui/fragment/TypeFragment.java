@@ -98,6 +98,11 @@ public class TypeFragment
 
     @Override
     public void getRefreshDataSuccess(List<ArticleBean> data) {
+        if(data.size()!=0) {
+            ll_blank.setVisibility(View.GONE);
+        }else {
+            ll_blank.setVisibility(View.VISIBLE);
+        }
         mAdapter.setNewData(data);
     }
 

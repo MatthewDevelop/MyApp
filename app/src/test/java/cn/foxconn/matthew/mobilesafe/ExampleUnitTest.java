@@ -64,7 +64,6 @@ public class ExampleUnitTest {
         WanService movieService = retrofit.create(WanService.class);
         boolean test=true;
         if(test){
-        }else {
             movieService.getTagData().subscribe(new Subscriber<ResponseData<List<TypeTagVO>>>() {
                 @Override
                 public void onCompleted() {
@@ -81,6 +80,7 @@ public class ExampleUnitTest {
                     System.out.println(listResponseData.toString());
                 }
             });
+        }else {
             movieService.getHomeBannerList().subscribe(new Subscriber<ResponseData<List<BannerBean>>>() {
                 @Override
                 public void onCompleted() {

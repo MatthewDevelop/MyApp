@@ -9,6 +9,7 @@ import cn.foxconn.matthew.mobilesafe.helper.RetrofitServiceManager;
 import cn.foxconn.matthew.mobilesafe.bean.ResponseData;
 import cn.foxconn.matthew.mobilesafe.bean.pojo.BannerBean;
 import cn.foxconn.matthew.mobilesafe.bean.pojoVO.ArticleListVO;
+import cn.foxconn.matthew.mobilesafe.helper.RxSubscribeHelper;
 import cn.foxconn.matthew.mobilesafe.model.DataModel;
 import cn.foxconn.matthew.mobilesafe.model.DataModelImpl;
 import cn.foxconn.matthew.mobilesafe.ui.base.BasePresenter;
@@ -38,28 +39,30 @@ public class HomePresenter extends BasePresenter<HomeView> {
      */
     public void getRefreshData() {
         mCurrentPage=0;
-        mDataModel.getHomeDataList(mCurrentPage,new Subscriber<ResponseData<ArticleListVO>>() {
-            @Override
-            public void onStart() {
-                Log.e(TAG, "onStart: " );
-                getView().showRefreshView(true);
-            }
+        mDataModel.getHomeDataList(mCurrentPage, new RxSubscribeHelper<ArticleListVO>() {
 
             @Override
-            public void onCompleted() {
-                Log.e(TAG, "onCompleted: " );
+            protected void _onCompleted() {
+                super._onCompleted();
                 getView().showRefreshView(false);
             }
 
             @Override
-            public void onError(Throwable e) {
-                //Log.e(TAG, "onError: " +e.getMessage());
-                getView().getDataError(e.getMessage());
+            protected void _onStart() {
+                super._onStart();
+                getView().showRefreshView(true);
             }
 
             @Override
-            public void onNext(ResponseData<ArticleListVO> articleListVOResponseData) {
-                getView().getRefreshDataSuccess(articleListVOResponseData.getData().getDatas());
+            protected void _onNext(ArticleListVO articleListVO) {
+                Log.e(TAG, "_onNext: "+articleListVO.toString() );
+                getView().getRefreshDataSuccess(articleListVO.getDatas());
+            }
+
+            @Override
+            protected void _onError(String message) {
+                Log.e(TAG, "_onError: "+message );
+                getView().getDataError(message);
             }
         });
     }
@@ -68,20 +71,15 @@ public class HomePresenter extends BasePresenter<HomeView> {
      * 刷新首页轮播图
      */
     public void getBannerData() {
-        mDataModel.getBannerData(new Subscriber<ResponseData<List<BannerBean>>>() {
+        mDataModel.getBannerData(new RxSubscribeHelper<List<BannerBean>>() {
             @Override
-            public void onCompleted() {
-
+            protected void _onNext(List<BannerBean> bannerBeans) {
+                getView().getBannerDataSuccess(bannerBeans);
             }
 
             @Override
-            public void onError(Throwable e) {
-                getView().getDataError(e.getMessage());
-            }
-
-            @Override
-            public void onNext(ResponseData<List<BannerBean>> listResponseData) {
-                getView().getBannerDataSuccess(listResponseData.getData());
+            protected void _onError(String message) {
+                getView().getDataError(message);
             }
         });
     }
@@ -92,20 +90,15 @@ public class HomePresenter extends BasePresenter<HomeView> {
      */
     public void getMoreData(){
         mCurrentPage=mCurrentPage+1;
-        mDataModel.getHomeDataList(mCurrentPage,new Subscriber<ResponseData<ArticleListVO>>() {
+        mDataModel.getHomeDataList(mCurrentPage, new RxSubscribeHelper<ArticleListVO>() {
             @Override
-            public void onCompleted() {
-
+            protected void _onNext(ArticleListVO articleListVO) {
+                getView().getMoreDataSuccess(articleListVO.getDatas());
             }
 
             @Override
-            public void onError(Throwable e) {
-                getView().getDataError(e.getMessage());
-            }
-
-            @Override
-            public void onNext(ResponseData<ArticleListVO> articleListVOResponseData) {
-                getView().getMoreDataSuccess(articleListVOResponseData.getData().getDatas());
+            protected void _onError(String message) {
+                getView().getDataError(message);
             }
         });
     }

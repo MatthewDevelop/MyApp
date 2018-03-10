@@ -9,9 +9,10 @@ import cn.foxconn.matthew.mobilesafe.bean.pojo.BannerBean;
 import cn.foxconn.matthew.mobilesafe.bean.pojoVO.ArticleListVO;
 import cn.foxconn.matthew.mobilesafe.bean.pojoVO.TypeTagVO;
 import cn.foxconn.matthew.mobilesafe.helper.RetrofitServiceManager;
-import rx.Subscriber;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
+import cn.foxconn.matthew.mobilesafe.helper.RxResultHelper;
+import cn.foxconn.matthew.mobilesafe.helper.RxSchedulersHelper;
+import cn.foxconn.matthew.mobilesafe.helper.RxSubscribeHelper;
+
 
 /**
  * @author:Matthew
@@ -21,45 +22,43 @@ import rx.schedulers.Schedulers;
 
 public class DataModelImpl implements DataModel {
 
+    private WanService mWanService;
+
+    public DataModelImpl(){
+        mWanService=RetrofitServiceManager.getInstance().create(WanService.class);
+    }
 
     @Override
-    public void getHomeDataList(int page, Subscriber<ResponseData<ArticleListVO>> subscriber) {
-        RetrofitServiceManager.getInstance().create(WanService.class)
-                .getHomeAtricleList(page)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+    public void getHomeDataList(int page, RxSubscribeHelper<ArticleListVO> subscriber) {
+        mWanService.getHomeAtricleList(page)
+                .compose(RxSchedulersHelper.<ResponseData<ArticleListVO>>defaultTransformer())
+                .compose(RxResultHelper.<ArticleListVO>handleResult())
                 .subscribe(subscriber);
     }
 
 
     @Override
-    public void getBannerData(Subscriber<ResponseData<List<BannerBean>>> subscriber) {
-        RetrofitServiceManager.getInstance().create(WanService.class)
-                .getHomeBannerList()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(subscriber);
-    }
-
-
-
-    @Override
-    public void getTagData(Subscriber<ResponseData<List<TypeTagVO>>> subscriber) {
-        RetrofitServiceManager.getInstance().create(WanService.class)
-                .getTagData()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+    public void getBannerData(RxSubscribeHelper<List<BannerBean>> subscriber) {
+        mWanService.getHomeBannerList()
+                .compose(RxSchedulersHelper.<ResponseData<List<BannerBean>>>defaultTransformer())
+                .compose(RxResultHelper.<List<BannerBean>>handleResult())
                 .subscribe(subscriber);
     }
 
     @Override
-    public void getTypeDataById(int page,int cid,Subscriber<ResponseData<ArticleListVO>> subscriber) {
-        RetrofitServiceManager.getInstance().create(WanService.class)
-                .getTypeDataById(page,cid)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+    public void getTagData(RxSubscribeHelper<List<TypeTagVO>> subscriber) {
+        mWanService.getTagData()
+                .compose(RxSchedulersHelper.<ResponseData<List<TypeTagVO>>>defaultTransformer())
+                .compose(RxResultHelper.<List<TypeTagVO>>handleResult())
                 .subscribe(subscriber);
     }
 
+    @Override
+    public void getTypeDataById(int page,int cid,RxSubscribeHelper<ArticleListVO> subscriber) {
+        mWanService.getTypeDataById(page,cid)
+                .compose(RxSchedulersHelper.<ResponseData<ArticleListVO>>defaultTransformer())
+                .compose(RxResultHelper.<ArticleListVO>handleResult())
+                .subscribe(subscriber);
+    }
 
 }

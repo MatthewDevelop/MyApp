@@ -35,12 +35,18 @@ public interface WanService {
     Observable<ResponseData<List<BannerBean>>> getHomeBannerList();
 
     /**
-     * 获取文章分类信息
+     * 获取文章分类标签信息
      * @return
      */
     @GET("tree/json")
     Observable<ResponseData<List<TypeTagVO>>> getTagData();
 
+    /**
+     * 根据标签获取文章列表信息
+     * @param page
+     * @param cid
+     * @return
+     */
     @GET("article/list/{page}/json")
     Observable<ResponseData<ArticleListVO>> getTypeDataById(@Path("page") int page,@Query("cid") int cid);
 }
