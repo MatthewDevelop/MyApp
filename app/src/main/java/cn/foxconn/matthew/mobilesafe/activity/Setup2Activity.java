@@ -1,20 +1,16 @@
 package cn.foxconn.matthew.mobilesafe.activity;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
-import android.view.GestureDetector;
-import android.view.MotionEvent;
 import android.view.View;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import cn.foxconn.matthew.mobilesafe.R;
-import cn.foxconn.matthew.mobilesafe.utils.LogUtil;
 import cn.foxconn.matthew.mobilesafe.utils.ToastUtil;
-import cn.foxconn.matthew.mobilesafe.view.SettingItemView;
+import cn.foxconn.matthew.mobilesafe.widget.SettingItemView;
 
 public class Setup2Activity extends BaseSetupActivity {
     private static final String TAG = "Setup2Activity";

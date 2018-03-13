@@ -8,7 +8,7 @@ import android.view.View;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import cn.foxconn.matthew.mobilesafe.R;
-import cn.foxconn.matthew.mobilesafe.view.SettingItemView;
+import cn.foxconn.matthew.mobilesafe.widget.SettingItemView;
 
 
 public class SettingActivity extends AppCompatActivity {

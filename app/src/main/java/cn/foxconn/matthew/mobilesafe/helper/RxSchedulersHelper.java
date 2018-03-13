@@ -21,9 +21,12 @@ public class RxSchedulersHelper {
             @Override
             public Observable<T> call(Observable<T> tObservable) {
                 return tObservable
+                        //指subscribe发生在IO线程，即事件产生的线程
                         .subscribeOn(Schedulers.io())
                         .unsubscribeOn(Schedulers.io())
+                        //指定subscriber所运行的线程，事件消费的线程。subscriber发生在UI线程，故可以在onStart方法中更新UI
                         .observeOn(AndroidSchedulers.mainThread());
+
             }
         };
     }

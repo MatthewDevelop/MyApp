@@ -1,4 +1,4 @@
-package cn.foxconn.matthew.mobilesafe.view;
+package cn.foxconn.matthew.mobilesafe.widget;
 
 import android.content.Context;
 import android.support.annotation.Nullable;

@@ -11,7 +11,9 @@ import cn.foxconn.matthew.mobilesafe.bean.ResponseData;
 import cn.foxconn.matthew.mobilesafe.bean.pojo.BannerBean;
 import cn.foxconn.matthew.mobilesafe.bean.pojoVO.ArticleListVO;
 import cn.foxconn.matthew.mobilesafe.bean.pojoVO.TypeTagVO;
+import cn.foxconn.matthew.mobilesafe.helper.interceptor.CustomInterceptor;
 import cn.foxconn.matthew.mobilesafe.model.DataModelImpl;
+import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -56,7 +58,11 @@ public class ExampleUnitTest {
     @Test
     public void APITest(){
         String BASE_URL = "http://wanandroid.com/";
+        OkHttpClient.Builder builder=new OkHttpClient.Builder();
+        //添加公共拦截器
+        builder.addInterceptor(new CustomInterceptor());
         Retrofit retrofit = new Retrofit.Builder()
+                .client(builder.build())
                 .baseUrl(BASE_URL)
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
@@ -64,6 +70,8 @@ public class ExampleUnitTest {
         WanService movieService = retrofit.create(WanService.class);
         boolean test=true;
         if(test){
+
+        }else {
             movieService.getTagData().subscribe(new Subscriber<ResponseData<List<TypeTagVO>>>() {
                 @Override
                 public void onCompleted() {
@@ -80,7 +88,6 @@ public class ExampleUnitTest {
                     System.out.println(listResponseData.toString());
                 }
             });
-        }else {
             movieService.getHomeBannerList().subscribe(new Subscriber<ResponseData<List<BannerBean>>>() {
                 @Override
                 public void onCompleted() {

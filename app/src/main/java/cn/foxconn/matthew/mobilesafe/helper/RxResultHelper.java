@@ -1,10 +1,6 @@
 package cn.foxconn.matthew.mobilesafe.helper;
 
-/**
- * @author:Matthew
- * @date:2018/3/9
- * @email:guocheng0816@163.com
- */
+
 
 
 import android.util.Log;
@@ -15,10 +11,16 @@ import rx.functions.Func1;
 
 /**
  * 处理请求结果的数据剥离
+ * @author:Matthew
+ * @date:2018/3/9
+ * @email:guocheng0816@163.com
  */
 public class RxResultHelper {
     private static final String TAG = "RxResultHelper";
-    private static final int RESPONSE_SUCCESS_CODE = 0; //请求成功时返回值为0
+    /**
+     * 请求成功时返回值为0,失败返回-1
+     */
+    private static final int RESPONSE_SUCCESS_CODE = 0;
     private static final int RESPONSE_ERROR_CODE = -1;
 
     public static <T>Observable.Transformer<ResponseData<T>,T> handleResult(){

@@ -18,6 +18,7 @@ import cn.foxconn.matthew.mobilesafe.ui.base.BaseActivity;
 import cn.foxconn.matthew.mobilesafe.ui.base.BasePresenter;
 import cn.foxconn.matthew.mobilesafe.ui.fragment.HomeFragment;
 import cn.foxconn.matthew.mobilesafe.ui.fragment.TypeFragment;
+import cn.foxconn.matthew.mobilesafe.ui.fragment.UserFragment;
 import cn.foxconn.matthew.mobilesafe.utils.UIUtil;
 import cn.foxconn.matthew.mobilesafe.widget.FontTextView;
 
@@ -71,6 +72,7 @@ public class WanAndroidActivity extends BaseActivity {
         setTabColor(ft_home, tv_home);
         mFragments.add(HomeFragment.newInstance());
         mFragments.add(TypeFragment.newInstance());
+        mFragments.add(UserFragment.newInstance());
         //TODO 还需添加其他碎片布局
         viewPager.setAdapter(new cn.foxconn.matthew.mobilesafe.ui.adapter.PagerAdapter(getSupportFragmentManager(), mFragments));
         viewPager.setCurrentItem(0, false);
@@ -90,6 +92,8 @@ public class WanAndroidActivity extends BaseActivity {
                     case 1:
                         setTabColor(ft_type, tv_type);
                         break;
+                    case 2:
+                        setTabColor(ft_user,tv_user);
                     default:
                         break;
                 }
@@ -114,6 +118,7 @@ public class WanAndroidActivity extends BaseActivity {
                 setTabColor(ft_type, tv_type);
                 break;
             case R.id.ll_user:
+                viewPager.setCurrentItem(2);
                 setTabColor(ft_user, tv_user);
                 break;
             case R.id.ft_search:

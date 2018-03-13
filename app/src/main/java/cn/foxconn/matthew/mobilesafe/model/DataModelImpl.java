@@ -1,11 +1,14 @@
 package cn.foxconn.matthew.mobilesafe.model;
 
 
+import android.database.Observable;
+
 import java.util.List;
 
 import cn.foxconn.matthew.mobilesafe.api.WanService;
 import cn.foxconn.matthew.mobilesafe.bean.ResponseData;
 import cn.foxconn.matthew.mobilesafe.bean.pojo.BannerBean;
+import cn.foxconn.matthew.mobilesafe.bean.pojo.UserBean;
 import cn.foxconn.matthew.mobilesafe.bean.pojoVO.ArticleListVO;
 import cn.foxconn.matthew.mobilesafe.bean.pojoVO.TypeTagVO;
 import cn.foxconn.matthew.mobilesafe.helper.RetrofitServiceManager;
@@ -58,6 +61,22 @@ public class DataModelImpl implements DataModel {
         mWanService.getTypeDataById(page,cid)
                 .compose(RxSchedulersHelper.<ResponseData<ArticleListVO>>defaultTransformer())
                 .compose(RxResultHelper.<ArticleListVO>handleResult())
+                .subscribe(subscriber);
+    }
+
+    @Override
+    public void toLogin(String username, String password, RxSubscribeHelper<UserBean> subscriber) {
+        mWanService.toLogin(username,password)
+                .compose(RxSchedulersHelper.<ResponseData<UserBean>>defaultTransformer())
+                .compose(RxResultHelper.<UserBean>handleResult())
+                .subscribe(subscriber);
+    }
+
+    @Override
+    public void toRegister(String username, String password, String rePassword, RxSubscribeHelper<UserBean> subscriber) {
+        mWanService.toRegister(username,password,rePassword)
+                .compose(RxSchedulersHelper.<ResponseData<UserBean>>defaultTransformer())
+                .compose(RxResultHelper.<UserBean>handleResult())
                 .subscribe(subscriber);
     }
 
