@@ -18,21 +18,23 @@ import rx.Subscriber;
 
 public interface DataModel {
 
-    void getHomeDataList(int page,RxSubscribeHelper<ArticleListVO> subscriber);
+    void getHomeDataList(int page, RxSubscribeHelper<ArticleListVO> subscriber);
 
     void getBannerData(RxSubscribeHelper<List<BannerBean>> subscriber);
 
     void getTagData(RxSubscribeHelper<List<TypeTagVO>> subscriber);
 
-    void getTypeDataById(int page,int cid,RxSubscribeHelper<ArticleListVO> subscriber);
+    void getTypeDataById(int page, int cid, RxSubscribeHelper<ArticleListVO> subscriber);
 
     void toLogin(String username, String password, RxSubscribeHelper<UserBean> subscriber);
 
-    void toRegister(String username,String password,String rePassword,RxSubscribeHelper<UserBean> subscriber);
+    void toRegister(String username, String password, String rePassword, RxSubscribeHelper<UserBean> subscriber);
 
-    void unCollectArticleInHomeList(int id,RxSubscribeHelper<String> subscriber);
+    void collectArticleInHomeList(int id, RxSubscribeHelper<String> subscriber);
 
-    void unCollectArticle(int id,int originId,RxSubscribeHelper<String> subscriber);
+    void unCollectArticleInHomeList(int id, RxSubscribeHelper<String> subscriber);
 
-    void getCollectList(int page,RxSubscribeHelper<ArticleListVO> subscriber);
+    void unCollectArticle(int id, int originId, RxSubscribeHelper<String> subscriber);
+
+    void getCollectList(int page, RxSubscribeHelper<ArticleListVO> subscriber);
 }

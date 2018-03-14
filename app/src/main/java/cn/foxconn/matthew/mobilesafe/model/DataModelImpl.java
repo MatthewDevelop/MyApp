@@ -80,6 +80,14 @@ public class DataModelImpl implements DataModel {
     }
 
     @Override
+    public void collectArticleInHomeList(int id, RxSubscribeHelper<String> subscriber) {
+        mWanService.collectArticleInHomeList(id)
+                .compose(RxSchedulersHelper.<ResponseData<String>>defaultTransformer())
+                .compose(RxResultHelper.<String>handleResult())
+                .subscribe(subscriber);
+    }
+
+    @Override
     public void unCollectArticleInHomeList(int id, RxSubscribeHelper<String> subscriber) {
         mWanService.unCollectArticleInHomeList(id,-1)
                 .compose(RxSchedulersHelper.<ResponseData<String>>defaultTransformer())

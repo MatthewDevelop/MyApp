@@ -59,6 +59,8 @@ public interface WanService {
     Observable<ResponseData<ArticleListVO>> getTypeDataById(@Path("page") int page, @Query("cid") int cid);
 
     /**
+     * 添加@FormUrlEncoded注释后就至少需要一个@Field参数
+     *
      * 登录
      *
      * @param username
@@ -80,6 +82,14 @@ public interface WanService {
     @FormUrlEncoded
     @POST("user/register")
     Observable<ResponseData<UserBean>> toRegister(@Field("username") String username, @Field("password") String password, @Field("repassword") String rePassword);
+
+    /**
+     * 主页收藏文章
+     * @param id
+     * @return
+     */
+    @POST("lg/collect/{id}/json")
+    Observable<ResponseData<String>> collectArticleInHomeList(@Path("id")int id);
 
     /**
      * 主页抓取的数据和收藏列表抓取的数据不相同，主页的数据缺少originId字段，且取消收藏的url也不一样

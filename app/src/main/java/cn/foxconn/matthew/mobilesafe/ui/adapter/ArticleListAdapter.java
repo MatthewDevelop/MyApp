@@ -14,6 +14,9 @@ import java.util.List;
 import cn.foxconn.matthew.mobilesafe.R;
 import cn.foxconn.matthew.mobilesafe.app.AppConst;
 import cn.foxconn.matthew.mobilesafe.bean.pojo.ArticleBean;
+import cn.foxconn.matthew.mobilesafe.helper.RxSubscribeHelper;
+import cn.foxconn.matthew.mobilesafe.model.DataModel;
+import cn.foxconn.matthew.mobilesafe.model.DataModelImpl;
 import cn.foxconn.matthew.mobilesafe.ui.activity.WebViewActivity;
 import cn.foxconn.matthew.mobilesafe.utils.PrefUtil;
 import cn.foxconn.matthew.mobilesafe.utils.ToastUtil;
@@ -28,10 +31,12 @@ import cn.foxconn.matthew.mobilesafe.utils.UIUtil;
 public class ArticleListAdapter extends BaseQuickAdapter<ArticleBean, BaseViewHolder> {
 
     private Context mContext;
+    private DataModel mDataModel;
 
     public ArticleListAdapter(Context context, @Nullable List<ArticleBean> data) {
         super(R.layout.item_article, data);
         mContext = context;
+        mDataModel=new DataModelImpl();
     }
 
 
@@ -55,7 +60,7 @@ public class ArticleListAdapter extends BaseQuickAdapter<ArticleBean, BaseViewHo
         tv_collect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //collectArticle(tv_collect, item);
+                collectArticle(tv_collect, item);
             }
         });
         helper.itemView.setOnClickListener(new View.OnClickListener() {
@@ -80,11 +85,35 @@ public class ArticleListAdapter extends BaseQuickAdapter<ArticleBean, BaseViewHo
         }
     }
 
-    private void collectArticler(ArticleBean item, TextView tv_collect) {
+    private void collectArticler(final ArticleBean item, TextView tv_collect) {
+        mDataModel.collectArticleInHomeList(item.getId(), new RxSubscribeHelper<String>() {
+            @Override
+            protected void _onNext(String s) {
+                ToastUtil.showShort(mContext,"收藏成功");
+                item.setCollect(true);
+                notifyDataSetChanged();
+            }
 
+            @Override
+            protected void _onError(String message) {
+                ToastUtil.showShort(mContext,"取消失败");
+            }
+        });
     }
 
-    private void unCollectArticler(ArticleBean item, TextView tv_collect) {
+    private void unCollectArticler(final ArticleBean item, TextView tv_collect) {
+        mDataModel.unCollectArticleInHomeList(item.getId(), new RxSubscribeHelper<String>() {
+            @Override
+            protected void _onNext(String s) {
+                ToastUtil.showShort(mContext,"取消成功");
+                item.setCollect(false);
+                notifyDataSetChanged();
+            }
 
+            @Override
+            protected void _onError(String message) {
+                ToastUtil.showShort(mContext,"取消失败");
+            }
+        });
     }
 }
