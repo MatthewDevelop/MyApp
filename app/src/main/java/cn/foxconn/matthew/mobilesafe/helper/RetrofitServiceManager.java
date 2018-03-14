@@ -2,6 +2,11 @@ package cn.foxconn.matthew.mobilesafe.helper;
 
 import java.util.concurrent.TimeUnit;
 
+import cn.foxconn.matthew.mobilesafe.app.App;
+import cn.foxconn.matthew.mobilesafe.persistentcookiejar.ClearableCookieJar;
+import cn.foxconn.matthew.mobilesafe.persistentcookiejar.PersistentCookieJar;
+import cn.foxconn.matthew.mobilesafe.persistentcookiejar.cache.SetCookieCache;
+import cn.foxconn.matthew.mobilesafe.persistentcookiejar.persistence.SharedPrefsCookiePersistor;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
@@ -28,6 +33,8 @@ public class RetrofitServiceManager {
         HttpLoggingInterceptor logging=new HttpLoggingInterceptor();
         logging.setLevel(HttpLoggingInterceptor.Level.BODY);
         builder.addInterceptor(logging);
+        ClearableCookieJar cookieJar=new PersistentCookieJar(new SetCookieCache(),new SharedPrefsCookiePersistor(App.getContext()));
+        builder.cookieJar(cookieJar);
         // 添加公共参数拦截器
         /*HttpCommonInterceptor commonInterceptor = new HttpCommonInterceptor.Builder()
                 .addHeaderParams("paltform","android")

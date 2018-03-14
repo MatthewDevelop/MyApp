@@ -29,4 +29,10 @@ public interface DataModel {
     void toLogin(String username, String password, RxSubscribeHelper<UserBean> subscriber);
 
     void toRegister(String username,String password,String rePassword,RxSubscribeHelper<UserBean> subscriber);
+
+    void unCollectArticleInHomeList(int id,RxSubscribeHelper<String> subscriber);
+
+    void unCollectArticle(int id,int originId,RxSubscribeHelper<String> subscriber);
+
+    void getCollectList(int page,RxSubscribeHelper<ArticleListVO> subscriber);
 }

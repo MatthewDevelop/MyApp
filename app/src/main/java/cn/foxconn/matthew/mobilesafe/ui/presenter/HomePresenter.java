@@ -4,9 +4,6 @@ import android.util.Log;
 
 import java.util.List;
 
-import cn.foxconn.matthew.mobilesafe.api.WanService;
-import cn.foxconn.matthew.mobilesafe.helper.RetrofitServiceManager;
-import cn.foxconn.matthew.mobilesafe.bean.ResponseData;
 import cn.foxconn.matthew.mobilesafe.bean.pojo.BannerBean;
 import cn.foxconn.matthew.mobilesafe.bean.pojoVO.ArticleListVO;
 import cn.foxconn.matthew.mobilesafe.helper.RxSubscribeHelper;
@@ -14,9 +11,6 @@ import cn.foxconn.matthew.mobilesafe.model.DataModel;
 import cn.foxconn.matthew.mobilesafe.model.DataModelImpl;
 import cn.foxconn.matthew.mobilesafe.ui.base.BasePresenter;
 import cn.foxconn.matthew.mobilesafe.ui.view.HomeView;
-import rx.Subscriber;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
 
 /**
  * @author:Matthew
@@ -62,7 +56,8 @@ public class HomePresenter extends BasePresenter<HomeView> {
             @Override
             protected void _onError(String message) {
                 Log.e(TAG, "_onError: "+message );
-                getView().getDataError(message);
+                getView().showRefreshView(false);
+                getView().getRefreshDataFailed(message);
             }
         });
     }
@@ -79,7 +74,7 @@ public class HomePresenter extends BasePresenter<HomeView> {
 
             @Override
             protected void _onError(String message) {
-                getView().getDataError(message);
+                getView().getRefreshDataFailed(message);
             }
         });
     }
@@ -98,7 +93,7 @@ public class HomePresenter extends BasePresenter<HomeView> {
 
             @Override
             protected void _onError(String message) {
-                getView().getDataError(message);
+                getView().getMoreDataFailed(message);
             }
         });
     }

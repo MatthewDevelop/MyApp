@@ -121,8 +121,7 @@ public class HomeFragment extends BaseFragment<HomeView,HomePresenter>
     }
 
     @Override
-    public void getDataError(String message) {
-        showRefreshView(false);
+    public void getRefreshDataFailed(String message) {
         Snackbar.make(mRecyclerView, message, Snackbar.LENGTH_SHORT).show();
     }
 
@@ -139,5 +138,11 @@ public class HomeFragment extends BaseFragment<HomeView,HomePresenter>
         }else {
             mAdapter.loadMoreEnd();
         }
+    }
+
+    @Override
+    public void getMoreDataFailed(String message) {
+        mAdapter.loadMoreComplete();
+        Snackbar.make(mRecyclerView, message, Snackbar.LENGTH_SHORT).show();
     }
 }

@@ -10,6 +10,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import cn.foxconn.matthew.mobilesafe.R;
 import cn.foxconn.matthew.mobilesafe.app.AppConst;
+import cn.foxconn.matthew.mobilesafe.ui.activity.CollectActivity;
 import cn.foxconn.matthew.mobilesafe.ui.activity.LoginActivity;
 import cn.foxconn.matthew.mobilesafe.ui.base.BaseFragment;
 import cn.foxconn.matthew.mobilesafe.ui.base.BasePresenter;
@@ -68,6 +69,11 @@ public class UserFragment extends BaseFragment {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.cv_collect:
+                if (!PrefUtil.getBoolean(getActivity(), AppConst.IS_LOGIN_KEY, false)) {
+                    ToastUtil.showShort(getContext(),"请先登录");
+                }else {
+                    startActivity(new Intent(getContext(), CollectActivity.class));
+                }
                 break;
             case R.id.cv_logout:
                 if (!PrefUtil.getBoolean(getActivity(), AppConst.IS_LOGIN_KEY, false)) {

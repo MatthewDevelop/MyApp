@@ -1,7 +1,6 @@
 package cn.foxconn.matthew.mobilesafe.model;
 
 
-import android.database.Observable;
 
 import java.util.List;
 
@@ -77,6 +76,30 @@ public class DataModelImpl implements DataModel {
         mWanService.toRegister(username,password,rePassword)
                 .compose(RxSchedulersHelper.<ResponseData<UserBean>>defaultTransformer())
                 .compose(RxResultHelper.<UserBean>handleResult())
+                .subscribe(subscriber);
+    }
+
+    @Override
+    public void unCollectArticleInHomeList(int id, RxSubscribeHelper<String> subscriber) {
+        mWanService.unCollectArticleInHomeList(id,-1)
+                .compose(RxSchedulersHelper.<ResponseData<String>>defaultTransformer())
+                .compose(RxResultHelper.<String>handleResult())
+                .subscribe(subscriber);
+    }
+
+    @Override
+    public void unCollectArticle(int id, int originId, RxSubscribeHelper<String> subscriber) {
+        mWanService.unCollectArticle(id,originId)
+                .compose(RxSchedulersHelper.<ResponseData<String>>defaultTransformer())
+                .compose(RxResultHelper.<String>handleResult())
+                .subscribe(subscriber);
+    }
+
+    @Override
+    public void getCollectList(int page, RxSubscribeHelper<ArticleListVO> subscriber) {
+        mWanService.getCollectList(page)
+                .compose(RxSchedulersHelper.<ResponseData<ArticleListVO>>defaultTransformer())
+                .compose(RxResultHelper.<ArticleListVO>handleResult())
                 .subscribe(subscriber);
     }
 

@@ -12,9 +12,16 @@ import cn.foxconn.matthew.mobilesafe.bean.pojo.BannerBean;
  */
 
 public interface HomeView {
+
     void showRefreshView(Boolean refresh);
+
     void getBannerDataSuccess(List<BannerBean> data);
-    void getDataError(String message);
+
+    void getRefreshDataFailed(String message);
+
     void getRefreshDataSuccess(List<ArticleBean> data);
+
     void getMoreDataSuccess(List<ArticleBean> data);
+
+    void getMoreDataFailed(String message);
 }

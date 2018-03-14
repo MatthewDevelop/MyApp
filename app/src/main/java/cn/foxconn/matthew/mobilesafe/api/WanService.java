@@ -71,6 +71,7 @@ public interface WanService {
 
     /**
      * 注册
+     *
      * @param username
      * @param password
      * @param rePassword
@@ -79,4 +80,33 @@ public interface WanService {
     @FormUrlEncoded
     @POST("user/register")
     Observable<ResponseData<UserBean>> toRegister(@Field("username") String username, @Field("password") String password, @Field("repassword") String rePassword);
+
+    /**
+     * 主页抓取的数据和收藏列表抓取的数据不相同，主页的数据缺少originId字段，且取消收藏的url也不一样
+     * 主页取消收藏
+     * @param id  文章id
+     * @param originId  主页数据无文章的originId故默认-1
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("lg/uncollect_originId/{id}/json")
+    Observable<ResponseData<String>> unCollectArticleInHomeList(@Path("id")int id,@Field("originId")int originId);
+
+    /**
+     * 我的收藏页面取消收藏
+     * @param id  文章id
+     * @param originId
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("lg/uncollect/{id}/json")
+    Observable<ResponseData<String>> unCollectArticle(@Path("id")int id,@Field("originId")int originId);
+
+    /**
+     *获取文章收藏列表
+     * @param page
+     * @return
+     */
+    @GET("lg/collect/list/{page}/json")
+    Observable<ResponseData<ArticleListVO>> getCollectList(@Path("page")int page);
 }
