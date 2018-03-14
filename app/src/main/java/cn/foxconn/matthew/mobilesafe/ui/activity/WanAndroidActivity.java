@@ -54,7 +54,7 @@ public class WanAndroidActivity extends BaseActivity {
     @BindView(R.id.viewPager)
     ViewPager viewPager;
 
-    private List<android.support.v4.app.Fragment> mFragments = new ArrayList<>();
+    private static List<android.support.v4.app.Fragment> mFragments = new ArrayList<>();
 
     @Override
     protected int getContentResId() {
@@ -76,7 +76,8 @@ public class WanAndroidActivity extends BaseActivity {
         //TODO 还需添加其他碎片布局
         viewPager.setAdapter(new cn.foxconn.matthew.mobilesafe.ui.adapter.PagerAdapter(getSupportFragmentManager(), mFragments));
         viewPager.setCurrentItem(0, false);
-        viewPager.setOffscreenPageLimit(1);
+        //设置偏移的页数
+        viewPager.setOffscreenPageLimit(2);
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -144,5 +145,9 @@ public class WanAndroidActivity extends BaseActivity {
         fontTextView.setTextColor(UIUtil.getColor(R.color.tab_bar_selected));
         textView.setTextColor(UIUtil.getColor(R.color.tab_bar_selected));
 
+    }
+
+    public static List<android.support.v4.app.Fragment> getFragments(){
+        return mFragments;
     }
 }

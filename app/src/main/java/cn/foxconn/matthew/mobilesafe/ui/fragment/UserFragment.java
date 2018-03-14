@@ -10,8 +10,10 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import cn.foxconn.matthew.mobilesafe.R;
 import cn.foxconn.matthew.mobilesafe.app.AppConst;
+import cn.foxconn.matthew.mobilesafe.helper.RetrofitServiceManager;
 import cn.foxconn.matthew.mobilesafe.ui.activity.CollectActivity;
 import cn.foxconn.matthew.mobilesafe.ui.activity.LoginActivity;
+import cn.foxconn.matthew.mobilesafe.ui.activity.WanAndroidActivity;
 import cn.foxconn.matthew.mobilesafe.ui.base.BaseFragment;
 import cn.foxconn.matthew.mobilesafe.ui.base.BasePresenter;
 import cn.foxconn.matthew.mobilesafe.utils.PrefUtil;
@@ -84,10 +86,20 @@ public class UserFragment extends BaseFragment {
                     ToastUtil.showShort(getContext(),"已登出");
                     tv_userName.setText("暂未登录");
                     tv_logout.setText("点击登录");
+                    RetrofitServiceManager.clearCookie();
+                    refreshData();
                 }
                 break;
             default:
                 break;
         }
+    }
+
+    /**
+     * 登出刷新数据
+     */
+    public void refreshData(){
+        ((HomeFragment)WanAndroidActivity.getFragments().get(0)).onRefresh();
+        ((TypeFragment)WanAndroidActivity.getFragments().get(1)).onRefresh();
     }
 }

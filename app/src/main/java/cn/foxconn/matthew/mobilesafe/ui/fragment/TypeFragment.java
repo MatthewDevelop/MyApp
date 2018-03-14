@@ -68,6 +68,10 @@ public class TypeFragment
         mPresenter.getTagData();
     }
 
+    public void onRefresh(){
+        mPresenter.getTagData();
+    }
+
     /**
      * 请求加载更多
      */

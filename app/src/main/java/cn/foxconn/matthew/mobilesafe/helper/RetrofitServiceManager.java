@@ -25,6 +25,7 @@ public class RetrofitServiceManager {
     private static final int DEFAULT_TIMEOUT=5;
     private static final int DEFAULT_READ_TIMEOUT=10;
     private Retrofit mRetrofit;
+    private static ClearableCookieJar mCookieJar = null;
 
     private RetrofitServiceManager() {
         OkHttpClient.Builder builder=new OkHttpClient.Builder();
@@ -33,8 +34,8 @@ public class RetrofitServiceManager {
         HttpLoggingInterceptor logging=new HttpLoggingInterceptor();
         logging.setLevel(HttpLoggingInterceptor.Level.BODY);
         builder.addInterceptor(logging);
-        ClearableCookieJar cookieJar=new PersistentCookieJar(new SetCookieCache(),new SharedPrefsCookiePersistor(App.getContext()));
-        builder.cookieJar(cookieJar);
+        mCookieJar = new PersistentCookieJar(new SetCookieCache(),new SharedPrefsCookiePersistor(App.getContext()));
+        builder.cookieJar(mCookieJar);
         // 添加公共参数拦截器
         /*HttpCommonInterceptor commonInterceptor = new HttpCommonInterceptor.Builder()
                 .addHeaderParams("paltform","android")
@@ -49,6 +50,12 @@ public class RetrofitServiceManager {
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
+    }
+
+    public static void clearCookie(){
+        //清除登录cookie
+        mCookieJar.clear();
+//        mCookieJar.clearSession();
     }
 
 
