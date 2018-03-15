@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_hot_key"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:text="搜索热词"
+        android:background="@drawable/bg_search_box"
+        android:textColor="@color/text0"
+        android:gravity="center"
+        android:layout_margin="5dp"
+        android:textSize="15sp"/>
+
+</LinearLayout>

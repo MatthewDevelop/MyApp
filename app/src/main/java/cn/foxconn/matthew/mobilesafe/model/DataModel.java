@@ -4,6 +4,7 @@ import java.util.List;
 
 import cn.foxconn.matthew.mobilesafe.bean.ResponseData;
 import cn.foxconn.matthew.mobilesafe.bean.pojo.BannerBean;
+import cn.foxconn.matthew.mobilesafe.bean.pojo.HotKeyBean;
 import cn.foxconn.matthew.mobilesafe.bean.pojo.UserBean;
 import cn.foxconn.matthew.mobilesafe.bean.pojoVO.ArticleListVO;
 import cn.foxconn.matthew.mobilesafe.bean.pojoVO.TypeTagVO;
@@ -37,4 +38,8 @@ public interface DataModel {
     void unCollectArticle(int id, int originId, RxSubscribeHelper<String> subscriber);
 
     void getCollectList(int page, RxSubscribeHelper<ArticleListVO> subscriber);
+
+    void getHotKeyList(RxSubscribeHelper<List<HotKeyBean>> subscriber);
+
+    void getSearchData(int page,String keyword,RxSubscribeHelper<ArticleListVO> subscriber);
 }

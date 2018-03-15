@@ -5,6 +5,7 @@ import java.util.List;
 
 import cn.foxconn.matthew.mobilesafe.bean.ResponseData;
 import cn.foxconn.matthew.mobilesafe.bean.pojo.BannerBean;
+import cn.foxconn.matthew.mobilesafe.bean.pojo.HotKeyBean;
 import cn.foxconn.matthew.mobilesafe.bean.pojo.UserBean;
 import cn.foxconn.matthew.mobilesafe.bean.pojoVO.ArticleListVO;
 import cn.foxconn.matthew.mobilesafe.bean.pojoVO.TypeTagVO;
@@ -60,7 +61,7 @@ public interface WanService {
 
     /**
      * 添加@FormUrlEncoded注释后就至少需要一个@Field参数
-     *
+     * <p>
      * 登录
      *
      * @param username
@@ -85,38 +86,61 @@ public interface WanService {
 
     /**
      * 主页收藏文章
+     *
      * @param id
      * @return
      */
     @POST("lg/collect/{id}/json")
-    Observable<ResponseData<String>> collectArticleInHomeList(@Path("id")int id);
+    Observable<ResponseData<String>> collectArticleInHomeList(@Path("id") int id);
 
     /**
      * 主页抓取的数据和收藏列表抓取的数据不相同，主页的数据缺少originId字段，且取消收藏的url也不一样
      * 主页取消收藏
-     * @param id  文章id
-     * @param originId  主页数据无文章的originId故默认-1
+     *
+     * @param id       文章id
+     * @param originId 主页数据无文章的originId故默认-1
      * @return
      */
     @FormUrlEncoded
     @POST("lg/uncollect_originId/{id}/json")
-    Observable<ResponseData<String>> unCollectArticleInHomeList(@Path("id")int id,@Field("originId")int originId);
+    Observable<ResponseData<String>> unCollectArticleInHomeList(@Path("id") int id, @Field("originId") int originId);
 
     /**
      * 我的收藏页面取消收藏
-     * @param id  文章id
+     *
+     * @param id       文章id
      * @param originId
      * @return
      */
     @FormUrlEncoded
     @POST("lg/uncollect/{id}/json")
-    Observable<ResponseData<String>> unCollectArticle(@Path("id")int id,@Field("originId")int originId);
+    Observable<ResponseData<String>> unCollectArticle(@Path("id") int id, @Field("originId") int originId);
 
     /**
-     *获取文章收藏列表
+     * 获取文章收藏列表
+     *
      * @param page
      * @return
      */
     @GET("lg/collect/list/{page}/json")
-    Observable<ResponseData<ArticleListVO>> getCollectList(@Path("page")int page);
+    Observable<ResponseData<ArticleListVO>> getCollectList(@Path("page") int page);
+
+    /**
+     * 获取搜索热门关键词
+     *
+     * @return
+     */
+    @GET("hotkey/json")
+    Observable<ResponseData<List<HotKeyBean>>> getHotKeyList();
+
+    /**
+     * 根据关键词获取搜索结果
+     *
+     * @param page
+     * @param keyword
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("article/query/{page}/json")
+    Observable<ResponseData<ArticleListVO>> getSearchData(@Path("page") int page, @Field("k") String keyword);
 }

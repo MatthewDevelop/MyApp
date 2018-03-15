@@ -8,8 +8,7 @@
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:layout_marginTop="10dp"
+        android:layout_margin="10dp"
         app:cardCornerRadius="5dp"
         app:contentPadding="10dp">
 
@@ -19,8 +18,8 @@
 
             <cn.foxconn.matthew.mobilesafe.widget.RoundImageView
                 android:id="@+id/iv_photo"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:scaleType="fitXY"
                 android:src="@mipmap/ic_photo"
                 app:type="circle" />
@@ -35,7 +34,7 @@
                 android:layout_toRightOf="@id/iv_photo"
                 android:text="作者"
                 android:textColor="@color/main"
-                android:textSize="11sp" />
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/tv_time"
@@ -45,7 +44,7 @@
                 android:layout_alignTop="@id/iv_photo"
                 android:text="1小时前"
                 android:textColor="@color/main"
-                android:textSize="12sp" />
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/tv_title"
@@ -56,7 +55,7 @@
                 android:layout_marginTop="10dp"
                 android:text="文章的标题文章的标题文章的标题文章的标题文章的标题"
                 android:textColor="@color/text0"
-                android:textSize="14sp" />
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/tv_type"
@@ -66,7 +65,7 @@
                 android:layout_marginTop="10dp"
                 android:text="类别"
                 android:textColor="@color/main"
-                android:textSize="11sp" />
+                android:textSize="14sp" />
 
             <cn.foxconn.matthew.mobilesafe.widget.FontTextView
                 android:id="@+id/tv_collect"
@@ -76,7 +75,7 @@
                 android:layout_alignTop="@id/tv_type"
                 android:text="@string/ic_collect_nor"
                 android:textColor="@color/text3"
-                android:textSize="15sp"/>
+                android:textSize="18sp"/>
 
         </RelativeLayout>
 

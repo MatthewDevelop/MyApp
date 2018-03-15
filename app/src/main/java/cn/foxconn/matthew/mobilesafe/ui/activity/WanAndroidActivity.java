@@ -1,6 +1,7 @@
 package cn.foxconn.matthew.mobilesafe.ui.activity;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -123,6 +124,7 @@ public class WanAndroidActivity extends BaseActivity {
                 setTabColor(ft_user, tv_user);
                 break;
             case R.id.ft_search:
+                startActivity(new Intent(this,SearchActivity.class));
                 break;
             default:
                 break;

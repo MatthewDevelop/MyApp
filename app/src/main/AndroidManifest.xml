@@ -52,10 +52,13 @@
         <activity
             android:name=".ui.activity.LoginActivity"
             android:label="@string/title_activity_login"
-            android:theme="@style/AppThemeNoTitle"/>
-
-        <activity android:name=".ui.activity.CollectActivity"
-            android:theme="@style/AppThemeNoTitle"/>
+            android:theme="@style/AppThemeNoTitle" />
+        <activity
+            android:name=".ui.activity.CollectActivity"
+            android:theme="@style/AppThemeNoTitle" />
+        <activity
+            android:name=".ui.activity.SearchActivity"
+            android:theme="@style/AppThemeNoTitle" />
     </application>
 
 </manifest>

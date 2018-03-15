@@ -49,13 +49,12 @@ public class HomePresenter extends BasePresenter<HomeView> {
 
             @Override
             protected void _onNext(ArticleListVO articleListVO) {
-                Log.e(TAG, "_onNext: "+articleListVO.toString() );
                 getView().getRefreshDataSuccess(articleListVO.getDatas());
             }
 
             @Override
             protected void _onError(String message) {
-                Log.e(TAG, "_onError: "+message );
+                Log.e(TAG, "getRefreshData _onError: "+message );
                 getView().showRefreshView(false);
                 getView().getRefreshDataFailed(message);
             }
