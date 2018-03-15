@@ -5,7 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
     android:orientation="vertical"
-    tools:context="cn.foxconn.matthew.mobilesafe.ui.fragment.UserFragment">
+    tools:context=".wanandroid.fragment.UserFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -14,7 +14,7 @@
         android:gravity="center"
         android:orientation="vertical">
 
-        <cn.foxconn.matthew.mobilesafe.widget.RoundImageView
+        <cn.foxconn.matthew.myapp.wanandroid.widget.RoundImageView
             android:id="@+id/iv_icon"
             android:layout_width="80dp"
             android:layout_height="80dp"

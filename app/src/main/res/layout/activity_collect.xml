@@ -10,7 +10,7 @@
         android:layout_height="50dp"
         android:background="@color/main">
 
-        <cn.foxconn.matthew.mobilesafe.widget.FontTextView
+        <cn.foxconn.matthew.myapp.wanandroid.widget.FontTextView
             android:id="@+id/ft_return"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -33,7 +33,7 @@
             android:textSize="13sp" />
 
 
-        <cn.foxconn.matthew.mobilesafe.widget.FontTextView
+        <cn.foxconn.matthew.myapp.wanandroid.widget.FontTextView
             android:id="@+id/ft_more"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

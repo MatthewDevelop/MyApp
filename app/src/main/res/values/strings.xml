@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">手机卫士</string>
+    <string name="app_name">大杂烩</string>
 
     <!--iconfont字体图标-->
     <string name="tab_left">&#xe620; </string> <!--左对齐-->

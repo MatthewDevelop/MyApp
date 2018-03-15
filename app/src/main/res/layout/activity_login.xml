@@ -10,7 +10,7 @@
         android:layout_height="150dp"
         android:background="@color/main">
 
-        <cn.foxconn.matthew.mobilesafe.widget.FontTextView
+        <cn.foxconn.matthew.myapp.wanandroid.widget.FontTextView
             android:id="@+id/ft_close"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -21,7 +21,7 @@
             android:text="@string/ic_close"
             android:textSize="20sp" />
 
-        <cn.foxconn.matthew.mobilesafe.widget.RoundImageView
+        <cn.foxconn.matthew.myapp.wanandroid.widget.RoundImageView
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_centerInParent="true"

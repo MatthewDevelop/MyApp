@@ -10,13 +10,13 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"/>
 
-    <cn.foxconn.matthew.mobilesafe.widget.FontTextView
+    <cn.foxconn.matthew.myapp.wanandroid.widget.FontTextView
         android:id="@+id/ft_hot"
         style="@style/top_bar_icon_style"
         android:text="@string/ic_hot"
         android:visibility="invisible"/>
 
-    <cn.foxconn.matthew.mobilesafe.widget.FontTextView
+    <cn.foxconn.matthew.myapp.wanandroid.widget.FontTextView
         android:id="@+id/ft_search"
         style="@style/top_bar_icon_style"
         android:text="@string/ic_search"

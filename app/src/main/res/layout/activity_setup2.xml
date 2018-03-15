@@ -17,7 +17,7 @@
         style="@style/ContentStyle"
         android:text="就会发送报警短信" />
 
-    <cn.foxconn.matthew.mobilesafe.widget.SettingItemView
+    <cn.foxconn.matthew.myapp.mobilesafe.widget.SettingItemView
         android:id="@+id/siv_sim"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

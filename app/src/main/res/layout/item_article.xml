@@ -16,7 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <cn.foxconn.matthew.mobilesafe.widget.RoundImageView
+            <cn.foxconn.matthew.myapp.wanandroid.widget.RoundImageView
                 android:id="@+id/iv_photo"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
@@ -67,7 +67,7 @@
                 android:textColor="@color/main"
                 android:textSize="14sp" />
 
-            <cn.foxconn.matthew.mobilesafe.widget.FontTextView
+            <cn.foxconn.matthew.myapp.wanandroid.widget.FontTextView
                 android:id="@+id/tv_collect"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
