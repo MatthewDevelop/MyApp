@@ -52,4 +52,6 @@ dependencies {
     compile 'com.github.bumptech.glide:glide:3.7.0'
     //持久化cookie
     implementation 'com.github.franmontiel:PersistentCookieJar:v1.0.1'
+    //监听activity和fragment的生命周期，防止RxJava导致的内存泄漏
+    implementation 'com.trello.rxlifecycle2:rxlifecycle-components:2.2.1'
 }

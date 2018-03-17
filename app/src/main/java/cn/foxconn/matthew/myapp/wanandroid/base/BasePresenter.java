@@ -1,5 +1,8 @@
 package cn.foxconn.matthew.myapp.wanandroid.base;
 
+import com.trello.rxlifecycle2.LifecycleProvider;
+import com.trello.rxlifecycle2.RxLifecycle;
+
 import java.lang.ref.Reference;
 import java.lang.ref.WeakReference;
 
@@ -9,13 +12,22 @@ import java.lang.ref.WeakReference;
  * @email:guocheng0816@163.com
  */
 
-public class BasePresenter<V> {
+public class BasePresenter<V,R> {
 
     protected Reference<V> mReference;
-
+    private LifecycleProvider<R> mProvider;
     public void attachView(V view){
         mReference=new WeakReference(view);
     }
+
+    public BasePresenter(LifecycleProvider<R> provider) {
+        mProvider=provider;
+    }
+
+    public LifecycleProvider<R> getProvider(){
+        return mProvider;
+    }
+
 
     protected V getView(){
         return mReference.get();

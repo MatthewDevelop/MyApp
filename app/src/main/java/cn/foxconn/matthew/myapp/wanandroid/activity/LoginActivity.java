@@ -44,7 +44,7 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
 
     @Override
     protected LoginPresenter createPresenter() {
-        return new LoginPresenter();
+        return new LoginPresenter(this);
     }
 
     @OnClick({R.id.ft_close, R.id.bt_login, R.id.bt_register})

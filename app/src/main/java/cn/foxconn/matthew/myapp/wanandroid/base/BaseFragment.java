@@ -2,10 +2,12 @@ package cn.foxconn.matthew.myapp.wanandroid.base;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.trello.rxlifecycle2.android.FragmentEvent;
+import com.trello.rxlifecycle2.components.support.RxFragment;
 
 import butterknife.ButterKnife;
 
@@ -15,7 +17,7 @@ import butterknife.ButterKnife;
  * @email:guocheng0816@163.com
  */
 
-public abstract class BaseFragment<V,T extends BasePresenter<V>> extends Fragment {
+public abstract class BaseFragment<V,T extends BasePresenter<V,FragmentEvent>> extends RxFragment {
     protected T mPresenter;
 
     @Override

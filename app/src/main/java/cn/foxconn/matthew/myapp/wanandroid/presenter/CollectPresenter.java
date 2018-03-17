@@ -1,5 +1,8 @@
 package cn.foxconn.matthew.myapp.wanandroid.presenter;
 
+import com.trello.rxlifecycle2.LifecycleProvider;
+import com.trello.rxlifecycle2.android.ActivityEvent;
+
 import cn.foxconn.matthew.myapp.wanandroid.bean.pojoVO.ArticleListVO;
 import cn.foxconn.matthew.myapp.wanandroid.helper.RxObserverHelper;
 import cn.foxconn.matthew.myapp.wanandroid.model.DataModel;
@@ -13,12 +16,13 @@ import cn.foxconn.matthew.myapp.wanandroid.view.CollectView;
  * @email:guocheng0816@163.com
  */
 
-public class CollectPresenter extends BasePresenter<CollectView> {
+public class CollectPresenter extends BasePresenter<CollectView,ActivityEvent> {
 
     DataModel mDataModel;
     private int mCurrentPage;
 
-    public CollectPresenter(){
+    public CollectPresenter(LifecycleProvider provider) {
+        super(provider);
         mDataModel=new DataModelImpl();
     }
 
@@ -27,7 +31,7 @@ public class CollectPresenter extends BasePresenter<CollectView> {
      */
     public void getRefreshData(){
         mCurrentPage=0;
-        mDataModel.getCollectList(mCurrentPage, new RxObserverHelper<ArticleListVO>() {
+        mDataModel.getCollectList(mCurrentPage, getProvider(),new RxObserverHelper<ArticleListVO>() {
             @Override
             protected void _onCompleted() {
                 super._onCompleted();
@@ -58,7 +62,7 @@ public class CollectPresenter extends BasePresenter<CollectView> {
      */
     public void getMoreData(){
         mCurrentPage=mCurrentPage+1;
-        mDataModel.getCollectList(mCurrentPage, new RxObserverHelper<ArticleListVO>() {
+        mDataModel.getCollectList(mCurrentPage, getProvider(), new RxObserverHelper<ArticleListVO>() {
             @Override
             protected void _onNext(ArticleListVO articleListVO) {
                 getView().onLoadMoreSuccess(articleListVO.getDatas());

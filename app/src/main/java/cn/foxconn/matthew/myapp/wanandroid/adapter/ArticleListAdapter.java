@@ -96,7 +96,7 @@ public class ArticleListAdapter extends BaseQuickAdapter<ArticleBean, BaseViewHo
 
             @Override
             protected void _onError(String message) {
-                ToastUtil.showShort(mContext,"取消失败");
+                ToastUtil.showShort(mContext,"收藏失败");
             }
         });
     }

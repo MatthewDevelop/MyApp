@@ -2,9 +2,13 @@ package cn.foxconn.matthew.myapp.wanandroid.presenter;
 
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.trello.rxlifecycle2.LifecycleProvider;
+import com.trello.rxlifecycle2.android.FragmentEvent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,9 +18,9 @@ import cn.foxconn.matthew.myapp.wanandroid.bean.pojoVO.ArticleListVO;
 import cn.foxconn.matthew.myapp.wanandroid.bean.pojoVO.TypeTagVO;
 import cn.foxconn.matthew.myapp.wanandroid.helper.RxObserverHelper;
 import cn.foxconn.matthew.myapp.wanandroid.model.DataModel;
-import cn.foxconn.matthew.myapp.wanandroid.model.DataModelImpl;
 import cn.foxconn.matthew.myapp.wanandroid.adapter.ArticleListAdapter;
 import cn.foxconn.matthew.myapp.wanandroid.base.BasePresenter;
+import cn.foxconn.matthew.myapp.wanandroid.model.DataModelImpl;
 import cn.foxconn.matthew.myapp.wanandroid.view.TypeView;
 import cn.foxconn.matthew.myapp.utils.UIUtil;
 import cn.foxconn.matthew.myapp.wanandroid.widget.AutoLinefeedLayout;
@@ -27,7 +31,7 @@ import cn.foxconn.matthew.myapp.wanandroid.widget.AutoLinefeedLayout;
  * @email:guocheng0816@163.com
  */
 
-public class TypePresenter extends BasePresenter<TypeView> {
+public class TypePresenter extends BasePresenter<TypeView,FragmentEvent> {
     private static final String TAG = "TypePresenter";
     private FragmentActivity mActivity;
     DataModel mDataModel;
@@ -44,14 +48,16 @@ public class TypePresenter extends BasePresenter<TypeView> {
     private ArticleListAdapter mAdapter;
 
 
-    public TypePresenter(FragmentActivity activity){
-        mDataModel=new DataModelImpl();
+
+    public TypePresenter(FragmentActivity activity,LifecycleProvider<FragmentEvent> provider) {
+        super(provider);
         mActivity=activity;
+        mDataModel=new DataModelImpl();
     }
 
     public void getTagData() {
         mTypeView=getView();
-        mDataModel.getTagData(new RxObserverHelper<List<TypeTagVO>>() {
+        mDataModel.getTagData(getProvider(),new RxObserverHelper<List<TypeTagVO>>() {
             @Override
             protected void _onNext(List<TypeTagVO> typeTagVOS) {
                 mDatas=typeTagVOS;
@@ -128,6 +134,7 @@ public class TypePresenter extends BasePresenter<TypeView> {
                     textView.setTextColor(UIUtil.getColor(R.color.white));
                     textView.setBackgroundResource(R.drawable.shape_tag_sel);
                     mId=mDatas.get(position).getChildren().get(finalI).getId();
+                    Log.e(TAG, "onClick: "+mId );
                     getServerData(mId);
                 }
             });
@@ -150,9 +157,10 @@ public class TypePresenter extends BasePresenter<TypeView> {
      * @param id
      */
     private void getServerData(int id) {
+        Log.e(TAG, "getServerData: "+id );
         mCurrentPage=0;
         mAdapter=getView().getAdapter();
-        mDataModel.getTypeDataById(mCurrentPage, id, new RxObserverHelper<ArticleListVO>() {
+        mDataModel.getTypeDataById(mCurrentPage,id, getProvider(),new RxObserverHelper<ArticleListVO>() {
             @Override
             protected void _onNext(ArticleListVO articleListVO) {
                 if (articleListVO.getDatas()!=null){
@@ -173,7 +181,7 @@ public class TypePresenter extends BasePresenter<TypeView> {
      */
     public void getMoreData() {
         mCurrentPage=mCurrentPage+1;
-        mDataModel.getTypeDataById(mCurrentPage, mId, new RxObserverHelper<ArticleListVO>() {
+        mDataModel.getTypeDataById(mCurrentPage, mId,getProvider(), new RxObserverHelper<ArticleListVO>() {
             @Override
             protected void _onNext(ArticleListVO articleListVO) {
                 getView().getMoreDataSuccess(articleListVO.getDatas());

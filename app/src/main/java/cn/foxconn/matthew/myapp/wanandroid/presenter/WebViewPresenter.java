@@ -9,6 +9,9 @@ import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
 
 
+import com.trello.rxlifecycle2.LifecycleProvider;
+import com.trello.rxlifecycle2.android.ActivityEvent;
+
 import cn.foxconn.matthew.myapp.wanandroid.base.BasePresenter;
 import cn.foxconn.matthew.myapp.wanandroid.view.CommonWebView;
 
@@ -18,9 +21,13 @@ import cn.foxconn.matthew.myapp.wanandroid.view.CommonWebView;
  * @email:guocheng0816@163.com
  */
 
-public class WebViewPresenter extends BasePresenter<CommonWebView> {
+public class WebViewPresenter extends BasePresenter<CommonWebView,ActivityEvent> {
 
-    public void setWebView(WebView webView,String url){
+    public WebViewPresenter(LifecycleProvider provider) {
+        super(provider);
+    }
+
+    public void setWebView(WebView webView, String url){
         final CommonWebView commonWebView=getView();
         final ProgressBar progressBar=getView().getProgressBar();
         //TODO WebView的设置有待学习

@@ -2,12 +2,14 @@ package cn.foxconn.matthew.myapp.wanandroid.base;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.TextView;
+
+import com.trello.rxlifecycle2.android.ActivityEvent;
+import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 
 import butterknife.ButterKnife;
 import cn.foxconn.matthew.myapp.R;
@@ -20,7 +22,7 @@ import cn.foxconn.matthew.myapp.wanandroid.widget.CustomDialog;
  * @email:guocheng0816@163.com
  */
 
-public abstract class BaseActivity<V,T extends BasePresenter<V>> extends AppCompatActivity{
+public abstract class BaseActivity<V,T extends BasePresenter<V,ActivityEvent>> extends RxAppCompatActivity {
     protected T mPresenter;
     CustomDialog mCustomDialog;
 

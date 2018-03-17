@@ -58,7 +58,7 @@ public class SearchActivity
 
     @Override
     protected SearchPresenter createPresenter() {
-        return new SearchPresenter();
+        return new SearchPresenter(this);
     }
 
     @Override

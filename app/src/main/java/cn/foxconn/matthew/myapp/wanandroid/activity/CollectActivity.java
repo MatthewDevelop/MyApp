@@ -49,7 +49,7 @@ public class CollectActivity extends BaseActivity<CollectView, CollectPresenter>
 
     @Override
     protected CollectPresenter createPresenter() {
-        return new CollectPresenter();
+        return new CollectPresenter(this);
     }
 
     @Override

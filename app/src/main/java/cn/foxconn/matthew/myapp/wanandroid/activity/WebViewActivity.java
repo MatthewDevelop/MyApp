@@ -64,7 +64,7 @@ public class WebViewActivity
 
     @Override
     protected WebViewPresenter createPresenter() {
-        return new WebViewPresenter();
+        return new WebViewPresenter(this);
     }
 
     @Override

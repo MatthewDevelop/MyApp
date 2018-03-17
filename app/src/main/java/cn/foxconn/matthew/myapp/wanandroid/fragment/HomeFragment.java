@@ -74,7 +74,7 @@ public class HomeFragment extends BaseFragment<HomeView,HomePresenter>
 
     @Override
     protected HomePresenter createPresenter() {
-        return new HomePresenter();
+        return new HomePresenter(this);
     }
 
     @Override

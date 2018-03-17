@@ -1,5 +1,8 @@
 package cn.foxconn.matthew.myapp.wanandroid.presenter;
 
+import com.trello.rxlifecycle2.LifecycleProvider;
+import com.trello.rxlifecycle2.android.ActivityEvent;
+
 import java.util.List;
 
 import cn.foxconn.matthew.myapp.wanandroid.bean.pojo.HotKeyBean;
@@ -16,18 +19,19 @@ import cn.foxconn.matthew.myapp.wanandroid.view.SearchView;
  * @email:guocheng0816@163.com
  */
 
-public class SearchPresenter extends BasePresenter<SearchView> {
+public class SearchPresenter extends BasePresenter<SearchView,ActivityEvent> {
 
     DataModel mDataModel;
     private int mCurrentPage;
 
-    public SearchPresenter() {
+    public SearchPresenter(LifecycleProvider provider) {
+        super(provider);
         mDataModel = new DataModelImpl();
     }
 
 
     public void getHotKeyData() {
-        mDataModel.getHotKeyList(new RxObserverHelper<List<HotKeyBean>>() {
+        mDataModel.getHotKeyList(getProvider(),new RxObserverHelper<List<HotKeyBean>>() {
             @Override
             protected void _onNext(List<HotKeyBean> hotKeyBeans) {
                 getView().getHotKeySuccess(hotKeyBeans);
@@ -42,7 +46,7 @@ public class SearchPresenter extends BasePresenter<SearchView> {
 
     public void getSearchData(String keyword) {
         mCurrentPage = 0;
-        mDataModel.getSearchData(mCurrentPage, keyword, new RxObserverHelper<ArticleListVO>() {
+        mDataModel.getSearchData(mCurrentPage, keyword,getProvider(), new RxObserverHelper<ArticleListVO>() {
             @Override
             protected void _onNext(ArticleListVO articleListVO) {
                 getView().searchDataSuccess(articleListVO.getDatas());
@@ -57,7 +61,7 @@ public class SearchPresenter extends BasePresenter<SearchView> {
 
     public void getMoreData(String keyword) {
         mCurrentPage = mCurrentPage + 1;
-        mDataModel.getSearchData(mCurrentPage, keyword, new RxObserverHelper<ArticleListVO>() {
+        mDataModel.getSearchData(mCurrentPage, keyword, getProvider(),new RxObserverHelper<ArticleListVO>() {
             @Override
             protected void _onNext(ArticleListVO articleListVO) {
                 getView().loadMoreDataSuccess(articleListVO.getDatas());

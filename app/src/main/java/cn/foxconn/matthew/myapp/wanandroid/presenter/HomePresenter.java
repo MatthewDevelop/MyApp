@@ -2,6 +2,10 @@ package cn.foxconn.matthew.myapp.wanandroid.presenter;
 
 import android.util.Log;
 
+import com.trello.rxlifecycle2.LifecycleProvider;
+import com.trello.rxlifecycle2.android.ActivityEvent;
+import com.trello.rxlifecycle2.android.FragmentEvent;
+
 import java.util.List;
 
 import cn.foxconn.matthew.myapp.wanandroid.bean.pojo.BannerBean;
@@ -18,22 +22,24 @@ import cn.foxconn.matthew.myapp.wanandroid.view.HomeView;
  * @email:guocheng0816@163.com
  */
 
-public class HomePresenter extends BasePresenter<HomeView> {
+public class HomePresenter extends BasePresenter<HomeView,
+        FragmentEvent> {
     private static final String TAG = "HomePresenter";
 
     DataModel mDataModel;
     private int mCurrentPage;
 
-    public HomePresenter(){
-        mDataModel=new DataModelImpl();
+    public HomePresenter(LifecycleProvider provider) {
+        super(provider);
+        mDataModel = new DataModelImpl();
     }
 
     /**
      * 刷新首页列表
      */
     public void getRefreshData() {
-        mCurrentPage=0;
-        mDataModel.getHomeDataList(mCurrentPage, new RxObserverHelper<ArticleListVO>() {
+        mCurrentPage = 0;
+        mDataModel.getHomeDataList(mCurrentPage, getProvider(),new RxObserverHelper<ArticleListVO>() {
 
             @Override
             protected void _onCompleted() {
@@ -54,7 +60,7 @@ public class HomePresenter extends BasePresenter<HomeView> {
 
             @Override
             protected void _onError(String message) {
-                Log.e(TAG, "getRefreshData _onError: "+message );
+                Log.e(TAG, "getRefreshData _onError: " + message);
                 getView().showRefreshView(false);
                 getView().getRefreshDataFailed(message);
             }
@@ -65,7 +71,7 @@ public class HomePresenter extends BasePresenter<HomeView> {
      * 刷新首页轮播图
      */
     public void getBannerData() {
-        mDataModel.getBannerData(new RxObserverHelper<List<BannerBean>>() {
+        mDataModel.getBannerData(getProvider(),new RxObserverHelper<List<BannerBean>>() {
             @Override
             protected void _onNext(List<BannerBean> bannerBeans) {
                 getView().getBannerDataSuccess(bannerBeans);
@@ -82,9 +88,9 @@ public class HomePresenter extends BasePresenter<HomeView> {
     /**
      * 加载更多数据
      */
-    public void getMoreData(){
-        mCurrentPage=mCurrentPage+1;
-        mDataModel.getHomeDataList(mCurrentPage, new RxObserverHelper<ArticleListVO>() {
+    public void getMoreData() {
+        mCurrentPage = mCurrentPage + 1;
+        mDataModel.getHomeDataList(mCurrentPage, getProvider(),new RxObserverHelper<ArticleListVO>() {
             @Override
             protected void _onNext(ArticleListVO articleListVO) {
                 getView().getMoreDataSuccess(articleListVO.getDatas());

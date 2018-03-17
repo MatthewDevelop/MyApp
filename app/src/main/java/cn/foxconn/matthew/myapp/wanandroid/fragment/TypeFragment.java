@@ -53,7 +53,7 @@ public class TypeFragment
 
     @Override
     protected TypePresenter createPresenter() {
-        return new TypePresenter(getActivity());
+        return new TypePresenter(getActivity(),this);
     }
 
 

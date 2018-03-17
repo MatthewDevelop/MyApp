@@ -1,5 +1,9 @@
 package cn.foxconn.matthew.myapp.wanandroid.model;
 
+import com.trello.rxlifecycle2.LifecycleProvider;
+import com.trello.rxlifecycle2.android.ActivityEvent;
+import com.trello.rxlifecycle2.android.FragmentEvent;
+
 import java.util.List;
 
 import cn.foxconn.matthew.myapp.wanandroid.bean.pojo.BannerBean;
@@ -17,17 +21,17 @@ import cn.foxconn.matthew.myapp.wanandroid.helper.RxObserverHelper;
 
 public interface DataModel {
 
-    void getHomeDataList(int page, RxObserverHelper<ArticleListVO> subscriber);
+    void getHomeDataList(int page, LifecycleProvider<FragmentEvent> provider, RxObserverHelper<ArticleListVO> subscriber);
 
-    void getBannerData(RxObserverHelper<List<BannerBean>> subscriber);
+    void getBannerData(LifecycleProvider<FragmentEvent> provider, RxObserverHelper<List<BannerBean>> subscriber);
 
-    void getTagData(RxObserverHelper<List<TypeTagVO>> subscriber);
+    void getTagData(LifecycleProvider<FragmentEvent> provider, RxObserverHelper<List<TypeTagVO>> subscriber);
 
-    void getTypeDataById(int page, int cid, RxObserverHelper<ArticleListVO> subscriber);
+    void getTypeDataById(int page, int cid, LifecycleProvider<FragmentEvent> provider, RxObserverHelper<ArticleListVO> subscriber);
 
-    void toLogin(String username, String password, RxObserverHelper<UserBean> subscriber);
+    void toLogin(String username, String password, LifecycleProvider<ActivityEvent> provider, RxObserverHelper<UserBean> subscriber);
 
-    void toRegister(String username, String password, String rePassword, RxObserverHelper<UserBean> subscriber);
+    void toRegister(String username, String password, String rePassword, LifecycleProvider<ActivityEvent> provider, RxObserverHelper<UserBean> subscriber);
 
     void collectArticleInHomeList(int id, RxObserverHelper<String> subscriber);
 
@@ -35,9 +39,9 @@ public interface DataModel {
 
     void unCollectArticle(int id, int originId, RxObserverHelper<String> subscriber);
 
-    void getCollectList(int page, RxObserverHelper<ArticleListVO> subscriber);
+    void getCollectList(int page, LifecycleProvider<ActivityEvent> provider, RxObserverHelper<ArticleListVO> subscriber);
 
-    void getHotKeyList(RxObserverHelper<List<HotKeyBean>> subscriber);
+    void getHotKeyList(LifecycleProvider<ActivityEvent> provider, RxObserverHelper<List<HotKeyBean>> subscriber);
 
-    void getSearchData(int page,String keyword,RxObserverHelper<ArticleListVO> subscriber);
+    void getSearchData(int page, String keyword, LifecycleProvider<ActivityEvent> provider, RxObserverHelper<ArticleListVO> subscriber);
 }
