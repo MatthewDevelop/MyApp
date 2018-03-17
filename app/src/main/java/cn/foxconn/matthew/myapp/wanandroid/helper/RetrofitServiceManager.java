@@ -1,12 +1,13 @@
 package cn.foxconn.matthew.myapp.wanandroid.helper;
 
+import com.franmontiel.persistentcookiejar.ClearableCookieJar;
+import com.franmontiel.persistentcookiejar.PersistentCookieJar;
+import com.franmontiel.persistentcookiejar.cache.SetCookieCache;
+import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor;
+
 import java.util.concurrent.TimeUnit;
 
 import cn.foxconn.matthew.myapp.app.App;
-import cn.foxconn.matthew.myapp.wanandroid.persistentcookiejar.ClearableCookieJar;
-import cn.foxconn.matthew.myapp.wanandroid.persistentcookiejar.PersistentCookieJar;
-import cn.foxconn.matthew.myapp.wanandroid.persistentcookiejar.cache.SetCookieCache;
-import cn.foxconn.matthew.myapp.wanandroid.persistentcookiejar.persistence.SharedPrefsCookiePersistor;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
