@@ -17,4 +17,6 @@ public class AppConst {
     public static final String IS_LOGIN_KEY = "isLogin";
     public static final String USERNAME_KEY = "userName";
 
+    public static final boolean DEBUG=true;
+
 }

@@ -87,6 +87,15 @@ public class ArticleListAdapter extends BaseQuickAdapter<ArticleBean, BaseViewHo
 
     private void collectArticler(final ArticleBean item, TextView tv_collect) {
         mDataModel.collectArticleInHomeList(item.getId(), new RxObserverHelper<String>() {
+
+            @Override
+            protected void _onNext() {
+                super._onNext();
+                ToastUtil.showShort(mContext,"收藏成功");
+                item.setCollect(true);
+                notifyDataSetChanged();
+            }
+
             @Override
             protected void _onNext(String s) {
                 ToastUtil.showShort(mContext,"收藏成功");
@@ -103,6 +112,14 @@ public class ArticleListAdapter extends BaseQuickAdapter<ArticleBean, BaseViewHo
 
     private void unCollectArticler(final ArticleBean item, TextView tv_collect) {
         mDataModel.unCollectArticleInHomeList(item.getId(), new RxObserverHelper<String>() {
+            @Override
+            protected void _onNext() {
+                super._onNext();
+                ToastUtil.showShort(mContext,"取消成功");
+                item.setCollect(false);
+                notifyDataSetChanged();
+            }
+
             @Override
             protected void _onNext(String s) {
                 ToastUtil.showShort(mContext,"取消成功");

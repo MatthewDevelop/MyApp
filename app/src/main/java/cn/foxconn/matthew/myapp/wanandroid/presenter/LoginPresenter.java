@@ -29,8 +29,8 @@ public class LoginPresenter extends BasePresenter<LoginView,ActivityEvent> {
         mDataModel.toLogin(username, password, getProvider(),new RxObserverHelper<UserBean>() {
 
             @Override
-            protected void _onSubscribe() {
-                super._onSubscribe();
+            protected void _onStart() {
+                super._onStart();
                 getView().showProgress("正在登录");
             }
 
@@ -63,8 +63,8 @@ public class LoginPresenter extends BasePresenter<LoginView,ActivityEvent> {
             }
 
             @Override
-            protected void _onSubscribe() {
-                super._onSubscribe();
+            protected void _onStart() {
+                super._onStart();
                 getView().showProgress("正在注册");
             }
 

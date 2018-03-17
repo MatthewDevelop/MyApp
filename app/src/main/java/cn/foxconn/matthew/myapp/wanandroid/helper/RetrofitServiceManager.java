@@ -8,6 +8,7 @@ import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersisto
 import java.util.concurrent.TimeUnit;
 
 import cn.foxconn.matthew.myapp.app.App;
+import cn.foxconn.matthew.myapp.app.AppConst;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
@@ -34,7 +35,9 @@ public class RetrofitServiceManager {
         builder.readTimeout(DEFAULT_READ_TIMEOUT,TimeUnit.SECONDS);
         HttpLoggingInterceptor logging=new HttpLoggingInterceptor();
         logging.setLevel(HttpLoggingInterceptor.Level.BODY);
-        builder.addInterceptor(logging);
+        if(AppConst.DEBUG) {
+            builder.addInterceptor(logging);
+        }
         mCookieJar = new PersistentCookieJar(new SetCookieCache(),new SharedPrefsCookiePersistor(App.getContext()));
         builder.cookieJar(mCookieJar);
         // 添加公共参数拦截器

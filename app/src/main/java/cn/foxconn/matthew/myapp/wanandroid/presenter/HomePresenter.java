@@ -3,7 +3,6 @@ package cn.foxconn.matthew.myapp.wanandroid.presenter;
 import android.util.Log;
 
 import com.trello.rxlifecycle2.LifecycleProvider;
-import com.trello.rxlifecycle2.android.ActivityEvent;
 import com.trello.rxlifecycle2.android.FragmentEvent;
 
 import java.util.List;
@@ -48,8 +47,8 @@ public class HomePresenter extends BasePresenter<HomeView,
             }
 
             @Override
-            protected void _onSubscribe() {
-                super._onSubscribe();
+            protected void _onStart() {
+                super._onStart();
                 getView().showRefreshView(true);
             }
 

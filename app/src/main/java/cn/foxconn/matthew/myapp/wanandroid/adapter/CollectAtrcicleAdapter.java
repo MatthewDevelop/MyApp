@@ -18,6 +18,7 @@ import cn.foxconn.matthew.myapp.wanandroid.model.DataModelImpl;
 import cn.foxconn.matthew.myapp.wanandroid.activity.WebViewActivity;
 import cn.foxconn.matthew.myapp.utils.ToastUtil;
 import cn.foxconn.matthew.myapp.utils.UIUtil;
+import io.reactivex.observers.DisposableObserver;
 
 /**
  * @author:Matthew
@@ -65,6 +66,21 @@ public class CollectAtrcicleAdapter extends BaseQuickAdapter<ArticleBean, BaseVi
 
     private void unCollectArticler(final int position, ArticleBean item, final TextView tv_collect) {
         mDataModel.unCollectArticle(item.getId(), item.getOriginId(), new RxObserverHelper<String>() {
+
+            @Override
+            protected void _onNext() {
+                super._onNext();
+                ToastUtil.showShort(mContext, "取消成功");
+                getData().remove(position);
+                //防止下标越界
+                if (position == 0 && getData().size() == 0) {
+                    notifyDataSetChanged();
+                    tv_no_collect.setVisibility(View.VISIBLE);
+                } else {
+                    notifyItemRemoved(position);
+                }
+            }
+
             @Override
             protected void _onNext(String s) {
                 ToastUtil.showShort(mContext, "取消成功");

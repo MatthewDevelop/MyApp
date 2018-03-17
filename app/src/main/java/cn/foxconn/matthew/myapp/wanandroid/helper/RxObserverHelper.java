@@ -3,8 +3,8 @@ package cn.foxconn.matthew.myapp.wanandroid.helper;
 import java.net.ConnectException;
 import java.net.SocketTimeoutException;
 
-import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.observers.DisposableObserver;
 import retrofit2.HttpException;
 
 /**
@@ -18,7 +18,7 @@ import retrofit2.HttpException;
  *
  * @param <T>
  */
-public abstract class RxObserverHelper<T> implements Observer<T> {
+public abstract class RxObserverHelper<T> extends DisposableObserver<T> {
 
     /**
      * onStart方法总是在订阅的线程执行，即observerOn指定的线程，指定AndroidSchedulers.mainThread()时，可以在onStart方法中更新UI
@@ -31,8 +31,9 @@ public abstract class RxObserverHelper<T> implements Observer<T> {
      */
 
     @Override
-    public void onSubscribe(Disposable d) {
-        _onSubscribe();
+    protected void onStart() {
+        super.onStart();
+        _onStart();
     }
 
     @Override
@@ -48,7 +49,9 @@ public abstract class RxObserverHelper<T> implements Observer<T> {
             _onError("请求超时，稍后再试");
         } else if (e instanceof HttpException) {
             _onError("服务器异常，稍后再试");
-        } else {
+        } else if(e instanceof NullPointerException){
+            _onNext();
+        }else {
             //_onError("请求失败，稍后再试");
             _onError(e.getMessage());
         }
@@ -63,7 +66,20 @@ public abstract class RxObserverHelper<T> implements Observer<T> {
 
     }
 
-    protected void _onSubscribe() {
+    protected void _onStart() {
+
+    }
+
+    /**
+     * {
+     *"data": null,
+     *"errorCode": 0,
+     *"errorMsg": ""
+     *}
+     *
+     * 针对收藏与取消收藏接口进行特殊处理，成功，但返回的data为空，observer会抛出空指针
+     */
+    protected void _onNext() {
 
     }
 

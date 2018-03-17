@@ -39,8 +39,8 @@ public class CollectPresenter extends BasePresenter<CollectView,ActivityEvent> {
             }
 
             @Override
-            protected void _onSubscribe() {
-                super._onSubscribe();
+            protected void _onStart() {
+                super._onStart();
                 getView().showRefreshView(true);
             }
 
