@@ -1,7 +1,7 @@
 package cn.foxconn.matthew.myapp.wanandroid.presenter;
 
 import cn.foxconn.matthew.myapp.wanandroid.bean.pojoVO.ArticleListVO;
-import cn.foxconn.matthew.myapp.wanandroid.helper.RxSubscribeHelper;
+import cn.foxconn.matthew.myapp.wanandroid.helper.RxObserverHelper;
 import cn.foxconn.matthew.myapp.wanandroid.model.DataModel;
 import cn.foxconn.matthew.myapp.wanandroid.model.DataModelImpl;
 import cn.foxconn.matthew.myapp.wanandroid.base.BasePresenter;
@@ -27,7 +27,7 @@ public class CollectPresenter extends BasePresenter<CollectView> {
      */
     public void getRefreshData(){
         mCurrentPage=0;
-        mDataModel.getCollectList(mCurrentPage, new RxSubscribeHelper<ArticleListVO>() {
+        mDataModel.getCollectList(mCurrentPage, new RxObserverHelper<ArticleListVO>() {
             @Override
             protected void _onCompleted() {
                 super._onCompleted();
@@ -35,8 +35,8 @@ public class CollectPresenter extends BasePresenter<CollectView> {
             }
 
             @Override
-            protected void _onStart() {
-                super._onStart();
+            protected void _onSubscribe() {
+                super._onSubscribe();
                 getView().showRefreshView(true);
             }
 
@@ -58,7 +58,7 @@ public class CollectPresenter extends BasePresenter<CollectView> {
      */
     public void getMoreData(){
         mCurrentPage=mCurrentPage+1;
-        mDataModel.getCollectList(mCurrentPage, new RxSubscribeHelper<ArticleListVO>() {
+        mDataModel.getCollectList(mCurrentPage, new RxObserverHelper<ArticleListVO>() {
             @Override
             protected void _onNext(ArticleListVO articleListVO) {
                 getView().onLoadMoreSuccess(articleListVO.getDatas());

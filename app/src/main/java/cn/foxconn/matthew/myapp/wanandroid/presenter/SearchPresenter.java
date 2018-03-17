@@ -4,7 +4,7 @@ import java.util.List;
 
 import cn.foxconn.matthew.myapp.wanandroid.bean.pojo.HotKeyBean;
 import cn.foxconn.matthew.myapp.wanandroid.bean.pojoVO.ArticleListVO;
-import cn.foxconn.matthew.myapp.wanandroid.helper.RxSubscribeHelper;
+import cn.foxconn.matthew.myapp.wanandroid.helper.RxObserverHelper;
 import cn.foxconn.matthew.myapp.wanandroid.model.DataModel;
 import cn.foxconn.matthew.myapp.wanandroid.model.DataModelImpl;
 import cn.foxconn.matthew.myapp.wanandroid.base.BasePresenter;
@@ -27,7 +27,7 @@ public class SearchPresenter extends BasePresenter<SearchView> {
 
 
     public void getHotKeyData() {
-        mDataModel.getHotKeyList(new RxSubscribeHelper<List<HotKeyBean>>() {
+        mDataModel.getHotKeyList(new RxObserverHelper<List<HotKeyBean>>() {
             @Override
             protected void _onNext(List<HotKeyBean> hotKeyBeans) {
                 getView().getHotKeySuccess(hotKeyBeans);
@@ -42,7 +42,7 @@ public class SearchPresenter extends BasePresenter<SearchView> {
 
     public void getSearchData(String keyword) {
         mCurrentPage = 0;
-        mDataModel.getSearchData(mCurrentPage, keyword, new RxSubscribeHelper<ArticleListVO>() {
+        mDataModel.getSearchData(mCurrentPage, keyword, new RxObserverHelper<ArticleListVO>() {
             @Override
             protected void _onNext(ArticleListVO articleListVO) {
                 getView().searchDataSuccess(articleListVO.getDatas());
@@ -57,7 +57,7 @@ public class SearchPresenter extends BasePresenter<SearchView> {
 
     public void getMoreData(String keyword) {
         mCurrentPage = mCurrentPage + 1;
-        mDataModel.getSearchData(mCurrentPage, keyword, new RxSubscribeHelper<ArticleListVO>() {
+        mDataModel.getSearchData(mCurrentPage, keyword, new RxObserverHelper<ArticleListVO>() {
             @Override
             protected void _onNext(ArticleListVO articleListVO) {
                 getView().loadMoreDataSuccess(articleListVO.getDatas());

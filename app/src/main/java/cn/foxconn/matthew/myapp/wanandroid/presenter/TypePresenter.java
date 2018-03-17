@@ -12,7 +12,7 @@ import java.util.List;
 import cn.foxconn.matthew.myapp.R;
 import cn.foxconn.matthew.myapp.wanandroid.bean.pojoVO.ArticleListVO;
 import cn.foxconn.matthew.myapp.wanandroid.bean.pojoVO.TypeTagVO;
-import cn.foxconn.matthew.myapp.wanandroid.helper.RxSubscribeHelper;
+import cn.foxconn.matthew.myapp.wanandroid.helper.RxObserverHelper;
 import cn.foxconn.matthew.myapp.wanandroid.model.DataModel;
 import cn.foxconn.matthew.myapp.wanandroid.model.DataModelImpl;
 import cn.foxconn.matthew.myapp.wanandroid.adapter.ArticleListAdapter;
@@ -51,7 +51,7 @@ public class TypePresenter extends BasePresenter<TypeView> {
 
     public void getTagData() {
         mTypeView=getView();
-        mDataModel.getTagData(new RxSubscribeHelper<List<TypeTagVO>>() {
+        mDataModel.getTagData(new RxObserverHelper<List<TypeTagVO>>() {
             @Override
             protected void _onNext(List<TypeTagVO> typeTagVOS) {
                 mDatas=typeTagVOS;
@@ -152,7 +152,7 @@ public class TypePresenter extends BasePresenter<TypeView> {
     private void getServerData(int id) {
         mCurrentPage=0;
         mAdapter=getView().getAdapter();
-        mDataModel.getTypeDataById(mCurrentPage, id, new RxSubscribeHelper<ArticleListVO>() {
+        mDataModel.getTypeDataById(mCurrentPage, id, new RxObserverHelper<ArticleListVO>() {
             @Override
             protected void _onNext(ArticleListVO articleListVO) {
                 if (articleListVO.getDatas()!=null){
@@ -173,7 +173,7 @@ public class TypePresenter extends BasePresenter<TypeView> {
      */
     public void getMoreData() {
         mCurrentPage=mCurrentPage+1;
-        mDataModel.getTypeDataById(mCurrentPage, mId, new RxSubscribeHelper<ArticleListVO>() {
+        mDataModel.getTypeDataById(mCurrentPage, mId, new RxObserverHelper<ArticleListVO>() {
             @Override
             protected void _onNext(ArticleListVO articleListVO) {
                 getView().getMoreDataSuccess(articleListVO.getDatas());

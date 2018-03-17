@@ -12,7 +12,7 @@ import java.util.List;
 
 import cn.foxconn.matthew.myapp.R;
 import cn.foxconn.matthew.myapp.wanandroid.bean.pojo.ArticleBean;
-import cn.foxconn.matthew.myapp.wanandroid.helper.RxSubscribeHelper;
+import cn.foxconn.matthew.myapp.wanandroid.helper.RxObserverHelper;
 import cn.foxconn.matthew.myapp.wanandroid.model.DataModel;
 import cn.foxconn.matthew.myapp.wanandroid.model.DataModelImpl;
 import cn.foxconn.matthew.myapp.wanandroid.activity.WebViewActivity;
@@ -64,7 +64,7 @@ public class CollectAtrcicleAdapter extends BaseQuickAdapter<ArticleBean, BaseVi
 
 
     private void unCollectArticler(final int position, ArticleBean item, final TextView tv_collect) {
-        mDataModel.unCollectArticle(item.getId(), item.getOriginId(), new RxSubscribeHelper<String>() {
+        mDataModel.unCollectArticle(item.getId(), item.getOriginId(), new RxObserverHelper<String>() {
             @Override
             protected void _onNext(String s) {
                 ToastUtil.showShort(mContext, "取消成功");

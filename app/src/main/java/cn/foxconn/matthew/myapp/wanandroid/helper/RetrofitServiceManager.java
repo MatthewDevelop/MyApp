@@ -10,7 +10,7 @@ import cn.foxconn.matthew.myapp.wanandroid.persistentcookiejar.persistence.Share
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 import static cn.foxconn.matthew.myapp.app.AppConst.BASE_URL;
@@ -47,7 +47,7 @@ public class RetrofitServiceManager {
         mRetrofit=new Retrofit.Builder()
                 .client(builder.build())
                 .baseUrl(BASE_URL)
-                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
     }

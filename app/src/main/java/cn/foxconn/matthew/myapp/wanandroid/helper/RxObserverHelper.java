@@ -3,8 +3,9 @@ package cn.foxconn.matthew.myapp.wanandroid.helper;
 import java.net.ConnectException;
 import java.net.SocketTimeoutException;
 
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
 import retrofit2.HttpException;
-import rx.Subscriber;
 
 /**
  * @author:Matthew
@@ -14,10 +15,14 @@ import rx.Subscriber;
 
 /**
  * 自定义subscriber，减少不必要回掉
+ *
  * @param <T>
  */
-public abstract class RxSubscribeHelper<T> extends Subscriber<T> {
+public abstract class RxObserverHelper<T> implements Observer<T> {
 
+    /**
+     * onStart方法总是在订阅的线程执行，即observerOn指定的线程，指定AndroidSchedulers.mainThread()时，可以在onStart方法中更新UI
+     */
     /**
      * onStart(): 这是 Subscriber 增加的方法。它会在 subscribe 刚开始，而事件还未发送之前被调用，可以用于做一些准备工作，例如数据的清零或重置。
      * 这是一个可选方法，默认情况下它的实现为空。
@@ -25,37 +30,25 @@ public abstract class RxSubscribeHelper<T> extends Subscriber<T> {
      * 因为它总是在 subscribe 所发生的线程被调用，而不能指定线程。要在指定的线程来做准备工作，可以使用 doOnSubscribe() 方法
      */
 
-    /**
-     * onStart方法总是在订阅的线程执行，即observerOn指定的线程，指定AndroidSchedulers.mainThread()时，可以在onStart方法中更新UI
-     */
-
     @Override
-    public void onStart() {
-        super.onStart();
-        _onStart();
+    public void onSubscribe(Disposable d) {
+        _onSubscribe();
     }
 
     @Override
-    public void onCompleted() {
-        //取消订阅
-        if(!isUnsubscribed()){
-            unsubscribe();
-        }
+    public void onComplete() {
         _onCompleted();
-
     }
+
 
     @Override
     public void onError(Throwable e) {
         e.printStackTrace();
-        if(!isUnsubscribed()){
-            unsubscribe();
-        }
-        if (e instanceof SocketTimeoutException||e instanceof ConnectException){
+        if (e instanceof SocketTimeoutException || e instanceof ConnectException) {
             _onError("请求超时，稍后再试");
-        }else if(e instanceof HttpException){
+        } else if (e instanceof HttpException) {
             _onError("服务器异常，稍后再试");
-        }else {
+        } else {
             //_onError("请求失败，稍后再试");
             _onError(e.getMessage());
         }
@@ -70,7 +63,7 @@ public abstract class RxSubscribeHelper<T> extends Subscriber<T> {
 
     }
 
-    protected void _onStart() {
+    protected void _onSubscribe() {
 
     }
 

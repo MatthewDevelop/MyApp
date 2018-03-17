@@ -7,7 +7,7 @@ import cn.foxconn.matthew.myapp.wanandroid.bean.pojo.HotKeyBean;
 import cn.foxconn.matthew.myapp.wanandroid.bean.pojo.UserBean;
 import cn.foxconn.matthew.myapp.wanandroid.bean.pojoVO.ArticleListVO;
 import cn.foxconn.matthew.myapp.wanandroid.bean.pojoVO.TypeTagVO;
-import cn.foxconn.matthew.myapp.wanandroid.helper.RxSubscribeHelper;
+import cn.foxconn.matthew.myapp.wanandroid.helper.RxObserverHelper;
 
 /**
  * @author:Matthew
@@ -17,27 +17,27 @@ import cn.foxconn.matthew.myapp.wanandroid.helper.RxSubscribeHelper;
 
 public interface DataModel {
 
-    void getHomeDataList(int page, RxSubscribeHelper<ArticleListVO> subscriber);
+    void getHomeDataList(int page, RxObserverHelper<ArticleListVO> subscriber);
 
-    void getBannerData(RxSubscribeHelper<List<BannerBean>> subscriber);
+    void getBannerData(RxObserverHelper<List<BannerBean>> subscriber);
 
-    void getTagData(RxSubscribeHelper<List<TypeTagVO>> subscriber);
+    void getTagData(RxObserverHelper<List<TypeTagVO>> subscriber);
 
-    void getTypeDataById(int page, int cid, RxSubscribeHelper<ArticleListVO> subscriber);
+    void getTypeDataById(int page, int cid, RxObserverHelper<ArticleListVO> subscriber);
 
-    void toLogin(String username, String password, RxSubscribeHelper<UserBean> subscriber);
+    void toLogin(String username, String password, RxObserverHelper<UserBean> subscriber);
 
-    void toRegister(String username, String password, String rePassword, RxSubscribeHelper<UserBean> subscriber);
+    void toRegister(String username, String password, String rePassword, RxObserverHelper<UserBean> subscriber);
 
-    void collectArticleInHomeList(int id, RxSubscribeHelper<String> subscriber);
+    void collectArticleInHomeList(int id, RxObserverHelper<String> subscriber);
 
-    void unCollectArticleInHomeList(int id, RxSubscribeHelper<String> subscriber);
+    void unCollectArticleInHomeList(int id, RxObserverHelper<String> subscriber);
 
-    void unCollectArticle(int id, int originId, RxSubscribeHelper<String> subscriber);
+    void unCollectArticle(int id, int originId, RxObserverHelper<String> subscriber);
 
-    void getCollectList(int page, RxSubscribeHelper<ArticleListVO> subscriber);
+    void getCollectList(int page, RxObserverHelper<ArticleListVO> subscriber);
 
-    void getHotKeyList(RxSubscribeHelper<List<HotKeyBean>> subscriber);
+    void getHotKeyList(RxObserverHelper<List<HotKeyBean>> subscriber);
 
-    void getSearchData(int page,String keyword,RxSubscribeHelper<ArticleListVO> subscriber);
+    void getSearchData(int page,String keyword,RxObserverHelper<ArticleListVO> subscriber);
 }

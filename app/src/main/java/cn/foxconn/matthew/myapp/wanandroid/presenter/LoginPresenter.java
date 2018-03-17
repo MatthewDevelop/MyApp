@@ -1,7 +1,7 @@
 package cn.foxconn.matthew.myapp.wanandroid.presenter;
 
 import cn.foxconn.matthew.myapp.wanandroid.bean.pojo.UserBean;
-import cn.foxconn.matthew.myapp.wanandroid.helper.RxSubscribeHelper;
+import cn.foxconn.matthew.myapp.wanandroid.helper.RxObserverHelper;
 import cn.foxconn.matthew.myapp.wanandroid.model.DataModel;
 import cn.foxconn.matthew.myapp.wanandroid.model.DataModelImpl;
 import cn.foxconn.matthew.myapp.wanandroid.base.BasePresenter;
@@ -22,11 +22,11 @@ public class LoginPresenter extends BasePresenter<LoginView> {
     }
 
     public void toLogin(String username,String password){
-        mDataModel.toLogin(username, password, new RxSubscribeHelper<UserBean>() {
+        mDataModel.toLogin(username, password, new RxObserverHelper<UserBean>() {
 
             @Override
-            protected void _onStart() {
-                super._onStart();
+            protected void _onSubscribe() {
+                super._onSubscribe();
                 getView().showProgress("正在登录");
             }
 
@@ -51,7 +51,7 @@ public class LoginPresenter extends BasePresenter<LoginView> {
 
 
     public void toRegister(String username,String password,String rePassword){
-        mDataModel.toRegister(username, password, rePassword,new RxSubscribeHelper<UserBean>() {
+        mDataModel.toRegister(username, password, rePassword,new RxObserverHelper<UserBean>() {
             @Override
             protected void _onCompleted() {
                 super._onCompleted();
@@ -59,8 +59,8 @@ public class LoginPresenter extends BasePresenter<LoginView> {
             }
 
             @Override
-            protected void _onStart() {
-                super._onStart();
+            protected void _onSubscribe() {
+                super._onSubscribe();
                 getView().showProgress("正在注册");
             }
 

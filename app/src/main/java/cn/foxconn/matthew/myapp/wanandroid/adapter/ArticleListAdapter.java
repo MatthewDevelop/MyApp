@@ -14,7 +14,7 @@ import java.util.List;
 import cn.foxconn.matthew.myapp.R;
 import cn.foxconn.matthew.myapp.app.AppConst;
 import cn.foxconn.matthew.myapp.wanandroid.bean.pojo.ArticleBean;
-import cn.foxconn.matthew.myapp.wanandroid.helper.RxSubscribeHelper;
+import cn.foxconn.matthew.myapp.wanandroid.helper.RxObserverHelper;
 import cn.foxconn.matthew.myapp.wanandroid.model.DataModel;
 import cn.foxconn.matthew.myapp.wanandroid.model.DataModelImpl;
 import cn.foxconn.matthew.myapp.wanandroid.activity.WebViewActivity;
@@ -86,7 +86,7 @@ public class ArticleListAdapter extends BaseQuickAdapter<ArticleBean, BaseViewHo
     }
 
     private void collectArticler(final ArticleBean item, TextView tv_collect) {
-        mDataModel.collectArticleInHomeList(item.getId(), new RxSubscribeHelper<String>() {
+        mDataModel.collectArticleInHomeList(item.getId(), new RxObserverHelper<String>() {
             @Override
             protected void _onNext(String s) {
                 ToastUtil.showShort(mContext,"收藏成功");
@@ -102,7 +102,7 @@ public class ArticleListAdapter extends BaseQuickAdapter<ArticleBean, BaseViewHo
     }
 
     private void unCollectArticler(final ArticleBean item, TextView tv_collect) {
-        mDataModel.unCollectArticleInHomeList(item.getId(), new RxSubscribeHelper<String>() {
+        mDataModel.unCollectArticleInHomeList(item.getId(), new RxObserverHelper<String>() {
             @Override
             protected void _onNext(String s) {
                 ToastUtil.showShort(mContext,"取消成功");

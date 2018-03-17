@@ -13,7 +13,7 @@ import cn.foxconn.matthew.myapp.wanandroid.bean.pojoVO.TypeTagVO;
 import cn.foxconn.matthew.myapp.wanandroid.helper.RetrofitServiceManager;
 import cn.foxconn.matthew.myapp.wanandroid.helper.RxResultHelper;
 import cn.foxconn.matthew.myapp.wanandroid.helper.RxSchedulersHelper;
-import cn.foxconn.matthew.myapp.wanandroid.helper.RxSubscribeHelper;
+import cn.foxconn.matthew.myapp.wanandroid.helper.RxObserverHelper;
 
 
 /**
@@ -31,7 +31,7 @@ public class DataModelImpl implements DataModel {
     }
 
     @Override
-    public void getHomeDataList(int page, RxSubscribeHelper<ArticleListVO> subscriber) {
+    public void getHomeDataList(int page, RxObserverHelper<ArticleListVO> subscriber) {
         mWanService.getHomeAtricleList(page)
                 .compose(RxSchedulersHelper.<ResponseData<ArticleListVO>>defaultTransformer())
                 .compose(RxResultHelper.<ArticleListVO>handleResult())
@@ -40,7 +40,7 @@ public class DataModelImpl implements DataModel {
 
 
     @Override
-    public void getBannerData(RxSubscribeHelper<List<BannerBean>> subscriber) {
+    public void getBannerData(RxObserverHelper<List<BannerBean>> subscriber) {
         mWanService.getHomeBannerList()
                 .compose(RxSchedulersHelper.<ResponseData<List<BannerBean>>>defaultTransformer())
                 .compose(RxResultHelper.<List<BannerBean>>handleResult())
@@ -48,7 +48,7 @@ public class DataModelImpl implements DataModel {
     }
 
     @Override
-    public void getTagData(RxSubscribeHelper<List<TypeTagVO>> subscriber) {
+    public void getTagData(RxObserverHelper<List<TypeTagVO>> subscriber) {
         mWanService.getTagData()
                 .compose(RxSchedulersHelper.<ResponseData<List<TypeTagVO>>>defaultTransformer())
                 .compose(RxResultHelper.<List<TypeTagVO>>handleResult())
@@ -56,7 +56,7 @@ public class DataModelImpl implements DataModel {
     }
 
     @Override
-    public void getTypeDataById(int page, int cid, RxSubscribeHelper<ArticleListVO> subscriber) {
+    public void getTypeDataById(int page, int cid, RxObserverHelper<ArticleListVO> subscriber) {
         mWanService.getTypeDataById(page, cid)
                 .compose(RxSchedulersHelper.<ResponseData<ArticleListVO>>defaultTransformer())
                 .compose(RxResultHelper.<ArticleListVO>handleResult())
@@ -64,7 +64,7 @@ public class DataModelImpl implements DataModel {
     }
 
     @Override
-    public void toLogin(String username, String password, RxSubscribeHelper<UserBean> subscriber) {
+    public void toLogin(String username, String password, RxObserverHelper<UserBean> subscriber) {
         mWanService.toLogin(username, password)
                 .compose(RxSchedulersHelper.<ResponseData<UserBean>>defaultTransformer())
                 .compose(RxResultHelper.<UserBean>handleResult())
@@ -72,7 +72,7 @@ public class DataModelImpl implements DataModel {
     }
 
     @Override
-    public void toRegister(String username, String password, String rePassword, RxSubscribeHelper<UserBean> subscriber) {
+    public void toRegister(String username, String password, String rePassword, RxObserverHelper<UserBean> subscriber) {
         mWanService.toRegister(username, password, rePassword)
                 .compose(RxSchedulersHelper.<ResponseData<UserBean>>defaultTransformer())
                 .compose(RxResultHelper.<UserBean>handleResult())
@@ -80,7 +80,7 @@ public class DataModelImpl implements DataModel {
     }
 
     @Override
-    public void collectArticleInHomeList(int id, RxSubscribeHelper<String> subscriber) {
+    public void collectArticleInHomeList(int id, RxObserverHelper<String> subscriber) {
         mWanService.collectArticleInHomeList(id)
                 .compose(RxSchedulersHelper.<ResponseData<String>>defaultTransformer())
                 .compose(RxResultHelper.<String>handleResult())
@@ -88,7 +88,7 @@ public class DataModelImpl implements DataModel {
     }
 
     @Override
-    public void unCollectArticleInHomeList(int id, RxSubscribeHelper<String> subscriber) {
+    public void unCollectArticleInHomeList(int id, RxObserverHelper<String> subscriber) {
         mWanService.unCollectArticleInHomeList(id, -1)
                 .compose(RxSchedulersHelper.<ResponseData<String>>defaultTransformer())
                 .compose(RxResultHelper.<String>handleResult())
@@ -96,7 +96,7 @@ public class DataModelImpl implements DataModel {
     }
 
     @Override
-    public void unCollectArticle(int id, int originId, RxSubscribeHelper<String> subscriber) {
+    public void unCollectArticle(int id, int originId, RxObserverHelper<String> subscriber) {
         mWanService.unCollectArticle(id, originId)
                 .compose(RxSchedulersHelper.<ResponseData<String>>defaultTransformer())
                 .compose(RxResultHelper.<String>handleResult())
@@ -104,7 +104,7 @@ public class DataModelImpl implements DataModel {
     }
 
     @Override
-    public void getCollectList(int page, RxSubscribeHelper<ArticleListVO> subscriber) {
+    public void getCollectList(int page, RxObserverHelper<ArticleListVO> subscriber) {
         mWanService.getCollectList(page)
                 .compose(RxSchedulersHelper.<ResponseData<ArticleListVO>>defaultTransformer())
                 .compose(RxResultHelper.<ArticleListVO>handleResult())
@@ -112,7 +112,7 @@ public class DataModelImpl implements DataModel {
     }
 
     @Override
-    public void getHotKeyList(RxSubscribeHelper<List<HotKeyBean>> subscriber) {
+    public void getHotKeyList(RxObserverHelper<List<HotKeyBean>> subscriber) {
         mWanService.getHotKeyList()
                 .compose(RxSchedulersHelper.<ResponseData<List<HotKeyBean>>>defaultTransformer())
                 .compose(RxResultHelper.<List<HotKeyBean>>handleResult())
@@ -120,7 +120,7 @@ public class DataModelImpl implements DataModel {
     }
 
     @Override
-    public void getSearchData(int page, String keyword,RxSubscribeHelper<ArticleListVO> subscriber) {
+    public void getSearchData(int page, String keyword,RxObserverHelper<ArticleListVO> subscriber) {
         mWanService.getSearchData(page,keyword)
                 .compose(RxSchedulersHelper.<ResponseData<ArticleListVO>>defaultTransformer())
                 .compose(RxResultHelper.<ArticleListVO>handleResult())

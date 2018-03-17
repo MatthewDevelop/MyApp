@@ -9,13 +9,13 @@ import cn.foxconn.matthew.myapp.wanandroid.bean.pojo.HotKeyBean;
 import cn.foxconn.matthew.myapp.wanandroid.bean.pojo.UserBean;
 import cn.foxconn.matthew.myapp.wanandroid.bean.pojoVO.ArticleListVO;
 import cn.foxconn.matthew.myapp.wanandroid.bean.pojoVO.TypeTagVO;
+import io.reactivex.Observable;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
-import rx.Observable;
 
 /**
  * @author:Matthew

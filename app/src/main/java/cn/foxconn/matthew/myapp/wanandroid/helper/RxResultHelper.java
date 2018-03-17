@@ -6,8 +6,10 @@ package cn.foxconn.matthew.myapp.wanandroid.helper;
 import android.util.Log;
 
 import cn.foxconn.matthew.myapp.wanandroid.bean.ResponseData;
-import rx.Observable;
-import rx.functions.Func1;
+import io.reactivex.Observable;
+import io.reactivex.ObservableSource;
+import io.reactivex.ObservableTransformer;
+import io.reactivex.functions.Function;
 
 /**
  * 处理请求结果的数据剥离
@@ -23,16 +25,14 @@ public class RxResultHelper {
     private static final int RESPONSE_SUCCESS_CODE = 0;
     private static final int RESPONSE_ERROR_CODE = -1;
 
-    public static <T>Observable.Transformer<ResponseData<T>,T> handleResult(){
-        return new Observable.Transformer<ResponseData<T>,T>(){
 
+    public static <T>ObservableTransformer<ResponseData<T>,T> handleResult(){
+        return new ObservableTransformer<ResponseData<T>, T>() {
             @Override
-            public Observable<T> call(final Observable<ResponseData<T>> responseDataObservable) {
-                return responseDataObservable.flatMap(new Func1<ResponseData<T>, Observable<T>>() {
-
+            public ObservableSource<T> apply(Observable<ResponseData<T>> upstream) {
+                return upstream.flatMap(new Function<ResponseData<T>, ObservableSource<T>>() {
                     @Override
-                    public Observable<T> call(ResponseData<T> tResponseData) {
-                        Log.e(TAG, "call: "+tResponseData.getErrorCode() );
+                    public ObservableSource<T> apply(ResponseData<T> tResponseData) throws Exception {
                         if (tResponseData.getErrorCode()==RESPONSE_SUCCESS_CODE){
                             //请求成功时将数据部分剥离返回
                             Log.e(TAG, "call: " +tResponseData.toString());
