@@ -10,9 +10,9 @@
 
     <style name="AppThemeNoTitle" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimary">@color/main</item>
+        <item name="colorPrimaryDark">@color/main</item>
+        <item name="colorAccent">@color/main</item>
         <!--去掉系统默认的标题栏-->
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
@@ -104,5 +104,9 @@
         <item name="android:windowIsFloating">true</item>
         <!--是否模糊-->
         <item name="android:backgroundDimEnabled">false</item>
+    </style>
+    <!--全屏不现实状态栏-->
+    <style name="fullscreen" parent="Theme.AppCompat.DayNight.NoActionBar">
+        <item name="android:windowFullscreen">true</item>
     </style>
 </resources>

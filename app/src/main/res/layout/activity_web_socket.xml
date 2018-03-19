@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="cn.foxconn.matthew.myapp.websocketdemo.WebSocketActivity"
+    android:orientation="vertical">
+
+    <TextView
+        style="@style/TitleStyle"
+        android:text="WebSocket" />
+
+    <EditText
+        android:layout_margin="10dp"
+        android:padding="10dp"
+        android:id="@+id/et_message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/transparent"
+        android:hint="请输入消息"/>
+
+    <Button
+        android:id="@+id/bt_send"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="发送"/>
+
+    <TextView
+        android:padding="10dp"
+        android:id="@+id/tv_log"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</LinearLayout>

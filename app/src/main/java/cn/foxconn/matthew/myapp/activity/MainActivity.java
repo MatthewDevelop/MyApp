@@ -11,11 +11,14 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import org.java_websocket.client.WebSocketClient;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import cn.foxconn.matthew.myapp.R;
 import cn.foxconn.matthew.myapp.mobilesafe.activity.MobileSafeActivity;
 import cn.foxconn.matthew.myapp.wanandroid.activity.WanAndroidActivity;
+import cn.foxconn.matthew.myapp.websocketdemo.WebSocketActivity;
 
 /**
  * @author:Matthew
@@ -27,8 +30,8 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.gridView)
     GridView mGridView;
 
-    String[] names = new String[]{"手机卫士", "玩Android"};
-    int[] imagIds = new int[]{R.drawable.home_callmsgsafe, R.drawable.ic_launcher_round};
+    String[] names = new String[]{"手机卫士", "玩Android","WebSocket"};
+    int[] imageIds = new int[]{R.drawable.home_callmsgsafe, R.drawable.ic_launcher_round, R.drawable.ic_launcher_round};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +48,9 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case 1:
                         startActivity(new Intent(MainActivity.this, WanAndroidActivity.class));
+                        break;
+                    case 2:
+                        startActivity(new Intent(MainActivity.this, WebSocketActivity.class));
                         break;
                     default:
                         break;
@@ -80,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
             TextView itemName = view.findViewById(R.id.item_name);
             ImageView itemIcon = view.findViewById(R.id.item_icon);
             itemName.setText(names[position]);
-            itemIcon.setImageResource(imagIds[position]);
+            itemIcon.setImageResource(imageIds[position]);
             return view;
         }
     }

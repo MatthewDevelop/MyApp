@@ -92,6 +92,15 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+        //全屏不现实状态栏
+        //方式一
+        //getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        //方式二
+        //getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN);
+        //方式三 style.xml中配置
+        //<style name="fullScreen" parent="Theme.AppCompat.DayNight.NoActionBar">
+        //        <item name="android:windowFullscreen">true</item>
+        //</style>
         ButterKnife.bind(this);
         tvVersion.setText("版本号：" + getVersionName());
         mPref=getSharedPreferences("config",MODE_PRIVATE);

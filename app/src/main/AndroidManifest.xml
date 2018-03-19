@@ -18,13 +18,14 @@
         android:theme="@style/AppThemeNoTitle">
         <activity
             android:name=".activity.SplashActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar">
+            android:theme="@style/fullscreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.MainActivity"/>
+        <activity android:name=".activity.MainActivity" />
         <activity android:name=".mobilesafe.activity.MobileSafeActivity" />
         <activity android:name=".mobilesafe.activity.SettingActivity" />
         <activity android:name=".mobilesafe.activity.LostFindActivity" />
@@ -38,6 +39,7 @@
         <activity android:name=".wanandroid.activity.LoginActivity" />
         <activity android:name=".wanandroid.activity.CollectActivity" />
         <activity android:name=".wanandroid.activity.SearchActivity" />
+
         <receiver
             android:name=".mobilesafe.receiver.BootCompleteReceiver"
             android:enabled="true"
@@ -46,6 +48,8 @@
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
+
+        <activity android:name=".websocketdemo.WebSocketActivity"></activity>
     </application>
 
 </manifest>

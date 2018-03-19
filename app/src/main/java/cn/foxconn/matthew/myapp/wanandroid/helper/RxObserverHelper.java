@@ -1,7 +1,11 @@
 package cn.foxconn.matthew.myapp.wanandroid.helper;
 
+import android.accounts.NetworkErrorException;
+
 import java.net.ConnectException;
 import java.net.SocketTimeoutException;
+import java.net.UnknownHostException;
+import java.util.concurrent.TimeoutException;
 
 import io.reactivex.disposables.Disposable;
 import io.reactivex.observers.DisposableObserver;
@@ -45,11 +49,16 @@ public abstract class RxObserverHelper<T> extends DisposableObserver<T> {
     @Override
     public void onError(Throwable e) {
         e.printStackTrace();
-        if (e instanceof SocketTimeoutException || e instanceof ConnectException) {
+        if (e instanceof SocketTimeoutException|| e instanceof TimeoutException) {
             _onError("请求超时，稍后再试");
-        } else if (e instanceof HttpException) {
+        } else if(e instanceof ConnectException
+                || e instanceof NetworkErrorException
+                || e instanceof UnknownHostException){
+            _onError("网络异常，稍后再试");
+        }else if (e instanceof HttpException) {
             _onError("服务器异常，稍后再试");
         } else if(e instanceof NullPointerException){
+            //特殊处理
             _onNext();
         }else {
             //_onError("请求失败，稍后再试");
