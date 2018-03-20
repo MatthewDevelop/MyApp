@@ -18,6 +18,7 @@ import cn.foxconn.matthew.myapp.wanandroid.model.DataModelImpl;
 import cn.foxconn.matthew.myapp.wanandroid.activity.WebViewActivity;
 import cn.foxconn.matthew.myapp.utils.ToastUtil;
 import cn.foxconn.matthew.myapp.utils.UIUtil;
+import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.observers.DisposableObserver;
 
 /**
@@ -30,12 +31,14 @@ public class CollectAtrcicleAdapter extends BaseQuickAdapter<ArticleBean, BaseVi
     DataModel mDataModel;
     private Context mContext;
     TextView tv_no_collect;
+    CompositeDisposable mCompositeDisposable;
 
-    public CollectAtrcicleAdapter(Context context, @Nullable List<ArticleBean> data, TextView tv_no_collect) {
+    public CollectAtrcicleAdapter(Context context, @Nullable List<ArticleBean> data, TextView tv_no_collect, CompositeDisposable compositeDisposable) {
         super(R.layout.item_article, data);
         mContext = context;
         mDataModel = new DataModelImpl();
         this.tv_no_collect = tv_no_collect;
+        mCompositeDisposable=compositeDisposable;
     }
 
     @Override
@@ -65,8 +68,7 @@ public class CollectAtrcicleAdapter extends BaseQuickAdapter<ArticleBean, BaseVi
 
 
     private void unCollectArticler(final int position, ArticleBean item, final TextView tv_collect) {
-        mDataModel.unCollectArticle(item.getId(), item.getOriginId(), new RxObserverHelper<String>() {
-
+        RxObserverHelper<String> disposableObserver=new RxObserverHelper<String>() {
             @Override
             protected void _onNext() {
                 super._onNext();
@@ -98,6 +100,8 @@ public class CollectAtrcicleAdapter extends BaseQuickAdapter<ArticleBean, BaseVi
             protected void _onError(String message) {
                 ToastUtil.showShort(mContext, "取消失败");
             }
-        });
+        };
+        mDataModel.unCollectArticle(item.getId(), item.getOriginId(),disposableObserver);
+        mCompositeDisposable.add(disposableObserver);
     }
 }

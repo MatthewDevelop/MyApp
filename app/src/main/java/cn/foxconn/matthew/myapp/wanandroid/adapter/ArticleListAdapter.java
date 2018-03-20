@@ -21,6 +21,7 @@ import cn.foxconn.matthew.myapp.wanandroid.activity.WebViewActivity;
 import cn.foxconn.matthew.myapp.utils.PrefUtil;
 import cn.foxconn.matthew.myapp.utils.ToastUtil;
 import cn.foxconn.matthew.myapp.utils.UIUtil;
+import io.reactivex.disposables.CompositeDisposable;
 
 /**
  * @author:Matthew
@@ -32,11 +33,13 @@ public class ArticleListAdapter extends BaseQuickAdapter<ArticleBean, BaseViewHo
 
     private Context mContext;
     private DataModel mDataModel;
+    private CompositeDisposable mCompositeDisposable;
 
-    public ArticleListAdapter(Context context, @Nullable List<ArticleBean> data) {
+    public ArticleListAdapter(Context context, @Nullable List<ArticleBean> data, CompositeDisposable compositeDisposable) {
         super(R.layout.item_article, data);
         mContext = context;
         mDataModel=new DataModelImpl();
+        mCompositeDisposable=compositeDisposable;
     }
 
 
@@ -60,7 +63,7 @@ public class ArticleListAdapter extends BaseQuickAdapter<ArticleBean, BaseViewHo
         tv_collect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                collectArticle(tv_collect, item);
+                collectArticle(item);
             }
         });
         helper.itemView.setOnClickListener(new View.OnClickListener() {
@@ -71,7 +74,7 @@ public class ArticleListAdapter extends BaseQuickAdapter<ArticleBean, BaseViewHo
         });
     }
 
-    private void collectArticle(TextView tv_collect, ArticleBean item) {
+    private void collectArticle(ArticleBean item) {
         if (PrefUtil.getBoolean(mContext, AppConst.IS_LOGIN_KEY, false) == false) {
             ToastUtil.showShort(mContext, "请先登录");
             return;
@@ -79,14 +82,14 @@ public class ArticleListAdapter extends BaseQuickAdapter<ArticleBean, BaseViewHo
 
         //已经收藏，点击取消收藏
         if (item.isCollect()) {
-            unCollectArticler(item, tv_collect);
+            unCollectArticler(item);
         } else {
-            collectArticler(item, tv_collect);
+            collectArticler(item);
         }
     }
 
-    private void collectArticler(final ArticleBean item, TextView tv_collect) {
-        mDataModel.collectArticleInHomeList(item.getId(), new RxObserverHelper<String>() {
+    private void collectArticler(final ArticleBean item) {
+        RxObserverHelper<String> rxObserverHelper=new RxObserverHelper<String>() {
 
             @Override
             protected void _onNext() {
@@ -107,11 +110,13 @@ public class ArticleListAdapter extends BaseQuickAdapter<ArticleBean, BaseViewHo
             protected void _onError(String message) {
                 ToastUtil.showShort(mContext,"收藏失败");
             }
-        });
+        };
+        mDataModel.collectArticleInHomeList(item.getId(),rxObserverHelper);
+        mCompositeDisposable.add(rxObserverHelper);
     }
 
-    private void unCollectArticler(final ArticleBean item, TextView tv_collect) {
-        mDataModel.unCollectArticleInHomeList(item.getId(), new RxObserverHelper<String>() {
+    private void unCollectArticler(final ArticleBean item) {
+        RxObserverHelper<String> rxObserverHelper=new RxObserverHelper<String>() {
             @Override
             protected void _onNext() {
                 super._onNext();
@@ -131,6 +136,8 @@ public class ArticleListAdapter extends BaseQuickAdapter<ArticleBean, BaseViewHo
             protected void _onError(String message) {
                 ToastUtil.showShort(mContext,"取消失败");
             }
-        });
+        };
+        mDataModel.unCollectArticleInHomeList(item.getId(),rxObserverHelper );
+        mCompositeDisposable.add(rxObserverHelper);
     }
 }

@@ -19,6 +19,7 @@ import cn.foxconn.matthew.myapp.wanandroid.base.BaseFragment;
 import cn.foxconn.matthew.myapp.wanandroid.presenter.TypePresenter;
 import cn.foxconn.matthew.myapp.wanandroid.view.TypeView;
 import cn.foxconn.matthew.myapp.wanandroid.widget.AutoLinefeedLayout;
+import io.reactivex.disposables.CompositeDisposable;
 
 /**
  * @author:Matthew
@@ -39,6 +40,7 @@ public class TypeFragment
     LinearLayout ll_blank;
 
     private ArticleListAdapter mAdapter;
+    private CompositeDisposable mCompositeDisposable;
 
 
 
@@ -61,10 +63,24 @@ public class TypeFragment
     protected void initView(View rootView) {
         super.initView(rootView);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        mAdapter=new ArticleListAdapter(getContext(),null);
+        mAdapter=new ArticleListAdapter(getContext(),null,mCompositeDisposable);
         mRecyclerView.setAdapter(mAdapter);
         mAdapter.setOnLoadMoreListener(this,mRecyclerView);
         mPresenter.getTagData();
+    }
+
+    @Override
+    protected void init() {
+        super.init();
+        mCompositeDisposable=new CompositeDisposable();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if(mCompositeDisposable!=null){
+            mCompositeDisposable.clear();
+        }
     }
 
     public void onRefresh(){

@@ -44,7 +44,7 @@ public abstract class BaseFragment<V,T extends BasePresenter<V,FragmentEvent>> e
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        initDate();
+        initData();
         initListener();
     }
 
@@ -60,7 +60,7 @@ public abstract class BaseFragment<V,T extends BasePresenter<V,FragmentEvent>> e
 
     }
 
-    protected void initDate() {
+    protected void initData() {
 
     }
 

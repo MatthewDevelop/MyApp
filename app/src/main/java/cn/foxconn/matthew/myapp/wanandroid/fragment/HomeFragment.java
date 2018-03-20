@@ -23,6 +23,7 @@ import cn.foxconn.matthew.myapp.wanandroid.adapter.ArticleListAdapter;
 import cn.foxconn.matthew.myapp.wanandroid.base.BaseFragment;
 import cn.foxconn.matthew.myapp.wanandroid.presenter.HomePresenter;
 import cn.foxconn.matthew.myapp.wanandroid.view.HomeView;
+import io.reactivex.disposables.CompositeDisposable;
 
 /**
  * @author:Matthew
@@ -41,6 +42,7 @@ public class HomeFragment extends BaseFragment<HomeView,HomePresenter>
 
     ArticleListAdapter mAdapter;
     BGABanner mBGABanner;
+    CompositeDisposable mCompositeDisposable;
 
     public static HomeFragment newInstance(){
         return new HomeFragment();
@@ -50,7 +52,7 @@ public class HomeFragment extends BaseFragment<HomeView,HomePresenter>
     protected void initView(View rootView) {
         super.initView(rootView);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        mAdapter=new ArticleListAdapter(getContext(),null);
+        mAdapter=new ArticleListAdapter(getContext(),null,mCompositeDisposable);
         mRecyclerView.setAdapter(mAdapter);
         mSwipeRefreshLayout.setOnRefreshListener(this);
         mAdapter.setOnLoadMoreListener(this,mRecyclerView);
@@ -63,8 +65,17 @@ public class HomeFragment extends BaseFragment<HomeView,HomePresenter>
     }
 
     @Override
-    protected void initDate() {
-        super.initDate();
+    protected void init() {
+        super.init();
+        mCompositeDisposable=new CompositeDisposable();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if(mCompositeDisposable!=null){
+            mCompositeDisposable.clear();
+        }
     }
 
     @Override

@@ -18,6 +18,7 @@ import cn.foxconn.matthew.myapp.wanandroid.helper.RetrofitServiceManager;
 import cn.foxconn.matthew.myapp.wanandroid.helper.RxObserverHelper;
 import cn.foxconn.matthew.myapp.wanandroid.helper.RxResultHelper;
 import cn.foxconn.matthew.myapp.wanandroid.helper.RxSchedulersHelper;
+import io.reactivex.observers.DisposableObserver;
 
 
 /**
@@ -36,11 +37,12 @@ public class DataModelImpl implements DataModel {
 
     @Override
     public void getHomeDataList(int page, LifecycleProvider<FragmentEvent> provider, RxObserverHelper<ArticleListVO> subscriber) {
+        DisposableObserver<ArticleListVO> disposableObserver=subscriber;
         mWanService.getHomeAtricleList(page)
                 .compose(RxSchedulersHelper.<ResponseData<ArticleListVO>>defaultTransformer())
                 .compose(RxResultHelper.<ArticleListVO>handleResult())
                 .compose(provider.<ArticleListVO>bindUntilEvent(FragmentEvent.DESTROY))
-                .subscribe(subscriber);
+                .subscribe(disposableObserver);
     }
 
 

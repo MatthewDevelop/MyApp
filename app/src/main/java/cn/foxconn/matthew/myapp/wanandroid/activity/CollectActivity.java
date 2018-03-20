@@ -20,6 +20,7 @@ import cn.foxconn.matthew.myapp.wanandroid.base.BaseActivity;
 import cn.foxconn.matthew.myapp.wanandroid.presenter.CollectPresenter;
 import cn.foxconn.matthew.myapp.wanandroid.view.CollectView;
 import cn.foxconn.matthew.myapp.wanandroid.widget.FontTextView;
+import io.reactivex.disposables.CompositeDisposable;
 
 /**
  * @author:Matthew
@@ -41,6 +42,7 @@ public class CollectActivity extends BaseActivity<CollectView, CollectPresenter>
     TextView tv_no_collect;
 
     CollectAtrcicleAdapter mAtrcicleAdapter;
+    CompositeDisposable mDisposable;
 
     @Override
     protected int getContentResId() {
@@ -58,12 +60,18 @@ public class CollectActivity extends BaseActivity<CollectView, CollectPresenter>
         tv_title.setText("我的收藏");
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        mAtrcicleAdapter=new CollectAtrcicleAdapter(this,null,tv_no_collect);
+        mAtrcicleAdapter=new CollectAtrcicleAdapter(this,null,tv_no_collect,mDisposable);
         mRecyclerView.setAdapter(mAtrcicleAdapter);
         mSwipeRefreshLayout.setOnRefreshListener(this);
         mAtrcicleAdapter.setOnLoadMoreListener(this,mRecyclerView);
 
         onRefresh();
+    }
+
+    @Override
+    protected void init() {
+        super.init();
+        mDisposable=new CompositeDisposable();
     }
 
     @OnClick(R.id.ft_return)
@@ -124,5 +132,13 @@ public class CollectActivity extends BaseActivity<CollectView, CollectPresenter>
     public void onLoadMoreFail(String errorString) {
         mAtrcicleAdapter.loadMoreComplete();
         Snackbar.make(mRecyclerView,errorString,Snackbar.LENGTH_SHORT).show();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if(mDisposable!=null) {
+            mDisposable.clear();
+        }
     }
 }

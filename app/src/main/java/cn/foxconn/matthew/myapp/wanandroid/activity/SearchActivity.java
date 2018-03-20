@@ -28,6 +28,7 @@ import cn.foxconn.matthew.myapp.wanandroid.view.SearchView;
 import cn.foxconn.matthew.myapp.utils.ToastUtil;
 import cn.foxconn.matthew.myapp.wanandroid.widget.AutoLinefeedLayout;
 import cn.foxconn.matthew.myapp.wanandroid.widget.FontTextView;
+import io.reactivex.disposables.CompositeDisposable;
 
 /**
  * @author:Matthew
@@ -51,6 +52,8 @@ public class SearchActivity
 
     ArticleListAdapter mAdapter;
 
+    CompositeDisposable mCompositeDisposable;
+
     @Override
     protected int getContentResId() {
         return R.layout.activity_search;
@@ -62,13 +65,27 @@ public class SearchActivity
     }
 
     @Override
+    protected void init() {
+        super.init();
+        mCompositeDisposable=new CompositeDisposable();
+    }
+
+    @Override
     protected void initView() {
         super.initView();
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mAdapter = new ArticleListAdapter(this, null);
+        mAdapter = new ArticleListAdapter(this, null,mCompositeDisposable);
         mRecyclerView.setAdapter(mAdapter);
         mAdapter.setOnLoadMoreListener(this, mRecyclerView);
         mPresenter.getHotKeyData();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if(mCompositeDisposable!=null){
+            mCompositeDisposable.clear();
+        }
     }
 
     @Override
