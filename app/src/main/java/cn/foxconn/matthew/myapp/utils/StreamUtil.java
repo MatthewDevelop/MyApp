@@ -23,7 +23,7 @@ public class StreamUtil {
         while((len=inputStream.read(buffer))!=-1){
             out.write(buffer,0,len);
         }
-        String result=out.toString();
+        String result=out.toString("UTF-8");
         inputStream.close();
         out.close();
         return result;

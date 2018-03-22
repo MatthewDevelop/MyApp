@@ -15,18 +15,39 @@ import java.util.List;
 
 public class App extends Application {
 
-    public static List<Activity> activities=new LinkedList<>();
+    private static List<Activity> activities;
 
     private static Context mContext;
 
     @Override
     public void onCreate() {
         super.onCreate();
-        mContext=getApplicationContext();
+        setContext(getApplicationContext());
+        setActivities(new LinkedList<Activity>());
+    }
+
+    public void setContext(Context context) {
+        setContextValue(context);
+    }
+
+    public static void setContextValue(Context contextValue){
+        mContext=contextValue;
     }
 
     public static Context getContext(){
         return mContext;
+    }
+
+    public void setActivities(List<Activity> activities) {
+        setActivitiesValue(activities);
+    }
+
+    public static void setActivitiesValue(List<Activity> activities) {
+        App.activities = activities;
+    }
+
+    public static List<Activity> getActivities() {
+        return activities;
     }
 
     /**

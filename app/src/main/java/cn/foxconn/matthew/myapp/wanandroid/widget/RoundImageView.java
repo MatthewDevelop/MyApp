@@ -134,7 +134,7 @@ public class RoundImageView extends ImageView {
         if (type == TYPE_CIRCLE) {
             mWidth = Math.min(MeasureSpec.getSize(widthMeasureSpec),
                     MeasureSpec.getSize(heightMeasureSpec));
-            mRadius = mWidth / 2 - mBorderWidth / 2;
+            mRadius = (float)mWidth / 2 - mBorderWidth / 2;
             setMeasuredDimension(mWidth, mWidth);
         }
 

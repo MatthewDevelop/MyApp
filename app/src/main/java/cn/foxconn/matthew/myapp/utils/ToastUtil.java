@@ -20,7 +20,7 @@ public class ToastUtil {
         Toast.makeText(ctx, msg, Toast.LENGTH_SHORT).show();
     }
 
-    public static boolean isShow = true;
+    public static final boolean isShow = true;
 
     /**
      * 短时间显示Toast

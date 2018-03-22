@@ -93,6 +93,7 @@ public class WanAndroidActivity extends BaseActivity {
                         break;
                     case 2:
                         setTabColor(mFtUser, mTvUser);
+                        break;
                     default:
                         break;
                 }

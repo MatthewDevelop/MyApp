@@ -29,7 +29,7 @@ public abstract class BaseActivity<V, T extends BasePresenter<V, ActivityEvent>>
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        App.activities.add(this);
+        App.getActivities().add(this);
         init();
         //判断是否使用MVP模式
         mPresenter = createPresenter();

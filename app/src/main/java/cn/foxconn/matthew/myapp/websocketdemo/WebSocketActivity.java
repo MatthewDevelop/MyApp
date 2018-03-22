@@ -132,10 +132,10 @@ public class WebSocketActivity extends AppCompatActivity {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            if(mReference.get()==null){
-                return;
+            WebSocketActivity webSocketActivity=mReference.get();
+            if(webSocketActivity!=null){
+                webSocketActivity.tvLog.setText(webSocketActivity.tvLog.getText() + "\n" + msg.obj);
             }
-            mReference.get().tvLog.setText(mReference.get().tvLog.getText() + "\n" + msg.obj);
         }
     }
 }

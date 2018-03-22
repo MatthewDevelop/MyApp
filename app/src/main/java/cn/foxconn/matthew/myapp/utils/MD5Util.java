@@ -1,5 +1,6 @@
 package cn.foxconn.matthew.myapp.utils;
 
+import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -18,7 +19,7 @@ public class MD5Util {
     public static String encode(String pass){
         try {
             MessageDigest instance = MessageDigest.getInstance("MD5");
-            byte[] digest = instance.digest(pass.getBytes());
+            byte[] digest = instance.digest(pass.getBytes("UTF-8"));
             StringBuffer sb=new StringBuffer();
             for (byte b : digest) {
                 //获取字节低八位有效值
@@ -34,6 +35,8 @@ public class MD5Util {
             //System.out.println(sb.length());
             return sb.toString();
         } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
         return "";

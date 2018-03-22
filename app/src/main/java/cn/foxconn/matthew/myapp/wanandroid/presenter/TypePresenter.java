@@ -45,7 +45,6 @@ public class TypePresenter extends BasePresenter<TypeView,FragmentEvent> {
     private int mTagSelect; //标记选中的Tag标签，用户设置背景色
 
     private int mCurrentPage;
-    private ArticleListAdapter mAdapter;
 
 
 
@@ -159,7 +158,6 @@ public class TypePresenter extends BasePresenter<TypeView,FragmentEvent> {
     private void getServerData(int id) {
         Log.e(TAG, "getServerData: "+id );
         mCurrentPage=0;
-        mAdapter=getView().getAdapter();
         mDataModel.getTypeDataById(mCurrentPage,id, getProvider(),new BaseRxObserverHelper<ArticleListVO>() {
             @Override
             protected void next(ArticleListVO articleListVO) {

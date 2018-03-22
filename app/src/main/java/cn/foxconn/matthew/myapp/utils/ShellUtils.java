@@ -114,7 +114,7 @@ public final class ShellUtils {
                 if (command == null) {
                     continue;
                 }
-                os.write(command.getBytes());
+                os.write(command.getBytes("UTF-8"));
                 os.writeBytes(LINE_SEP);
                 os.flush();
             }
