@@ -9,6 +9,7 @@ import android.net.Uri;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.support.test.espresso.core.internal.deps.guava.util.concurrent.ThreadFactoryBuilder;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -29,14 +30,20 @@ import org.json.JSONObject;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.ref.WeakReference;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.LinkedBlockingDeque;
+import java.util.concurrent.ThreadFactory;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import cn.foxconn.matthew.myapp.R;
-import cn.foxconn.matthew.myapp.mobilesafe.activity.MobileSafeActivity;
+import cn.foxconn.matthew.myapp.app.App;
 import cn.foxconn.matthew.myapp.utils.LogUtil;
 import cn.foxconn.matthew.myapp.utils.StreamUtil;
 
@@ -52,42 +59,16 @@ public class SplashActivity extends AppCompatActivity {
     @BindView(R.id.text_progress)
     TextView tvProgress;
     @BindView(R.id.rl_root)
-    RelativeLayout rl_root;
-    private String mVersionName;
+    RelativeLayout mRlRoot;
+    private static String mVersionName;
     private int mVersionCode;
-    private String mDes;
-    private String mDownLoadUrl;
-    //TODO 待优化
-    private Handler mHandler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            switch (msg.what) {
-                case TYPE_UPDATE:
-                    showUpdateDialog();
-                    break;
-                case TYPE_ERR_NET:
-                    Toast.makeText(SplashActivity.this, "网络异常", Toast.LENGTH_SHORT).show();
-                    enterHome();
-                    break;
-                case TYPE_ERR_URL:
-                    Toast.makeText(SplashActivity.this, "Url异常", Toast.LENGTH_SHORT).show();
-                    enterHome();
-                    break;
-                case TYPE_ERR_JSON:
-                    Toast.makeText(SplashActivity.this, "解析异常", Toast.LENGTH_SHORT).show();
-                    enterHome();
-                    break;
-                case TYPE_ENTER:
-                    enterHome();
-                    break;
-                default:
-                    break;
-            }
-        }
-    };
+    private static String mDes;
+    private static String mDownLoadUrl;
+    private ExecutorService fixedThreadPool;
 
     private SharedPreferences mPref;
+    private MyHandler mHandler;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -102,18 +83,21 @@ public class SplashActivity extends AppCompatActivity {
         //        <item name="android:windowFullscreen">true</item>
         //</style>
         ButterKnife.bind(this);
+        mHandler=new MyHandler(this);
         tvVersion.setText("版本号：" + getVersionName());
-        mPref=getSharedPreferences("config",MODE_PRIVATE);
-        boolean isAutoUpdate=mPref.getBoolean("auto_update",true);
-        if(isAutoUpdate) {
+        mPref = getSharedPreferences("config", MODE_PRIVATE);
+        boolean isAutoUpdate = mPref.getBoolean("auto_update", true);
+        ThreadFactory checkUpdateFactory = new ThreadFactoryBuilder().setNameFormat("checkUpdate-thread").build();
+        fixedThreadPool = new ThreadPoolExecutor(1, 1, 0, TimeUnit.MILLISECONDS, new LinkedBlockingDeque<Runnable>(), checkUpdateFactory);
+        if (isAutoUpdate) {
             checkVersion();
-        }else {
-            mHandler.sendEmptyMessageDelayed(TYPE_ENTER,2000);
+        } else {
+            mHandler.sendEmptyMessageDelayed(TYPE_ENTER, 2000);
         }
 
-        AlphaAnimation anim=new AlphaAnimation(0.3f,1);
+        AlphaAnimation anim = new AlphaAnimation(0.3f, 1);
         anim.setDuration(2000);
-        rl_root.startAnimation(anim);
+        mRlRoot.startAnimation(anim);
     }
 
     /**
@@ -159,7 +143,7 @@ public class SplashActivity extends AppCompatActivity {
      */
     //TODO android.permission.INTERNET
     private void checkVersion() {
-        new Thread(new Runnable() {
+        Runnable runnable = new Runnable() {
             @Override
             public void run() {
                 long startTime = System.currentTimeMillis();
@@ -217,7 +201,8 @@ public class SplashActivity extends AppCompatActivity {
                     }
                 }
             }
-        }).start();
+        };
+        fixedThreadPool.execute(runnable);
     }
 
     /**
@@ -244,19 +229,19 @@ public class SplashActivity extends AppCompatActivity {
                 public void onLoading(long total, long current, boolean isUploading) {
                     super.onLoading(total, current, isUploading);
                     LogUtil.e(TAG, "current:" + current + ", total:" + total);
-                    tvProgress.setText("下载进度："+current*100/total+"%");
+                    tvProgress.setText("下载进度：" + current * 100 / total + "%");
                 }
 
                 @Override
                 public void onSuccess(ResponseInfo<File> responseInfo) {
                     LogUtil.e(TAG, "成功");
-                    Intent intent=new Intent(Intent.ACTION_VIEW);
+                    Intent intent = new Intent(Intent.ACTION_VIEW);
                     intent.addCategory(Intent.CATEGORY_DEFAULT);
                     intent.setDataAndType(Uri.fromFile(responseInfo.result),
                             "application/vnd.android.package-archive");
 //                    startActivity(intent);
                     //用户取消安装会回掉onActivityResult
-                    startActivityForResult(intent,0);
+                    startActivityForResult(intent, 0);
                 }
 
                 @Override
@@ -271,6 +256,7 @@ public class SplashActivity extends AppCompatActivity {
 
     /**
      * activity跳转回调
+     *
      * @param requestCode
      * @param resultCode
      * @param data
@@ -279,6 +265,15 @@ public class SplashActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         enterHome();
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (fixedThreadPool != null) {
+            fixedThreadPool.shutdown();
+            fixedThreadPool = null;
+        }
     }
 
     /**
@@ -308,5 +303,44 @@ public class SplashActivity extends AppCompatActivity {
             }
         });
         builder.show();
+    }
+
+    private static class MyHandler extends Handler {
+
+        private final WeakReference<SplashActivity> mActivityWeakReference;
+
+        private MyHandler(SplashActivity splashActivity) {
+            mActivityWeakReference = new WeakReference<>(splashActivity);
+        }
+
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            if(mActivityWeakReference==null) {
+                return;
+            }
+            switch (msg.what) {
+                case TYPE_UPDATE:
+                    mActivityWeakReference.get().showUpdateDialog();
+                    break;
+                case TYPE_ERR_NET:
+                    Toast.makeText(App.getContext(), "网络异常", Toast.LENGTH_SHORT).show();
+                    mActivityWeakReference.get().enterHome();
+                    break;
+                case TYPE_ERR_URL:
+                    Toast.makeText(App.getContext(), "Url异常", Toast.LENGTH_SHORT).show();
+                    mActivityWeakReference.get().enterHome();
+                    break;
+                case TYPE_ERR_JSON:
+                    Toast.makeText(App.getContext(), "解析异常", Toast.LENGTH_SHORT).show();
+                    mActivityWeakReference.get().enterHome();
+                    break;
+                case TYPE_ENTER:
+                    mActivityWeakReference.get().enterHome();
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 }

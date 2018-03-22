@@ -1,7 +1,6 @@
 package cn.foxconn.matthew.myapp.wanandroid.base;
 
 import com.trello.rxlifecycle2.LifecycleProvider;
-import com.trello.rxlifecycle2.RxLifecycle;
 
 import java.lang.ref.Reference;
 import java.lang.ref.WeakReference;

@@ -22,7 +22,7 @@ import cn.foxconn.matthew.myapp.wanandroid.widget.CustomDialog;
  * @email:guocheng0816@163.com
  */
 
-public abstract class BaseActivity<V,T extends BasePresenter<V,ActivityEvent>> extends RxAppCompatActivity {
+public abstract class BaseActivity<V, T extends BasePresenter<V, ActivityEvent>> extends RxAppCompatActivity {
     protected T mPresenter;
     CustomDialog mCustomDialog;
 
@@ -32,11 +32,11 @@ public abstract class BaseActivity<V,T extends BasePresenter<V,ActivityEvent>> e
         App.activities.add(this);
         init();
         //判断是否使用MVP模式
-        mPresenter=createPresenter();
+        mPresenter = createPresenter();
 
-        if(mPresenter!=null){
+        if (mPresenter != null) {
             //所有子类均要实现对应的view接口
-            mPresenter.attachView((V)this);
+            mPresenter.attachView((V) this);
         }
 
 
@@ -44,7 +44,7 @@ public abstract class BaseActivity<V,T extends BasePresenter<V,ActivityEvent>> e
 
         ButterKnife.bind(this);
 
-        excuteStatesBar();
+        //excuteStatesBar();
 
         initView();
         initData();
@@ -54,14 +54,23 @@ public abstract class BaseActivity<V,T extends BasePresenter<V,ActivityEvent>> e
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if(mPresenter!=null){
+        if (mPresenter != null) {
             mPresenter.detachView();
         }
     }
 
-    //获取布局id
+    /**
+     * 获取布局id
+     *
+     * @return 布局资源id
+     */
     protected abstract int getContentResId();
-    //创建presenter
+
+    /**
+     * 创建presenter
+     *
+     * @return
+     */
     protected abstract T createPresenter();
 
     protected void initListener() {
@@ -79,8 +88,8 @@ public abstract class BaseActivity<V,T extends BasePresenter<V,ActivityEvent>> e
     /**
      * 解决4.4设置状态栏颜色之后，布局内容嵌入状态栏位置问题
      */
-    //todo 有待研究
-    private void excuteStatesBar(){
+    private void excuteStatesBar() {
+        //todo 有待研究
         ViewGroup mContentView = (ViewGroup) getWindow().findViewById(Window.ID_ANDROID_CONTENT);
         View mChildView = mContentView.getChildAt(0);
         if (mChildView != null) {
@@ -90,21 +99,21 @@ public abstract class BaseActivity<V,T extends BasePresenter<V,ActivityEvent>> e
         }
     }
 
-    public void showProgressDialog(String tip){
+    public void showProgressDialog(String tip) {
         hideProgressDialog();
-        View view=View.inflate(this, R.layout.layout_waiting_dialog,null);
-        if(!TextUtils.isEmpty(tip)){
-            ((TextView)view.findViewById(R.id.tv_tip)).setText(tip);
+        View view = View.inflate(this, R.layout.layout_waiting_dialog, null);
+        if (!TextUtils.isEmpty(tip)) {
+            ((TextView) view.findViewById(R.id.tv_tip)).setText(tip);
         }
-        mCustomDialog=new CustomDialog(this,view,R.style.MyDialog);
+        mCustomDialog = new CustomDialog(this, view, R.style.MyDialog);
         mCustomDialog.setCancelable(false);
         mCustomDialog.show();
     }
 
-    public void hideProgressDialog(){
-        if(mCustomDialog!=null){
+    public void hideProgressDialog() {
+        if (mCustomDialog != null) {
             mCustomDialog.dismiss();
-            mCustomDialog=null;
+            mCustomDialog = null;
         }
     }
 }

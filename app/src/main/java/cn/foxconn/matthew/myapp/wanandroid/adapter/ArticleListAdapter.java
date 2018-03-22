@@ -2,7 +2,6 @@ package cn.foxconn.matthew.myapp.wanandroid.adapter;
 
 import android.content.Context;
 import android.support.annotation.Nullable;
-import android.text.Html;
 import android.view.View;
 import android.widget.TextView;
 
@@ -14,7 +13,7 @@ import java.util.List;
 import cn.foxconn.matthew.myapp.R;
 import cn.foxconn.matthew.myapp.app.AppConst;
 import cn.foxconn.matthew.myapp.wanandroid.bean.pojo.ArticleBean;
-import cn.foxconn.matthew.myapp.wanandroid.helper.RxObserverHelper;
+import cn.foxconn.matthew.myapp.wanandroid.helper.BaseRxObserverHelper;
 import cn.foxconn.matthew.myapp.wanandroid.model.DataModel;
 import cn.foxconn.matthew.myapp.wanandroid.model.DataModelImpl;
 import cn.foxconn.matthew.myapp.wanandroid.activity.WebViewActivity;
@@ -45,22 +44,22 @@ public class ArticleListAdapter extends BaseQuickAdapter<ArticleBean, BaseViewHo
 
     @Override
     protected void convert(BaseViewHolder helper, final ArticleBean item) {
-        helper.setText(R.id.tv_title, Html.fromHtml(item.getTitle()))
+        helper.setText(R.id.tv_title, item.getTitle())
                 .setText(R.id.tv_author, item.getAuthor())
                 .setText(R.id.tv_time, item.getNiceDate())
                 .setText(R.id.tv_type, item.getChapterName());
 
         //判断文章是否被收藏
-        final TextView tv_collect = helper.getView(R.id.tv_collect);
+        final TextView tvCollect = helper.getView(R.id.tv_collect);
         if (item.isCollect()) {
-            tv_collect.setText(UIUtil.getString(R.string.ic_collect_sel));
-            tv_collect.setTextColor(UIUtil.getColor(R.color.main));
+            tvCollect.setText(UIUtil.getString(R.string.ic_collect_sel));
+            tvCollect.setTextColor(UIUtil.getColor(R.color.main));
         } else {
-            tv_collect.setText(UIUtil.getString(R.string.ic_collect_nor));
-            tv_collect.setTextColor(UIUtil.getColor(R.color.text3));
+            tvCollect.setText(UIUtil.getString(R.string.ic_collect_nor));
+            tvCollect.setTextColor(UIUtil.getColor(R.color.text3));
         }
 
-        tv_collect.setOnClickListener(new View.OnClickListener() {
+        tvCollect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 collectArticle(item);
@@ -89,55 +88,55 @@ public class ArticleListAdapter extends BaseQuickAdapter<ArticleBean, BaseViewHo
     }
 
     private void collectArticler(final ArticleBean item) {
-        RxObserverHelper<String> rxObserverHelper=new RxObserverHelper<String>() {
+        BaseRxObserverHelper<String> baseRxObserverHelper =new BaseRxObserverHelper<String>() {
 
             @Override
-            protected void _onNext() {
-                super._onNext();
+            protected void next() {
+                super.next();
                 ToastUtil.showShort(mContext,"收藏成功");
                 item.setCollect(true);
                 notifyDataSetChanged();
             }
 
             @Override
-            protected void _onNext(String s) {
+            protected void next(String s) {
                 ToastUtil.showShort(mContext,"收藏成功");
                 item.setCollect(true);
                 notifyDataSetChanged();
             }
 
             @Override
-            protected void _onError(String message) {
+            protected void error(String message) {
                 ToastUtil.showShort(mContext,"收藏失败");
             }
         };
-        mDataModel.collectArticleInHomeList(item.getId(),rxObserverHelper);
-        mCompositeDisposable.add(rxObserverHelper);
+        mDataModel.collectArticleInHomeList(item.getId(), baseRxObserverHelper);
+        mCompositeDisposable.add(baseRxObserverHelper);
     }
 
     private void unCollectArticler(final ArticleBean item) {
-        RxObserverHelper<String> rxObserverHelper=new RxObserverHelper<String>() {
+        BaseRxObserverHelper<String> baseRxObserverHelper =new BaseRxObserverHelper<String>() {
             @Override
-            protected void _onNext() {
-                super._onNext();
+            protected void next() {
+                super.next();
                 ToastUtil.showShort(mContext,"取消成功");
                 item.setCollect(false);
                 notifyDataSetChanged();
             }
 
             @Override
-            protected void _onNext(String s) {
+            protected void next(String s) {
                 ToastUtil.showShort(mContext,"取消成功");
                 item.setCollect(false);
                 notifyDataSetChanged();
             }
 
             @Override
-            protected void _onError(String message) {
+            protected void error(String message) {
                 ToastUtil.showShort(mContext,"取消失败");
             }
         };
-        mDataModel.unCollectArticleInHomeList(item.getId(),rxObserverHelper );
-        mCompositeDisposable.add(rxObserverHelper);
+        mDataModel.unCollectArticleInHomeList(item.getId(), baseRxObserverHelper);
+        mCompositeDisposable.add(baseRxObserverHelper);
     }
 }

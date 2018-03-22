@@ -11,7 +11,7 @@ import cn.foxconn.matthew.myapp.R;
 
 public class Setup4Activity extends BaseSetupActivity {
     @BindView(R.id.cb_protect)
-    CheckBox cb_protect;
+    CheckBox mCbProtect;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,19 +20,19 @@ public class Setup4Activity extends BaseSetupActivity {
         ButterKnife.bind(this);
         boolean isProtect=preference.getBoolean("protect",false);
         if(isProtect){
-            cb_protect.setText("防盗保护已经开启");
+            mCbProtect.setText("防盗保护已经开启");
         }else {
-            cb_protect.setText("防盗保护未开启");
+            mCbProtect.setText("防盗保护未开启");
         }
-        cb_protect.setChecked(isProtect);
-        cb_protect.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        mCbProtect.setChecked(isProtect);
+        mCbProtect.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
-                    cb_protect.setText("防盗保护已经开启");
+                    mCbProtect.setText("防盗保护已经开启");
                     preference.edit().putBoolean("protect",true).commit();
                 }else {
-                    cb_protect.setText("防盗保护未开启");
+                    mCbProtect.setText("防盗保护未开启");
                     preference.edit().putBoolean("protect",false).commit();
                 }
             }

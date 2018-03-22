@@ -64,7 +64,7 @@ public class RetrofitServiceManager {
 
 
     private static class SingletonHolder{
-        private static final RetrofitServiceManager manager=new RetrofitServiceManager();
+        private static final RetrofitServiceManager MANAGER =new RetrofitServiceManager();
     }
 
     /**
@@ -72,7 +72,7 @@ public class RetrofitServiceManager {
      * @return
      */
     public static RetrofitServiceManager getInstance(){
-        return SingletonHolder.manager;
+        return SingletonHolder.MANAGER;
     }
 
     public <T> T create(Class<T> service){

@@ -108,7 +108,7 @@ public class HomeFragment extends BaseFragment<HomeView,HomePresenter>
             @Override
             public void fillBannerItem(BGABanner banner, View itemView, BannerBean model, int position) {
                 ImageView imageView=itemView.findViewById(R.id.imageView);
-                ImageLoaderManager.LoadImage(getContext(),model.getImagePath(),imageView);
+                ImageLoaderManager.loadImage(getContext(),model.getImagePath(),imageView);
             }
         });
         mBGABanner.setDelegate(new BGABanner.Delegate<View,BannerBean>() {
@@ -121,7 +121,6 @@ public class HomeFragment extends BaseFragment<HomeView,HomePresenter>
 
     @Override
     public void showRefreshView(final Boolean refresh) {
-        //mSwipeRefreshLayout.setRefreshing(refresh);
         //保证首次加载数据时，有加载动画效果
         mSwipeRefreshLayout.post(new Runnable() {
             @Override

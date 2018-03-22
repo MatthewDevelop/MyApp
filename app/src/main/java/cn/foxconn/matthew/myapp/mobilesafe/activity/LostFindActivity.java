@@ -25,6 +25,7 @@ public class LostFindActivity extends AppCompatActivity {
     @BindView(R.id.iv_isProtect)
     ImageView ivProtect;
     private SharedPreferences preferences;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,12 +34,12 @@ public class LostFindActivity extends AppCompatActivity {
         if (isConfiged) {
             setContentView(R.layout.activity_lost_find);
             ButterKnife.bind(this);
-            String phone=preferences.getString("safe_phone","");
+            String phone = preferences.getString("safe_phone", "");
             tvProtectNum.setText(phone);
-            boolean isProtected=preferences.getBoolean("protect",false);
-            if(isProtected){
+            boolean isProtected = preferences.getBoolean("protect", false);
+            if (isProtected) {
                 ivProtect.setImageResource(R.drawable.lock);
-            }else {
+            } else {
                 ivProtect.setImageResource(R.drawable.unlock);
             }
         } else {
@@ -47,11 +48,13 @@ public class LostFindActivity extends AppCompatActivity {
         }
     }
 
-    public void onClick(View view){
-        switch (view.getId()){
+    public void onClick(View view) {
+        switch (view.getId()) {
             case R.id.reEnter:
-                startActivity(new Intent(this,Setup1Activity.class));
+                startActivity(new Intent(this, Setup1Activity.class));
                 finish();
+                break;
+            default:
                 break;
         }
     }

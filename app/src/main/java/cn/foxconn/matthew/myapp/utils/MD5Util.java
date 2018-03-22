@@ -24,8 +24,9 @@ public class MD5Util {
                 //获取字节低八位有效值
                 int i = b & 0xff;
                 String hexString = Integer.toHexString(i);
-                if(hexString.length()<2)
-                    hexString="0"+hexString;
+                if(hexString.length()<2) {
+                    hexString = "0" + hexString;
+                }
                 //System.out.println(hexString);
                 sb.append(hexString);
             }

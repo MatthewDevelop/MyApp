@@ -93,20 +93,20 @@ public class MobileSafeActivity extends AppCompatActivity {
         final AlertDialog dialog = builder.create();
         View view = View.inflate(this, R.layout.dialog_input_password, null);
         dialog.setView(view, 0, 0, 0, 0);
-        Button bt_ok = view.findViewById(R.id.bt_ok);
-        Button bt_cancel = view.findViewById(R.id.bt_cancel);
-        final EditText et_password = view.findViewById(R.id.et_password);
-        bt_cancel.setOnClickListener(new View.OnClickListener() {
+        Button btOk = view.findViewById(R.id.bt_ok);
+        Button btCancel = view.findViewById(R.id.bt_cancel);
+        final EditText etPassword = view.findViewById(R.id.et_password);
+        btCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
             }
         });
-        bt_ok.setOnClickListener(new View.OnClickListener() {
+        btOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String localPassword = preferences.getString("password", null);
-                String password = et_password.getText().toString();
+                String password = etPassword.getText().toString();
                 //判空 null和""
                 if (!TextUtils.isEmpty(password)) {
                     if (MD5Util.encode(password).equals(localPassword)) {
@@ -132,21 +132,21 @@ public class MobileSafeActivity extends AppCompatActivity {
         final AlertDialog dialog = builder.create();
         View view = View.inflate(this, R.layout.dialog_set_password, null);
         dialog.setView(view, 0, 0, 0, 0);
-        Button bt_ok = view.findViewById(R.id.bt_ok);
-        Button bt_cancel = view.findViewById(R.id.bt_cancel);
-        final EditText et_password = view.findViewById(R.id.et_password);
-        final EditText et_password_confirm = view.findViewById(R.id.et_password_confirm);
-        bt_cancel.setOnClickListener(new View.OnClickListener() {
+        Button btOk = view.findViewById(R.id.bt_ok);
+        Button btCancel = view.findViewById(R.id.bt_cancel);
+        final EditText etPassword = view.findViewById(R.id.et_password);
+        final EditText etPasswordConfirm = view.findViewById(R.id.et_password_confirm);
+        btCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
             }
         });
-        bt_ok.setOnClickListener(new View.OnClickListener() {
+        btOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String password = et_password.getText().toString();
-                String passwordConfirm = et_password_confirm.getText().toString();
+                String password = etPassword.getText().toString();
+                String passwordConfirm = etPasswordConfirm.getText().toString();
                 //判空 null和""
                 if (!TextUtils.isEmpty(password) && !TextUtils.isEmpty(passwordConfirm)) {
                     if (password.equals(passwordConfirm)) {

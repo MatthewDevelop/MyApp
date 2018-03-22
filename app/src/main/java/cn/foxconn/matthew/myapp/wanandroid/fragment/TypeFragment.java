@@ -37,7 +37,7 @@ public class TypeFragment
     @BindView(R.id.ll_tag)
     AutoLinefeedLayout mAutoLinefeedLayout;
     @BindView(R.id.ll_blank)
-    LinearLayout ll_blank;
+    LinearLayout mLlBlank;
 
     private ArticleListAdapter mAdapter;
     private CompositeDisposable mCompositeDisposable;
@@ -118,9 +118,9 @@ public class TypeFragment
     @Override
     public void getRefreshDataSuccess(List<ArticleBean> data) {
         if(data.size()!=0) {
-            ll_blank.setVisibility(View.GONE);
+            mLlBlank.setVisibility(View.GONE);
         }else {
-            ll_blank.setVisibility(View.VISIBLE);
+            mLlBlank.setVisibility(View.VISIBLE);
         }
         mAdapter.setNewData(data);
     }

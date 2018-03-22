@@ -13,14 +13,14 @@ import cn.foxconn.matthew.myapp.utils.ToastUtil;
 
 public class Setup3Activity extends BaseSetupActivity {
     @BindView(R.id.et_phone)
-    EditText et_phone;
+    EditText mEtPhone;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setup3);
         ButterKnife.bind(this);
         String phone=preference.getString("safe_phone","");
-        et_phone.setText(phone);
+        mEtPhone.setText(phone);
     }
 
     @Override
@@ -32,7 +32,7 @@ public class Setup3Activity extends BaseSetupActivity {
 
     @Override
     public void showNextPage() {
-        String phone=et_phone.getText().toString().trim();
+        String phone= mEtPhone.getText().toString().trim();
         if(TextUtils.isEmpty(phone)){
 //            Toast.makeText(this, "安全号码不为空", Toast.LENGTH_SHORT).show();
             ToastUtil.show(this,"安全号码不为空");
@@ -55,7 +55,7 @@ public class Setup3Activity extends BaseSetupActivity {
         if(resultCode==RESULT_OK) {
             String phone = data.getStringExtra("phone");
             phone = phone.replaceAll("-", "").replaceAll(" ", "");
-            et_phone.setText(phone);
+            mEtPhone.setText(phone);
             super.onActivityResult(requestCode, resultCode, data);
         }
     }

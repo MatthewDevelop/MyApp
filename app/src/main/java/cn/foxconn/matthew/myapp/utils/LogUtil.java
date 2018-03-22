@@ -19,28 +19,33 @@ public class LogUtil {
     public static int level = VERVOSE;
 
     public static void v(String tag, String message) {
-        if (level <= VERVOSE)
+        if (level <= VERVOSE) {
             Log.v(tag, message);
+        }
     }
 
     public static void d(String tag, String message) {
-        if (level <= DEBUG)
+        if (level <= DEBUG) {
             Log.d(tag, message);
+        }
     }
 
     public static void i(String tag, String message) {
-        if (level <= INFO)
+        if (level <= INFO) {
             Log.i(tag, message);
+        }
     }
 
     public static void w(String tag, String message) {
-        if (level <= WARN)
+        if (level <= WARN) {
             Log.w(tag, message);
+        }
     }
 
     public static void e(String tag, String message) {
-        if (level <= ERROR)
+        if (level <= ERROR) {
             Log.e(tag, message);
+        }
     }
 
 

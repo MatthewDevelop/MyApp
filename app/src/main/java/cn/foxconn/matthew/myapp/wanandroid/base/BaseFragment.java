@@ -17,7 +17,7 @@ import butterknife.ButterKnife;
  * @email:guocheng0816@163.com
  */
 
-public abstract class BaseFragment<V,T extends BasePresenter<V,FragmentEvent>> extends RxFragment {
+public abstract class BaseFragment<V, T extends BasePresenter<V, FragmentEvent>> extends RxFragment {
     protected T mPresenter;
 
     @Override
@@ -26,8 +26,8 @@ public abstract class BaseFragment<V,T extends BasePresenter<V,FragmentEvent>> e
 
         init();
 
-        mPresenter=createPresenter();
-        if(mPresenter!=null){
+        mPresenter = createPresenter();
+        if (mPresenter != null) {
             mPresenter.attachView((V) this);
         }
     }
@@ -35,8 +35,8 @@ public abstract class BaseFragment<V,T extends BasePresenter<V,FragmentEvent>> e
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View rootView=inflater.inflate(getContentResId(),container,false);
-        ButterKnife.bind(this,rootView);
+        View rootView = inflater.inflate(getContentResId(), container, false);
+        ButterKnife.bind(this, rootView);
         initView(rootView);
         return rootView;
     }
@@ -51,7 +51,7 @@ public abstract class BaseFragment<V,T extends BasePresenter<V,FragmentEvent>> e
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if(mPresenter!=null){
+        if (mPresenter != null) {
             mPresenter.detachView();
         }
     }
@@ -68,8 +68,18 @@ public abstract class BaseFragment<V,T extends BasePresenter<V,FragmentEvent>> e
 
     }
 
+    /**
+     * 获取资源id
+     *
+     * @return 资源id
+     */
     protected abstract int getContentResId();
 
+    /**
+     * 创建presenter
+     *
+     * @return
+     */
     protected abstract T createPresenter();
 
     protected void init() {

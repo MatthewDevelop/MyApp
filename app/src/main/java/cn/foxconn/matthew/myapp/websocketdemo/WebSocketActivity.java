@@ -2,6 +2,7 @@ package cn.foxconn.matthew.myapp.websocketdemo;
 
 import android.os.Handler;
 import android.os.Message;
+import android.support.test.espresso.core.internal.deps.guava.util.concurrent.ThreadFactoryBuilder;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -16,8 +17,14 @@ import org.java_websocket.client.WebSocketClient;
 import org.java_websocket.drafts.Draft_10;
 import org.java_websocket.handshake.ServerHandshake;
 
+import java.lang.ref.WeakReference;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.LinkedBlockingDeque;
+import java.util.concurrent.ThreadFactory;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -33,20 +40,14 @@ public class WebSocketActivity extends AppCompatActivity {
     private static final String TAG = "WebSocketActivity";
 
     @BindView(R.id.et_message)
-    EditText et_message;
+    EditText etMessage;
     @BindView(R.id.bt_send)
-    Button bt_send;
+    Button btSend;
     @BindView(R.id.tv_log)
-    TextView tv_log;
+    TextView tvLog;
 
     private WebSocketClient mClient;
-    private Handler handler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            tv_log.setText(tv_log.getText() + "\n" + msg.obj);
-        }
-    };
+    private MyHandler handler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +58,10 @@ public class WebSocketActivity extends AppCompatActivity {
     }
 
     private void init() {
-        new Thread(new Runnable() {
+        handler=new MyHandler(this);
+        ThreadFactory webSocketFactory=new ThreadFactoryBuilder().setNameFormat("webSocket-thread").build();
+        ExecutorService fixedThreadPool = new ThreadPoolExecutor(1, 1, 0, TimeUnit.MILLISECONDS, new LinkedBlockingDeque<Runnable>(), webSocketFactory);
+        Runnable runnable=new Runnable() {
             @Override
             public void run() {
                 try {
@@ -92,16 +96,17 @@ public class WebSocketActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
             }
-        }).start();
+        };
+        fixedThreadPool.execute(runnable);
 
-        bt_send.setOnClickListener(new View.OnClickListener() {
+        btSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!TextUtils.isEmpty(et_message.getText().toString())){
+                if(!TextUtils.isEmpty(etMessage.getText().toString())){
                     if(mClient!=null) {
                         Log.e(TAG, "onClick: "+mClient.getReadyState() );
                         if(mClient.getReadyState()== WebSocket.READYSTATE.OPEN) {
-                            mClient.send(et_message.getText().toString());
+                            mClient.send(etMessage.getText().toString());
                         }
                     }
                 }
@@ -114,6 +119,23 @@ public class WebSocketActivity extends AppCompatActivity {
         super.onDestroy();
         if(mClient!=null){
             mClient.close();
+        }
+    }
+
+    private static class MyHandler extends Handler {
+        WeakReference<WebSocketActivity> mReference;
+
+        public MyHandler(WebSocketActivity webSocketActivity){
+            mReference= new WeakReference<>(webSocketActivity);
+        }
+
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            if(mReference.get()==null){
+                return;
+            }
+            mReference.get().tvLog.setText(mReference.get().tvLog.getText() + "\n" + msg.obj);
         }
     }
 }

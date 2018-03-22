@@ -12,14 +12,13 @@ import java.util.List;
 
 import cn.foxconn.matthew.myapp.R;
 import cn.foxconn.matthew.myapp.wanandroid.bean.pojo.ArticleBean;
-import cn.foxconn.matthew.myapp.wanandroid.helper.RxObserverHelper;
+import cn.foxconn.matthew.myapp.wanandroid.helper.BaseRxObserverHelper;
 import cn.foxconn.matthew.myapp.wanandroid.model.DataModel;
 import cn.foxconn.matthew.myapp.wanandroid.model.DataModelImpl;
 import cn.foxconn.matthew.myapp.wanandroid.activity.WebViewActivity;
 import cn.foxconn.matthew.myapp.utils.ToastUtil;
 import cn.foxconn.matthew.myapp.utils.UIUtil;
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.observers.DisposableObserver;
 
 /**
  * @author:Matthew
@@ -30,14 +29,14 @@ import io.reactivex.observers.DisposableObserver;
 public class CollectAtrcicleAdapter extends BaseQuickAdapter<ArticleBean, BaseViewHolder> {
     DataModel mDataModel;
     private Context mContext;
-    TextView tv_no_collect;
+    TextView tvNoCollect;
     CompositeDisposable mCompositeDisposable;
 
-    public CollectAtrcicleAdapter(Context context, @Nullable List<ArticleBean> data, TextView tv_no_collect, CompositeDisposable compositeDisposable) {
+    public CollectAtrcicleAdapter(Context context, @Nullable List<ArticleBean> data, TextView tvNoCollect, CompositeDisposable compositeDisposable) {
         super(R.layout.item_article, data);
         mContext = context;
         mDataModel = new DataModelImpl();
-        this.tv_no_collect = tv_no_collect;
+        this.tvNoCollect = tvNoCollect;
         mCompositeDisposable=compositeDisposable;
     }
 
@@ -48,14 +47,14 @@ public class CollectAtrcicleAdapter extends BaseQuickAdapter<ArticleBean, BaseVi
                 .setText(R.id.tv_time, item.getNiceDate())
                 .setText(R.id.tv_type, item.getChapterName());
         //判断文章是否被收藏
-        final TextView tv_collect = helper.getView(R.id.tv_collect);
-        tv_collect.setText(UIUtil.getString(R.string.ic_collect_sel));
-        tv_collect.setTextColor(UIUtil.getColor(R.color.main));
-        tv_collect.setOnClickListener(new View.OnClickListener() {
+        final TextView tvCollect = helper.getView(R.id.tv_collect);
+        tvCollect.setText(UIUtil.getString(R.string.ic_collect_sel));
+        tvCollect.setTextColor(UIUtil.getColor(R.color.main));
+        tvCollect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //collectArticle(tv_collect, item);
-                unCollectArticler(helper.getAdapterPosition(), item, tv_collect);
+                unCollectArticler(helper.getAdapterPosition(), item, tvCollect);
             }
         });
         helper.itemView.setOnClickListener(new View.OnClickListener() {
@@ -67,37 +66,37 @@ public class CollectAtrcicleAdapter extends BaseQuickAdapter<ArticleBean, BaseVi
     }
 
 
-    private void unCollectArticler(final int position, ArticleBean item, final TextView tv_collect) {
-        RxObserverHelper<String> disposableObserver=new RxObserverHelper<String>() {
+    private void unCollectArticler(final int position, ArticleBean item, final TextView tvCollect) {
+        BaseRxObserverHelper<String> disposableObserver=new BaseRxObserverHelper<String>() {
             @Override
-            protected void _onNext() {
-                super._onNext();
+            protected void next() {
+                super.next();
                 ToastUtil.showShort(mContext, "取消成功");
                 getData().remove(position);
                 //防止下标越界
                 if (position == 0 && getData().size() == 0) {
                     notifyDataSetChanged();
-                    tv_no_collect.setVisibility(View.VISIBLE);
+                    tvNoCollect.setVisibility(View.VISIBLE);
                 } else {
                     notifyItemRemoved(position);
                 }
             }
 
             @Override
-            protected void _onNext(String s) {
+            protected void next(String s) {
                 ToastUtil.showShort(mContext, "取消成功");
                 getData().remove(position);
                 //防止下标越界
                 if (position == 0 && getData().size() == 0) {
                     notifyDataSetChanged();
-                    tv_no_collect.setVisibility(View.VISIBLE);
+                    tvNoCollect.setVisibility(View.VISIBLE);
                 } else {
                     notifyItemRemoved(position);
                 }
             }
 
             @Override
-            protected void _onError(String message) {
+            protected void error(String message) {
                 ToastUtil.showShort(mContext, "取消失败");
             }
         };

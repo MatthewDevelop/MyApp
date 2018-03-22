@@ -31,15 +31,15 @@ import io.reactivex.disposables.CompositeDisposable;
 public class CollectActivity extends BaseActivity<CollectView, CollectPresenter>
         implements CollectView, SwipeRefreshLayout.OnRefreshListener, BaseQuickAdapter.RequestLoadMoreListener {
     @BindView(R.id.ft_return)
-    FontTextView ft_return;
+    FontTextView ftReturn;
     @BindView(R.id.tv_title)
-    TextView tv_title;
+    TextView tvTitle;
     @BindView(R.id.swipeRefreshLayout)
     SwipeRefreshLayout mSwipeRefreshLayout;
     @BindView(R.id.recyclerView)
     RecyclerView mRecyclerView;
     @BindView(R.id.tv_no_collect)
-    TextView tv_no_collect;
+    TextView tvNoCollect;
 
     CollectAtrcicleAdapter mAtrcicleAdapter;
     CompositeDisposable mDisposable;
@@ -57,10 +57,10 @@ public class CollectActivity extends BaseActivity<CollectView, CollectPresenter>
     @Override
     protected void initView() {
         super.initView();
-        tv_title.setText("我的收藏");
+        tvTitle.setText("我的收藏");
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        mAtrcicleAdapter=new CollectAtrcicleAdapter(this,null,tv_no_collect,mDisposable);
+        mAtrcicleAdapter=new CollectAtrcicleAdapter(this,null, tvNoCollect,mDisposable);
         mRecyclerView.setAdapter(mAtrcicleAdapter);
         mSwipeRefreshLayout.setOnRefreshListener(this);
         mAtrcicleAdapter.setOnLoadMoreListener(this,mRecyclerView);
@@ -110,7 +110,7 @@ public class CollectActivity extends BaseActivity<CollectView, CollectPresenter>
     @Override
     public void onRefreshSuccess(List<ArticleBean> data) {
         mAtrcicleAdapter.setNewData(data);
-        tv_no_collect.setVisibility(data.size()==0? View.VISIBLE:View.GONE);
+        tvNoCollect.setVisibility(data.size()==0? View.VISIBLE:View.GONE);
     }
 
     @Override

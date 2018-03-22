@@ -3,8 +3,8 @@ package cn.foxconn.matthew.myapp.wanandroid.presenter;
 import com.trello.rxlifecycle2.LifecycleProvider;
 import com.trello.rxlifecycle2.android.ActivityEvent;
 
-import cn.foxconn.matthew.myapp.wanandroid.bean.pojoVO.ArticleListVO;
-import cn.foxconn.matthew.myapp.wanandroid.helper.RxObserverHelper;
+import cn.foxconn.matthew.myapp.wanandroid.bean.pojovo.ArticleListVO;
+import cn.foxconn.matthew.myapp.wanandroid.helper.BaseRxObserverHelper;
 import cn.foxconn.matthew.myapp.wanandroid.model.DataModel;
 import cn.foxconn.matthew.myapp.wanandroid.model.DataModelImpl;
 import cn.foxconn.matthew.myapp.wanandroid.base.BasePresenter;
@@ -31,26 +31,26 @@ public class CollectPresenter extends BasePresenter<CollectView,ActivityEvent> {
      */
     public void getRefreshData(){
         mCurrentPage=0;
-        mDataModel.getCollectList(mCurrentPage, getProvider(),new RxObserverHelper<ArticleListVO>() {
+        mDataModel.getCollectList(mCurrentPage, getProvider(),new BaseRxObserverHelper<ArticleListVO>() {
             @Override
-            protected void _onCompleted() {
-                super._onCompleted();
+            protected void completed() {
+                super.completed();
                 getView().showRefreshView(false);
             }
 
             @Override
-            protected void _onStart() {
-                super._onStart();
+            protected void start() {
+                super.start();
                 getView().showRefreshView(true);
             }
 
             @Override
-            protected void _onNext(ArticleListVO articleListVO) {
+            protected void next(ArticleListVO articleListVO) {
                 getView().onRefreshSuccess(articleListVO.getDatas());
             }
 
             @Override
-            protected void _onError(String message) {
+            protected void error(String message) {
                 getView().onRefreshFail(message);
                 getView().showRefreshView(false);
             }
@@ -62,14 +62,14 @@ public class CollectPresenter extends BasePresenter<CollectView,ActivityEvent> {
      */
     public void getMoreData(){
         mCurrentPage=mCurrentPage+1;
-        mDataModel.getCollectList(mCurrentPage, getProvider(), new RxObserverHelper<ArticleListVO>() {
+        mDataModel.getCollectList(mCurrentPage, getProvider(), new BaseRxObserverHelper<ArticleListVO>() {
             @Override
-            protected void _onNext(ArticleListVO articleListVO) {
+            protected void next(ArticleListVO articleListVO) {
                 getView().onLoadMoreSuccess(articleListVO.getDatas());
             }
 
             @Override
-            protected void _onError(String message) {
+            protected void error(String message) {
                 getView().onLoadMoreFail(message);
             }
         });

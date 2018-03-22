@@ -28,17 +28,17 @@ import cn.foxconn.matthew.myapp.wanandroid.widget.RoundImageView;
 
 public class UserFragment extends BaseFragment {
     @BindView(R.id.iv_icon)
-    RoundImageView iv_icon;
+    RoundImageView mIvIcon;
     @BindView(R.id.tv_userName)
-    TextView tv_userName;
+    TextView mTvUserName;
     @BindView(R.id.cv_collect)
-    CardView cv_collect;
+    CardView mCvCollect;
     @BindView(R.id.tv_collect)
-    TextView tv_collect;
+    TextView mTvCollect;
     @BindView(R.id.cv_logout)
-    CardView cv_logout;
+    CardView mCvLogout;
     @BindView(R.id.tv_logout)
-    TextView tv_logout;
+    TextView mTvLogout;
 
 
     @Override
@@ -59,11 +59,11 @@ public class UserFragment extends BaseFragment {
     protected void initView(View rootView) {
         super.initView(rootView);
         if (PrefUtil.getBoolean(getActivity(), AppConst.IS_LOGIN_KEY, false)) {
-            tv_userName.setText(PrefUtil.getString(getActivity(), AppConst.USERNAME_KEY, "暂未登录"));
-            tv_logout.setText("退出登录");
+            mTvUserName.setText(PrefUtil.getString(getActivity(), AppConst.USERNAME_KEY, "暂未登录"));
+            mTvLogout.setText("退出登录");
         } else {
-            tv_userName.setText("暂未登录");
-            tv_logout.setText("点击登录");
+            mTvUserName.setText("暂未登录");
+            mTvLogout.setText("点击登录");
         }
     }
 
@@ -84,8 +84,8 @@ public class UserFragment extends BaseFragment {
                 } else {
                     PrefUtil.setBoolean(getActivity(),AppConst.IS_LOGIN_KEY,false);
                     ToastUtil.showShort(getContext(),"已登出");
-                    tv_userName.setText("暂未登录");
-                    tv_logout.setText("点击登录");
+                    mTvUserName.setText("暂未登录");
+                    mTvLogout.setText("点击登录");
                     RetrofitServiceManager.clearCookie();
                     refreshData();
                 }

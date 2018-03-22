@@ -3,6 +3,7 @@ package cn.foxconn.matthew.myapp.wanandroid.presenter;
 import android.graphics.Bitmap;
 import android.view.View;
 import android.webkit.WebChromeClient;
+import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -32,20 +33,32 @@ public class WebViewPresenter extends BasePresenter<CommonWebView,ActivityEvent>
         final ProgressBar progressBar=getView().getProgressBar();
         //TODO WebView的设置有待学习
         WebSettings webSettings=webView.getSettings();
-        webSettings.setJavaScriptEnabled(true);//设置JavaScript可用
+        //设置JavaScript可用
+        webSettings.setJavaScriptEnabled(true);
         //设置屏幕适应
-        webSettings.setSupportZoom(true);//设置支持缩放，是下项设置的前提
-        webSettings.setBuiltInZoomControls(true);//设置可以缩放缩放
-        webSettings.setDisplayZoomControls(false);//设置隐藏原生缩放控件
-        webSettings.setUseWideViewPort(true);//设置调整图片至合适webView大小
-        webSettings.setLoadWithOverviewMode(true);//设置缩放至屏幕大小
+        //设置支持缩放，是下项设置的前提
+        webSettings.setSupportZoom(true);
+        //设置可以缩放缩放
+        webSettings.setBuiltInZoomControls(true);
+        //设置隐藏原生缩放控件
+        webSettings.setDisplayZoomControls(false);
+        //设置调整图片至合适webView大小
+        webSettings.setUseWideViewPort(true);
+        //设置缩放至屏幕大小
+        webSettings.setLoadWithOverviewMode(true);
 
-        webSettings.setJavaScriptCanOpenWindowsAutomatically(true);//支持通过js打开新的窗口
-        webSettings.setDefaultTextEncodingName("utf-8");//设置默认编码格式
-        webSettings.setLoadsImagesAutomatically(true);//设置自动加载图片
-        webSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);//设置支持内容重新布局
-        webSettings.setAppCacheEnabled(true);//开启Application Cache（html5缓存）功能
-        webSettings.setDomStorageEnabled(true);//开启Dom Storage功能
+        //支持通过js打开新的窗口
+        webSettings.setJavaScriptCanOpenWindowsAutomatically(true);
+        //设置默认编码格式
+        webSettings.setDefaultTextEncodingName("utf-8");
+        //设置自动加载图片
+        webSettings.setLoadsImagesAutomatically(true);
+        //设置支持内容重新布局
+        webSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
+        //开启Application Cache（html5缓存）功能
+        webSettings.setAppCacheEnabled(true);
+        //开启Dom Storage功能
+        webSettings.setDomStorageEnabled(true);
 
         webView.setWebViewClient(new WebViewClient(){
             @Override
@@ -73,7 +86,6 @@ public class WebViewPresenter extends BasePresenter<CommonWebView,ActivityEvent>
                 view.loadUrl(url);
                 return super.shouldOverrideUrlLoading(view, url);
             }
-
         });
 
         webView.setWebChromeClient(new WebChromeClient(){

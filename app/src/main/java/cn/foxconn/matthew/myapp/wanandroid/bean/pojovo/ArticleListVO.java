@@ -1,4 +1,4 @@
-package cn.foxconn.matthew.myapp.wanandroid.bean.pojoVO;
+package cn.foxconn.matthew.myapp.wanandroid.bean.pojovo;
 
 import java.util.List;
 
@@ -21,12 +21,12 @@ public class ArticleListVO {
      * over : false
      */
 
-    private int offset;
-    private int size;
-    private int total;
-    private int pageCount;
-    private int curPage;
-    private boolean over;
+    private Integer offset;
+    private Integer size;
+    private Integer total;
+    private Integer pageCount;
+    private Integer curPage;
+    private Boolean over;
     private List<ArticleBean> datas;
 
     public int getOffset() {

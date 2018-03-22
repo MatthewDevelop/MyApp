@@ -39,15 +39,15 @@ public class WebViewActivity
     public static final String WEB_URL = "web_url";
 
     @BindView(R.id.tv_title)
-    TextView tv_title;
+    TextView mTvTitle;
     @BindView(R.id.ft_return)
-    FontTextView ft_return;
+    FontTextView mFtReturn;
     @BindView(R.id.ft_more)
-    FontTextView ft_more;
+    FontTextView mFtMore;
     @BindView(R.id.progress_bar)
     ProgressBar mProgressBar;
     @BindView(R.id.rl_topbar)
-    RelativeLayout rl_topbar;
+    RelativeLayout mRlTopbar;
     @BindView(R.id.webView_container)
     NestedScrollView webContainer;
 
@@ -74,7 +74,7 @@ public class WebViewActivity
 
     @Override
     public void setTitle(String title) {
-        tv_title.setText(title);
+        mTvTitle.setText(title);
     }
 
     /**
@@ -92,22 +92,22 @@ public class WebViewActivity
     @Override
     protected void init() {
         super.init();
-        url=getIntent().getStringExtra(WEB_URL);
+        url = getIntent().getStringExtra(WEB_URL);
     }
 
     @Override
     protected void initView() {
         super.initView();
-        mWebViewFragment=new WebViewFragment();
-        ActivityUtil.addFragmentToActivity(getSupportFragmentManager(),mWebViewFragment,R.id.webView_container);
+        mWebViewFragment = new WebViewFragment();
+        ActivityUtil.addFragmentToActivity(getSupportFragmentManager(), mWebViewFragment, R.id.webView_container);
     }
 
     @Override
     protected void onStart() {
         super.onStart();
         //get WebView
-        mWebView=mWebViewFragment.getWebView();
-        mPresenter.setWebView(mWebView,url);
+        mWebView = mWebViewFragment.getWebView();
+        mPresenter.setWebView(mWebView, url);
     }
 
     @Override
@@ -118,16 +118,17 @@ public class WebViewActivity
 
     /**
      * 处理页面回退
+     *
      * @param keyCode
      * @param event
      * @return
      */
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if(keyCode==KeyEvent.KEYCODE_BACK){
-            if(mWebView.canGoBack()){
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            if (mWebView.canGoBack()) {
                 mWebView.goBack();
-            }else {
+            } else {
                 finish();
                 return true;
             }
@@ -135,27 +136,27 @@ public class WebViewActivity
         return super.onKeyDown(keyCode, event);
     }
 
-    @OnClick({R.id.ft_return,R.id.ft_more})
-    public void OnViewClicked(View view){
-        switch (view.getId()){
+    @OnClick({R.id.ft_return, R.id.ft_more})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
             case R.id.ft_return:
                 finish();
                 break;
             case R.id.ft_more:
                 //TODO Android PobWindow
-                View popView=View.inflate(this,R.layout.pupup_webview_more,null);
-                mMorePopWindow=new CustomPopWindow.PopupWindowBuilder(this)
-                                .setView(popView)
-                                .enableBackgroundDark(false)
-                                .create()
-                                .showAsDropDown(ft_more,-430,-10);
+                View popView = View.inflate(this, R.layout.pupup_webview_more, null);
+                mMorePopWindow = new CustomPopWindow.PopupWindowBuilder(this)
+                        .setView(popView)
+                        .enableBackgroundDark(false)
+                        .create()
+                        .showAsDropDown(mFtMore, -430, -10);
 
                 //设置点击事件
                 //分享
                 popView.findViewById(R.id.tv_share).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        SharesUtils.share(WebViewActivity.this,mWebView.getUrl());
+                        SharesUtils.share(WebViewActivity.this, mWebView.getUrl());
                         mMorePopWindow.dissmiss();
                     }
                 });
@@ -164,9 +165,9 @@ public class WebViewActivity
                     @Override
                     public void onClick(View v) {
                         //todo 剪切板的使用
-                        ClipboardManager clipboardManager= (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
-                        clipboardManager.setPrimaryClip(ClipData.newPlainText(getString(R.string.copy_link),mWebView.getUrl()));
-                        Snackbar.make(getWindow().getDecorView(),R.string.copy_link_success,Snackbar.LENGTH_SHORT).show();
+                        ClipboardManager clipboardManager = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+                        clipboardManager.setPrimaryClip(ClipData.newPlainText(getString(R.string.copy_link), mWebView.getUrl()));
+                        Snackbar.make(getWindow().getDecorView(), R.string.copy_link_success, Snackbar.LENGTH_SHORT).show();
                         mMorePopWindow.dissmiss();
                     }
                 });
@@ -175,11 +176,13 @@ public class WebViewActivity
                     @Override
                     public void onClick(View v) {
                         //TODO open with system Browser
-                        Intent intent=new Intent(Intent.ACTION_VIEW, Uri.parse(mWebView.getUrl()));
+                        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(mWebView.getUrl()));
                         startActivity(intent);
                         mMorePopWindow.dissmiss();
                     }
                 });
+                break;
+            default:
                 break;
         }
     }

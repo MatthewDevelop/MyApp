@@ -14,9 +14,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cn.foxconn.matthew.myapp.R;
-import cn.foxconn.matthew.myapp.wanandroid.bean.pojoVO.ArticleListVO;
-import cn.foxconn.matthew.myapp.wanandroid.bean.pojoVO.TypeTagVO;
-import cn.foxconn.matthew.myapp.wanandroid.helper.RxObserverHelper;
+import cn.foxconn.matthew.myapp.wanandroid.bean.pojovo.ArticleListVO;
+import cn.foxconn.matthew.myapp.wanandroid.bean.pojovo.TypeTagVO;
+import cn.foxconn.matthew.myapp.wanandroid.helper.BaseRxObserverHelper;
 import cn.foxconn.matthew.myapp.wanandroid.model.DataModel;
 import cn.foxconn.matthew.myapp.wanandroid.adapter.ArticleListAdapter;
 import cn.foxconn.matthew.myapp.wanandroid.base.BasePresenter;
@@ -57,9 +57,9 @@ public class TypePresenter extends BasePresenter<TypeView,FragmentEvent> {
 
     public void getTagData() {
         mTypeView=getView();
-        mDataModel.getTagData(getProvider(),new RxObserverHelper<List<TypeTagVO>>() {
+        mDataModel.getTagData(getProvider(),new BaseRxObserverHelper<List<TypeTagVO>>() {
             @Override
-            protected void _onNext(List<TypeTagVO> typeTagVOS) {
+            protected void next(List<TypeTagVO> typeTagVOS) {
                 mDatas=typeTagVOS;
                 setTabUi();
                 mTabSelect=0;
@@ -68,7 +68,7 @@ public class TypePresenter extends BasePresenter<TypeView,FragmentEvent> {
             }
 
             @Override
-            protected void _onError(String message) {
+            protected void error(String message) {
                 System.out.println(message);
             }
         });
@@ -160,9 +160,9 @@ public class TypePresenter extends BasePresenter<TypeView,FragmentEvent> {
         Log.e(TAG, "getServerData: "+id );
         mCurrentPage=0;
         mAdapter=getView().getAdapter();
-        mDataModel.getTypeDataById(mCurrentPage,id, getProvider(),new RxObserverHelper<ArticleListVO>() {
+        mDataModel.getTypeDataById(mCurrentPage,id, getProvider(),new BaseRxObserverHelper<ArticleListVO>() {
             @Override
-            protected void _onNext(ArticleListVO articleListVO) {
+            protected void next(ArticleListVO articleListVO) {
                 if (articleListVO.getDatas()!=null){
                     getView().getRefreshDataSuccess(articleListVO.getDatas());
                     mTypeView.getTagLayout().setVisibility(View.GONE);
@@ -170,7 +170,7 @@ public class TypePresenter extends BasePresenter<TypeView,FragmentEvent> {
             }
 
             @Override
-            protected void _onError(String message) {
+            protected void error(String message) {
                 getView().getDataError(message);
             }
         });
@@ -181,14 +181,14 @@ public class TypePresenter extends BasePresenter<TypeView,FragmentEvent> {
      */
     public void getMoreData() {
         mCurrentPage=mCurrentPage+1;
-        mDataModel.getTypeDataById(mCurrentPage, mId,getProvider(), new RxObserverHelper<ArticleListVO>() {
+        mDataModel.getTypeDataById(mCurrentPage, mId,getProvider(), new BaseRxObserverHelper<ArticleListVO>() {
             @Override
-            protected void _onNext(ArticleListVO articleListVO) {
+            protected void next(ArticleListVO articleListVO) {
                 getView().getMoreDataSuccess(articleListVO.getDatas());
             }
 
             @Override
-            protected void _onError(String message) {
+            protected void error(String message) {
                 getView().getDataError(message);
             }
         });

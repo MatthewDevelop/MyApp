@@ -41,7 +41,6 @@ public abstract class BaseSetupActivity extends AppCompatActivity {
                 }
                 //判断用户的滑动速度是否过慢
                 if(Math.abs(velocityX)<100){
-//                    Toast.makeText(BaseSetupActivity.this, "慢了", Toast.LENGTH_SHORT).show();
                     return true;
                 }
                 //向右划，到上一页

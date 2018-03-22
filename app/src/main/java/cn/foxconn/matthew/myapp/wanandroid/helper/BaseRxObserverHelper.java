@@ -7,22 +7,18 @@ import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
 import java.util.concurrent.TimeoutException;
 
-import io.reactivex.disposables.Disposable;
 import io.reactivex.observers.DisposableObserver;
 import retrofit2.HttpException;
 
 /**
+ * 自定义subscriber，减少不必要回掉
+ *
  * @author:Matthew
  * @date:2018/3/9
  * @email:guocheng0816@163.com
  */
 
-/**
- * 自定义subscriber，减少不必要回掉
- *
- * @param <T>
- */
-public abstract class RxObserverHelper<T> extends DisposableObserver<T> {
+public abstract class BaseRxObserverHelper<T> extends DisposableObserver<T> {
 
     /**
      * onStart方法总是在订阅的线程执行，即observerOn指定的线程，指定AndroidSchedulers.mainThread()时，可以在onStart方法中更新UI
@@ -37,62 +33,78 @@ public abstract class RxObserverHelper<T> extends DisposableObserver<T> {
     @Override
     protected void onStart() {
         super.onStart();
-        _onStart();
+        start();
     }
 
     @Override
     public void onComplete() {
-        _onCompleted();
+        completed();
     }
 
 
     @Override
     public void onError(Throwable e) {
         e.printStackTrace();
-        if (e instanceof SocketTimeoutException|| e instanceof TimeoutException) {
-            _onError("请求超时，稍后再试");
-        } else if(e instanceof ConnectException
+        if (e instanceof SocketTimeoutException || e instanceof TimeoutException) {
+            error("请求超时，稍后再试");
+        } else if (e instanceof ConnectException
                 || e instanceof NetworkErrorException
-                || e instanceof UnknownHostException){
-            _onError("网络异常，稍后再试");
-        }else if (e instanceof HttpException) {
-            _onError("服务器异常，稍后再试");
-        } else if(e instanceof NullPointerException){
+                || e instanceof UnknownHostException) {
+            error("网络异常，稍后再试");
+        } else if (e instanceof HttpException) {
+            error("服务器异常，稍后再试");
+        } else if (e instanceof NullPointerException) {
             //特殊处理
-            _onNext();
-        }else {
-            //_onError("请求失败，稍后再试");
-            _onError(e.getMessage());
+            next();
+        } else {
+            //error("请求失败，稍后再试");
+            error(e.getMessage());
         }
     }
 
     @Override
     public void onNext(T t) {
-        _onNext(t);
+        next(t);
     }
 
-    protected void _onCompleted() {
+    /**
+     * 请求完成回调方法
+     */
+    protected void completed() {
 
     }
 
-    protected void _onStart() {
+    /**
+     * 提交订阅时的回调方法
+     */
+    protected void start() {
 
     }
 
     /**
      * {
-     *"data": null,
-     *"errorCode": 0,
-     *"errorMsg": ""
-     *}
-     *
+     * "data": null,
+     * "errorCode": 0,
+     * "errorMsg": ""
+     * }
+     * <p>
      * 针对收藏与取消收藏接口进行特殊处理，成功，但返回的data为空，observer会抛出空指针
      */
-    protected void _onNext() {
+    protected void next() {
 
     }
 
-    protected abstract void _onNext(T t);
+    /**
+     * 请求成功回调方法
+     *
+     * @param t
+     */
+    protected abstract void next(T t);
 
-    protected abstract void _onError(String message);
+    /**
+     * 请求出错回调方法
+     *
+     * @param message
+     */
+    protected abstract void error(String message);
 }

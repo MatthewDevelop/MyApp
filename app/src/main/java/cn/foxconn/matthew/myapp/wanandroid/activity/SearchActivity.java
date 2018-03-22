@@ -40,13 +40,13 @@ public class SearchActivity
         implements SearchView, BaseQuickAdapter.RequestLoadMoreListener {
 
     @BindView(R.id.et_search)
-    EditText et_search;
+    EditText mEtSearch;
     @BindView(R.id.ft_clear)
-    FontTextView ft_clear;
+    FontTextView mFtClear;
     @BindView(R.id.ll_hot_key)
-    LinearLayout ll_hot_key;
+    LinearLayout mLlHotKey;
     @BindView(R.id.layout_hot_key)
-    AutoLinefeedLayout hot_key;
+    AutoLinefeedLayout mHotKey;
     @BindView(R.id.recyclerView)
     RecyclerView mRecyclerView;
 
@@ -94,7 +94,7 @@ public class SearchActivity
         /**
          * 设置编辑框内容变化监听事件
          */
-        et_search.addTextChangedListener(new TextWatcher() {
+        mEtSearch.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -107,11 +107,11 @@ public class SearchActivity
 
             @Override
             public void afterTextChanged(Editable s) {
-                String keyword=et_search.getText().toString();
+                String keyword= mEtSearch.getText().toString();
                 if(!TextUtils.isEmpty(keyword)) {
                     mPresenter.getSearchData(keyword);
                 }else {
-                    ll_hot_key.setVisibility(View.VISIBLE);
+                    mLlHotKey.setVisibility(View.VISIBLE);
                     mRecyclerView.setVisibility(View.GONE);
                 }
             }
@@ -122,7 +122,7 @@ public class SearchActivity
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.ft_clear:
-                et_search.setText("");
+                mEtSearch.setText("");
                 break;
             case R.id.tv_cancel:
                 finish();
@@ -135,27 +135,27 @@ public class SearchActivity
 
     @Override
     public void onLoadMoreRequested() {
-        if(!TextUtils.isEmpty(et_search.getText().toString())){
-            mPresenter.getMoreData(et_search.getText().toString());
+        if(!TextUtils.isEmpty(mEtSearch.getText().toString())){
+            mPresenter.getMoreData(mEtSearch.getText().toString());
         }
     }
 
     @Override
     public void getHotKeySuccess(final List<HotKeyBean> data) {
-        hot_key.removeAllViews();
+        mHotKey.removeAllViews();
         for (int i = 0; i < data.size(); i++) {
             View view = LinearLayout.inflate(this, R.layout.item_hot_key, null);
-            TextView tv_hotkey = view.findViewById(R.id.tv_hot_key);
-            tv_hotkey.setText(data.get(i).getName());
-            hot_key.addView(view);
+            TextView tvHotKey = view.findViewById(R.id.tv_hot_key);
+            tvHotKey.setText(data.get(i).getName());
+            mHotKey.addView(view);
             final int finalI = i;
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    et_search.setText(data.get(finalI).getName());
+                    mEtSearch.setText(data.get(finalI).getName());
 
                     // 将光标移至字符串尾部
-                    CharSequence charSequence = et_search.getText();
+                    CharSequence charSequence = mEtSearch.getText();
                     if (charSequence instanceof Spannable) {
                         Spannable spanText = (Spannable) charSequence;
                         Selection.setSelection(spanText, charSequence.length());
@@ -173,10 +173,10 @@ public class SearchActivity
     @Override
     public void searchDataSuccess(List<ArticleBean> data) {
         if(data==null||data.size()==0){
-            ll_hot_key.setVisibility(View.VISIBLE);
+            mLlHotKey.setVisibility(View.VISIBLE);
             mRecyclerView.setVisibility(View.GONE);
         }else {
-            ll_hot_key.setVisibility(View.GONE);
+            mLlHotKey.setVisibility(View.GONE);
             mRecyclerView.setVisibility(View.VISIBLE);
         }
         mAdapter.setNewData(data);

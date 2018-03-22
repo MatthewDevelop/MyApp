@@ -2,6 +2,7 @@ package cn.foxconn.matthew.myapp.utils;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.support.v4.content.ContextCompat;
 
 import cn.foxconn.matthew.myapp.app.App;
 
@@ -37,7 +38,7 @@ public class UIUtil {
      * @return
      */
     public static int getColor(int resourceId){
-        return getResource().getColor(resourceId);
+        return ContextCompat.getColor(getContext(),resourceId);
     }
 
     /**

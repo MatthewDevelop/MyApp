@@ -4,7 +4,7 @@ import com.trello.rxlifecycle2.LifecycleProvider;
 import com.trello.rxlifecycle2.android.ActivityEvent;
 
 import cn.foxconn.matthew.myapp.wanandroid.bean.pojo.UserBean;
-import cn.foxconn.matthew.myapp.wanandroid.helper.RxObserverHelper;
+import cn.foxconn.matthew.myapp.wanandroid.helper.BaseRxObserverHelper;
 import cn.foxconn.matthew.myapp.wanandroid.model.DataModel;
 import cn.foxconn.matthew.myapp.wanandroid.model.DataModelImpl;
 import cn.foxconn.matthew.myapp.wanandroid.base.BasePresenter;
@@ -26,28 +26,28 @@ public class LoginPresenter extends BasePresenter<LoginView,ActivityEvent> {
     }
 
     public void toLogin(String username,String password){
-        mDataModel.toLogin(username, password, getProvider(),new RxObserverHelper<UserBean>() {
+        mDataModel.toLogin(username, password, getProvider(),new BaseRxObserverHelper<UserBean>() {
 
             @Override
-            protected void _onStart() {
-                super._onStart();
+            protected void start() {
+                super.start();
                 getView().showProgress("正在登录");
             }
 
             @Override
-            protected void _onNext(UserBean userBean) {
+            protected void next(UserBean userBean) {
                 getView().loginSuccess(userBean);
             }
 
             @Override
-            protected void _onError(String message) {
+            protected void error(String message) {
                 getView().loginFail(message);
                 getView().hideProgress();
             }
 
             @Override
-            protected void _onCompleted() {
-                super._onCompleted();
+            protected void completed() {
+                super.completed();
                 getView().hideProgress();
             }
         });
@@ -55,26 +55,26 @@ public class LoginPresenter extends BasePresenter<LoginView,ActivityEvent> {
 
 
     public void toRegister(String username,String password,String rePassword){
-        mDataModel.toRegister(username, password, rePassword,getProvider(),new RxObserverHelper<UserBean>() {
+        mDataModel.toRegister(username, password, rePassword,getProvider(),new BaseRxObserverHelper<UserBean>() {
             @Override
-            protected void _onCompleted() {
-                super._onCompleted();
+            protected void completed() {
+                super.completed();
                 getView().hideProgress();
             }
 
             @Override
-            protected void _onStart() {
-                super._onStart();
+            protected void start() {
+                super.start();
                 getView().showProgress("正在注册");
             }
 
             @Override
-            protected void _onNext(UserBean userBean) {
+            protected void next(UserBean userBean) {
                 getView().registerSuccess(userBean);
             }
 
             @Override
-            protected void _onError(String message) {
+            protected void error(String message) {
                 getView().registerFail(message);
                 getView().hideProgress();
             }

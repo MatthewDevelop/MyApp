@@ -16,6 +16,7 @@ import android.graphics.Shader;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.ColorRes;
+import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.widget.ImageView;
@@ -83,7 +84,6 @@ public class RoundImageView extends ImageView {
     private Path mRoundPath;
     private int mBorderProgress = 0;
     private static int num = 1;
-
 
     public RoundImageView(Context context) {
         this(context, null);
@@ -175,7 +175,7 @@ public class RoundImageView extends ImageView {
             canvas.drawCircle(mRadius + mBorderWidth / 2, mRadius + mBorderWidth / 2, mRadius, mBorderPaint);
 
             //进度
-            mBorderPaint.setColor(getResources().getColor(mProgressColor));
+            mBorderPaint.setColor(ContextCompat.getColor(getContext(),mProgressColor));
             RectF rect = new RectF(mBorderWidth/2,mBorderWidth/2,mRadius*2 + mBorderWidth/2,mRadius*2 + mBorderWidth/2);
             canvas.drawArc(rect,-90,mBorderProgress,false,mBorderPaint);
 

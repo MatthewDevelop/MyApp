@@ -26,15 +26,15 @@ import cn.foxconn.matthew.myapp.wanandroid.widget.FontTextView;
 public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> implements LoginView {
 
     @BindView(R.id.ft_close)
-    FontTextView ft_close;
+    FontTextView mFtClose;
     @BindView(R.id.et_userName)
-    EditText et_userName;
+    EditText mEtUserName;
     @BindView(R.id.et_password)
-    EditText et_password;
+    EditText mEtPassword;
     @BindView(R.id.bt_register)
-    Button bt_register;
+    Button mBtRegister;
     @BindView(R.id.bt_login)
-    Button bt_login;
+    Button mBtLogin;
 
 
     @Override
@@ -54,21 +54,21 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
                 finish();
                 break;
             case R.id.bt_login:
-                if(TextUtils.isEmpty(et_userName.getText().toString())||TextUtils.isEmpty(et_password.getText().toString())){
+                if(TextUtils.isEmpty(mEtUserName.getText().toString())||TextUtils.isEmpty(mEtPassword.getText().toString())){
                     ToastUtil.showShort(this,"用户名或密码不为空");
-                }else if (et_userName.getText().toString().length()<6||et_password.getText().toString().length()<6){
+                }else if (mEtUserName.getText().toString().length()<6|| mEtPassword.getText().toString().length()<6){
                     ToastUtil.showShort(this,"用户名或密码长度不能小于6位");
                 }else {
-                    mPresenter.toLogin(et_userName.getText().toString(),et_password.getText().toString());
+                    mPresenter.toLogin(mEtUserName.getText().toString(), mEtPassword.getText().toString());
                 }
                 break;
             case R.id.bt_register:
-                if(TextUtils.isEmpty(et_userName.getText().toString())||TextUtils.isEmpty(et_password.getText().toString())){
+                if(TextUtils.isEmpty(mEtUserName.getText().toString())||TextUtils.isEmpty(mEtPassword.getText().toString())){
                     ToastUtil.showShort(this,"用户名或密码不为空");
-                }else if (et_userName.getText().toString().length()<6||et_password.getText().toString().length()<6){
+                }else if (mEtUserName.getText().toString().length()<6|| mEtPassword.getText().toString().length()<6){
                     ToastUtil.showShort(this,"用户名或密码长度不能小于6位");
                 }else {
-                    mPresenter.toRegister(et_userName.getText().toString(),et_password.getText().toString(),et_password.getText().toString());
+                    mPresenter.toRegister(mEtUserName.getText().toString(), mEtPassword.getText().toString(), mEtPassword.getText().toString());
                 }
                 break;
             default:
@@ -94,7 +94,7 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
     public void loginSuccess(UserBean user) {
         ToastUtil.showShort(this,"登录成功");
         PrefUtil.setBoolean(LoginActivity.this, AppConst.IS_LOGIN_KEY,true);
-        PrefUtil.setString(LoginActivity.this,AppConst.USERNAME_KEY,et_userName.getText().toString());
+        PrefUtil.setString(LoginActivity.this,AppConst.USERNAME_KEY, mEtUserName.getText().toString());
         startActivity(new Intent(LoginActivity.this,WanAndroidActivity.class));
         finish();
     }
@@ -103,7 +103,7 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
     public void registerSuccess(UserBean user) {
         ToastUtil.showShort(this,"注册成功");
         PrefUtil.setBoolean(LoginActivity.this, AppConst.IS_LOGIN_KEY,true);
-        PrefUtil.setString(LoginActivity.this,AppConst.USERNAME_KEY,et_userName.getText().toString());
+        PrefUtil.setString(LoginActivity.this,AppConst.USERNAME_KEY, mEtUserName.getText().toString());
         startActivity(new Intent(LoginActivity.this,WanAndroidActivity.class));
         finish();
     }

@@ -1,4 +1,4 @@
-package cn.foxconn.matthew.myapp.wanandroid.bean.pojoVO;
+package cn.foxconn.matthew.myapp.wanandroid.bean.pojovo;
 
 
 import java.io.Serializable;
@@ -7,10 +7,10 @@ import java.util.List;
 import cn.foxconn.matthew.myapp.wanandroid.bean.pojo.TypeChildrenBean;
 
 /**
- * user：lqm
- * desc：分类标签
+ * @author:Matthew
+ * @date:2018/3/3
+ * @email:guocheng0816@163.com
  */
-
 public class TypeTagVO implements Serializable {
 
     /**
@@ -22,12 +22,12 @@ public class TypeTagVO implements Serializable {
      * visible : 1
      * children : [{"id":60,"name":"Android Studio相关","courseId":13,"parentChapterId":150,"order":1000,"visible":1,"children":[]},{"id":169,"name":"gradle","courseId":13,"parentChapterId":150,"order":1001,"visible":1,"children":[]},{"id":269,"name":"官方发布","courseId":13,"parentChapterId":150,"order":1002,"visible":1,"children":[]}]
      */
-    private int id;
+    private Integer id;
     private String name;
-    private int courseId;
-    private int parentChapterId;
-    private int order;
-    private int visible;
+    private Integer courseId;
+    private Integer parentChapterId;
+    private Integer order;
+    private Integer visible;
     private List<TypeChildrenBean> children;
 
     public int getId() {

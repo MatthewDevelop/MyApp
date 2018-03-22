@@ -25,7 +25,7 @@ public class ImageLoaderManager {
      * @param imgUrl
      * @param imageView
      */
-    public static void LoadImage(Context context, String imgUrl, ImageView imageView) {
+    public static void loadImage(Context context, String imgUrl, ImageView imageView) {
 
         Glide.with(context)
                 .load(imgUrl)
@@ -40,7 +40,7 @@ public class ImageLoaderManager {
     /**
      * 缓存图片到本地
      */
-    public static File CacheFile(Context context, String imgUrl){
+    public static File cacheFile(Context context, String imgUrl){
         File cacheFile = null;
         FutureTarget<File> future = Glide.with(context)
                 .load(imgUrl)

@@ -28,29 +28,29 @@ import cn.foxconn.matthew.myapp.wanandroid.widget.FontTextView;
 
 public class WanAndroidActivity extends BaseActivity {
     @BindView(R.id.ft_search)
-    FontTextView ft_search;
+    FontTextView mFtSearch;
     @BindView(R.id.ft_hot)
-    FontTextView ft_hot;
+    FontTextView mFtHot;
     @BindView(R.id.ll_home)
-    LinearLayout ll_home;
+    LinearLayout mLlHome;
     @BindView(R.id.ft_home)
-    FontTextView ft_home;
+    FontTextView mFtHome;
     @BindView(R.id.tv_home)
-    TextView tv_home;
+    TextView mTvHome;
     @BindView(R.id.ll_type)
-    LinearLayout ll_type;
+    LinearLayout mLlType;
     @BindView(R.id.ft_type)
-    FontTextView ft_type;
+    FontTextView mFtType;
     @BindView(R.id.tv_type)
-    TextView tv_type;
+    TextView mTvType;
     @BindView(R.id.ll_user)
-    LinearLayout ll_user;
+    LinearLayout mLlUser;
     @BindView(R.id.ft_user)
-    FontTextView ft_user;
+    FontTextView mFtUser;
     @BindView(R.id.tv_user)
-    TextView tv_user;
+    TextView mTvUser;
     @BindView(R.id.viewPager)
-    ViewPager viewPager;
+    ViewPager mViewPager;
 
     private static List<android.support.v4.app.Fragment> mFragments = new ArrayList<>();
 
@@ -67,16 +67,16 @@ public class WanAndroidActivity extends BaseActivity {
     @Override
     protected void initView() {
         super.initView();
-        setTabColor(ft_home, tv_home);
+        setTabColor(mFtHome, mTvHome);
         mFragments.add(HomeFragment.newInstance());
         mFragments.add(TypeFragment.newInstance());
         mFragments.add(UserFragment.newInstance());
         //TODO 还需添加其他碎片布局
-        viewPager.setAdapter(new cn.foxconn.matthew.myapp.wanandroid.adapter.PagerAdapter(getSupportFragmentManager(), mFragments));
-        viewPager.setCurrentItem(0, false);
+        mViewPager.setAdapter(new cn.foxconn.matthew.myapp.wanandroid.adapter.PagerAdapter(getSupportFragmentManager(), mFragments));
+        mViewPager.setCurrentItem(0, false);
         //设置偏移的页数
-        viewPager.setOffscreenPageLimit(2);
-        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+        mViewPager.setOffscreenPageLimit(2);
+        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
@@ -86,13 +86,13 @@ public class WanAndroidActivity extends BaseActivity {
             public void onPageSelected(int position) {
                 switch (position) {
                     case 0:
-                        setTabColor(ft_home, tv_home);
+                        setTabColor(mFtHome, mTvHome);
                         break;
                     case 1:
-                        setTabColor(ft_type, tv_type);
+                        setTabColor(mFtType, mTvType);
                         break;
                     case 2:
-                        setTabColor(ft_user,tv_user);
+                        setTabColor(mFtUser, mTvUser);
                     default:
                         break;
                 }
@@ -109,16 +109,16 @@ public class WanAndroidActivity extends BaseActivity {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.ll_home:
-                viewPager.setCurrentItem(0);
-                setTabColor(ft_home, tv_home);
+                mViewPager.setCurrentItem(0);
+                setTabColor(mFtHome, mTvHome);
                 break;
             case R.id.ll_type:
-                viewPager.setCurrentItem(1);
-                setTabColor(ft_type, tv_type);
+                mViewPager.setCurrentItem(1);
+                setTabColor(mFtType, mTvType);
                 break;
             case R.id.ll_user:
-                viewPager.setCurrentItem(2);
-                setTabColor(ft_user, tv_user);
+                mViewPager.setCurrentItem(2);
+                setTabColor(mFtUser, mTvUser);
                 break;
             case R.id.ft_search:
                 startActivity(new Intent(this,SearchActivity.class));
@@ -135,12 +135,12 @@ public class WanAndroidActivity extends BaseActivity {
      * @param textView
      */
     private void setTabColor(FontTextView fontTextView, TextView textView) {
-        ft_home.setTextColor(UIUtil.getColor(R.color.tab_bar_normal));
-        tv_home.setTextColor(UIUtil.getColor(R.color.tab_bar_normal));
-        ft_type.setTextColor(UIUtil.getColor(R.color.tab_bar_normal));
-        tv_type.setTextColor(UIUtil.getColor(R.color.tab_bar_normal));
-        ft_user.setTextColor(UIUtil.getColor(R.color.tab_bar_normal));
-        tv_user.setTextColor(UIUtil.getColor(R.color.tab_bar_normal));
+        mFtHome.setTextColor(UIUtil.getColor(R.color.tab_bar_normal));
+        mTvHome.setTextColor(UIUtil.getColor(R.color.tab_bar_normal));
+        mFtType.setTextColor(UIUtil.getColor(R.color.tab_bar_normal));
+        mTvType.setTextColor(UIUtil.getColor(R.color.tab_bar_normal));
+        mFtUser.setTextColor(UIUtil.getColor(R.color.tab_bar_normal));
+        mTvUser.setTextColor(UIUtil.getColor(R.color.tab_bar_normal));
         fontTextView.setTextColor(UIUtil.getColor(R.color.tab_bar_selected));
         textView.setTextColor(UIUtil.getColor(R.color.tab_bar_selected));
 

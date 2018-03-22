@@ -21,12 +21,12 @@ import cn.foxconn.matthew.myapp.utils.LogUtil;
 public class SettingItemView extends RelativeLayout {
     private static final String TAG = "SettingItemView";
     private static final String NAMESPACE = "http://schemas.android.com/apk/res-auto";
-    private TextView tv_title;
-    private TextView tv_des;
-    private CheckBox cb_status;
-    private String title;
-    private String des_on;
-    private String des_off;
+    private TextView mTvTitle;
+    private TextView mTvDes;
+    private CheckBox mCbStatus;
+    private String mTitle;
+    private String mDesOn;
+    private String mDesOff;
 
     public SettingItemView(Context context) {
         super(context);
@@ -39,9 +39,9 @@ public class SettingItemView extends RelativeLayout {
         Log.e(TAG, "SettingItemView: 2" );
         //getAtts(attrs);
         //根据name获取value
-        title = attrs.getAttributeValue(NAMESPACE, "title");
-        des_on = attrs.getAttributeValue(NAMESPACE, "des_on");
-        des_off = attrs.getAttributeValue(NAMESPACE, "des_off");
+        mTitle = attrs.getAttributeValue(NAMESPACE, "mTitle");
+        mDesOn = attrs.getAttributeValue(NAMESPACE, "mDesOn");
+        mDesOff = attrs.getAttributeValue(NAMESPACE, "mDesOff");
         initView();
     }
 
@@ -72,18 +72,18 @@ public class SettingItemView extends RelativeLayout {
     private void initView() {
         //将自定义的布局文件设置给当前的SettingItemView
         View.inflate(getContext(), R.layout.view_setting_layout,this);
-        tv_title = findViewById(R.id.tv_title);
-        tv_des = findViewById(R.id.tv_des);
-        cb_status = findViewById(R.id.cb_status);
-        setTitle(title);
+        mTvTitle = findViewById(R.id.tv_title);
+        mTvDes = findViewById(R.id.tv_des);
+        mCbStatus = findViewById(R.id.cb_status);
+        setTitle(mTitle);
     }
 
     public void setTitle(String title){
-        tv_title.setText(title);
+        mTvTitle.setText(title);
     }
 
     public void setDes(String des){
-        tv_des.setText(des);
+        mTvDes.setText(des);
     }
 
     /**
@@ -91,16 +91,16 @@ public class SettingItemView extends RelativeLayout {
      * @return
      */
     public boolean isChecked(){
-        return cb_status.isChecked();
+        return mCbStatus.isChecked();
     }
 
     public void setChecked(boolean isChecked){
-        cb_status.setChecked(isChecked);
+        mCbStatus.setChecked(isChecked);
         //根据选择状态更新版本描述
         if(isChecked){
-            setDes(des_on);
+            setDes(mDesOn);
         }else {
-            setDes(des_off);
+            setDes(mDesOff);
         }
     }
 }
