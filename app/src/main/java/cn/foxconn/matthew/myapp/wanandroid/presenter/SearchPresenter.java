@@ -31,7 +31,7 @@ public class SearchPresenter extends BasePresenter<SearchView,ActivityEvent> {
 
 
     public void getHotKeyData() {
-        mDataModel.getHotKeyList(getProvider(),new BaseRxObserverHelper<List<HotKeyBean>>() {
+        mDataModel.getHotKeyListInActivity(getProvider(),new BaseRxObserverHelper<List<HotKeyBean>>() {
             @Override
             protected void next(List<HotKeyBean> hotKeyBeans) {
                 getView().getHotKeySuccess(hotKeyBeans);

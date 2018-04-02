@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.support.v4.content.ContextCompat;
 
+import java.util.Random;
+
 import cn.foxconn.matthew.myapp.app.App;
 
 /**
@@ -49,6 +51,17 @@ public class UIUtil {
      */
     public static String getString(int resId) {
         return getResource().getString(resId);
+    }
+
+
+    /**
+     * 获取随机颜色代码
+     * @return
+     */
+    public static int getRandomColor(){
+        Random random=new Random();
+        int ranColor = 0xff000000 | random.nextInt(0x00ffffff);
+        return ranColor;
     }
 
 }

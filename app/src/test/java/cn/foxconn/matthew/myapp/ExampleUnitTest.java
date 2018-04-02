@@ -12,11 +12,12 @@ import cn.foxconn.matthew.myapp.wanandroid.bean.pojo.BannerBean;
 import cn.foxconn.matthew.myapp.wanandroid.bean.pojovo.ArticleListVO;
 import cn.foxconn.matthew.myapp.wanandroid.bean.pojovo.TypeTagVO;
 import cn.foxconn.matthew.myapp.wanandroid.helper.interceptor.CustomInterceptor;
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
-import rx.Subscriber;
 
 import static org.junit.Assert.*;
 
@@ -63,7 +64,7 @@ public class ExampleUnitTest {
         Retrofit retrofit = new Retrofit.Builder()
                 .client(builder.build())
                 .baseUrl(BASE_URL)
-                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         WanService movieService = retrofit.create(WanService.class);
@@ -71,14 +72,19 @@ public class ExampleUnitTest {
         if(test){
 
         }else {
-            movieService.getTagData().subscribe(new Subscriber<ResponseData<List<TypeTagVO>>>() {
+            movieService.getTagData().subscribe(new Observer<ResponseData<List<TypeTagVO>>>() {
                 @Override
-                public void onCompleted() {
+                public void onError(Throwable e) {
 
                 }
 
                 @Override
-                public void onError(Throwable e) {
+                public void onComplete() {
+
+                }
+
+                @Override
+                public void onSubscribe(Disposable d) {
 
                 }
 
@@ -87,11 +93,7 @@ public class ExampleUnitTest {
                     System.out.println(listResponseData.toString());
                 }
             });
-            movieService.getHomeBannerList().subscribe(new Subscriber<ResponseData<List<BannerBean>>>() {
-                @Override
-                public void onCompleted() {
-                    System.out.println("finish");
-                }
+            movieService.getHomeBannerList().subscribe(new Observer<ResponseData<List<BannerBean>>>() {
 
                 @Override
                 public void onError(Throwable e) {
@@ -99,18 +101,34 @@ public class ExampleUnitTest {
                 }
 
                 @Override
+                public void onComplete() {
+
+                }
+
+                @Override
+                public void onSubscribe(Disposable d) {
+
+                }
+
+                @Override
                 public void onNext(ResponseData<List<BannerBean>> listResponseData) {
                     System.out.println(listResponseData.toString());
                 }
             });
-            movieService.getHomeAtricleList(5).subscribe(new Subscriber<ResponseData<ArticleListVO>>() {
+            movieService.getHomeArticleList(5).subscribe(new Observer<ResponseData<ArticleListVO>>() {
+
                 @Override
-                public void onCompleted() {
+                public void onError(Throwable e) {
 
                 }
 
                 @Override
-                public void onError(Throwable e) {
+                public void onComplete() {
+
+                }
+
+                @Override
+                public void onSubscribe(Disposable d) {
 
                 }
 

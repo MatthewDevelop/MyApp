@@ -29,9 +29,9 @@ public class ImageLoaderManager {
 
         Glide.with(context)
                 .load(imgUrl)
-                .placeholder(R.mipmap.default_img)
+                .placeholder(R.drawable.default_img)
                 .dontAnimate() //解决圆形图显示占位图问题
-                .error(R.mipmap.default_img)
+                .error(R.drawable.default_img)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(imageView);
     }

@@ -18,7 +18,6 @@ import cn.foxconn.matthew.myapp.wanandroid.helper.RetrofitServiceManager;
 import cn.foxconn.matthew.myapp.wanandroid.helper.BaseRxObserverHelper;
 import cn.foxconn.matthew.myapp.wanandroid.helper.RxResultHelper;
 import cn.foxconn.matthew.myapp.wanandroid.helper.RxSchedulersHelper;
-import io.reactivex.observers.DisposableObserver;
 
 
 /**
@@ -37,12 +36,11 @@ public class DataModelImpl implements DataModel {
 
     @Override
     public void getHomeDataList(int page, LifecycleProvider<FragmentEvent> provider, BaseRxObserverHelper<ArticleListVO> subscriber) {
-        DisposableObserver<ArticleListVO> disposableObserver=subscriber;
-        mWanService.getHomeAtricleList(page)
+        mWanService.getHomeArticleList(page)
                 .compose(RxSchedulersHelper.<ResponseData<ArticleListVO>>defaultTransformer())
                 .compose(RxResultHelper.<ArticleListVO>handleResult())
                 .compose(provider.<ArticleListVO>bindUntilEvent(FragmentEvent.DESTROY))
-                .subscribe(disposableObserver);
+                .subscribe(subscriber);
     }
 
 
@@ -126,7 +124,7 @@ public class DataModelImpl implements DataModel {
 
 
     @Override
-    public void getHotKeyList(LifecycleProvider<ActivityEvent> provider, BaseRxObserverHelper<List<HotKeyBean>> subscriber) {
+    public void getHotKeyListInActivity(LifecycleProvider<ActivityEvent> provider, BaseRxObserverHelper<List<HotKeyBean>> subscriber) {
         mWanService.getHotKeyList()
                 .compose(RxSchedulersHelper.<ResponseData<List<HotKeyBean>>>defaultTransformer())
                 .compose(RxResultHelper.<List<HotKeyBean>>handleResult())
@@ -140,6 +138,17 @@ public class DataModelImpl implements DataModel {
                 .compose(RxSchedulersHelper.<ResponseData<ArticleListVO>>defaultTransformer())
                 .compose(RxResultHelper.<ArticleListVO>handleResult())
                 .compose(provider.<ArticleListVO>bindUntilEvent(ActivityEvent.DESTROY))
+                .subscribe(subscriber);
+    }
+
+
+
+    @Override
+    public void getCommonWebsitList(LifecycleProvider<ActivityEvent> provider, BaseRxObserverHelper<List<HotKeyBean>> subscriber) {
+        mWanService.getCommonWebsiteList()
+                .compose(RxSchedulersHelper.<ResponseData<List<HotKeyBean>>>defaultTransformer())
+                .compose(RxResultHelper.<List<HotKeyBean>>handleResult())
+                .compose(provider.<List<HotKeyBean>>bindUntilEvent(ActivityEvent.DESTROY))
                 .subscribe(subscriber);
     }
 

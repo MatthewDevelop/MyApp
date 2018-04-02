@@ -50,6 +50,7 @@
         </receiver>
 
         <activity android:name=".websocketdemo.WebSocketActivity"></activity>
+        <activity android:name=".wanandroid.activity.HotActivity" />
     </application>
 
 </manifest>

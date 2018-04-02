@@ -31,7 +31,7 @@ public interface WanService {
      * @return
      */
     @GET("article/list/{page}/json")
-    Observable<ResponseData<ArticleListVO>> getHomeAtricleList(@Path("page") int page);
+    Observable<ResponseData<ArticleListVO>> getHomeArticleList(@Path("page") int page);
 
     /**
      * 获取首页轮播图信息
@@ -143,4 +143,12 @@ public interface WanService {
     @FormUrlEncoded
     @POST("article/query/{page}/json")
     Observable<ResponseData<ArticleListVO>> getSearchData(@Path("page") int page, @Field("k") String keyword);
+
+    /**
+     * 获取友链列表
+     *
+     * @return
+     */
+    @GET("friend/json")
+    Observable<ResponseData<List<HotKeyBean>>> getCommonWebsiteList();
 }

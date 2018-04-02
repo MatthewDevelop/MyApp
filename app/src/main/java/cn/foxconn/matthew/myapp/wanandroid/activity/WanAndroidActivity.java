@@ -106,7 +106,7 @@ public class WanAndroidActivity extends BaseActivity {
         });
     }
 
-    @OnClick({R.id.ll_home, R.id.ll_type, R.id.ll_user, R.id.ft_search})
+    @OnClick({R.id.ll_home, R.id.ll_type, R.id.ll_user, R.id.ft_search,R.id.ft_hot})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.ll_home:
@@ -123,6 +123,9 @@ public class WanAndroidActivity extends BaseActivity {
                 break;
             case R.id.ft_search:
                 startActivity(new Intent(this,SearchActivity.class));
+                break;
+            case R.id.ft_hot:
+                startActivity(new Intent(this,HotActivity.class));
                 break;
             default:
                 break;

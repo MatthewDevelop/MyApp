@@ -8,18 +8,28 @@ package cn.foxconn.matthew.myapp.wanandroid.bean.pojo;
 
 public class HotKeyBean {
     /**
+     * icon : null
      * id : 6
      * name : 面试
      * link : null
      * visible : 1
      * order : 1
      */
-
+    private String icon;
     private int id;
     private String name;
     private String link;
     private int visible;
     private int order;
+
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
+    }
+
 
     public int getId() {
         return id;

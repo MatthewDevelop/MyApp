@@ -13,8 +13,7 @@
     <cn.foxconn.matthew.myapp.wanandroid.widget.FontTextView
         android:id="@+id/ft_hot"
         style="@style/top_bar_icon_style"
-        android:text="@string/ic_hot"
-        android:visibility="invisible"/>
+        android:text="@string/ic_hot"/>
 
     <cn.foxconn.matthew.myapp.wanandroid.widget.FontTextView
         android:id="@+id/ft_search"
