@@ -1,5 +1,6 @@
 package cn.foxconn.matthew.myapp.wanandroid.fragment;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.view.View;
@@ -39,6 +40,14 @@ public class UserFragment extends BaseFragment {
     CardView mCvLogout;
     @BindView(R.id.tv_logout)
     TextView mTvLogout;
+
+    private WanAndroidActivity mActivity;
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        mActivity= (WanAndroidActivity) activity;
+    }
 
 
     @Override
@@ -86,6 +95,7 @@ public class UserFragment extends BaseFragment {
                     ToastUtil.showShort(getContext(),"已登出");
                     mTvUserName.setText("暂未登录");
                     mTvLogout.setText("点击登录");
+                    //退出登录清除cookie
                     RetrofitServiceManager.clearCookie();
                     refreshData();
                 }
@@ -99,7 +109,7 @@ public class UserFragment extends BaseFragment {
      * 登出刷新数据
      */
     public void refreshData(){
-        ((HomeFragment)WanAndroidActivity.getFragments().get(0)).onRefresh();
-        ((TypeFragment)WanAndroidActivity.getFragments().get(1)).onRefresh();
+        ((HomeFragment)mActivity.getFragments().get(0)).onRefresh();
+        ((TypeFragment)mActivity.getFragments().get(1)).onRefresh();
     }
 }

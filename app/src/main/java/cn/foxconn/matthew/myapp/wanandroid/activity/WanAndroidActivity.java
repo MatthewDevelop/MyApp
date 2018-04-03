@@ -2,6 +2,7 @@ package cn.foxconn.matthew.myapp.wanandroid.activity;
 
 import android.content.Intent;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -27,6 +28,7 @@ import cn.foxconn.matthew.myapp.wanandroid.widget.FontTextView;
  */
 
 public class WanAndroidActivity extends BaseActivity {
+    private static final String TAG = "WanAndroidActivity";
     @BindView(R.id.ft_search)
     FontTextView mFtSearch;
     @BindView(R.id.ft_hot)
@@ -52,7 +54,7 @@ public class WanAndroidActivity extends BaseActivity {
     @BindView(R.id.viewPager)
     ViewPager mViewPager;
 
-    private static List<android.support.v4.app.Fragment> mFragments = new ArrayList<>();
+    private List<android.support.v4.app.Fragment> mFragments;
 
     @Override
     protected int getContentResId() {
@@ -62,6 +64,12 @@ public class WanAndroidActivity extends BaseActivity {
     @Override
     protected BasePresenter createPresenter() {
         return null;
+    }
+
+    @Override
+    protected void init() {
+        super.init();
+        mFragments = new ArrayList<>();
     }
 
     @Override
@@ -79,11 +87,12 @@ public class WanAndroidActivity extends BaseActivity {
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
+                Log.e(TAG, "onPageScrolled: ");
             }
 
             @Override
             public void onPageSelected(int position) {
+                Log.e(TAG, "onPageSelected: " + position);
                 switch (position) {
                     case 0:
                         setTabColor(mFtHome, mTvHome);
@@ -101,12 +110,12 @@ public class WanAndroidActivity extends BaseActivity {
 
             @Override
             public void onPageScrollStateChanged(int state) {
-
+                Log.e(TAG, "onPageScrollStateChanged: " + state);
             }
         });
     }
 
-    @OnClick({R.id.ll_home, R.id.ll_type, R.id.ll_user, R.id.ft_search,R.id.ft_hot})
+    @OnClick({R.id.ll_home, R.id.ll_type, R.id.ll_user, R.id.ft_search, R.id.ft_hot})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.ll_home:
@@ -122,10 +131,10 @@ public class WanAndroidActivity extends BaseActivity {
                 setTabColor(mFtUser, mTvUser);
                 break;
             case R.id.ft_search:
-                startActivity(new Intent(this,SearchActivity.class));
+                startActivity(new Intent(this, SearchActivity.class));
                 break;
             case R.id.ft_hot:
-                startActivity(new Intent(this,HotActivity.class));
+                startActivity(new Intent(this, HotActivity.class));
                 break;
             default:
                 break;
@@ -150,7 +159,7 @@ public class WanAndroidActivity extends BaseActivity {
 
     }
 
-    public static List<android.support.v4.app.Fragment> getFragments(){
+    public List<android.support.v4.app.Fragment> getFragments() {
         return mFragments;
     }
 }
