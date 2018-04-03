@@ -1,5 +1,6 @@
 package cn.foxconn.matthew.myapp.wanandroid.activity;
 
+import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
@@ -19,6 +20,8 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.OnClick;
 import cn.foxconn.matthew.myapp.R;
+import cn.foxconn.matthew.myapp.app.AppConst;
+import cn.foxconn.matthew.myapp.utils.UIUtil;
 import cn.foxconn.matthew.myapp.wanandroid.bean.pojo.ArticleBean;
 import cn.foxconn.matthew.myapp.wanandroid.bean.pojo.HotKeyBean;
 import cn.foxconn.matthew.myapp.wanandroid.adapter.ArticleListAdapter;
@@ -54,6 +57,9 @@ public class SearchActivity
 
     CompositeDisposable mCompositeDisposable;
 
+    private boolean isHotKeyExist = false;
+    private String hotKey;
+
     @Override
     protected int getContentResId() {
         return R.layout.activity_search;
@@ -67,14 +73,17 @@ public class SearchActivity
     @Override
     protected void init() {
         super.init();
-        mCompositeDisposable=new CompositeDisposable();
+        Intent intent=getIntent();
+        isHotKeyExist=intent.getBooleanExtra(AppConst.SEARCH_KEY,false);
+        hotKey=intent.getStringExtra(AppConst.CONTENT_TITLE_KEY);
+        mCompositeDisposable = new CompositeDisposable();
     }
 
     @Override
     protected void initView() {
         super.initView();
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mAdapter = new ArticleListAdapter(this, null,mCompositeDisposable);
+        mAdapter = new ArticleListAdapter(this, null, mCompositeDisposable);
         mRecyclerView.setAdapter(mAdapter);
         mAdapter.setOnLoadMoreListener(this, mRecyclerView);
         mPresenter.getHotKeyData();
@@ -83,7 +92,7 @@ public class SearchActivity
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if(mCompositeDisposable!=null){
+        if (mCompositeDisposable != null) {
             mCompositeDisposable.clear();
         }
     }
@@ -107,15 +116,29 @@ public class SearchActivity
 
             @Override
             public void afterTextChanged(Editable s) {
-                String keyword= mEtSearch.getText().toString();
-                if(!TextUtils.isEmpty(keyword)) {
+                String keyword = mEtSearch.getText().toString();
+                if (!TextUtils.isEmpty(keyword)) {
                     mPresenter.getSearchData(keyword);
-                }else {
+                } else {
                     mLlHotKey.setVisibility(View.VISIBLE);
                     mRecyclerView.setVisibility(View.GONE);
                 }
             }
         });
+    }
+
+    @Override
+    protected void initData() {
+        super.initData();
+        if(isHotKeyExist){
+            mEtSearch.setText(hotKey);
+            // 将光标移至字符串尾部
+            CharSequence charSequence = mEtSearch.getText();
+            if (charSequence instanceof Spannable) {
+                Spannable spanText = (Spannable) charSequence;
+                Selection.setSelection(spanText, charSequence.length());
+            }
+        }
     }
 
     @OnClick({R.id.ft_clear, R.id.tv_cancel})
@@ -135,7 +158,7 @@ public class SearchActivity
 
     @Override
     public void onLoadMoreRequested() {
-        if(!TextUtils.isEmpty(mEtSearch.getText().toString())){
+        if (!TextUtils.isEmpty(mEtSearch.getText().toString())) {
             mPresenter.getMoreData(mEtSearch.getText().toString());
         }
     }
@@ -147,6 +170,7 @@ public class SearchActivity
             View view = LinearLayout.inflate(this, R.layout.item_hot_key, null);
             TextView tvHotKey = view.findViewById(R.id.tv_hot_key);
             tvHotKey.setText(data.get(i).getName());
+            tvHotKey.setTextColor(UIUtil.getRandomColor());
             mHotKey.addView(view);
             final int finalI = i;
             view.setOnClickListener(new View.OnClickListener() {
@@ -167,15 +191,15 @@ public class SearchActivity
 
     @Override
     public void getHotKeyFail(String message) {
-        ToastUtil.showShort(this,message);
+        ToastUtil.showShort(this, message);
     }
 
     @Override
     public void searchDataSuccess(List<ArticleBean> data) {
-        if(data==null||data.size()==0){
+        if (data == null || data.size() == 0) {
             mLlHotKey.setVisibility(View.VISIBLE);
             mRecyclerView.setVisibility(View.GONE);
-        }else {
+        } else {
             mLlHotKey.setVisibility(View.GONE);
             mRecyclerView.setVisibility(View.VISIBLE);
         }
@@ -184,15 +208,15 @@ public class SearchActivity
 
     @Override
     public void searchDataFail(String message) {
-        ToastUtil.showShort(this,message);
+        ToastUtil.showShort(this, message);
     }
 
     @Override
     public void loadMoreDataSuccess(List<ArticleBean> data) {
-        if(data.size()!=0){
+        if (data.size() != 0) {
             mAdapter.addData(data);
             mAdapter.loadMoreComplete();
-        }else {
+        } else {
             mAdapter.loadMoreEnd();
         }
     }
@@ -200,6 +224,6 @@ public class SearchActivity
     @Override
     public void loadMoreDataFail(String message) {
         mAdapter.loadMoreComplete();
-        ToastUtil.showShort(this,message);
+        ToastUtil.showShort(this, message);
     }
 }

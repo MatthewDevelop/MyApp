@@ -1,7 +1,9 @@
 package cn.foxconn.matthew.myapp.wanandroid.activity;
 
+import android.content.Intent;
 import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
@@ -15,6 +17,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import cn.foxconn.matthew.myapp.R;
+import cn.foxconn.matthew.myapp.app.AppConst;
 import cn.foxconn.matthew.myapp.utils.UIUtil;
 import cn.foxconn.matthew.myapp.wanandroid.base.BaseActivity;
 import cn.foxconn.matthew.myapp.wanandroid.bean.pojo.HotKeyBean;
@@ -29,7 +32,7 @@ import cn.foxconn.matthew.myapp.wanandroid.view.HotView;
 
 public class HotActivity extends BaseActivity<HotView, HotPresenter>
         implements HotView, SwipeRefreshLayout.OnRefreshListener {
-
+    private static final String TAG = "HotActivity";
     @BindView(R.id.swipeRefreshLayout)
     SwipeRefreshLayout mSwipeRefreshLayout;
     @BindView(R.id.tfl_hot_search)
@@ -80,10 +83,32 @@ public class HotActivity extends BaseActivity<HotView, HotPresenter>
     protected void initListener() {
         super.initListener();
         mSwipeRefreshLayout.setOnRefreshListener(this);
+        mTflHotSearch.setOnTagClickListener(new TagFlowLayout.OnTagClickListener() {
+            @Override
+            public boolean onTagClick(View view, int position, FlowLayout parent) {
+                if(mHotKeyList.size()!=0){
+                    Intent intent=new Intent(HotActivity.this,SearchActivity.class);
+                    intent.putExtra(AppConst.SEARCH_KEY,true);
+                    intent.putExtra(AppConst.CONTENT_TITLE_KEY,mHotKeyList.get(position).getName());
+                    startActivity(intent);
+                }
+                return true;
+            }
+        });
+        mTflCommonWebsit.setOnTagClickListener(new TagFlowLayout.OnTagClickListener() {
+            @Override
+            public boolean onTagClick(View view, int position, FlowLayout parent) {
+                if(mCommomWebsiteList.size()!=0) {
+                    WebViewActivity.runActivity(HotActivity.this,mCommomWebsiteList.get(position).getLink() );
+                }
+                return true;
+            }
+        });
     }
 
     @Override
     public void onRefresh() {
+        Log.e(TAG, "onRefresh: ");
         mPresenter.getHotKeyList();
         mPresenter.getCommonWebSiteList();
     }

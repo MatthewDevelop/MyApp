@@ -47,8 +47,8 @@ public abstract class BaseActivity<V, T extends BasePresenter<V, ActivityEvent>>
         //excuteStatesBar();
 
         initView();
-        initData();
         initListener();
+        initData();
     }
 
     @Override

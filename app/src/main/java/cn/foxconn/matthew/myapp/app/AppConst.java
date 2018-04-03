@@ -15,8 +15,13 @@ public class AppConst {
     public static final String BASE_URL = "http://wanandroid.com/";
 
     public static final String IS_LOGIN_KEY = "isLogin";
+
     public static final String USERNAME_KEY = "userName";
 
-    public static final boolean DEBUG=true;
+    public static final boolean DEBUG = true;
+
+    public static final String SEARCH_KEY = "search";
+
+    public static final String CONTENT_TITLE_KEY="title";
 
 }
