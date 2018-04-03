@@ -22,17 +22,17 @@ import cn.foxconn.matthew.myapp.wanandroid.view.CommonWebView;
  * @email:guocheng0816@163.com
  */
 
-public class WebViewPresenter extends BasePresenter<CommonWebView,ActivityEvent> {
+public class WebViewPresenter extends BasePresenter<CommonWebView, ActivityEvent> {
 
     public WebViewPresenter(LifecycleProvider provider) {
         super(provider);
     }
 
-    public void setWebView(WebView webView, String url){
-        final CommonWebView commonWebView=getView();
-        final ProgressBar progressBar=getView().getProgressBar();
+    public void setWebView(WebView webView, String url) {
+        final CommonWebView commonWebView = getView();
+        final ProgressBar progressBar = getView().getProgressBar();
         //TODO WebView的设置有待学习
-        WebSettings webSettings=webView.getSettings();
+        WebSettings webSettings = webView.getSettings();
         //设置JavaScript可用
         webSettings.setJavaScriptEnabled(true);
         //设置屏幕适应
@@ -60,11 +60,14 @@ public class WebViewPresenter extends BasePresenter<CommonWebView,ActivityEvent>
         //开启Dom Storage功能
         webSettings.setDomStorageEnabled(true);
 
-        webView.setWebViewClient(new WebViewClient(){
+        webView.setWebViewClient(new WebViewClient() {
+            String startUrl;
+
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
                 super.onPageStarted(view, url, favicon);
                 progressBar.setVisibility(View.VISIBLE);
+                startUrl = url;
             }
 
             @Override
@@ -80,15 +83,18 @@ public class WebViewPresenter extends BasePresenter<CommonWebView,ActivityEvent>
              * @return
              */
             //TODO shouldOverrideUrlLoading(WebView view, String url)和 shouldOverrideUrlLoading(WebView view, WebResourceRequest request)区别
-
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                view.loadUrl(url);
-                return super.shouldOverrideUrlLoading(view, url);
+                if (startUrl != null && url.equals(startUrl)) {
+                    view.loadUrl(url);
+                } else {
+                    return super.shouldOverrideUrlLoading(view, url);
+                }
+                return true;
             }
         });
 
-        webView.setWebChromeClient(new WebChromeClient(){
+        webView.setWebChromeClient(new WebChromeClient() {
             @Override
             public void onProgressChanged(WebView view, int newProgress) {
                 super.onProgressChanged(view, newProgress);
