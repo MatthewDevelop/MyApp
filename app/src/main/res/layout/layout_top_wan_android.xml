@@ -2,24 +2,28 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="50dp"
-    android:orientation="horizontal"
-    android:background="@color/main">
+    android:background="@color/main"
+    android:orientation="horizontal">
+
+    <cn.foxconn.matthew.myapp.wanandroid.widget.FontTextView
+        android:id="@+id/ft_refresh"
+        style="@style/top_bar_icon_style"
+        android:text="@string/ic_refresh" />
 
     <View
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"/>
+        android:layout_weight="1" />
 
     <cn.foxconn.matthew.myapp.wanandroid.widget.FontTextView
         android:id="@+id/ft_hot"
         style="@style/top_bar_icon_style"
-        android:text="@string/ic_hot"/>
+        android:text="@string/ic_hot" />
 
     <cn.foxconn.matthew.myapp.wanandroid.widget.FontTextView
         android:id="@+id/ft_search"
         style="@style/top_bar_icon_style"
-        android:text="@string/ic_search"
-        />
+        android:text="@string/ic_search" />
 
 
 </LinearLayout>

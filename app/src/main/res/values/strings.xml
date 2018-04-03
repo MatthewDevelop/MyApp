@@ -2,20 +2,21 @@
     <string name="app_name">WanAndroid</string>
 
     <!--iconfont字体图标-->
-    <string name="tab_left">&#xe620; </string> <!--左对齐-->
-    <string name="tab_right">&#xe618; </string> <!--右对齐-->
-    <string name="ic_hot">&#xe66d; </string> <!--火-->
-    <string name="ic_return">&#xe6e5; </string> <!--返回-->
-    <string name="ic_share">&#xe66c; </string> <!--分享-->
-    <string name="ic_search">&#xe6a8; </string> <!--搜索-->
-    <string name="ic_collect_nor">&#xe63c; </string> <!--未收藏-->
-    <string name="ic_collect_sel">&#xe63b; </string> <!--已收藏-->
-    <string name="ic_about">&#xe7ca; </string> <!--关于-->
-    <string name="ic_close">&#xe80b; </string> <!--关闭的叉-->
-    <string name="ic_home">&#xe611; </string> <!--首页-->
-    <string name="ic_type">&#xe654; </string> <!--分类-->
+    <string name="tab_left">&#xe73e; </string> <!--左对齐-->
+    <string name="tab_right">&#xe629; </string> <!--右对齐-->
+    <string name="ic_hot">&#xe7de; </string> <!--火-->
+    <string name="ic_return">&#xe643; </string> <!--返回-->
+    <string name="ic_share">&#xe624; </string> <!--分享-->
+    <string name="ic_search">&#xe7a8; </string> <!--搜索-->
+    <string name="ic_collect_nor">&#xe621; </string> <!--未收藏-->
+    <string name="ic_collect_sel">&#xe612; </string> <!--已收藏-->
+    <string name="ic_about">&#xe608; </string> <!--关于-->
+    <string name="ic_close">&#xe633; </string> <!--关闭的叉-->
+    <string name="ic_home">&#xe635; </string> <!--首页-->
+    <string name="ic_type">&#xe606; </string> <!--分类-->
     <string name="ic_user">&#xe652; </string> <!--用户-->
-    <string name="ic_more">&#xe62b; </string> <!--更多-->
+    <string name="ic_more">&#xe66f; </string> <!--更多-->
+    <string name="ic_refresh">&#xe600; </string> <!--刷新-->
 
     <string name="action_share">分享</string>
     <string name="copy_link">复制链接</string>

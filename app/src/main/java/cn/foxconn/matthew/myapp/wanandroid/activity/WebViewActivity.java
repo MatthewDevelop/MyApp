@@ -154,6 +154,13 @@ public class WebViewActivity
                         .showAsDropDown(mFtMore, -430, -10);
 
                 //设置点击事件
+                popView.findViewById(R.id.tv_refresh).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        mWebView.reload();
+                        mMorePopWindow.dissmiss();
+                    }
+                });
                 //分享
                 popView.findViewById(R.id.tv_share).setOnClickListener(new View.OnClickListener() {
                     @Override

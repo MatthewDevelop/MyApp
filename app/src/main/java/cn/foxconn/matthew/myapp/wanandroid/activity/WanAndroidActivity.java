@@ -28,11 +28,12 @@ import cn.foxconn.matthew.myapp.wanandroid.widget.FontTextView;
  */
 
 public class WanAndroidActivity extends BaseActivity {
-    private static final String TAG = "WanAndroidActivity";
     @BindView(R.id.ft_search)
     FontTextView mFtSearch;
     @BindView(R.id.ft_hot)
     FontTextView mFtHot;
+    @BindView(R.id.ft_refresh)
+    FontTextView mFtRefresh;
     @BindView(R.id.ll_home)
     LinearLayout mLlHome;
     @BindView(R.id.ft_home)
@@ -87,12 +88,10 @@ public class WanAndroidActivity extends BaseActivity {
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                Log.e(TAG, "onPageScrolled: ");
             }
 
             @Override
             public void onPageSelected(int position) {
-                Log.e(TAG, "onPageSelected: " + position);
                 switch (position) {
                     case 0:
                         setTabColor(mFtHome, mTvHome);
@@ -110,12 +109,11 @@ public class WanAndroidActivity extends BaseActivity {
 
             @Override
             public void onPageScrollStateChanged(int state) {
-                Log.e(TAG, "onPageScrollStateChanged: " + state);
             }
         });
     }
 
-    @OnClick({R.id.ll_home, R.id.ll_type, R.id.ll_user, R.id.ft_search, R.id.ft_hot})
+    @OnClick({R.id.ll_home, R.id.ll_type, R.id.ll_user, R.id.ft_search, R.id.ft_hot, R.id.ft_refresh})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.ll_home:
@@ -135,6 +133,21 @@ public class WanAndroidActivity extends BaseActivity {
                 break;
             case R.id.ft_hot:
                 startActivity(new Intent(this, HotActivity.class));
+                break;
+            case R.id.ft_refresh:
+                switch (mViewPager.getCurrentItem()) {
+                    case 0:
+                        ((HomeFragment) mFragments.get(0)).onRefresh();
+                        break;
+                    case 1:
+                        ((TypeFragment) mFragments.get(1)).onRefresh();
+                        break;
+                    case 2:
+                        ((UserFragment) mFragments.get(2)).refreshData();
+                        break;
+                    default:
+                        break;
+                }
                 break;
             default:
                 break;
