@@ -38,7 +38,7 @@ public class HomePresenter extends BasePresenter<HomeView,
      */
     public void getRefreshData() {
         mCurrentPage = 0;
-        mDataModel.getHomeDataList(mCurrentPage, getProvider(),new BaseRxObserverHelper<ArticleListVO>() {
+        mDataModel.getHomeDataList(mCurrentPage, getProvider(), new BaseRxObserverHelper<ArticleListVO>() {
 
             @Override
             protected void completed() {
@@ -70,7 +70,7 @@ public class HomePresenter extends BasePresenter<HomeView,
      * 刷新首页轮播图
      */
     public void getBannerData() {
-        mDataModel.getBannerData(getProvider(),new BaseRxObserverHelper<List<BannerBean>>() {
+        mDataModel.getBannerData(getProvider(), new BaseRxObserverHelper<List<BannerBean>>() {
             @Override
             protected void next(List<BannerBean> bannerBeans) {
                 getView().getBannerDataSuccess(bannerBeans);
@@ -89,7 +89,7 @@ public class HomePresenter extends BasePresenter<HomeView,
      */
     public void getMoreData() {
         mCurrentPage = mCurrentPage + 1;
-        mDataModel.getHomeDataList(mCurrentPage, getProvider(),new BaseRxObserverHelper<ArticleListVO>() {
+        mDataModel.getHomeDataList(mCurrentPage, getProvider(), new BaseRxObserverHelper<ArticleListVO>() {
             @Override
             protected void next(ArticleListVO articleListVO) {
                 getView().getMoreDataSuccess(articleListVO.getDatas());

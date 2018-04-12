@@ -1,4 +1,4 @@
-package cn.foxconn.matthew.myapp.wanandroid.helper;
+package cn.foxconn.matthew.myapp.helper;
 
 import com.franmontiel.persistentcookiejar.ClearableCookieJar;
 import com.franmontiel.persistentcookiejar.PersistentCookieJar;
@@ -15,8 +15,6 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-import static cn.foxconn.matthew.myapp.app.AppConst.BASE_URL;
-
 /**
  * @author:Matthew
  * @date:2018/3/3
@@ -29,7 +27,7 @@ public class RetrofitServiceManager {
     private Retrofit mRetrofit;
     private static ClearableCookieJar mCookieJar = null;
 
-    private RetrofitServiceManager() {
+    private RetrofitServiceManager(String baseUrl) {
         OkHttpClient.Builder builder=new OkHttpClient.Builder();
         builder.connectTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS);
         builder.readTimeout(DEFAULT_READ_TIMEOUT,TimeUnit.SECONDS);
@@ -50,7 +48,7 @@ public class RetrofitServiceManager {
         //创建Retrofit
         mRetrofit=new Retrofit.Builder()
                 .client(builder.build())
-                .baseUrl(BASE_URL)
+                .baseUrl(baseUrl)
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
@@ -63,16 +61,16 @@ public class RetrofitServiceManager {
     }
 
 
-    private static class SingletonHolder{
-        private static final RetrofitServiceManager MANAGER =new RetrofitServiceManager();
-    }
+//    private static class SingletonHolder{
+//        private static final RetrofitServiceManager MANAGER =new RetrofitServiceManager();
+//    }
 
     /**
      * 获取RetrofitServiceManager
      * @return
      */
-    public static RetrofitServiceManager getInstance(){
-        return SingletonHolder.MANAGER;
+    public static RetrofitServiceManager getInstance(String baseUrl){
+        return new RetrofitServiceManager(baseUrl);
     }
 
     public <T> T create(Class<T> service){

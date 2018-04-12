@@ -11,7 +11,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import cn.foxconn.matthew.myapp.R;
 import cn.foxconn.matthew.myapp.app.AppConst;
-import cn.foxconn.matthew.myapp.wanandroid.helper.RetrofitServiceManager;
+import cn.foxconn.matthew.myapp.helper.RetrofitServiceManager;
 import cn.foxconn.matthew.myapp.wanandroid.activity.CollectActivity;
 import cn.foxconn.matthew.myapp.wanandroid.activity.LoginActivity;
 import cn.foxconn.matthew.myapp.wanandroid.activity.WanAndroidActivity;

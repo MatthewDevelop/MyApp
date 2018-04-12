@@ -57,27 +57,6 @@ public class WebViewActivity
     private WebView mWebView;
     private CustomPopWindow mMorePopWindow;
 
-
-    @Override
-    protected int getContentResId() {
-        return R.layout.activity_webview;
-    }
-
-    @Override
-    protected WebViewPresenter createPresenter() {
-        return new WebViewPresenter(this);
-    }
-
-    @Override
-    public ProgressBar getProgressBar() {
-        return mProgressBar;
-    }
-
-    @Override
-    public void setTitle(String title) {
-        mTvTitle.setText(title);
-    }
-
     /**
      * 启动Activity
      *
@@ -91,16 +70,13 @@ public class WebViewActivity
     }
 
     @Override
-    protected void init() {
-        super.init();
-        url = getIntent().getStringExtra(WEB_URL);
+    public ProgressBar getProgressBar() {
+        return mProgressBar;
     }
 
     @Override
-    protected void initView() {
-        super.initView();
-        mWebViewFragment = new WebViewFragment();
-        ActivityUtil.addFragmentToActivity(getSupportFragmentManager(), mWebViewFragment, R.id.webView_container);
+    public void setTitle(String title) {
+        mTvTitle.setText(title);
     }
 
     @Override
@@ -115,6 +91,29 @@ public class WebViewActivity
     protected void onDestroy() {
         super.onDestroy();
         mWebView.destroy();
+    }
+
+    @Override
+    protected int getContentResId() {
+        return R.layout.activity_webview;
+    }
+
+    @Override
+    protected WebViewPresenter createPresenter() {
+        return new WebViewPresenter(this);
+    }
+
+    @Override
+    protected void initView() {
+        super.initView();
+        mWebViewFragment = new WebViewFragment();
+        ActivityUtil.addFragmentToActivity(getSupportFragmentManager(), mWebViewFragment, R.id.webView_container);
+    }
+
+    @Override
+    protected void init() {
+        super.init();
+        url = getIntent().getStringExtra(WEB_URL);
     }
 
     /**

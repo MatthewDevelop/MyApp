@@ -1,0 +1,1596 @@
+{
+  "rows": [
+    {
+      "company_name": "AOL澳通速递",
+      "company_code": "aolau"
+    },
+    {
+      "company_name": "A2U速递",
+      "company_code": "a2u"
+    },
+    {
+      "company_name": "AAE快递",
+      "company_code": "aae"
+    },
+    {
+      "company_name": "安能物流",
+      "company_code": "annengwuliu"
+    },
+    {
+      "company_name": "安迅物流",
+      "company_code": "anxl"
+    },
+    {
+      "company_name": "澳邮中国快运",
+      "company_code": "auexpress"
+    },
+    {
+      "company_name": "安鲜达",
+      "company_code": "exfresh"
+    },
+    {
+      "company_name": "安捷物流",
+      "company_code": "anjie88"
+    },
+    {
+      "company_name": "BCWELT",
+      "company_code": "bcwelt"
+    },
+    {
+      "company_name": "百世快运",
+      "company_code": "baishiwuliu"
+    },
+    {
+      "company_name": "百世快递",
+      "company_code": "huitongkuaidi"
+    },
+    {
+      "company_name": "包裹/平邮/挂号信",
+      "company_code": "youzhengguonei"
+    },
+    {
+      "company_name": "百福东方物流",
+      "company_code": "baifudongfang"
+    },
+    {
+      "company_name": "邦送物流",
+      "company_code": "bangsongwuliu"
+    },
+    {
+      "company_name": "北青小红帽",
+      "company_code": "xiaohongmao"
+    },
+    {
+      "company_name": "宝凯物流",
+      "company_code": "lbbk"
+    },
+    {
+      "company_name": "百千诚物流",
+      "company_code": "bqcwl"
+    },
+    {
+      "company_name": "博源恒通",
+      "company_code": "byht"
+    },
+    {
+      "company_name": "百成大达物流",
+      "company_code": "idada"
+    },
+    {
+      "company_name": "百腾物流",
+      "company_code": "baitengwuliu"
+    },
+    {
+      "company_name": "巴伦支快递",
+      "company_code": "balunzhi"
+    },
+    {
+      "company_name": "笨鸟海淘",
+      "company_code": "birdex"
+    },
+    {
+      "company_name": "百事亨通",
+      "company_code": "bsht"
+    },
+    {
+      "company_name": "奔腾物流",
+      "company_code": "benteng"
+    },
+    {
+      "company_name": "布谷鸟速递",
+      "company_code": "cuckooexpess"
+    },
+    {
+      "company_name": "邦工快运",
+      "company_code": "bgky100"
+    },
+    {
+      "company_name": "堡昕德速递",
+      "company_code": "bosind"
+    },
+    {
+      "company_name": "斑马物联网",
+      "company_code": "banma"
+    },
+    {
+      "company_name": "CE易欧通国际速递",
+      "company_code": "cloudexpress"
+    },
+    {
+      "company_name": "COE（东方快递）",
+      "company_code": "coe"
+    },
+    {
+      "company_name": "城市100",
+      "company_code": "city100"
+    },
+    {
+      "company_name": "城际速递",
+      "company_code": "chengjisudi"
+    },
+    {
+      "company_name": "成都立即送",
+      "company_code": "lijisong"
+    },
+    {
+      "company_name": "出口易",
+      "company_code": "chukou1"
+    },
+    {
+      "company_name": "晟邦物流",
+      "company_code": "nanjingshengbang"
+    },
+    {
+      "company_name": "程光快递",
+      "company_code": "flyway"
+    },
+    {
+      "company_name": "传喜物流",
+      "company_code": "chuanxiwuliu"
+    },
+    {
+      "company_name": "钏博物流",
+      "company_code": "cbo56"
+    },
+    {
+      "company_name": "城铁物流",
+      "company_code": "cex"
+    },
+    {
+      "company_name": "DHL中国",
+      "company_code": "dhl"
+    },
+    {
+      "company_name": "DHL国际",
+      "company_code": "dhlen"
+    },
+    {
+      "company_name": "DHL德国",
+      "company_code": "dhlde"
+    },
+    {
+      "company_name": "德邦",
+      "company_code": "debangwuliu"
+    },
+    {
+      "company_name": "大田物流",
+      "company_code": "datianwuliu"
+    },
+    {
+      "company_name": "东方快递",
+      "company_code": "coe"
+    },
+    {
+      "company_name": "递四方",
+      "company_code": "disifang"
+    },
+    {
+      "company_name": "大洋物流",
+      "company_code": "dayangwuliu"
+    },
+    {
+      "company_name": "店通快递",
+      "company_code": "diantongkuaidi"
+    },
+    {
+      "company_name": "德创物流",
+      "company_code": "dechuangwuliu"
+    },
+    {
+      "company_name": "东红物流",
+      "company_code": "donghong"
+    },
+    {
+      "company_name": "D速物流",
+      "company_code": "dsukuaidi"
+    },
+    {
+      "company_name": "东瀚物流",
+      "company_code": "donghanwl"
+    },
+    {
+      "company_name": "达方物流",
+      "company_code": "dfpost"
+    },
+    {
+      "company_name": "东骏快捷物流",
+      "company_code": "dongjun"
+    },
+    {
+      "company_name": "叮咚澳洲转运",
+      "company_code": "dindon"
+    },
+    {
+      "company_name": "大众佐川急便",
+      "company_code": "dazhong"
+    },
+    {
+      "company_name": "德方物流",
+      "company_code": "ahdf"
+    },
+    {
+      "company_name": "德中快递",
+      "company_code": "decnlh"
+    },
+    {
+      "company_name": "德坤供应链",
+      "company_code": "dekuncn"
+    },
+    {
+      "company_name": "达速物流",
+      "company_code": "dasu"
+    },
+    {
+      "company_name": "德豪驿",
+      "company_code": "dehaoyi"
+    },
+    {
+      "company_name": "DHL Paket",
+      "company_code": "dhlpaket"
+    },
+    {
+      "company_name": "德国优拜物流",
+      "company_code": "ubuy"
+    },
+    {
+      "company_name": "德国雄鹰速递",
+      "company_code": "adlerlogi"
+    },
+    {
+      "company_name": "德国云快递",
+      "company_code": "yunexpress"
+    },
+    {
+      "company_name": "EU-EXPRESS",
+      "company_code": "euexpress"
+    },
+    {
+      "company_name": "EMS快递查询",
+      "company_code": "ems"
+    },
+    {
+      "company_name": "EMS国际快递查询",
+      "company_code": "emsguoji"
+    },
+    {
+      "company_name": "俄顺达",
+      "company_code": "eshunda"
+    },
+    {
+      "company_name": "EWE全球快递",
+      "company_code": "ewe"
+    },
+    {
+      "company_name": "FedEx快递查询",
+      "company_code": "fedex"
+    },
+    {
+      "company_name": "FedEx美国",
+      "company_code": "fedexus"
+    },
+    {
+      "company_name": "FedEx英国",
+      "company_code": "fedexuk"
+    },
+    {
+      "company_name": "FOX国际速递",
+      "company_code": "fox"
+    },
+    {
+      "company_name": "凡客如风达",
+      "company_code": "rufengda"
+    },
+    {
+      "company_name": "飞康达物流",
+      "company_code": "feikangda"
+    },
+    {
+      "company_name": "飞豹快递",
+      "company_code": "feibaokuaidi"
+    },
+    {
+      "company_name": "飞狐快递",
+      "company_code": "feihukuaidi"
+    },
+    {
+      "company_name": "凡宇速递",
+      "company_code": "fanyukuaidi"
+    },
+    {
+      "company_name": "颿达国际快递",
+      "company_code": "fandaguoji"
+    },
+    {
+      "company_name": "飞远配送",
+      "company_code": "feiyuanvipshop"
+    },
+    {
+      "company_name": "飞鹰物流",
+      "company_code": "hnfy"
+    },
+    {
+      "company_name": "风行天下",
+      "company_code": "fengxingtianxia"
+    },
+    {
+      "company_name": "飞力士物流",
+      "company_code": "flysman"
+    },
+    {
+      "company_name": "飞邦快递",
+      "company_code": "fbkd"
+    },
+    {
+      "company_name": "丰程物流",
+      "company_code": "sccod"
+    },
+    {
+      "company_name": "泛远国际物流",
+      "company_code": "farlogistis"
+    },
+    {
+      "company_name": "疯狂快递",
+      "company_code": "crazyexpress"
+    },
+    {
+      "company_name": "法翔速运",
+      "company_code": "ftlexpress"
+    },
+    {
+      "company_name": "富腾达快递",
+      "company_code": "ftd"
+    },
+    {
+      "company_name": "GLS",
+      "company_code": "gls"
+    },
+    {
+      "company_name": "GSM",
+      "company_code": "gsm"
+    },
+    {
+      "company_name": "GATI快递",
+      "company_code": "gaticn"
+    },
+    {
+      "company_name": "GTS快递",
+      "company_code": "gts"
+    },
+    {
+      "company_name": "挂号信/国内邮件",
+      "company_code": "youzhengguonei"
+    },
+    {
+      "company_name": "国通快递",
+      "company_code": "guotongkuaidi"
+    },
+    {
+      "company_name": "国际邮件查询",
+      "company_code": "youzhengguoji"
+    },
+    {
+      "company_name": "港中能达物流",
+      "company_code": "ganzhongnengda"
+    },
+    {
+      "company_name": "港快速递",
+      "company_code": "gdkd"
+    },
+    {
+      "company_name": "共速达",
+      "company_code": "gongsuda"
+    },
+    {
+      "company_name": "广通速递（山东）",
+      "company_code": "gtongsudi"
+    },
+    {
+      "company_name": "高铁速递",
+      "company_code": "hre"
+    },
+    {
+      "company_name": "冠达快递",
+      "company_code": "gda"
+    },
+    {
+      "company_name": "哥士传奇速递",
+      "company_code": "gscq365"
+    },
+    {
+      "company_name": "冠捷物流",
+      "company_code": "gjwl"
+    },
+    {
+      "company_name": "国晶物流",
+      "company_code": "xdshipping"
+    },
+    {
+      "company_name": "华宇物流",
+      "company_code": "tiandihuayu"
+    },
+    {
+      "company_name": "恒路物流",
+      "company_code": "hengluwuliu"
+    },
+    {
+      "company_name": "好来运快递",
+      "company_code": "hlyex"
+    },
+    {
+      "company_name": "华夏龙物流",
+      "company_code": "huaxialongwuliu"
+    },
+    {
+      "company_name": "海航天天",
+      "company_code": "tiantian"
+    },
+    {
+      "company_name": "河北建华",
+      "company_code": "hebeijianhua"
+    },
+    {
+      "company_name": "海盟速递",
+      "company_code": "haimengsudi"
+    },
+    {
+      "company_name": "华企快运",
+      "company_code": "huaqikuaiyun"
+    },
+    {
+      "company_name": "昊盛物流",
+      "company_code": "haoshengwuliu"
+    },
+    {
+      "company_name": "户通物流",
+      "company_code": "hutongwuliu"
+    },
+    {
+      "company_name": "华航快递",
+      "company_code": "hzpl"
+    },
+    {
+      "company_name": "黄马甲快递",
+      "company_code": "huangmajia"
+    },
+    {
+      "company_name": "合众速递（UCS）",
+      "company_code": "ucs"
+    },
+    {
+      "company_name": "皇家物流",
+      "company_code": "pfcexpress"
+    },
+    {
+      "company_name": "伙伴物流",
+      "company_code": "huoban"
+    },
+    {
+      "company_name": "红马速递",
+      "company_code": "nedahm"
+    },
+    {
+      "company_name": "汇文配送",
+      "company_code": "huiwen"
+    },
+    {
+      "company_name": "华赫物流",
+      "company_code": "nmhuahe"
+    },
+    {
+      "company_name": "猴急送",
+      "company_code": "hjs"
+    },
+    {
+      "company_name": "航宇快递",
+      "company_code": "hangyu"
+    },
+    {
+      "company_name": "辉联物流",
+      "company_code": "huilian"
+    },
+    {
+      "company_name": "环球速运",
+      "company_code": "huanqiu"
+    },
+    {
+      "company_name": "华达快运",
+      "company_code": "huada"
+    },
+    {
+      "company_name": "华通务达物流",
+      "company_code": "htwd"
+    },
+    {
+      "company_name": "海派通",
+      "company_code": "hipito"
+    },
+    {
+      "company_name": "环球通达",
+      "company_code": "hqtd"
+    },
+    {
+      "company_name": "航空快递",
+      "company_code": "airgtc"
+    },
+    {
+      "company_name": "好又快物流",
+      "company_code": "haoyoukuai"
+    },
+    {
+      "company_name": "韩润物流",
+      "company_code": "hanrun"
+    },
+    {
+      "company_name": "河南次晨达",
+      "company_code": "ccd"
+    },
+    {
+      "company_name": "和丰同城",
+      "company_code": "hfwuxi"
+    },
+    {
+      "company_name": "荷兰 Sky Post",
+      "company_code": "skypost"
+    },
+    {
+      "company_name": "鸿讯物流",
+      "company_code": "hongxun"
+    },
+    {
+      "company_name": "宏捷国际物流",
+      "company_code": "hongjie"
+    },
+    {
+      "company_name": "汇通天下物流",
+      "company_code": "httx56"
+    },
+    {
+      "company_name": "恒通快递",
+      "company_code": "lqht"
+    },
+    {
+      "company_name": "黑狗物流",
+      "company_code": "higo"
+    },
+    {
+      "company_name": "恒宇运通",
+      "company_code": "hyytes"
+    },
+    {
+      "company_name": "恒瑞物流",
+      "company_code": "hengrui56"
+    },
+    {
+      "company_name": "环创物流",
+      "company_code": "ghl"
+    },
+    {
+      "company_name": "河南全速通",
+      "company_code": "hnqst"
+    },
+    {
+      "company_name": "佳吉物流",
+      "company_code": "jiajiwuliu"
+    },
+    {
+      "company_name": "佳怡物流",
+      "company_code": "jiayiwuliu"
+    },
+    {
+      "company_name": "加运美快递",
+      "company_code": "jiayunmeiwuliu"
+    },
+    {
+      "company_name": "急先达物流",
+      "company_code": "jixianda"
+    },
+    {
+      "company_name": "京广速递快件",
+      "company_code": "jinguangsudikuaijian"
+    },
+    {
+      "company_name": "晋越快递",
+      "company_code": "jinyuekuaidi"
+    },
+    {
+      "company_name": "京东快递",
+      "company_code": "jd"
+    },
+    {
+      "company_name": "捷特快递",
+      "company_code": "jietekuaidi"
+    },
+    {
+      "company_name": "久易快递",
+      "company_code": "jiuyicn"
+    },
+    {
+      "company_name": "九曳供应链",
+      "company_code": "jiuyescm"
+    },
+    {
+      "company_name": "骏丰国际速递",
+      "company_code": "junfengguoji"
+    },
+    {
+      "company_name": "佳家通",
+      "company_code": "jiajiatong56"
+    },
+    {
+      "company_name": "吉日优派",
+      "company_code": "jrypex"
+    },
+    {
+      "company_name": "锦程国际物流",
+      "company_code": "jinchengwuliu"
+    },
+    {
+      "company_name": "景光物流",
+      "company_code": "jgwl"
+    },
+    {
+      "company_name": "急顺通",
+      "company_code": "pzhjst"
+    },
+    {
+      "company_name": "捷网俄全通",
+      "company_code": "ruexp"
+    },
+    {
+      "company_name": "嘉里大通",
+      "company_code": "jialidatong"
+    },
+    {
+      "company_name": "金马甲",
+      "company_code": "jmjss"
+    },
+    {
+      "company_name": "佳成快递",
+      "company_code": "jiacheng"
+    },
+    {
+      "company_name": "骏绅物流",
+      "company_code": "jsexpress"
+    },
+    {
+      "company_name": "锦程快递",
+      "company_code": "hrex"
+    },
+    {
+      "company_name": "快捷快递",
+      "company_code": "kuaijiesudi"
+    },
+    {
+      "company_name": "康力物流",
+      "company_code": "kangliwuliu"
+    },
+    {
+      "company_name": "跨越速运",
+      "company_code": "kuayue"
+    },
+    {
+      "company_name": "快优达速递",
+      "company_code": "kuaiyouda"
+    },
+    {
+      "company_name": "快淘快递",
+      "company_code": "kuaitao"
+    },
+    {
+      "company_name": "开心快递",
+      "company_code": "happylink"
+    },
+    {
+      "company_name": "联邦快递",
+      "company_code": "lianbangkuaidi"
+    },
+    {
+      "company_name": "联昊通物流",
+      "company_code": "lianhaowuliu"
+    },
+    {
+      "company_name": "龙邦速递",
+      "company_code": "longbanwuliu"
+    },
+    {
+      "company_name": "乐捷递",
+      "company_code": "lejiedi"
+    },
+    {
+      "company_name": "立即送",
+      "company_code": "lijisong"
+    },
+    {
+      "company_name": "蓝弧快递",
+      "company_code": "lanhukuaidi"
+    },
+    {
+      "company_name": "乐天速递",
+      "company_code": "ltexp"
+    },
+    {
+      "company_name": "鲁通快运",
+      "company_code": "lutong"
+    },
+    {
+      "company_name": "乐递供应链",
+      "company_code": "ledii"
+    },
+    {
+      "company_name": "论道国际物流",
+      "company_code": "lundao"
+    },
+    {
+      "company_name": "林安物流",
+      "company_code": "lasy56"
+    },
+    {
+      "company_name": "ME物流",
+      "company_code": "macroexpressco"
+    },
+    {
+      "company_name": "民航快递",
+      "company_code": "minghangkuaidi"
+    },
+    {
+      "company_name": "美国快递",
+      "company_code": "meiguokuaidi"
+    },
+    {
+      "company_name": "门对门",
+      "company_code": "menduimen"
+    },
+    {
+      "company_name": "明亮物流",
+      "company_code": "mingliangwuliu"
+    },
+    {
+      "company_name": "民邦速递",
+      "company_code": "minbangsudi"
+    },
+    {
+      "company_name": "闽盛快递",
+      "company_code": "minshengkuaidi"
+    },
+    {
+      "company_name": "麦力快递",
+      "company_code": "mailikuaidi"
+    },
+    {
+      "company_name": "木春货运",
+      "company_code": "mchy"
+    },
+    {
+      "company_name": "美快国际物流",
+      "company_code": "meiquick"
+    },
+    {
+      "company_name": "美通快递",
+      "company_code": "company_codeway"
+    },
+    {
+      "company_name": "马珂博逻",
+      "company_code": "cnmcpl"
+    },
+    {
+      "company_name": "能达速递",
+      "company_code": "ganzhongnengda"
+    },
+    {
+      "company_name": "偌亚奥国际",
+      "company_code": "nuoyaao"
+    },
+    {
+      "company_name": "诺尔国际物流",
+      "company_code": "nuoer"
+    },
+    {
+      "company_name": "尼尔快递",
+      "company_code": "nell"
+    },
+    {
+      "company_name": "OCS",
+      "company_code": "ocs"
+    },
+    {
+      "company_name": "欧亚专线",
+      "company_code": "euasia"
+    },
+    {
+      "company_name": "PCA Express",
+      "company_code": "pcaexpress"
+    },
+    {
+      "company_name": "平安达腾飞",
+      "company_code": "pingandatengfei"
+    },
+    {
+      "company_name": "陪行物流",
+      "company_code": "peixingwuliu"
+    },
+    {
+      "company_name": "品骏快递",
+      "company_code": "pjbest"
+    },
+    {
+      "company_name": "鹏远国际速递",
+      "company_code": "pengyuanexpress"
+    },
+    {
+      "company_name": "全峰快递",
+      "company_code": "quanfengkuaidi"
+    },
+    {
+      "company_name": "全一快递",
+      "company_code": "quanyikuaidi"
+    },
+    {
+      "company_name": "全日通快递",
+      "company_code": "quanritongkuaidi"
+    },
+    {
+      "company_name": "全晨快递",
+      "company_code": "quanchenkuaidi"
+    },
+    {
+      "company_name": "7天连锁物流",
+      "company_code": "sevendays"
+    },
+    {
+      "company_name": "秦邦快运",
+      "company_code": "qbexpress"
+    },
+    {
+      "company_name": "全信通快递",
+      "company_code": "quanxintong"
+    },
+    {
+      "company_name": "全速通国际快递",
+      "company_code": "quansutong"
+    },
+    {
+      "company_name": "秦远物流",
+      "company_code": "qinyuan"
+    },
+    {
+      "company_name": "启辰国际物流",
+      "company_code": "qichen"
+    },
+    {
+      "company_name": "全速快运",
+      "company_code": "quansu"
+    },
+    {
+      "company_name": "全之鑫物流",
+      "company_code": "qzx56"
+    },
+    {
+      "company_name": "千顺快递",
+      "company_code": "qskdyxgs"
+    },
+    {
+      "company_name": "全时速运",
+      "company_code": "runhengfeng"
+    },
+    {
+      "company_name": "如风达快递",
+      "company_code": "rufengda"
+    },
+    {
+      "company_name": "日昱物流",
+      "company_code": "riyuwuliu"
+    },
+    {
+      "company_name": "瑞丰速递",
+      "company_code": "rfsd"
+    },
+    {
+      "company_name": "日日顺物流",
+      "company_code": "rrs"
+    },
+    {
+      "company_name": "日益通速递",
+      "company_code": "rytsd"
+    },
+    {
+      "company_name": "瑞达国际速递",
+      "company_code": "ruidaex"
+    },
+    {
+      "company_name": "日日顺快线",
+      "company_code": "rrskx"
+    },
+    {
+      "company_name": "容智物流速运",
+      "company_code": "gdrz58"
+    },
+    {
+      "company_name": "顺丰速运",
+      "company_code": "shunfeng"
+    },
+    {
+      "company_name": "申通快递",
+      "company_code": "shentong"
+    },
+    {
+      "company_name": "速尔快递",
+      "company_code": "suer"
+    },
+    {
+      "company_name": "山东海红",
+      "company_code": "haihongwangsong"
+    },
+    {
+      "company_name": "盛辉物流",
+      "company_code": "shenghuiwuliu"
+    },
+    {
+      "company_name": "世运快递",
+      "company_code": "shiyunkuaidi"
+    },
+    {
+      "company_name": "盛丰物流",
+      "company_code": "shengfengwuliu"
+    },
+    {
+      "company_name": "上大物流",
+      "company_code": "shangda"
+    },
+    {
+      "company_name": "三态速递",
+      "company_code": "santaisudi"
+    },
+    {
+      "company_name": "赛澳递",
+      "company_code": "saiaodi"
+    },
+    {
+      "company_name": "申通E物流",
+      "company_code": "shentong"
+    },
+    {
+      "company_name": "圣安物流",
+      "company_code": "shenganwuliu"
+    },
+    {
+      "company_name": "山西红马甲",
+      "company_code": "sxhongmajia"
+    },
+    {
+      "company_name": "穗佳物流",
+      "company_code": "suijiawuliu"
+    },
+    {
+      "company_name": "沈阳佳惠尔",
+      "company_code": "syjiahuier"
+    },
+    {
+      "company_name": "上海林道货运",
+      "company_code": "shlindao"
+    },
+    {
+      "company_name": "十方通物流",
+      "company_code": "sfift"
+    },
+    {
+      "company_name": "山东广通速递",
+      "company_code": "gtongsudi"
+    },
+    {
+      "company_name": "顺捷丰达",
+      "company_code": "shunjiefengda"
+    },
+    {
+      "company_name": "速必达物流",
+      "company_code": "subida"
+    },
+    {
+      "company_name": "速通成达物流",
+      "company_code": "htwd"
+    },
+    {
+      "company_name": "速腾物流",
+      "company_code": "suteng"
+    },
+    {
+      "company_name": "速方国际物流",
+      "company_code": "bphchina"
+    },
+    {
+      "company_name": "顺通快递",
+      "company_code": "stkd"
+    },
+    {
+      "company_name": "速递中国",
+      "company_code": "sendtochina"
+    },
+    {
+      "company_name": "苏宁快递",
+      "company_code": "suning"
+    },
+    {
+      "company_name": "四海快递",
+      "company_code": "sihaiet"
+    },
+    {
+      "company_name": "首通快运",
+      "company_code": "staky"
+    },
+    {
+      "company_name": "顺时达物流",
+      "company_code": "hnssd56"
+    },
+    {
+      "company_name": "Superb Grace",
+      "company_code": "superb"
+    },
+    {
+      "company_name": "圣飞捷快递",
+      "company_code": "sfjhd"
+    },
+    {
+      "company_name": "上海航瑞货运",
+      "company_code": "hangrui"
+    },
+    {
+      "company_name": "嗖一下同城快递",
+      "company_code": "sofast56"
+    },
+    {
+      "company_name": "天天快递",
+      "company_code": "tiantian"
+    },
+    {
+      "company_name": "TNT快递",
+      "company_code": "tnt"
+    },
+    {
+      "company_name": "天地华宇",
+      "company_code": "tiandihuayu"
+    },
+    {
+      "company_name": "通和天下",
+      "company_code": "tonghetianxia"
+    },
+    {
+      "company_name": "天纵物流",
+      "company_code": "tianzong"
+    },
+    {
+      "company_name": "同舟行物流",
+      "company_code": "chinatzx"
+    },
+    {
+      "company_name": "腾达速递",
+      "company_code": "nntengda"
+    },
+    {
+      "company_name": "泰国138",
+      "company_code": "sd138"
+    },
+    {
+      "company_name": "通达兴物流",
+      "company_code": "tongdaxing"
+    },
+    {
+      "company_name": "天联快运",
+      "company_code": "tlky"
+    },
+    {
+      "company_name": "途鲜物流",
+      "company_code": "ibenben"
+    },
+    {
+      "company_name": "淘韩国际快递",
+      "company_code": "krtao"
+    },
+    {
+      "company_name": "特急送",
+      "company_code": "lntjs"
+    },
+    {
+      "company_name": "UPS快递查询",
+      "company_code": "ups"
+    },
+    {
+      "company_name": "UC优速快递",
+      "company_code": "youshuwuliu"
+    },
+    {
+      "company_name": "UCS（合众速递）",
+      "company_code": "ucs"
+    },
+    {
+      "company_name": "USPS美国邮政",
+      "company_code": "usps"
+    },
+    {
+      "company_name": "UEQ快递",
+      "company_code": "ueq"
+    },
+    {
+      "company_name": "万象物流",
+      "company_code": "wanxiangwuliu"
+    },
+    {
+      "company_name": "微特派",
+      "company_code": "weitepai"
+    },
+    {
+      "company_name": "万家物流",
+      "company_code": "wanjiawuliu"
+    },
+    {
+      "company_name": "万博快递",
+      "company_code": "wanboex"
+    },
+    {
+      "company_name": "万家通",
+      "company_code": "timedg"
+    },
+    {
+      "company_name": "威时沛运",
+      "company_code": "wtdchina"
+    },
+    {
+      "company_name": "微转运",
+      "company_code": "wzhaunyun"
+    },
+    {
+      "company_name": "万通快递",
+      "company_code": "gswtkd"
+    },
+    {
+      "company_name": "渥途国际速运",
+      "company_code": "wotu"
+    },
+    {
+      "company_name": "豌豆物流",
+      "company_code": "wandougongzhu"
+    },
+    {
+      "company_name": "万家康物流",
+      "company_code": "wjkwl"
+    },
+    {
+      "company_name": "希优特快递",
+      "company_code": "xiyoutekuaidi"
+    },
+    {
+      "company_name": "新邦物流",
+      "company_code": "xinbangwuliu"
+    },
+    {
+      "company_name": "信丰物流",
+      "company_code": "xinfengwuliu"
+    },
+    {
+      "company_name": "新蛋物流",
+      "company_code": "neweggozzo"
+    },
+    {
+      "company_name": "祥龙运通物流",
+      "company_code": "xianglongyuntong"
+    },
+    {
+      "company_name": "西安城联速递",
+      "company_code": "xianchengliansudi"
+    },
+    {
+      "company_name": "喜来快递",
+      "company_code": "xilaikd"
+    },
+    {
+      "company_name": "鑫世锐达",
+      "company_code": "xsrd"
+    },
+    {
+      "company_name": "鑫通宝物流",
+      "company_code": "xtb"
+    },
+    {
+      "company_name": "信天捷快递",
+      "company_code": "xintianjie"
+    },
+    {
+      "company_name": "西安胜峰",
+      "company_code": "xaetc"
+    },
+    {
+      "company_name": "新顺丰（NSF）",
+      "company_code": "nsf"
+    },
+    {
+      "company_name": "先锋快递",
+      "company_code": "xianfeng"
+    },
+    {
+      "company_name": "新速航",
+      "company_code": "sunspeedy"
+    },
+    {
+      "company_name": "西邮寄",
+      "company_code": "xipost"
+    },
+    {
+      "company_name": "信联通",
+      "company_code": "sinatone"
+    },
+    {
+      "company_name": "新杰物流",
+      "company_code": "sunjex"
+    },
+    {
+      "company_name": "心怡物流",
+      "company_code": "alog"
+    },
+    {
+      "company_name": "新时速物流",
+      "company_code": "csxss"
+    },
+    {
+      "company_name": "翔腾物流",
+      "company_code": "xiangteng"
+    },
+    {
+      "company_name": "西翼物流",
+      "company_code": "westwing"
+    },
+    {
+      "company_name": "小熊物流",
+      "company_code": "littlebearbear"
+    },
+    {
+      "company_name": "鑫和高铁快运",
+      "company_code": "gaotieex"
+    },
+    {
+      "company_name": "圆通速递",
+      "company_code": "yuantong"
+    },
+    {
+      "company_name": "韵达快递",
+      "company_code": "yunda"
+    },
+    {
+      "company_name": "韵达美国件",
+      "company_code": "yundaexus"
+    },
+    {
+      "company_name": "邮政国内",
+      "company_code": "youzhengguonei"
+    },
+    {
+      "company_name": "邮政国际",
+      "company_code": "youzhengguoji"
+    },
+    {
+      "company_name": "邮政EMS速递",
+      "company_code": "ems"
+    },
+    {
+      "company_name": "运通快递",
+      "company_code": "yuntongkuaidi"
+    },
+    {
+      "company_name": "宇鑫物流",
+      "company_code": "yuxinwuliu"
+    },
+    {
+      "company_name": "远成物流",
+      "company_code": "yuanchengwuliu"
+    },
+    {
+      "company_name": "优速快递",
+      "company_code": "youshuwuliu"
+    },
+    {
+      "company_name": "越丰物流",
+      "company_code": "yuefengwuliu"
+    },
+    {
+      "company_name": "源安达快递",
+      "company_code": "yuananda"
+    },
+    {
+      "company_name": "原飞航物流",
+      "company_code": "yuanfeihangwuliu"
+    },
+    {
+      "company_name": "银捷速递",
+      "company_code": "yinjiesudi"
+    },
+    {
+      "company_name": "一统飞鸿",
+      "company_code": "yitongfeihong"
+    },
+    {
+      "company_name": "亚风速递",
+      "company_code": "yafengsudi"
+    },
+    {
+      "company_name": "易通达",
+      "company_code": "yitongda"
+    },
+    {
+      "company_name": "邮必佳",
+      "company_code": "youbijia"
+    },
+    {
+      "company_name": "一柒物流",
+      "company_code": "yiqiguojiwuliu"
+    },
+    {
+      "company_name": "音素快运",
+      "company_code": "yinsu"
+    },
+    {
+      "company_name": "亿领速运",
+      "company_code": "yilingsuyun"
+    },
+    {
+      "company_name": "煜嘉物流",
+      "company_code": "yujiawuliu"
+    },
+    {
+      "company_name": "英脉物流",
+      "company_code": "gml"
+    },
+    {
+      "company_name": "云豹国际货运",
+      "company_code": "leopard"
+    },
+    {
+      "company_name": "云南中诚",
+      "company_code": "czwlyn"
+    },
+    {
+      "company_name": "优配速运",
+      "company_code": "sdyoupei"
+    },
+    {
+      "company_name": "永昌物流",
+      "company_code": "yongchang"
+    },
+    {
+      "company_name": "御风速运",
+      "company_code": "yufeng"
+    },
+    {
+      "company_name": "亚马逊物流",
+      "company_code": "yamaxunwuliu"
+    },
+    {
+      "company_name": "优速通达",
+      "company_code": "yousutongda"
+    },
+    {
+      "company_name": "亿顺航",
+      "company_code": "yishunhang"
+    },
+    {
+      "company_name": "永旺达快递",
+      "company_code": "yongwangda"
+    },
+    {
+      "company_name": "易客满",
+      "company_code": "ecmscn"
+    },
+    {
+      "company_name": "英超物流",
+      "company_code": "yingchao"
+    },
+    {
+      "company_name": "益递物流",
+      "company_code": "edlogistics"
+    },
+    {
+      "company_name": "远洋国际",
+      "company_code": "yyexpress"
+    },
+    {
+      "company_name": "一号仓",
+      "company_code": "onehcang"
+    },
+    {
+      "company_name": "远成快运",
+      "company_code": "ycgky"
+    },
+    {
+      "company_name": "一号线",
+      "company_code": "lineone"
+    },
+    {
+      "company_name": "壹品速递",
+      "company_code": "ypsd"
+    },
+    {
+      "company_name": "易达通快递",
+      "company_code": "qexpress"
+    },
+    {
+      "company_name": "鹰运国际速递",
+      "company_code": "vipexpress"
+    },
+    {
+      "company_name": "YLTD",
+      "company_code": "el56"
+    },
+    {
+      "company_name": "一运全成物流",
+      "company_code": "yyqc56"
+    },
+    {
+      "company_name": "韵丰物流",
+      "company_code": "yunfeng56"
+    },
+    {
+      "company_name": "驿扬国际速运",
+      "company_code": "iyoungspeed"
+    },
+    {
+      "company_name": "一站通快递",
+      "company_code": "zgyzt"
+    },
+    {
+      "company_name": "易优包裹",
+      "company_code": "eupackage"
+    },
+    {
+      "company_name": "云达通",
+      "company_code": "ydglobe"
+    },
+    {
+      "company_name": "运东西",
+      "company_code": "yundx"
+    },
+    {
+      "company_name": "洋包裹",
+      "company_code": "yangbaoguo"
+    },
+    {
+      "company_name": "优联吉运",
+      "company_code": "uluckex"
+    },
+    {
+      "company_name": "优邦速运",
+      "company_code": "ubonex"
+    },
+    {
+      "company_name": "玥玛速运",
+      "company_code": "yue777"
+    },
+    {
+      "company_name": "远为快递",
+      "company_code": "ywexpress"
+    },
+    {
+      "company_name": "易转运",
+      "company_code": "ezhuanyuan"
+    },
+    {
+      "company_name": "中通快递",
+      "company_code": "zhongtong"
+    },
+    {
+      "company_name": "宅急送",
+      "company_code": "zhaijisong"
+    },
+    {
+      "company_name": "中铁快运",
+      "company_code": "ztky"
+    },
+    {
+      "company_name": "中铁物流",
+      "company_code": "zhongtiewuliu"
+    },
+    {
+      "company_name": "中邮物流",
+      "company_code": "zhongyouwuliu"
+    },
+    {
+      "company_name": "中国东方(COE)",
+      "company_code": "coe"
+    },
+    {
+      "company_name": "芝麻开门",
+      "company_code": "zhimakaimen"
+    },
+    {
+      "company_name": "中国邮政快递",
+      "company_code": "youzhengguonei"
+    },
+    {
+      "company_name": "郑州建华",
+      "company_code": "zhengzhoujianhua"
+    },
+    {
+      "company_name": "中速快件",
+      "company_code": "zhongsukuaidi"
+    },
+    {
+      "company_name": "中天万运",
+      "company_code": "zhongtianwanyun"
+    },
+    {
+      "company_name": "中睿速递",
+      "company_code": "zhongruisudi"
+    },
+    {
+      "company_name": "中外运速递",
+      "company_code": "zhongwaiyun"
+    },
+    {
+      "company_name": "增益速递",
+      "company_code": "zengyisudi"
+    },
+    {
+      "company_name": "郑州速捷",
+      "company_code": "sujievip"
+    },
+    {
+      "company_name": "智通物流",
+      "company_code": "ztong"
+    },
+    {
+      "company_name": "至诚通达快递",
+      "company_code": "zhichengtongda"
+    },
+    {
+      "company_name": "众辉达物流",
+      "company_code": "zhdwl"
+    },
+    {
+      "company_name": "直邮易",
+      "company_code": "kuachangwuliu"
+    },
+    {
+      "company_name": "中运全速",
+      "company_code": "topspeedex"
+    },
+    {
+      "company_name": "中欧快运",
+      "company_code": "otobv"
+    },
+    {
+      "company_name": "准实快运",
+      "company_code": "zsky123"
+    },
+    {
+      "company_name": "中国翼",
+      "company_code": "cnws"
+    },
+    {
+      "company_name": "中宇天地",
+      "company_code": "zytdscm"
+    },
+    {
+      "company_name": "转运四方",
+      "company_code": "zhuanyunsifang"
+    },
+    {
+      "company_name": "卓烨快递",
+      "company_code": "hrbzykd"
+    }
+  ]
+}

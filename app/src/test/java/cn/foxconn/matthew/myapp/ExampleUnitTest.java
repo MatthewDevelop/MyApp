@@ -6,6 +6,8 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
+import cn.foxconn.matthew.myapp.expressinquiry.api.ExpressService;
+import cn.foxconn.matthew.myapp.expressinquiry.bean.ExpressResponseData;
 import cn.foxconn.matthew.myapp.wanandroid.api.WanService;
 import cn.foxconn.matthew.myapp.wanandroid.bean.ResponseData;
 import cn.foxconn.matthew.myapp.wanandroid.bean.pojo.BannerBean;
@@ -57,7 +59,8 @@ public class ExampleUnitTest {
     }
     @Test
     public void APITest(){
-        String BASE_URL = "http://wanandroid.com/";
+        String BASE_URL = "http://www.kuaidi100.com/";
+//        String BASE_URL = "http://wanandroid.com/";
         OkHttpClient.Builder builder=new OkHttpClient.Builder();
         //添加公共拦截器
         builder.addInterceptor(new CustomInterceptor());
@@ -68,9 +71,31 @@ public class ExampleUnitTest {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         WanService movieService = retrofit.create(WanService.class);
+        ExpressService expressService = retrofit.create(ExpressService.class);
         boolean test=true;
         if(test){
+            System.out.println("hello");
+            expressService.queryExpressInfo("yuantong","888590141663223471").subscribe(new Observer<ExpressResponseData>() {
+                @Override
+                public void onSubscribe(Disposable d) {
 
+                }
+
+                @Override
+                public void onNext(ExpressResponseData expressResponseData) {
+                    System.out.println(expressResponseData.toString());
+                }
+
+                @Override
+                public void onError(Throwable e) {
+
+                }
+
+                @Override
+                public void onComplete() {
+
+                }
+            });
         }else {
             movieService.getTagData().subscribe(new Observer<ResponseData<List<TypeTagVO>>>() {
                 @Override

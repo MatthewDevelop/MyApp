@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/main">
+
+        <cn.foxconn.matthew.myapp.wanandroid.widget.FontTextView
+            android:id="@+id/ft_return"
+            style="@style/top_bar_icon_style"
+            android:text="@string/ic_return" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="快递查询"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+    </RelativeLayout>
+
+    <Spinner
+        android:id="@+id/sp_company"
+        android:layout_width="match_parent"
+        android:layout_height="50dp" />
+
+    <EditText
+        android:id="@+id/et_post_id"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:hint="请输入快递单号"/>
+
+    <Button
+        android:id="@+id/bt_query"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/main"
+        android:text="查询"
+        android:textColor="@color/white"
+        android:textSize="18sp" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_express_info"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <RelativeLayout
+            android:id="@+id/load_error"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone">
+
+            <cn.foxconn.matthew.myapp.wanandroid.widget.FontTextView
+                android:id="@+id/ft_refresh"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="@string/ic_refresh"
+                android:textColor="@color/main"
+                android:textSize="50sp" />
+
+            <TextView
+                android:id="@+id/tv_error_message"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/ft_refresh"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="5dp"
+                android:text="Error"
+                android:textSize="18sp" />
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+
+</LinearLayout>

@@ -31,11 +31,10 @@ import cn.foxconn.matthew.myapp.wanandroid.widget.AutoLinefeedLayout;
  * @email:guocheng0816@163.com
  */
 
-public class TypePresenter extends BasePresenter<TypeView,FragmentEvent> {
+public class TypePresenter extends BasePresenter<TypeView, FragmentEvent> {
     private static final String TAG = "TypePresenter";
-    private FragmentActivity mActivity;
     DataModel mDataModel;
-
+    private FragmentActivity mActivity;
     private TypeView mTypeView;
     private List<TypeTagVO> mDatas;
     private AutoLinefeedLayout llTag;
@@ -47,22 +46,21 @@ public class TypePresenter extends BasePresenter<TypeView,FragmentEvent> {
     private int mCurrentPage;
 
 
-
-    public TypePresenter(FragmentActivity activity,LifecycleProvider<FragmentEvent> provider) {
+    public TypePresenter(FragmentActivity activity, LifecycleProvider<FragmentEvent> provider) {
         super(provider);
-        mActivity=activity;
-        mDataModel=new DataModelImpl();
+        mActivity = activity;
+        mDataModel = new DataModelImpl();
     }
 
     public void getTagData() {
-        mTypeView=getView();
-        mDataModel.getTagData(getProvider(),new BaseRxObserverHelper<List<TypeTagVO>>() {
+        mTypeView = getView();
+        mDataModel.getTagData(getProvider(), new BaseRxObserverHelper<List<TypeTagVO>>() {
             @Override
             protected void next(List<TypeTagVO> typeTagVOS) {
-                mDatas=typeTagVOS;
+                mDatas = typeTagVOS;
                 setTabUi();
-                mTabSelect=0;
-                mTagSelect=0;
+                mTabSelect = 0;
+                mTagSelect = 0;
                 getServerData(mDatas.get(0).getChildren().get(0).getId());
             }
 
@@ -76,10 +74,10 @@ public class TypePresenter extends BasePresenter<TypeView,FragmentEvent> {
     /**
      * 设置tab
      */
-    public void setTabUi(){
-        TabLayout tabLayout=mTypeView.getTabLayout();
+    public void setTabUi() {
+        TabLayout tabLayout = mTypeView.getTabLayout();
         tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
-        for (TypeTagVO bean:mDatas){
+        for (TypeTagVO bean : mDatas) {
             tabLayout.addTab(tabLayout.newTab().setText(bean.getName()));
         }
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
@@ -105,22 +103,47 @@ public class TypePresenter extends BasePresenter<TypeView,FragmentEvent> {
     }
 
     /**
+     * 根据选择的标签从服务器抓取数据
+     *
+     * @param id
+     */
+    private void getServerData(int id) {
+        Log.e(TAG, "getServerData: " + id);
+        mCurrentPage = 0;
+        mDataModel.getTypeDataById(mCurrentPage, id, getProvider(), new BaseRxObserverHelper<ArticleListVO>() {
+            @Override
+            protected void next(ArticleListVO articleListVO) {
+                if (articleListVO.getDatas() != null) {
+                    getView().getRefreshDataSuccess(articleListVO.getDatas());
+                    mTypeView.getTagLayout().setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            protected void error(String message) {
+                getView().getDataError(message);
+            }
+        });
+    }
+
+    /**
      * 设置tag
+     *
      * @param position
      */
     private void setTagUi(final int position) {
-        llTag=getView().getTagLayout();
+        llTag = getView().getTagLayout();
         llTag.setVisibility(View.VISIBLE);
         llTag.removeAllViews();
-        if(tagTvs==null){
-            tagTvs=new ArrayList<>();
-        }else {
+        if (tagTvs == null) {
+            tagTvs = new ArrayList<>();
+        } else {
             tagTvs.clear();
         }
 
-        for(int i=0;i<mDatas.get(position).getChildren().size();i++){
-            View view= LinearLayout.inflate(mActivity, R.layout.item_tag_layout,null);
-            final TextView textView=view.findViewById(R.id.tv_item);
+        for (int i = 0; i < mDatas.get(position).getChildren().size(); i++) {
+            View view = LinearLayout.inflate(mActivity, R.layout.item_tag_layout, null);
+            final TextView textView = view.findViewById(R.id.tv_item);
             textView.setText(mDatas.get(position).getChildren().get(i).getName());
             llTag.addView(view);
             tagTvs.add(textView);
@@ -128,12 +151,12 @@ public class TypePresenter extends BasePresenter<TypeView,FragmentEvent> {
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    mTabSelect=position;
-                    mTagSelect= finalI;
+                    mTabSelect = position;
+                    mTagSelect = finalI;
                     textView.setTextColor(UIUtil.getColor(R.color.white));
                     textView.setBackgroundResource(R.drawable.shape_tag_sel);
-                    mId=mDatas.get(position).getChildren().get(finalI).getId();
-                    Log.e(TAG, "onClick: "+mId );
+                    mId = mDatas.get(position).getChildren().get(finalI).getId();
+                    Log.e(TAG, "onClick: " + mId);
                     getServerData(mId);
                 }
             });
@@ -152,34 +175,11 @@ public class TypePresenter extends BasePresenter<TypeView,FragmentEvent> {
     }
 
     /**
-     * 根据选择的标签从服务器抓取数据
-     * @param id
-     */
-    private void getServerData(int id) {
-        Log.e(TAG, "getServerData: "+id );
-        mCurrentPage=0;
-        mDataModel.getTypeDataById(mCurrentPage,id, getProvider(),new BaseRxObserverHelper<ArticleListVO>() {
-            @Override
-            protected void next(ArticleListVO articleListVO) {
-                if (articleListVO.getDatas()!=null){
-                    getView().getRefreshDataSuccess(articleListVO.getDatas());
-                    mTypeView.getTagLayout().setVisibility(View.GONE);
-                }
-            }
-
-            @Override
-            protected void error(String message) {
-                getView().getDataError(message);
-            }
-        });
-    }
-
-    /**
      * 加载下一页
      */
     public void getMoreData() {
-        mCurrentPage=mCurrentPage+1;
-        mDataModel.getTypeDataById(mCurrentPage, mId,getProvider(), new BaseRxObserverHelper<ArticleListVO>() {
+        mCurrentPage = mCurrentPage + 1;
+        mDataModel.getTypeDataById(mCurrentPage, mId, getProvider(), new BaseRxObserverHelper<ArticleListVO>() {
             @Override
             protected void next(ArticleListVO articleListVO) {
                 getView().getMoreDataSuccess(articleListVO.getDatas());

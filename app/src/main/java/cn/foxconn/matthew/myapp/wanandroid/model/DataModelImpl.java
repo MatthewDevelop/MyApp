@@ -7,6 +7,7 @@ import com.trello.rxlifecycle2.android.FragmentEvent;
 
 import java.util.List;
 
+import cn.foxconn.matthew.myapp.app.AppConst;
 import cn.foxconn.matthew.myapp.wanandroid.api.WanService;
 import cn.foxconn.matthew.myapp.wanandroid.bean.ResponseData;
 import cn.foxconn.matthew.myapp.wanandroid.bean.pojo.BannerBean;
@@ -14,7 +15,7 @@ import cn.foxconn.matthew.myapp.wanandroid.bean.pojo.HotKeyBean;
 import cn.foxconn.matthew.myapp.wanandroid.bean.pojo.UserBean;
 import cn.foxconn.matthew.myapp.wanandroid.bean.pojovo.ArticleListVO;
 import cn.foxconn.matthew.myapp.wanandroid.bean.pojovo.TypeTagVO;
-import cn.foxconn.matthew.myapp.wanandroid.helper.RetrofitServiceManager;
+import cn.foxconn.matthew.myapp.helper.RetrofitServiceManager;
 import cn.foxconn.matthew.myapp.wanandroid.helper.BaseRxObserverHelper;
 import cn.foxconn.matthew.myapp.wanandroid.helper.RxResultHelper;
 import cn.foxconn.matthew.myapp.wanandroid.helper.RxSchedulersHelper;
@@ -31,7 +32,7 @@ public class DataModelImpl implements DataModel {
     private WanService mWanService;
 
     public DataModelImpl() {
-        mWanService = RetrofitServiceManager.getInstance().create(WanService.class);
+        mWanService = RetrofitServiceManager.getInstance(AppConst.WAN_ANDROID_BASE_URL).create(WanService.class);
     }
 
     @Override

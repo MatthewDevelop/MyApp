@@ -63,19 +63,6 @@ public class WebViewPresenter extends BasePresenter<CommonWebView, ActivityEvent
         webView.setWebViewClient(new WebViewClient() {
             String startUrl;
 
-            @Override
-            public void onPageStarted(WebView view, String url, Bitmap favicon) {
-                super.onPageStarted(view, url, favicon);
-                progressBar.setVisibility(View.VISIBLE);
-                startUrl = url;
-            }
-
-            @Override
-            public void onPageFinished(WebView view, String url) {
-                super.onPageFinished(view, url);
-                progressBar.setVisibility(View.GONE);
-            }
-
             /**
              * 跳转链接在此方法中执行
              * @param view
@@ -91,6 +78,19 @@ public class WebViewPresenter extends BasePresenter<CommonWebView, ActivityEvent
                     return super.shouldOverrideUrlLoading(view, url);
                 }
                 return true;
+            }
+
+            @Override
+            public void onPageStarted(WebView view, String url, Bitmap favicon) {
+                super.onPageStarted(view, url, favicon);
+                progressBar.setVisibility(View.VISIBLE);
+                startUrl = url;
+            }
+
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                super.onPageFinished(view, url);
+                progressBar.setVisibility(View.GONE);
             }
         });
 

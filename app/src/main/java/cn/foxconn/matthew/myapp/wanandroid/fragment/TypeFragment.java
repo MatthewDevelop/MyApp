@@ -29,7 +29,7 @@ import io.reactivex.disposables.CompositeDisposable;
 
 public class TypeFragment
         extends BaseFragment<TypeView, TypePresenter>
-        implements TypeView,BaseQuickAdapter.RequestLoadMoreListener{
+        implements TypeView, BaseQuickAdapter.RequestLoadMoreListener {
     @BindView(R.id.tabLayout)
     TabLayout mTabLayout;
     @BindView(R.id.recyclerView)
@@ -43,9 +43,26 @@ public class TypeFragment
     private CompositeDisposable mCompositeDisposable;
 
 
-
-    public static TypeFragment newInstance(){
+    public static TypeFragment newInstance() {
         return new TypeFragment();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (mCompositeDisposable != null) {
+            mCompositeDisposable.clear();
+        }
+    }
+
+    @Override
+    protected void initView(View rootView) {
+        super.initView(rootView);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        mAdapter = new ArticleListAdapter(getContext(), null, mCompositeDisposable);
+        mRecyclerView.setAdapter(mAdapter);
+        mAdapter.setOnLoadMoreListener(this, mRecyclerView);
+        mPresenter.getTagData();
     }
 
     @Override
@@ -55,35 +72,16 @@ public class TypeFragment
 
     @Override
     protected TypePresenter createPresenter() {
-        return new TypePresenter(getActivity(),this);
-    }
-
-
-    @Override
-    protected void initView(View rootView) {
-        super.initView(rootView);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        mAdapter=new ArticleListAdapter(getContext(),null,mCompositeDisposable);
-        mRecyclerView.setAdapter(mAdapter);
-        mAdapter.setOnLoadMoreListener(this,mRecyclerView);
-        mPresenter.getTagData();
+        return new TypePresenter(getActivity(), this);
     }
 
     @Override
     protected void init() {
         super.init();
-        mCompositeDisposable=new CompositeDisposable();
+        mCompositeDisposable = new CompositeDisposable();
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        if(mCompositeDisposable!=null){
-            mCompositeDisposable.clear();
-        }
-    }
-
-    public void onRefresh(){
+    public void onRefresh() {
         mPresenter.getTagData();
     }
 
@@ -117,9 +115,9 @@ public class TypeFragment
 
     @Override
     public void getRefreshDataSuccess(List<ArticleBean> data) {
-        if(data.size()!=0) {
+        if (data.size() != 0) {
             mLlBlank.setVisibility(View.GONE);
-        }else {
+        } else {
             mLlBlank.setVisibility(View.VISIBLE);
         }
         mAdapter.setNewData(data);
@@ -127,10 +125,10 @@ public class TypeFragment
 
     @Override
     public void getMoreDataSuccess(List<ArticleBean> data) {
-        if(data.size()!=0){
+        if (data.size() != 0) {
             mAdapter.addData(data);
             mAdapter.loadMoreComplete();
-        }else {
+        } else {
             mAdapter.loadMoreEnd();
         }
     }

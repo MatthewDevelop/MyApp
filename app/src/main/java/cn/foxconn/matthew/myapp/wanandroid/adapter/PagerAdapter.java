@@ -17,9 +17,9 @@ public class PagerAdapter extends FragmentPagerAdapter {
     private static final String TAG = "PagerAdapter";
     private List<Fragment> mFragments;
 
-    public PagerAdapter(FragmentManager fm,List<Fragment> fragments) {
+    public PagerAdapter(FragmentManager fm, List<Fragment> fragments) {
         super(fm);
-        mFragments=fragments;
+        mFragments = fragments;
     }
 
     @Override
@@ -29,7 +29,6 @@ public class PagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        Log.e(TAG, "getCount: " +mFragments.size());
         return mFragments.size();
     }
 }

@@ -68,12 +68,6 @@ public class WanAndroidActivity extends BaseActivity {
     }
 
     @Override
-    protected void init() {
-        super.init();
-        mFragments = new ArrayList<>();
-    }
-
-    @Override
     protected void initView() {
         super.initView();
         setTabColor(mFtHome, mTvHome);
@@ -111,6 +105,30 @@ public class WanAndroidActivity extends BaseActivity {
             public void onPageScrollStateChanged(int state) {
             }
         });
+    }
+
+    @Override
+    protected void init() {
+        super.init();
+        mFragments = new ArrayList<>();
+    }
+
+    /**
+     * 设置导航栏的选择状态和颜色
+     *
+     * @param fontTextView
+     * @param textView
+     */
+    private void setTabColor(FontTextView fontTextView, TextView textView) {
+        mFtHome.setTextColor(UIUtil.getColor(R.color.tab_bar_normal));
+        mTvHome.setTextColor(UIUtil.getColor(R.color.tab_bar_normal));
+        mFtType.setTextColor(UIUtil.getColor(R.color.tab_bar_normal));
+        mTvType.setTextColor(UIUtil.getColor(R.color.tab_bar_normal));
+        mFtUser.setTextColor(UIUtil.getColor(R.color.tab_bar_normal));
+        mTvUser.setTextColor(UIUtil.getColor(R.color.tab_bar_normal));
+        fontTextView.setTextColor(UIUtil.getColor(R.color.tab_bar_selected));
+        textView.setTextColor(UIUtil.getColor(R.color.tab_bar_selected));
+
     }
 
     @OnClick({R.id.ll_home, R.id.ll_type, R.id.ll_user, R.id.ft_search, R.id.ft_hot, R.id.ft_refresh})
@@ -152,24 +170,6 @@ public class WanAndroidActivity extends BaseActivity {
             default:
                 break;
         }
-    }
-
-    /**
-     * 设置导航栏的选择状态和颜色
-     *
-     * @param fontTextView
-     * @param textView
-     */
-    private void setTabColor(FontTextView fontTextView, TextView textView) {
-        mFtHome.setTextColor(UIUtil.getColor(R.color.tab_bar_normal));
-        mTvHome.setTextColor(UIUtil.getColor(R.color.tab_bar_normal));
-        mFtType.setTextColor(UIUtil.getColor(R.color.tab_bar_normal));
-        mTvType.setTextColor(UIUtil.getColor(R.color.tab_bar_normal));
-        mFtUser.setTextColor(UIUtil.getColor(R.color.tab_bar_normal));
-        mTvUser.setTextColor(UIUtil.getColor(R.color.tab_bar_normal));
-        fontTextView.setTextColor(UIUtil.getColor(R.color.tab_bar_selected));
-        textView.setTextColor(UIUtil.getColor(R.color.tab_bar_selected));
-
     }
 
     public List<android.support.v4.app.Fragment> getFragments() {

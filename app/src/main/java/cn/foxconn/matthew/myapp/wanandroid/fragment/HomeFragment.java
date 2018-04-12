@@ -31,9 +31,9 @@ import io.reactivex.disposables.CompositeDisposable;
  * @email:guocheng0816@163.com
  */
 
-public class HomeFragment extends BaseFragment<HomeView,HomePresenter>
-                        implements HomeView,SwipeRefreshLayout.OnRefreshListener
-                        ,BaseQuickAdapter.RequestLoadMoreListener{
+public class HomeFragment extends BaseFragment<HomeView, HomePresenter>
+        implements HomeView, SwipeRefreshLayout.OnRefreshListener
+        , BaseQuickAdapter.RequestLoadMoreListener {
     private static final String TAG = "HomeFragment";
     @BindView(R.id.swipeRefreshLayout)
     SwipeRefreshLayout mSwipeRefreshLayout;
@@ -44,38 +44,31 @@ public class HomeFragment extends BaseFragment<HomeView,HomePresenter>
     BGABanner mBGABanner;
     CompositeDisposable mCompositeDisposable;
 
-    public static HomeFragment newInstance(){
+    public static HomeFragment newInstance() {
         return new HomeFragment();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (mCompositeDisposable != null) {
+            mCompositeDisposable.clear();
+        }
     }
 
     @Override
     protected void initView(View rootView) {
         super.initView(rootView);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        mAdapter=new ArticleListAdapter(getContext(),null,mCompositeDisposable);
+        mAdapter = new ArticleListAdapter(getContext(), null, mCompositeDisposable);
         mRecyclerView.setAdapter(mAdapter);
         mSwipeRefreshLayout.setOnRefreshListener(this);
-        mAdapter.setOnLoadMoreListener(this,mRecyclerView);
-
+        mAdapter.setOnLoadMoreListener(this, mRecyclerView);
         //添加轮播图布局
-        View headView=View.inflate(getContext(),R.layout.layout_banner,null);
-        mBGABanner=headView.findViewById(R.id.bgaBanner);
+        View headView = View.inflate(getContext(), R.layout.layout_banner, null);
+        mBGABanner = headView.findViewById(R.id.bgaBanner);
         mAdapter.addHeaderView(headView);
         onRefresh();
-    }
-
-    @Override
-    protected void init() {
-        super.init();
-        mCompositeDisposable=new CompositeDisposable();
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        if(mCompositeDisposable!=null){
-            mCompositeDisposable.clear();
-        }
     }
 
     @Override
@@ -89,8 +82,14 @@ public class HomeFragment extends BaseFragment<HomeView,HomePresenter>
     }
 
     @Override
+    protected void init() {
+        super.init();
+        mCompositeDisposable = new CompositeDisposable();
+    }
+
+    @Override
     public void onRefresh() {
-        Log.e(TAG, "onRefresh: " );
+        Log.e(TAG, "onRefresh: ");
         mPresenter.getBannerData();
         mPresenter.getRefreshData();
     }
@@ -101,31 +100,31 @@ public class HomeFragment extends BaseFragment<HomeView,HomePresenter>
     }
 
     @Override
-    public void getBannerDataSuccess(List<BannerBean> data) {
-        //设置轮播图
-        mBGABanner.setData(R.layout.item_banner,data,null);
-        mBGABanner.setAdapter(new BGABanner.Adapter<View,BannerBean>() {
-            @Override
-            public void fillBannerItem(BGABanner banner, View itemView, BannerBean model, int position) {
-                ImageView imageView=itemView.findViewById(R.id.imageView);
-                ImageLoaderManager.loadImage(getContext(),model.getImagePath(),imageView);
-            }
-        });
-        mBGABanner.setDelegate(new BGABanner.Delegate<View,BannerBean>() {
-            @Override
-            public void onBannerItemClick(BGABanner banner, View itemView, BannerBean model, int position) {
-                WebViewActivity.runActivity(getContext(),model.getUrl());
-            }
-        });
-    }
-
-    @Override
     public void showRefreshView(final Boolean refresh) {
         //保证首次加载数据时，有加载动画效果
         mSwipeRefreshLayout.post(new Runnable() {
             @Override
             public void run() {
                 mSwipeRefreshLayout.setRefreshing(refresh);
+            }
+        });
+    }
+
+    @Override
+    public void getBannerDataSuccess(List<BannerBean> data) {
+        //设置轮播图
+        mBGABanner.setData(R.layout.item_banner, data, null);
+        mBGABanner.setAdapter(new BGABanner.Adapter<View, BannerBean>() {
+            @Override
+            public void fillBannerItem(BGABanner banner, View itemView, BannerBean model, int position) {
+                ImageView imageView = itemView.findViewById(R.id.imageView);
+                ImageLoaderManager.loadImage(getContext(), model.getImagePath(), imageView);
+            }
+        });
+        mBGABanner.setDelegate(new BGABanner.Delegate<View, BannerBean>() {
+            @Override
+            public void onBannerItemClick(BGABanner banner, View itemView, BannerBean model, int position) {
+                WebViewActivity.runActivity(getContext(), model.getUrl());
             }
         });
     }
@@ -142,10 +141,10 @@ public class HomeFragment extends BaseFragment<HomeView,HomePresenter>
 
     @Override
     public void getMoreDataSuccess(List<ArticleBean> data) {
-        if (data.size()!=0){
+        if (data.size() != 0) {
             mAdapter.addData(data);
             mAdapter.loadMoreComplete();
-        }else {
+        } else {
             mAdapter.loadMoreEnd();
         }
     }

@@ -37,8 +37,8 @@ public class ArticleListAdapter extends BaseQuickAdapter<ArticleBean, BaseViewHo
     public ArticleListAdapter(Context context, @Nullable List<ArticleBean> data, CompositeDisposable compositeDisposable) {
         super(R.layout.item_article, data);
         mContext = context;
-        mDataModel=new DataModelImpl();
-        mCompositeDisposable=compositeDisposable;
+        mDataModel = new DataModelImpl();
+        mCompositeDisposable = compositeDisposable;
     }
 
 
@@ -68,7 +68,7 @@ public class ArticleListAdapter extends BaseQuickAdapter<ArticleBean, BaseViewHo
         helper.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                WebViewActivity.runActivity(mContext,item.getLink());
+                WebViewActivity.runActivity(mContext, item.getLink());
             }
         });
     }
@@ -87,56 +87,56 @@ public class ArticleListAdapter extends BaseQuickAdapter<ArticleBean, BaseViewHo
         }
     }
 
-    private void collectArticler(final ArticleBean item) {
-        BaseRxObserverHelper<String> baseRxObserverHelper =new BaseRxObserverHelper<String>() {
-
-            @Override
-            protected void next() {
-                super.next();
-                ToastUtil.showShort(mContext,"收藏成功");
-                item.setCollect(true);
-                notifyDataSetChanged();
-            }
-
-            @Override
-            protected void next(String s) {
-                ToastUtil.showShort(mContext,"收藏成功");
-                item.setCollect(true);
-                notifyDataSetChanged();
-            }
-
-            @Override
-            protected void error(String message) {
-                ToastUtil.showShort(mContext,"收藏失败");
-            }
-        };
-        mDataModel.collectArticleInHomeList(item.getId(), baseRxObserverHelper);
-        mCompositeDisposable.add(baseRxObserverHelper);
-    }
-
     private void unCollectArticler(final ArticleBean item) {
-        BaseRxObserverHelper<String> baseRxObserverHelper =new BaseRxObserverHelper<String>() {
+        BaseRxObserverHelper<String> baseRxObserverHelper = new BaseRxObserverHelper<String>() {
             @Override
             protected void next() {
                 super.next();
-                ToastUtil.showShort(mContext,"取消成功");
+                ToastUtil.showShort(mContext, "取消成功");
                 item.setCollect(false);
                 notifyDataSetChanged();
             }
 
             @Override
             protected void next(String s) {
-                ToastUtil.showShort(mContext,"取消成功");
+                ToastUtil.showShort(mContext, "取消成功");
                 item.setCollect(false);
                 notifyDataSetChanged();
             }
 
             @Override
             protected void error(String message) {
-                ToastUtil.showShort(mContext,"取消失败");
+                ToastUtil.showShort(mContext, "取消失败");
             }
         };
         mDataModel.unCollectArticleInHomeList(item.getId(), baseRxObserverHelper);
+        mCompositeDisposable.add(baseRxObserverHelper);
+    }
+
+    private void collectArticler(final ArticleBean item) {
+        BaseRxObserverHelper<String> baseRxObserverHelper = new BaseRxObserverHelper<String>() {
+
+            @Override
+            protected void next() {
+                super.next();
+                ToastUtil.showShort(mContext, "收藏成功");
+                item.setCollect(true);
+                notifyDataSetChanged();
+            }
+
+            @Override
+            protected void next(String s) {
+                ToastUtil.showShort(mContext, "收藏成功");
+                item.setCollect(true);
+                notifyDataSetChanged();
+            }
+
+            @Override
+            protected void error(String message) {
+                ToastUtil.showShort(mContext, "收藏失败");
+            }
+        };
+        mDataModel.collectArticleInHomeList(item.getId(), baseRxObserverHelper);
         mCompositeDisposable.add(baseRxObserverHelper);
     }
 }
