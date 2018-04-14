@@ -32,4 +32,8 @@ public class AppConst {
 
     public static final int DB_VERSION = 1;
 
+    public static final String COMPANY_NAMES="company_names";
+
+    public static final String SELECTED_COMPANY="selected_company";
+
 }

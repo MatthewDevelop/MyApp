@@ -51,7 +51,8 @@
 
         <activity android:name=".websocketdemo.WebSocketActivity"></activity>
         <activity android:name=".wanandroid.activity.HotActivity" />
-        <activity android:name=".expressinquiry.activity.ExpressQueryActivity"/>
+        <activity android:name=".expressinquiry.activity.ExpressQueryActivity" />
+        <activity android:name=".expressinquiry.activity.CompanySearchActivity" />
     </application>
 
 </manifest>

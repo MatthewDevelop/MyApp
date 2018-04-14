@@ -1,6 +1,7 @@
 package cn.foxconn.matthew.myapp.expressinquiry.activity;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -25,6 +26,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.foxconn.matthew.myapp.R;
+import cn.foxconn.matthew.myapp.app.AppConst;
 import cn.foxconn.matthew.myapp.expressinquiry.adapter.ExpressInfoAdapter;
 import cn.foxconn.matthew.myapp.expressinquiry.bean.ExpressResponseData;
 import cn.foxconn.matthew.myapp.expressinquiry.presenter.ExpressQueryPresenter;
@@ -52,6 +54,8 @@ public class ExpressQueryActivity extends RxAppCompatActivity implements Express
     RelativeLayout mRlLoadError;
     @BindView(R.id.ft_refresh)
     FontTextView mFtRefresh;
+    @BindView(R.id.ft_search)
+    FontTextView mFtSearch;
     @BindView(R.id.tv_error_message)
     TextView mTvErrorMessage;
 
@@ -113,7 +117,7 @@ public class ExpressQueryActivity extends RxAppCompatActivity implements Express
         mPresenter.getCompanyData();
     }
 
-    @OnClick({R.id.ft_return, R.id.bt_query,R.id.ft_refresh})
+    @OnClick({R.id.ft_return, R.id.bt_query,R.id.ft_refresh,R.id.ft_search})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.ft_return:
@@ -130,8 +134,29 @@ public class ExpressQueryActivity extends RxAppCompatActivity implements Express
             case R.id.ft_refresh:
                 mPresenter.getExpressInfo(mCurrentCompanyCode,mCurrentPostId);
                 break;
+            case R.id.ft_search:
+                Intent intent=new Intent(ExpressQueryActivity.this,CompanySearchActivity.class);
+                intent.putStringArrayListExtra(AppConst.COMPANY_NAMES, (ArrayList<String>) mCompanyNames);
+                startActivityForResult(intent,0);
+                break;
             default:
                 break;
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode==0){
+            if (resultCode==RESULT_OK){
+                String selectedName=data.getStringExtra(AppConst.SELECTED_COMPANY);
+                for(int i=0;i<mCompanyNames.size();i++){
+                    if(mCompanyNames.get(i).equals(selectedName)){
+                        mSpCompany.setSelection(i);
+                        break;
+                    }
+                }
+            }
         }
     }
 

@@ -23,16 +23,30 @@
             android:textSize="18sp" />
     </RelativeLayout>
 
-    <Spinner
-        android:id="@+id/sp_company"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp" />
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Spinner
+            android:id="@+id/sp_company"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1" />
+
+        <cn.foxconn.matthew.myapp.wanandroid.widget.FontTextView
+            android:id="@+id/ft_search"
+            style="@style/top_bar_icon_style"
+            android:text="@string/ic_search"
+            android:textColor="@color/main" />
+
+    </LinearLayout>
 
     <EditText
         android:id="@+id/et_post_id"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:hint="请输入快递单号"/>
+        android:hint="请输入快递单号" />
 
     <Button
         android:id="@+id/bt_query"
