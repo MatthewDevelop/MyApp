@@ -116,7 +116,6 @@ public class CharacterParser {
             result = String.valueOf((char) ascII);
         } else {
             for (int i = (pyvalue.length-1); i >=0; i--) {
-                Log.e(TAG, "convert: " +pyvalue.length);
                 if (pyvalue[i] <= ascII) {
                     result = pystr[i];
                     break;

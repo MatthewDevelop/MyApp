@@ -22,26 +22,76 @@
             android:textColor="@color/white"
             android:textSize="18sp" />
     </RelativeLayout>
-
-    <EditText
-        android:id="@+id/et_name"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="50dp"
+        android:background="@color/main"
+        android:gravity="center_vertical">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="6dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_search_box"
+            android:gravity="center_vertical">
+
+            <cn.foxconn.matthew.myapp.wanandroid.widget.FontTextView
+                android:id="@+id/ft_search"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="5dp"
+                android:gravity="center"
+                android:text="@string/ic_search"
+                android:textColor="@color/main"
+                android:textSize="22sp" />
+
+            <EditText
+                android:id="@+id/et_name"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/transparent"
+                android:gravity="center_vertical"
+                android:hint="请输入关键词"
+                android:paddingLeft="15dp"
+                android:textColor="@color/text0" />
+
+            <cn.foxconn.matthew.myapp.wanandroid.widget.FontTextView
+                android:id="@+id/ft_clear"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="15dp"
+                android:gravity="center"
+                android:text="@string/ic_close"
+                android:textColor="@color/main"
+                android:textSize="22sp" />
+
+        </LinearLayout>
+    </LinearLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ListView
-            android:id="@+id/lv_company"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent">
 
-        <cn.foxconn.matthew.myapp.expressinquiry.widget.SideBar
-            android:id="@+id/sideBar"
-            android:layout_width="30dp"
-            android:layout_height="match_parent"
-            android:layout_alignParentRight="true" />
+            <ListView
+                android:id="@+id/lv_company"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <cn.foxconn.matthew.myapp.expressinquiry.widget.SideBar
+                android:id="@+id/sideBar"
+                android:layout_width="30dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true" />
+        </LinearLayout>
 
         <TextView
             android:id="@+id/tv_dialog"
@@ -53,7 +103,7 @@
             android:paddingRight="10dp"
             android:text="A"
             android:textSize="35sp"
-            android:visibility="gone"/>
+            android:visibility="gone" />
 
     </RelativeLayout>
 

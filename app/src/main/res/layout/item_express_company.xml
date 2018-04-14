@@ -8,14 +8,16 @@
         android:id="@+id/tv_letter"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/wheat"
+        android:padding="5dp"
         android:text="Y"
-        android:textSize="18sp"
-        android:background="@color/main"/>
+        android:textSize="18sp" />
 
     <TextView
         android:id="@+id/tv_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:padding="5dp"
         android:text="圆通快递"
         android:textSize="18sp" />
 

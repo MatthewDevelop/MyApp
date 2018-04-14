@@ -69,7 +69,7 @@ public class SideBar extends View {
             default:
                 setBackgroundColor(UIUtil.getColor(R.color.wheat));
                 if (oldChoose != c) {
-                    if (c > 0 && c < b.length) {
+                    if (c >=0 && c < b.length) {
                         if (listener != null) {
                             listener.onTouchLetterChanged(b[c]);
                         }
