@@ -89,12 +89,15 @@ public class WanAndroidActivity extends BaseActivity {
                 switch (position) {
                     case 0:
                         setTabColor(mFtHome, mTvHome);
+                        mFtRefresh.setVisibility(View.GONE);
                         break;
                     case 1:
                         setTabColor(mFtType, mTvType);
+                        mFtRefresh.setVisibility(View.VISIBLE);
                         break;
                     case 2:
                         setTabColor(mFtUser, mTvUser);
+                        mFtRefresh.setVisibility(View.GONE);
                         break;
                     default:
                         break;

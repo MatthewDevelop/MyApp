@@ -2,6 +2,7 @@ package cn.foxconn.matthew.myapp.wanandroid.base;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +19,20 @@ import butterknife.ButterKnife;
  */
 
 public abstract class BaseFragment<V, T extends BasePresenter<V, FragmentEvent>> extends RxFragment {
+    private static final String TAG = "BaseFragment";
     protected T mPresenter;
+    /**
+     * Fragment是否可见
+     */
+    private boolean isVisible;
+    /**
+     * Fragment是否初始化完成
+     */
+    private boolean isPrepared;
+    /**
+     * Fragment是否为首次加载
+     */
+    private boolean isFirst = true;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -31,6 +45,53 @@ public abstract class BaseFragment<V, T extends BasePresenter<V, FragmentEvent>>
             mPresenter.attachView((V) this);
         }
     }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (mPresenter != null) {
+            mPresenter.detachView();
+        }
+    }
+
+    protected void init() {
+    }
+
+    /**
+     * 创建presenter
+     *
+     * @return
+     */
+    protected abstract T createPresenter();
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (getUserVisibleHint()) {
+            isVisible = true;
+            onVisiable();
+        } else {
+            isVisible = false;
+            onInVisiable();
+        }
+    }
+
+    private void onVisiable() {
+        if (!isPrepared || !isVisible || !isFirst) {
+            return;
+        }
+        lazyLoad();
+        isFirst = false;
+    }
+
+    private void onInVisiable() {
+
+    }
+
+    /**
+     * 懒加载
+     */
+    protected abstract void lazyLoad();
 
     @Nullable
     @Override
@@ -46,25 +107,15 @@ public abstract class BaseFragment<V, T extends BasePresenter<V, FragmentEvent>>
         super.onActivityCreated(savedInstanceState);
         initData();
         initListener();
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        if (mPresenter != null) {
-            mPresenter.detachView();
-        }
-    }
-
-    protected void initListener() {
-
+        isPrepared = true;
+        lazyLoad();
     }
 
     protected void initData() {
 
     }
 
-    protected void initView(View rootView) {
+    protected void initListener() {
 
     }
 
@@ -75,13 +126,7 @@ public abstract class BaseFragment<V, T extends BasePresenter<V, FragmentEvent>>
      */
     protected abstract int getContentResId();
 
-    /**
-     * 创建presenter
-     *
-     * @return
-     */
-    protected abstract T createPresenter();
+    protected void initView(View rootView) {
 
-    protected void init() {
     }
 }

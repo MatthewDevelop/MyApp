@@ -43,16 +43,14 @@ public class UserFragment extends BaseFragment {
 
     private WanAndroidActivity mActivity;
 
+    public static UserFragment newInstance() {
+        return new UserFragment();
+    }
+
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        mActivity= (WanAndroidActivity) activity;
-    }
-
-
-    @Override
-    protected int getContentResId() {
-        return R.layout.frag_user;
+        mActivity = (WanAndroidActivity) activity;
     }
 
     @Override
@@ -60,8 +58,14 @@ public class UserFragment extends BaseFragment {
         return null;
     }
 
-    public static UserFragment newInstance() {
-        return new UserFragment();
+    @Override
+    protected void lazyLoad() {
+        //do nothing
+    }
+
+    @Override
+    protected int getContentResId() {
+        return R.layout.frag_user;
     }
 
     @Override
@@ -81,8 +85,8 @@ public class UserFragment extends BaseFragment {
         switch (view.getId()) {
             case R.id.cv_collect:
                 if (!PrefUtil.getBoolean(getActivity(), AppConst.IS_LOGIN_KEY, false)) {
-                    ToastUtil.showShort(getContext(),"请先登录");
-                }else {
+                    ToastUtil.showShort(getContext(), "请先登录");
+                } else {
                     startActivity(new Intent(getContext(), CollectActivity.class));
                 }
                 break;
@@ -91,8 +95,8 @@ public class UserFragment extends BaseFragment {
                     startActivity(new Intent(getContext(), LoginActivity.class));
                     getActivity().finish();
                 } else {
-                    PrefUtil.setBoolean(getActivity(),AppConst.IS_LOGIN_KEY,false);
-                    ToastUtil.showShort(getContext(),"已登出");
+                    PrefUtil.setBoolean(getActivity(), AppConst.IS_LOGIN_KEY, false);
+                    ToastUtil.showShort(getContext(), "已登出");
                     mTvUserName.setText("暂未登录");
                     mTvLogout.setText("点击登录");
                     //退出登录清除cookie
@@ -108,8 +112,8 @@ public class UserFragment extends BaseFragment {
     /**
      * 登出刷新数据
      */
-    public void refreshData(){
-        ((HomeFragment)mActivity.getFragments().get(0)).onRefresh();
-        ((TypeFragment)mActivity.getFragments().get(1)).onRefresh();
+    public void refreshData() {
+        ((HomeFragment) mActivity.getFragments().get(0)).onRefresh();
+        ((TypeFragment) mActivity.getFragments().get(1)).onRefresh();
     }
 }

@@ -57,6 +57,27 @@ public class HomeFragment extends BaseFragment<HomeView, HomePresenter>
     }
 
     @Override
+    protected void init() {
+        super.init();
+        mCompositeDisposable = new CompositeDisposable();
+    }
+
+    @Override
+    protected HomePresenter createPresenter() {
+        return new HomePresenter(this);
+    }
+
+    @Override
+    protected void lazyLoad() {
+        onRefresh();
+    }
+
+    @Override
+    protected int getContentResId() {
+        return R.layout.frag_home;
+    }
+
+    @Override
     protected void initView(View rootView) {
         super.initView(rootView);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -68,23 +89,6 @@ public class HomeFragment extends BaseFragment<HomeView, HomePresenter>
         View headView = View.inflate(getContext(), R.layout.layout_banner, null);
         mBGABanner = headView.findViewById(R.id.bgaBanner);
         mAdapter.addHeaderView(headView);
-        onRefresh();
-    }
-
-    @Override
-    protected int getContentResId() {
-        return R.layout.frag_home;
-    }
-
-    @Override
-    protected HomePresenter createPresenter() {
-        return new HomePresenter(this);
-    }
-
-    @Override
-    protected void init() {
-        super.init();
-        mCompositeDisposable = new CompositeDisposable();
     }
 
     @Override

@@ -4,6 +4,7 @@ import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 
@@ -30,6 +31,7 @@ import io.reactivex.disposables.CompositeDisposable;
 public class TypeFragment
         extends BaseFragment<TypeView, TypePresenter>
         implements TypeView, BaseQuickAdapter.RequestLoadMoreListener {
+    private static final String TAG = "TypeFragment";
     @BindView(R.id.tabLayout)
     TabLayout mTabLayout;
     @BindView(R.id.recyclerView)
@@ -56,12 +58,18 @@ public class TypeFragment
     }
 
     @Override
-    protected void initView(View rootView) {
-        super.initView(rootView);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        mAdapter = new ArticleListAdapter(getContext(), null, mCompositeDisposable);
-        mRecyclerView.setAdapter(mAdapter);
-        mAdapter.setOnLoadMoreListener(this, mRecyclerView);
+    protected void init() {
+        super.init();
+        mCompositeDisposable = new CompositeDisposable();
+    }
+
+    @Override
+    protected TypePresenter createPresenter() {
+        return new TypePresenter(getActivity(), this);
+    }
+
+    @Override
+    protected void lazyLoad() {
         mPresenter.getTagData();
     }
 
@@ -71,14 +79,18 @@ public class TypeFragment
     }
 
     @Override
-    protected TypePresenter createPresenter() {
-        return new TypePresenter(getActivity(), this);
+    protected void initView(View rootView) {
+        super.initView(rootView);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        mAdapter = new ArticleListAdapter(getContext(), null, mCompositeDisposable);
+        mRecyclerView.setAdapter(mAdapter);
+        mAdapter.setOnLoadMoreListener(this, mRecyclerView);
     }
 
     @Override
-    protected void init() {
-        super.init();
-        mCompositeDisposable = new CompositeDisposable();
+    public void onStart() {
+        super.onStart();
+        Log.e(TAG, "onStart: ");
     }
 
     public void onRefresh() {

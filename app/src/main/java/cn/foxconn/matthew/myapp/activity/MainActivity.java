@@ -3,6 +3,7 @@ package cn.foxconn.matthew.myapp.activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -11,19 +12,15 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import org.java_websocket.client.WebSocketClient;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import cn.foxconn.matthew.myapp.R;
-import cn.foxconn.matthew.myapp.app.AppConst;
 import cn.foxconn.matthew.myapp.expressinquiry.activity.ExpressQueryActivity;
-import cn.foxconn.matthew.myapp.expressinquiry.api.ExpressService;
-import cn.foxconn.matthew.myapp.expressinquiry.bean.ExpressResponseData;
 import cn.foxconn.matthew.myapp.helper.RetrofitServiceManager;
 import cn.foxconn.matthew.myapp.mobilesafe.activity.MobileSafeActivity;
+import cn.foxconn.matthew.myapp.test.TrackingMoreApi;
+import cn.foxconn.matthew.myapp.test.CarrierBean;
 import cn.foxconn.matthew.myapp.wanandroid.activity.WanAndroidActivity;
-import cn.foxconn.matthew.myapp.websocketdemo.WebSocketActivity;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 
@@ -34,12 +31,17 @@ import io.reactivex.disposables.Disposable;
  */
 
 public class MainActivity extends AppCompatActivity {
+
+    private static final String TAG = "MainActivity";
+
     @BindView(R.id.gridView)
     GridView mGridView;
 
     //    String[] names = new String[]{"手机卫士", "玩Android","WebSocket"};
-    String[] names = new String[]{"手机卫士", "玩Android", "快递查询"};
-    int[] imageIds = new int[]{R.drawable.home_callmsgsafe, R.drawable.ic_launcher_round,R.drawable.ic_launcher_round};
+    String[] names = new String[]{"手机卫士", "玩Android", "快递查询",
+            /*"Test"*/};
+    int[] imageIds = new int[]{R.drawable.home_callmsgsafe, R.drawable.ic_launcher_round, R.drawable.ic_launcher_round,
+            /*R.drawable.ic_launcher_round*/};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,6 +93,47 @@ public class MainActivity extends AppCompatActivity {
                                         });
                             }
                         }).start();*/
+                        new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                String json = "{\n" +
+                                        "    \"tracking_number\": \"888590141663223471\"\n" +
+                                        "}";
+                                try {
+//                                    Tracker.orderOnlineByJson(json, " /carriers/detect", "post");
+//                                    Tracker.orderOnlineByJson("", "/carriers", "get");
+//                                    Tracker.queryCompany(json);
+                                    RetrofitServiceManager.getInstance("https://api.trackingmore.com/v2/")
+                                            .create(TrackingMoreApi.class)
+                                            .queryCarriers("8ddcc142-4540-4837-9bb0-0600f8c3ba36")
+                                            .subscribe(new Observer<CarrierBean>() {
+                                                @Override
+                                                public void onSubscribe(Disposable d) {
+
+                                                }
+
+                                                @Override
+                                                public void onNext(CarrierBean carrierBean) {
+                                                    Log.e(TAG, "onNext: "+carrierBean.getData().size() );
+                                                    Log.e(TAG, carrierBean.toString() );
+                                                }
+
+                                                @Override
+                                                public void onError(Throwable e) {
+
+                                                }
+
+                                                @Override
+                                                public void onComplete() {
+
+                                                }
+                                            });
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }).start();
+
                         break;
                     default:
                         break;
