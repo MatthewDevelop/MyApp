@@ -77,6 +77,7 @@ public class TypePresenter extends BasePresenter<TypeView, FragmentEvent> {
     public void setTabUi() {
         TabLayout tabLayout = mTypeView.getTabLayout();
         tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
+        tabLayout.removeAllTabs();
         for (TypeTagVO bean : mDatas) {
             tabLayout.addTab(tabLayout.newTab().setText(bean.getName()));
         }

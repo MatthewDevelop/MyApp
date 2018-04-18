@@ -77,6 +77,7 @@ public abstract class BaseFragment<V, T extends BasePresenter<V, FragmentEvent>>
     }
 
     private void onVisiable() {
+        Log.e(TAG, "onVisiable: "+isPrepared+isVisible+isFirst );
         if (!isPrepared || !isVisible || !isFirst) {
             return;
         }
@@ -108,7 +109,7 @@ public abstract class BaseFragment<V, T extends BasePresenter<V, FragmentEvent>>
         initData();
         initListener();
         isPrepared = true;
-        lazyLoad();
+        onVisiable();
     }
 
     protected void initData() {

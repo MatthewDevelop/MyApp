@@ -71,13 +71,14 @@ public class WanAndroidActivity extends BaseActivity {
     protected void initView() {
         super.initView();
         setTabColor(mFtHome, mTvHome);
+        mFtRefresh.setVisibility(View.INVISIBLE);
         mFragments.add(HomeFragment.newInstance());
         mFragments.add(TypeFragment.newInstance());
         mFragments.add(UserFragment.newInstance());
         //TODO 还需添加其他碎片布局
         mViewPager.setAdapter(new cn.foxconn.matthew.myapp.wanandroid.adapter.PagerAdapter(getSupportFragmentManager(), mFragments));
         mViewPager.setCurrentItem(0, false);
-        //设置偏移的页数
+        //设置左右预加载页面的数量
         mViewPager.setOffscreenPageLimit(2);
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override

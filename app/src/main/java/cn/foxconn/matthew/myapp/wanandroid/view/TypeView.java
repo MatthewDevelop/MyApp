@@ -6,6 +6,7 @@ import java.util.List;
 
 import cn.foxconn.matthew.myapp.wanandroid.bean.pojo.ArticleBean;
 import cn.foxconn.matthew.myapp.wanandroid.adapter.ArticleListAdapter;
+import cn.foxconn.matthew.myapp.wanandroid.bean.pojovo.TypeTagVO;
 import cn.foxconn.matthew.myapp.wanandroid.widget.AutoLinefeedLayout;
 
 /**
@@ -14,11 +15,18 @@ import cn.foxconn.matthew.myapp.wanandroid.widget.AutoLinefeedLayout;
  * @email:guocheng0816@163.com
  */
 
-public interface  TypeView {
+public interface TypeView {
     TabLayout getTabLayout();
+
     AutoLinefeedLayout getTagLayout();
+
     ArticleListAdapter getAdapter();
+
+    void getTagDataSuccess(List<TypeTagVO> typeTagVOs);
+
     void getDataError(String message);
+
     void getRefreshDataSuccess(List<ArticleBean> data);
+
     void getMoreDataSuccess(List<ArticleBean> data);
 }

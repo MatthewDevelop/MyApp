@@ -17,6 +17,7 @@ import cn.foxconn.matthew.myapp.R;
 import cn.foxconn.matthew.myapp.wanandroid.bean.pojo.ArticleBean;
 import cn.foxconn.matthew.myapp.wanandroid.adapter.ArticleListAdapter;
 import cn.foxconn.matthew.myapp.wanandroid.base.BaseFragment;
+import cn.foxconn.matthew.myapp.wanandroid.bean.pojovo.TypeTagVO;
 import cn.foxconn.matthew.myapp.wanandroid.presenter.TypePresenter;
 import cn.foxconn.matthew.myapp.wanandroid.view.TypeView;
 import cn.foxconn.matthew.myapp.wanandroid.widget.AutoLinefeedLayout;
@@ -70,7 +71,7 @@ public class TypeFragment
 
     @Override
     protected void lazyLoad() {
-        mPresenter.getTagData();
+        onRefresh();
     }
 
     @Override
@@ -87,13 +88,9 @@ public class TypeFragment
         mAdapter.setOnLoadMoreListener(this, mRecyclerView);
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        Log.e(TAG, "onStart: ");
-    }
 
     public void onRefresh() {
+        Log.e(TAG, "onRefresh: ");
         mPresenter.getTagData();
     }
 
@@ -118,6 +115,11 @@ public class TypeFragment
     @Override
     public ArticleListAdapter getAdapter() {
         return mAdapter;
+    }
+
+    @Override
+    public void getTagDataSuccess(List<TypeTagVO> typeTagVOs) {
+
     }
 
     @Override

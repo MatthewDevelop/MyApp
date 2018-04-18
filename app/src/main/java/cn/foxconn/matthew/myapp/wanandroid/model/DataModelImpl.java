@@ -32,7 +32,7 @@ public class DataModelImpl implements DataModel {
     private WanService mWanService;
 
     public DataModelImpl() {
-        mWanService = RetrofitServiceManager.getInstance(AppConst.WAN_ANDROID_BASE_URL).create(WanService.class);
+        mWanService = RetrofitServiceManager.getInstance().create(WanService.class);
     }
 
     @Override
@@ -135,13 +135,12 @@ public class DataModelImpl implements DataModel {
 
     @Override
     public void getSearchData(int page, String keyword, LifecycleProvider<ActivityEvent> provider, BaseRxObserverHelper<ArticleListVO> subscriber) {
-        mWanService.getSearchData(page,keyword)
+        mWanService.getSearchData(page, keyword)
                 .compose(RxSchedulersHelper.<ResponseData<ArticleListVO>>defaultTransformer())
                 .compose(RxResultHelper.<ArticleListVO>handleResult())
                 .compose(provider.<ArticleListVO>bindUntilEvent(ActivityEvent.DESTROY))
                 .subscribe(subscriber);
     }
-
 
 
     @Override

@@ -93,46 +93,46 @@ public class MainActivity extends AppCompatActivity {
                                         });
                             }
                         }).start();*/
-                        new Thread(new Runnable() {
-                            @Override
-                            public void run() {
-                                String json = "{\n" +
-                                        "    \"tracking_number\": \"888590141663223471\"\n" +
-                                        "}";
-                                try {
-//                                    Tracker.orderOnlineByJson(json, " /carriers/detect", "post");
-//                                    Tracker.orderOnlineByJson("", "/carriers", "get");
-//                                    Tracker.queryCompany(json);
-                                    RetrofitServiceManager.getInstance("https://api.trackingmore.com/v2/")
-                                            .create(TrackingMoreApi.class)
-                                            .queryCarriers("8ddcc142-4540-4837-9bb0-0600f8c3ba36")
-                                            .subscribe(new Observer<CarrierBean>() {
-                                                @Override
-                                                public void onSubscribe(Disposable d) {
-
-                                                }
-
-                                                @Override
-                                                public void onNext(CarrierBean carrierBean) {
-                                                    Log.e(TAG, "onNext: "+carrierBean.getData().size() );
-                                                    Log.e(TAG, carrierBean.toString() );
-                                                }
-
-                                                @Override
-                                                public void onError(Throwable e) {
-
-                                                }
-
-                                                @Override
-                                                public void onComplete() {
-
-                                                }
-                                            });
-                                } catch (Exception e) {
-                                    e.printStackTrace();
-                                }
-                            }
-                        }).start();
+//                        new Thread(new Runnable() {
+//                            @Override
+//                            public void run() {
+//                                String json = "{\n" +
+//                                        "    \"tracking_number\": \"888590141663223471\"\n" +
+//                                        "}";
+//                                try {
+////                                    Tracker.orderOnlineByJson(json, " /carriers/detect", "post");
+////                                    Tracker.orderOnlineByJson("", "/carriers", "get");
+////                                    Tracker.queryCompany(json);
+//                                    RetrofitServiceManager.getExpressInstance()
+//                                            .create(TrackingMoreApi.class)
+//                                            .queryCarriers("8ddcc142-4540-4837-9bb0-0600f8c3ba36")
+//                                            .subscribe(new Observer<CarrierBean>() {
+//                                                @Override
+//                                                public void onSubscribe(Disposable d) {
+//
+//                                                }
+//
+//                                                @Override
+//                                                public void onNext(CarrierBean carrierBean) {
+//                                                    Log.e(TAG, "onNext: "+carrierBean.getData().size() );
+//                                                    Log.e(TAG, carrierBean.toString() );
+//                                                }
+//
+//                                                @Override
+//                                                public void onError(Throwable e) {
+//
+//                                                }
+//
+//                                                @Override
+//                                                public void onComplete() {
+//
+//                                                }
+//                                            });
+//                                } catch (Exception e) {
+//                                    e.printStackTrace();
+//                                }
+//                            }
+//                        }).start();
 
                         break;
                     default:
