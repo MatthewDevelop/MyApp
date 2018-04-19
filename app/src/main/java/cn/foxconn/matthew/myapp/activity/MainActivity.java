@@ -20,6 +20,7 @@ import cn.foxconn.matthew.myapp.helper.RetrofitServiceManager;
 import cn.foxconn.matthew.myapp.mobilesafe.activity.MobileSafeActivity;
 import cn.foxconn.matthew.myapp.test.TrackingMoreApi;
 import cn.foxconn.matthew.myapp.test.CarrierBean;
+import cn.foxconn.matthew.myapp.utils.NetworkUtil;
 import cn.foxconn.matthew.myapp.wanandroid.activity.WanAndroidActivity;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
@@ -39,9 +40,9 @@ public class MainActivity extends AppCompatActivity {
 
     //    String[] names = new String[]{"手机卫士", "玩Android","WebSocket"};
     String[] names = new String[]{"手机卫士", "玩Android", "快递查询",
-            /*"Test"*/};
+            "Test"};
     int[] imageIds = new int[]{R.drawable.home_callmsgsafe, R.drawable.ic_launcher_round, R.drawable.ic_launcher_round,
-            /*R.drawable.ic_launcher_round*/};
+            R.drawable.ic_launcher_round};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -133,7 +134,6 @@ public class MainActivity extends AppCompatActivity {
 //                                }
 //                            }
 //                        }).start();
-
                         break;
                     default:
                         break;

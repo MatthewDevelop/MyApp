@@ -53,10 +53,12 @@ public class RetrofitServiceManager {
         /**
          * 添加缓存功能
          */
-        /*Cache cache = new Cache(App.getContext().getCacheDir(), 10240 * 1024);
+        Cache cache = new Cache(App.getContext().getCacheDir(), 10240 * 1024);
         CacheInterceptor cacheInterceptor = new CacheInterceptor();
-        builder.addNetworkInterceptor(cacheInterceptor);
-        builder.cache(cache);*/
+        builder.cache(cache)
+                .addInterceptor(cacheInterceptor)
+                .addNetworkInterceptor(cacheInterceptor);
+//        builder.addNetworkInterceptor(cacheInterceptor);
 
         //创建Retrofit
         mRetrofit = new Retrofit.Builder()

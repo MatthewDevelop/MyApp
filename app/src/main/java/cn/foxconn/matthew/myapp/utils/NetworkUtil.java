@@ -1,8 +1,14 @@
 package cn.foxconn.matthew.myapp.utils;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.support.annotation.RequiresPermission;
 import android.util.Log;
 
+import cn.foxconn.matthew.myapp.app.App;
+
+import static android.Manifest.permission.ACCESS_NETWORK_STATE;
 import static android.Manifest.permission.INTERNET;
 
 /**
@@ -12,39 +18,32 @@ import static android.Manifest.permission.INTERNET;
  */
 
 public class NetworkUtil {
+
     /**
-     * Return whether network is available using ping.
-     * <p>Must hold {@code <uses-permission android:name="android.permission.INTERNET" />}</p>
-     * <p>The default ping ip: 223.5.5.5</p>
+     * Return whether network is connected.
+     * <p>Must hold
+     * {@code <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />}</p>
      *
-     * @return {@code true}: yes<br>{@code false}: no
+     * @return {@code true}: connected<br>{@code false}: disconnected
      */
-    @RequiresPermission(INTERNET)
-    public static boolean isAvailableByPing() {
-        return isAvailableByPing(null);
+    @RequiresPermission(ACCESS_NETWORK_STATE)
+    public static boolean isConnected() {
+        NetworkInfo info = getActiveNetworkInfo();
+        return info != null && info.isConnected();
     }
 
-
     /**
-     * Return whether network is available using ping.
-     * <p>Must hold {@code <uses-permission android:name="android.permission.INTERNET" />}</p>
+     * 获取网络信息
      *
-     * @param ip The ip address.
-     * @return {@code true}: yes<br>{@code false}: no
+     * @return
      */
-    @RequiresPermission(INTERNET)
-    public static boolean isAvailableByPing(String ip) {
-        if (ip == null || ip.length() <= 0) {
-            ip = "223.5.5.5";// default ping ip
+    @RequiresPermission(ACCESS_NETWORK_STATE)
+    private static NetworkInfo getActiveNetworkInfo() {
+        ConnectivityManager manager =
+                (ConnectivityManager) App.getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (manager == null) {
+            return null;
         }
-        ShellUtils.CommandResult result = ShellUtils.execCmd(String.format("ping -c 1 %s", ip), false);
-        boolean ret = result.result == 0;
-        if (result.errorMsg != null) {
-            Log.d("NetworkUtils", "isAvailableByPing() called" + result.errorMsg);
-        }
-        if (result.successMsg != null) {
-            Log.d("NetworkUtils", "isAvailableByPing() called" + result.successMsg);
-        }
-        return ret;
+        return manager.getActiveNetworkInfo();
     }
 }
