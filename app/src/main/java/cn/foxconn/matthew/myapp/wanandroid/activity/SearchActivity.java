@@ -25,7 +25,7 @@ import cn.foxconn.matthew.myapp.utils.UIUtil;
 import cn.foxconn.matthew.myapp.wanandroid.bean.pojo.ArticleBean;
 import cn.foxconn.matthew.myapp.wanandroid.bean.pojo.HotKeyBean;
 import cn.foxconn.matthew.myapp.wanandroid.adapter.ArticleListAdapter;
-import cn.foxconn.matthew.myapp.wanandroid.base.BaseActivity;
+import cn.foxconn.matthew.myapp.wanandroid.base.WanAndroidBaseActivity;
 import cn.foxconn.matthew.myapp.wanandroid.presenter.SearchPresenter;
 import cn.foxconn.matthew.myapp.wanandroid.view.SearchView;
 import cn.foxconn.matthew.myapp.utils.ToastUtil;
@@ -39,7 +39,7 @@ import io.reactivex.disposables.CompositeDisposable;
  * @email:guocheng0816@163.com
  */
 public class SearchActivity
-        extends BaseActivity<SearchView, SearchPresenter>
+        extends WanAndroidBaseActivity<SearchView, SearchPresenter>
         implements SearchView, BaseQuickAdapter.RequestLoadMoreListener {
 
     @BindView(R.id.et_search)

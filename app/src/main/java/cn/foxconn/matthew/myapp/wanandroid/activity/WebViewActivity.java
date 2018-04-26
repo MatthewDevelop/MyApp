@@ -9,7 +9,6 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.widget.NestedScrollView;
 import android.view.KeyEvent;
 import android.view.View;
-import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
@@ -18,7 +17,7 @@ import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.OnClick;
 import cn.foxconn.matthew.myapp.R;
-import cn.foxconn.matthew.myapp.wanandroid.base.BaseActivity;
+import cn.foxconn.matthew.myapp.wanandroid.base.WanAndroidBaseActivity;
 import cn.foxconn.matthew.myapp.wanandroid.presenter.WebViewPresenter;
 import cn.foxconn.matthew.myapp.wanandroid.view.CommonWebView;
 import cn.foxconn.matthew.myapp.utils.ActivityUtil;
@@ -34,7 +33,7 @@ import cn.foxconn.matthew.myapp.wanandroid.widget.WebViewFragment;
  */
 
 public class WebViewActivity
-        extends BaseActivity<CommonWebView, WebViewPresenter>
+        extends WanAndroidBaseActivity<CommonWebView, WebViewPresenter>
         implements CommonWebView {
 
     public static final String WEB_URL = "web_url";

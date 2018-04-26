@@ -1,14 +1,13 @@
 package cn.foxconn.matthew.myapp.mobilesafe.activity;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.view.View;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import cn.foxconn.matthew.myapp.R;
+import cn.foxconn.matthew.myapp.mobilesafe.base.BaseSetupActivity;
 import cn.foxconn.matthew.myapp.utils.ToastUtil;
 import cn.foxconn.matthew.myapp.mobilesafe.widget.SettingItemView;
 
@@ -18,10 +17,8 @@ public class Setup2Activity extends BaseSetupActivity {
     SettingItemView sivSim;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_setup2);
-        ButterKnife.bind(this);
+    protected void init() {
+        super.init();
         String sim=preference.getString("sim",null);
         if(!TextUtils.isEmpty(sim)){
             sivSim.setChecked(true);
@@ -70,6 +67,11 @@ public class Setup2Activity extends BaseSetupActivity {
         startActivity(new Intent(this,Setup3Activity.class));
         finish();
         overridePendingTransition(R.anim.trans_in,R.anim.trans_out);
+    }
+
+    @Override
+    protected int getContentResId() {
+        return R.layout.activity_setup2;
     }
 
 }

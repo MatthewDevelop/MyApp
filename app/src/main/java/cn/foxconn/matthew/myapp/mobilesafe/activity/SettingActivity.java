@@ -8,19 +8,23 @@ import android.view.View;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import cn.foxconn.matthew.myapp.R;
+import cn.foxconn.matthew.myapp.mobilesafe.base.MobileSafeBaseActivity;
 import cn.foxconn.matthew.myapp.mobilesafe.widget.SettingItemView;
 
 
-public class SettingActivity extends AppCompatActivity {
+public class SettingActivity extends MobileSafeBaseActivity {
     @BindView(R.id.item_update)
     SettingItemView updateItem;
     private SharedPreferences preferences;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_setting);
-        ButterKnife.bind(this);
+    protected int getContentResId() {
+        return R.layout.activity_setting;
+    }
+
+    @Override
+    protected void init() {
+        super.init();
         preferences = getSharedPreferences("config", MODE_PRIVATE);
         //updateItem.setTitle("自动更新设置");
         boolean isAutoUpdate=preferences.getBoolean("auto_update",true);

@@ -1,4 +1,4 @@
-package cn.foxconn.matthew.myapp.mobilesafe.activity;
+package cn.foxconn.matthew.myapp.mobilesafe.base;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -8,23 +8,29 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 
+import butterknife.ButterKnife;
+import cn.foxconn.matthew.myapp.activity.BaseActivity;
+import cn.foxconn.matthew.myapp.app.AppConst;
+
 
 /**
  * 设置引导页的基类
+ *
  * @author:Matthew
  * @date:2018/2/4
  * @email:guocheng0816@163.com
  */
 
-public abstract class BaseSetupActivity extends AppCompatActivity {
+public abstract class BaseSetupActivity extends BaseActivity {
 
-    private GestureDetector mDetector;
     public SharedPreferences preference;
+    private GestureDetector mDetector;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         preference = getSharedPreferences("config", MODE_PRIVATE);
-        mDetector = new GestureDetector(this,new GestureDetector.SimpleOnGestureListener(){
+        mDetector = new GestureDetector(this, new GestureDetector.SimpleOnGestureListener() {
             /**
              * 监听手势滑动事件
              * @param e1 手势滑动的起点
@@ -36,20 +42,20 @@ public abstract class BaseSetupActivity extends AppCompatActivity {
             @Override
             public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
                 //判断纵向滑动幅度是否过大，过大则不切换界面
-                if(Math.abs(e2.getRawY()-e1.getRawY())>100){
+                if (Math.abs(e2.getRawY() - e1.getRawY()) > 100) {
                     return true;
                 }
                 //判断用户的滑动速度是否过慢
-                if(Math.abs(velocityX)<100){
+                if (Math.abs(velocityX) < 100) {
                     return true;
                 }
                 //向右划，到上一页
-                if((e2.getRawX()-e1.getRawX())>200){
+                if ((e2.getRawX() - e1.getRawX()) > 200) {
                     showPreviousPage();
                     return true;
                 }
                 //向左划，下一页
-                if((e1.getRawX()-e2.getRawX())>200){
+                if ((e1.getRawX() - e2.getRawX()) > 200) {
                     showNextPage();
                     return true;
                 }
@@ -57,21 +63,10 @@ public abstract class BaseSetupActivity extends AppCompatActivity {
                 return super.onFling(e1, e2, velocityX, velocityY);
             }
         });
-    }
-
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        //将用户的触摸事件交给手势识别器
-        mDetector.onTouchEvent(event);
-        return super.onTouchEvent(event);
-    }
-
-    public void showNext(View view){
-        showNextPage();
-    }
-
-    public void showPrevious(View view){
-        showPreviousPage();
+        setContentView(getContentResId());
+        translucentBar(AppConst.THEME_COLOR);
+        ButterKnife.bind(this);
+        init();
     }
 
     /**
@@ -83,4 +78,25 @@ public abstract class BaseSetupActivity extends AppCompatActivity {
      * 展示下一页
      */
     public abstract void showNextPage();
+
+    protected abstract int getContentResId();
+
+    protected void init() {
+
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        //将用户的触摸事件交给手势识别器
+        mDetector.onTouchEvent(event);
+        return super.onTouchEvent(event);
+    }
+
+    public void showNext(View view) {
+        showNextPage();
+    }
+
+    public void showPrevious(View view) {
+        showPreviousPage();
+    }
 }

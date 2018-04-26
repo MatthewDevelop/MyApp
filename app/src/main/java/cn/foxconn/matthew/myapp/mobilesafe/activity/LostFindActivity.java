@@ -12,6 +12,9 @@ import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import cn.foxconn.matthew.myapp.R;
+import cn.foxconn.matthew.myapp.activity.BaseActivity;
+import cn.foxconn.matthew.myapp.app.AppConst;
+import cn.foxconn.matthew.myapp.mobilesafe.base.MobileSafeBaseActivity;
 
 /**
  * @author:Matthew
@@ -19,7 +22,7 @@ import cn.foxconn.matthew.myapp.R;
  * @email:guocheng0816@163.com
  */
 
-public class LostFindActivity extends AppCompatActivity {
+public class LostFindActivity extends BaseActivity {
     @BindView(R.id.tv_protect_num)
     TextView tvProtectNum;
     @BindView(R.id.iv_isProtect)
@@ -33,6 +36,7 @@ public class LostFindActivity extends AppCompatActivity {
         boolean isConfiged = preferences.getBoolean("configed", false);
         if (isConfiged) {
             setContentView(R.layout.activity_lost_find);
+            translucentBar(AppConst.THEME_COLOR);
             ButterKnife.bind(this);
             String phone = preferences.getString("safe_phone", "");
             tvProtectNum.setText(phone);

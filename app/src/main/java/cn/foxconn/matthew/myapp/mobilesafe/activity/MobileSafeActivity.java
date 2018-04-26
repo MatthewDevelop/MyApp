@@ -21,6 +21,7 @@ import android.widget.Toast;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import cn.foxconn.matthew.myapp.R;
+import cn.foxconn.matthew.myapp.mobilesafe.base.MobileSafeBaseActivity;
 import cn.foxconn.matthew.myapp.wanandroid.activity.WanAndroidActivity;
 import cn.foxconn.matthew.myapp.utils.MD5Util;
 
@@ -28,7 +29,7 @@ import cn.foxconn.matthew.myapp.utils.MD5Util;
  * Created by Matthew on 2018/1/31.
  */
 
-public class MobileSafeActivity extends AppCompatActivity {
+public class MobileSafeActivity extends MobileSafeBaseActivity {
     private static final String TAG = "MobileSafeActivity";
     @BindView(R.id.gridView)
     GridView mGridView;
@@ -45,11 +46,15 @@ public class MobileSafeActivity extends AppCompatActivity {
             , R.drawable.home_settings};
     private SharedPreferences preferences;
 
+
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_mobile_safe);
-        ButterKnife.bind(this);
+    protected int getContentResId() {
+        return R.layout.activity_mobile_safe;
+    }
+
+    @Override
+    protected void init() {
+        super.init();
         preferences = getSharedPreferences("config", MODE_PRIVATE);
         mGridView.setAdapter(new HomeAdapter());
         mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

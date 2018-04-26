@@ -29,13 +29,15 @@ import java.util.concurrent.TimeUnit;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import cn.foxconn.matthew.myapp.R;
+import cn.foxconn.matthew.myapp.activity.BaseActivity;
+import cn.foxconn.matthew.myapp.app.AppConst;
 
 /**
  * @author:Matthew
  * @date:2018/3/13
  * @email:guocheng0816@163.com
  */
-public class WebSocketActivity extends AppCompatActivity {
+public class WebSocketActivity extends BaseActivity {
 
     private static final String TAG = "WebSocketActivity";
 
@@ -53,6 +55,7 @@ public class WebSocketActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_web_socket);
+        translucentBar(AppConst.THEME_COLOR);
         ButterKnife.bind(this);
         init();
     }

@@ -1,11 +1,15 @@
 package cn.foxconn.matthew.myapp.wanandroid.base;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.view.WindowManager;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.trello.rxlifecycle2.android.ActivityEvent;
@@ -13,7 +17,9 @@ import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 
 import butterknife.ButterKnife;
 import cn.foxconn.matthew.myapp.R;
+import cn.foxconn.matthew.myapp.activity.BaseActivity;
 import cn.foxconn.matthew.myapp.app.App;
+import cn.foxconn.matthew.myapp.app.AppConst;
 import cn.foxconn.matthew.myapp.wanandroid.widget.CustomDialog;
 
 /**
@@ -22,7 +28,7 @@ import cn.foxconn.matthew.myapp.wanandroid.widget.CustomDialog;
  * @email:guocheng0816@163.com
  */
 
-public abstract class BaseActivity<V, T extends BasePresenter<V, ActivityEvent>> extends RxAppCompatActivity {
+public abstract class WanAndroidBaseActivity<V, T extends BasePresenter<V, ActivityEvent>> extends BaseActivity {
     protected T mPresenter;
     CustomDialog mCustomDialog;
 
@@ -41,7 +47,7 @@ public abstract class BaseActivity<V, T extends BasePresenter<V, ActivityEvent>>
 
 
         setContentView(getContentResId());
-
+        translucentBar(AppConst.THEME_COLOR);
         ButterKnife.bind(this);
 
         //excuteStatesBar();

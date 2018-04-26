@@ -6,6 +6,8 @@ package cn.foxconn.matthew.myapp.app;
  * @email:guocheng0816@163.com
  */
 
+import cn.foxconn.matthew.myapp.R;
+
 /**
  * 全局的常量
  */
@@ -35,5 +37,7 @@ public class AppConst {
     public static final String COMPANY_NAMES="company_names";
 
     public static final String SELECTED_COMPANY="selected_company";
+
+    public static final int THEME_COLOR= R.color.main;
 
 }

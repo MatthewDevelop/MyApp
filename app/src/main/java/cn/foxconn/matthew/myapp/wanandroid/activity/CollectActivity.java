@@ -16,7 +16,7 @@ import butterknife.OnClick;
 import cn.foxconn.matthew.myapp.R;
 import cn.foxconn.matthew.myapp.wanandroid.bean.pojo.ArticleBean;
 import cn.foxconn.matthew.myapp.wanandroid.adapter.CollectAtrcicleAdapter;
-import cn.foxconn.matthew.myapp.wanandroid.base.BaseActivity;
+import cn.foxconn.matthew.myapp.wanandroid.base.WanAndroidBaseActivity;
 import cn.foxconn.matthew.myapp.wanandroid.presenter.CollectPresenter;
 import cn.foxconn.matthew.myapp.wanandroid.view.CollectView;
 import cn.foxconn.matthew.myapp.wanandroid.widget.FontTextView;
@@ -28,7 +28,7 @@ import io.reactivex.disposables.CompositeDisposable;
  * @email:guocheng0816@163.com
  */
 
-public class CollectActivity extends BaseActivity<CollectView, CollectPresenter>
+public class CollectActivity extends WanAndroidBaseActivity<CollectView, CollectPresenter>
         implements CollectView, SwipeRefreshLayout.OnRefreshListener, BaseQuickAdapter.RequestLoadMoreListener {
     @BindView(R.id.ft_return)
     FontTextView ftReturn;

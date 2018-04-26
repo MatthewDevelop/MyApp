@@ -11,7 +11,7 @@ import butterknife.OnClick;
 import cn.foxconn.matthew.myapp.R;
 import cn.foxconn.matthew.myapp.app.AppConst;
 import cn.foxconn.matthew.myapp.wanandroid.bean.pojo.UserBean;
-import cn.foxconn.matthew.myapp.wanandroid.base.BaseActivity;
+import cn.foxconn.matthew.myapp.wanandroid.base.WanAndroidBaseActivity;
 import cn.foxconn.matthew.myapp.wanandroid.presenter.LoginPresenter;
 import cn.foxconn.matthew.myapp.wanandroid.view.LoginView;
 import cn.foxconn.matthew.myapp.utils.PrefUtil;
@@ -23,7 +23,7 @@ import cn.foxconn.matthew.myapp.wanandroid.widget.FontTextView;
  * @date:2018/3/12
  * @email:guocheng0816@163.com
  */
-public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> implements LoginView {
+public class LoginActivity extends WanAndroidBaseActivity<LoginView, LoginPresenter> implements LoginView {
 
     @BindView(R.id.ft_close)
     FontTextView mFtClose;

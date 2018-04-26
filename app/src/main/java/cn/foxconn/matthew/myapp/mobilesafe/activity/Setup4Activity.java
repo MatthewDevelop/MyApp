@@ -1,23 +1,25 @@
 package cn.foxconn.matthew.myapp.mobilesafe.activity;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import cn.foxconn.matthew.myapp.R;
+import cn.foxconn.matthew.myapp.mobilesafe.base.BaseSetupActivity;
 
 public class Setup4Activity extends BaseSetupActivity {
     @BindView(R.id.cb_protect)
     CheckBox mCbProtect;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_setup4);
-        ButterKnife.bind(this);
+    protected int getContentResId() {
+        return R.layout.activity_setup4;
+    }
+
+    @Override
+    protected void init() {
+        super.init();
         boolean isProtect=preference.getBoolean("protect",false);
         if(isProtect){
             mCbProtect.setText("防盗保护已经开启");

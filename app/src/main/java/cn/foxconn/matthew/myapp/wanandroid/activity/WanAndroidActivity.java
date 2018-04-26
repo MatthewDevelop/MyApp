@@ -2,7 +2,6 @@ package cn.foxconn.matthew.myapp.wanandroid.activity;
 
 import android.content.Intent;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -13,7 +12,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.OnClick;
 import cn.foxconn.matthew.myapp.R;
-import cn.foxconn.matthew.myapp.wanandroid.base.BaseActivity;
+import cn.foxconn.matthew.myapp.wanandroid.base.WanAndroidBaseActivity;
 import cn.foxconn.matthew.myapp.wanandroid.base.BasePresenter;
 import cn.foxconn.matthew.myapp.wanandroid.fragment.HomeFragment;
 import cn.foxconn.matthew.myapp.wanandroid.fragment.TypeFragment;
@@ -27,7 +26,7 @@ import cn.foxconn.matthew.myapp.wanandroid.widget.FontTextView;
  * @email:guocheng0816@163.com
  */
 
-public class WanAndroidActivity extends BaseActivity {
+public class WanAndroidActivity extends WanAndroidBaseActivity {
     @BindView(R.id.ft_search)
     FontTextView mFtSearch;
     @BindView(R.id.ft_hot)

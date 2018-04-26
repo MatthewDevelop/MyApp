@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -11,10 +12,13 @@ import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import cn.foxconn.matthew.myapp.R;
+import cn.foxconn.matthew.myapp.app.App;
+import cn.foxconn.matthew.myapp.app.AppConst;
 import cn.foxconn.matthew.myapp.expressinquiry.activity.ExpressQueryActivity;
 import cn.foxconn.matthew.myapp.helper.RetrofitServiceManager;
 import cn.foxconn.matthew.myapp.mobilesafe.activity.MobileSafeActivity;
@@ -31,7 +35,7 @@ import io.reactivex.disposables.Disposable;
  * @email:guocheng0816@163.com
  */
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     private static final String TAG = "MainActivity";
 
@@ -48,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        translucentBar(AppConst.THEME_COLOR);
         ButterKnife.bind(this);
         mGridView.setAdapter(new HomeAdapter());
         mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -142,6 +147,30 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+
+    long time=0;
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        /**
+         * 连续按两次返回退出程序
+         */
+        if(keyCode==KeyEvent.KEYCODE_BACK){
+            if (time==0){
+                time=System.currentTimeMillis();
+                Toast.makeText(this, "再按一次返回桌面", Toast.LENGTH_LONG).show();
+                return true;
+            }else {
+                if (System.currentTimeMillis()-time<2000){
+                    return super.onKeyDown(keyCode, event);
+                }else {
+                    time=System.currentTimeMillis();
+                    Toast.makeText(this, "再按一次返回桌面", Toast.LENGTH_LONG).show();
+                    return true;
+                }
+            }
+        }
+        return super.onKeyDown(keyCode, event);
+    }
 
     /**
      * gridView适配器

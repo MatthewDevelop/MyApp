@@ -13,7 +13,9 @@ import android.support.test.espresso.core.internal.deps.guava.util.concurrent.Th
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.animation.AlphaAnimation;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -49,7 +51,8 @@ import cn.foxconn.matthew.myapp.utils.StreamUtil;
 
 public class SplashActivity extends AppCompatActivity {
     private static final String TAG = "SplashActivity";
-    private static final int TYPE_UPDATE = 0;
+    private static final int TYPE_DEFAULT = 0;
+    private static final int TYPE_UPDATE = 5;
     private static final int TYPE_ERR_NET = 1;
     private static final int TYPE_ERR_URL = 2;
     private static final int TYPE_ERR_JSON = 3;
@@ -150,13 +153,14 @@ public class SplashActivity extends AppCompatActivity {
                 Message msg = Message.obtain();
                 HttpURLConnection connection = null;
                 try {
-                    URL url = new URL("http://192.168.1.104:8080/update.json");
+                    URL url = new URL("http://10.203.146.158:8080/update.json");
                     connection = (HttpURLConnection) url.openConnection();
                     connection.setRequestMethod("GET");
                     connection.setConnectTimeout(5000);
                     connection.setReadTimeout(5000);
                     connection.connect();
                     int responseCode = connection.getResponseCode();
+                    Log.e(TAG, "run: "+responseCode );
                     if (responseCode == 200) {
                         InputStream inputStream = connection.getInputStream();
                         String result = StreamUtil.readFromStream(inputStream);
@@ -196,6 +200,7 @@ public class SplashActivity extends AppCompatActivity {
                         }
                     }
                     mHandler.sendMessage(msg);
+                    Log.e(TAG, "run: "+msg.what );
                     if (connection != null) {
                         connection.disconnect();
                     }
@@ -209,6 +214,11 @@ public class SplashActivity extends AppCompatActivity {
      * 跳转主页面
      */
     private void enterHome() {
+        /**
+         * 页面跳转前退出全屏界面
+         * 全屏页面跳转到非全屏页面，会先显示页面内容，然后状态栏出现，整个页面下移一个状态栏的高度，导致页面会卡一下
+         */
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN);
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         finish();
@@ -323,6 +333,7 @@ public class SplashActivity extends AppCompatActivity {
                 case TYPE_UPDATE:
                     mActivityWeakReference.get().showUpdateDialog();
                     break;
+                case TYPE_DEFAULT:
                 case TYPE_ERR_NET:
                     Toast.makeText(App.getContext(), "网络异常", Toast.LENGTH_SHORT).show();
                     mActivityWeakReference.get().enterHome();

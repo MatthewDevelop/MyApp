@@ -19,7 +19,7 @@ import butterknife.BindView;
 import cn.foxconn.matthew.myapp.R;
 import cn.foxconn.matthew.myapp.app.AppConst;
 import cn.foxconn.matthew.myapp.utils.UIUtil;
-import cn.foxconn.matthew.myapp.wanandroid.base.BaseActivity;
+import cn.foxconn.matthew.myapp.wanandroid.base.WanAndroidBaseActivity;
 import cn.foxconn.matthew.myapp.wanandroid.bean.pojo.HotKeyBean;
 import cn.foxconn.matthew.myapp.wanandroid.presenter.HotPresenter;
 import cn.foxconn.matthew.myapp.wanandroid.view.HotView;
@@ -30,7 +30,7 @@ import cn.foxconn.matthew.myapp.wanandroid.view.HotView;
  * @email:guocheng0816@163.com
  */
 
-public class HotActivity extends BaseActivity<HotView, HotPresenter>
+public class HotActivity extends WanAndroidBaseActivity<HotView, HotPresenter>
         implements HotView, SwipeRefreshLayout.OnRefreshListener {
     private static final String TAG = "HotActivity";
     @BindView(R.id.swipeRefreshLayout)

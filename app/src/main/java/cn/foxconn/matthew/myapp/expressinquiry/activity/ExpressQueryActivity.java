@@ -26,6 +26,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.foxconn.matthew.myapp.R;
+import cn.foxconn.matthew.myapp.activity.BaseActivity;
 import cn.foxconn.matthew.myapp.app.AppConst;
 import cn.foxconn.matthew.myapp.expressinquiry.adapter.ExpressInfoAdapter;
 import cn.foxconn.matthew.myapp.expressinquiry.bean.ExpressResponseData;
@@ -38,7 +39,7 @@ import cn.foxconn.matthew.myapp.wanandroid.widget.FontTextView;
  * @date:2018/4/11
  * @email:guocheng0816@163.com
  */
-public class ExpressQueryActivity extends RxAppCompatActivity implements ExpressQueryView {
+public class ExpressQueryActivity extends BaseActivity implements ExpressQueryView {
     private static final String TAG = "ExpressQueryActivity";
     @BindView(R.id.ft_return)
     FontTextView mFtReturm;
@@ -72,6 +73,7 @@ public class ExpressQueryActivity extends RxAppCompatActivity implements Express
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_express_query);
+        translucentBar(AppConst.THEME_COLOR);
         ButterKnife.bind(this);
         init();
         initView();
