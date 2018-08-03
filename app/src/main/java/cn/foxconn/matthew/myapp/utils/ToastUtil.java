@@ -3,6 +3,8 @@ package cn.foxconn.matthew.myapp.utils;
 import android.content.Context;
 import android.widget.Toast;
 
+import cn.foxconn.matthew.myapp.app.App;
+
 /**
  * @author:Matthew
  * @date:2018/2/4
@@ -15,6 +17,11 @@ public class ToastUtil {
         /* cannot be instantiated */
         throw new UnsupportedOperationException("cannot be instantiated");
     }
+
+    public static void show(String msg){
+        Toast.makeText(App.getContext(), msg, Toast.LENGTH_SHORT).show();
+    }
+
 
     public static void show(Context ctx,String msg){
         Toast.makeText(ctx, msg, Toast.LENGTH_SHORT).show();

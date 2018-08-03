@@ -23,6 +23,7 @@ public class BaseActivity extends RxAppCompatActivity {
         super.onCreate(savedInstanceState);
     }
 
+
     /**
      * 处理状态栏变色
      *

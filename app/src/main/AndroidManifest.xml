@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="cn.foxconn.matthew.myapp">
-
+    <!--获取粗糙的定位-->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <!--获取精确的定位-->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
 
     <application
         android:name=".app.App"
@@ -28,18 +33,24 @@
         </activity>
         <activity android:name=".activity.MainActivity" />
         <activity android:name=".mobilesafe.activity.MobileSafeActivity" />
-        <activity android:name=".mobilesafe.activity.SettingActivity" />
-        <activity android:name=".mobilesafe.activity.LostFindActivity" />
-        <activity android:name=".mobilesafe.activity.Setup1Activity" />
-        <activity android:name=".mobilesafe.activity.Setup2Activity" />
-        <activity android:name=".mobilesafe.activity.Setup3Activity" />
-        <activity android:name=".mobilesafe.activity.Setup4Activity" />
-        <activity android:name=".mobilesafe.activity.ContactActivity" />
+        <activity android:name=".mobilesafe.activity.setting.SettingActivity" />
+        <activity android:name=".mobilesafe.activity.security.LostFindActivity" />
+        <activity android:name=".mobilesafe.activity.security.Setup1Activity" />
+        <activity android:name=".mobilesafe.activity.security.Setup2Activity" />
+        <activity android:name=".mobilesafe.activity.security.Setup3Activity" />
+        <activity android:name=".mobilesafe.activity.security.Setup4Activity" />
+        <activity android:name=".mobilesafe.activity.security.ContactActivity" />
         <activity android:name=".wanandroid.activity.WanAndroidActivity" />
         <activity android:name=".wanandroid.activity.WebViewActivity" />
         <activity android:name=".wanandroid.activity.LoginActivity" />
         <activity android:name=".wanandroid.activity.CollectActivity" />
         <activity android:name=".wanandroid.activity.SearchActivity" />
+
+
+        <activity android:name=".websocketdemo.WebSocketActivity"></activity>
+        <activity android:name=".wanandroid.activity.HotActivity" />
+        <activity android:name=".expressinquiry.activity.ExpressQueryActivity" />
+        <activity android:name=".expressinquiry.activity.CompanySearchActivity" />
 
         <receiver
             android:name=".mobilesafe.receiver.BootCompleteReceiver"
@@ -49,11 +60,23 @@
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
+        <receiver android:name=".mobilesafe.receiver.SmsReceiver">
+            <intent-filter android:priority="2147483647">
+                <action android:name="android.provider.Telephony.SMS_RECEIVED" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name=".mobilesafe.receiver.AdminReceiver"
+            android:label="@string/sample_device_admin"
+            android:description="@string/sample_device_admin_description"
+            android:permission="android.permission.BIND_DEVICE_ADMIN">
+            <meta-data android:name="android.app.device_admin"
+                android:resource="@xml/device_admin_sample" />
+            <intent-filter>
+                <action android:name="android.app.action.DEVICE_ADMIN_ENABLED" />
+            </intent-filter>
+        </receiver>
 
-        <activity android:name=".websocketdemo.WebSocketActivity"></activity>
-        <activity android:name=".wanandroid.activity.HotActivity" />
-        <activity android:name=".expressinquiry.activity.ExpressQueryActivity" />
-        <activity android:name=".expressinquiry.activity.CompanySearchActivity" />
+        <service android:name=".mobilesafe.service.LocationService" />
     </application>
 
 </manifest>

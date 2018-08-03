@@ -1,4 +1,4 @@
-package cn.foxconn.matthew.myapp.mobilesafe.activity;
+package cn.foxconn.matthew.myapp.mobilesafe.activity.security;
 
 import android.content.Intent;
 import android.telephony.TelephonyManager;
@@ -30,15 +30,18 @@ public class Setup2Activity extends BaseSetupActivity {
             public void onClick(View v) {
                 if(sivSim.isChecked()){
                     sivSim.setChecked(false);
-                    preference.edit().remove("sim").commit();
+                    preference.edit().remove("sim").apply();
                 }else {
                     sivSim.setChecked(true);
                     TelephonyManager tm= (TelephonyManager) getSystemService(TELEPHONY_SERVICE);
                     //TODO 获取android.permission.READ_PHONE_STATE
-                    String serialNum=tm.getSimSerialNumber();
+                    String serialNum= null;
+                    if (tm != null) {
+                        serialNum = tm.getSimSerialNumber();
+                    }
 //                    LogUtil.e(TAG,serialNum);
                     //将SIM卡序列号保存
-                    preference.edit().putString("sim",serialNum).commit();
+                    preference.edit().putString("sim",serialNum).apply();
                 }
             }
         });

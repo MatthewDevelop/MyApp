@@ -37,11 +37,11 @@ public class SettingItemView extends RelativeLayout {
     public SettingItemView(Context context, AttributeSet attrs) {
         super(context, attrs);
         Log.e(TAG, "SettingItemView: 2" );
-        //getAtts(attrs);
+//        getAtts(attrs);
         //根据name获取value
-        mTitle = attrs.getAttributeValue(NAMESPACE, "mTitle");
-        mDesOn = attrs.getAttributeValue(NAMESPACE, "mDesOn");
-        mDesOff = attrs.getAttributeValue(NAMESPACE, "mDesOff");
+        mTitle = attrs.getAttributeValue(NAMESPACE, "title");
+        mDesOn = attrs.getAttributeValue(NAMESPACE, "des_on");
+        mDesOff = attrs.getAttributeValue(NAMESPACE, "des_off");
         initView();
     }
 
@@ -49,8 +49,7 @@ public class SettingItemView extends RelativeLayout {
         super(context, attrs, defStyleAttr);
         Log.e(TAG, "SettingItemView: 3" );
         initView();
-        //getAtts(attrs);
-
+//        getAtts(attrs);
     }
 
     /**

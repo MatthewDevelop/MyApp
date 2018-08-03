@@ -100,11 +100,11 @@
         style="@style/ContentStyle"
         android:drawableLeft="@android:drawable/star_big_on"
         android:gravity="left"
-        android:text="远程删除数据：#*wipedate*#" />
+        android:text="远程删除数据：#*wipeDate*#" />
 
     <TextView
         style="@style/ContentStyle"
         android:drawableLeft="@android:drawable/star_big_on"
         android:gravity="left"
-        android:text="远程锁屏：#*lockscreen*#" />
+        android:text="远程锁屏：#*lockScreen*#" />
 </LinearLayout>

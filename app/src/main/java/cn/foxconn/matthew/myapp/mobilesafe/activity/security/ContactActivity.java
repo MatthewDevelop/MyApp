@@ -1,4 +1,4 @@
-package cn.foxconn.matthew.myapp.mobilesafe.activity;
+package cn.foxconn.matthew.myapp.mobilesafe.activity.security;
 
 import android.content.Intent;
 import android.database.Cursor;

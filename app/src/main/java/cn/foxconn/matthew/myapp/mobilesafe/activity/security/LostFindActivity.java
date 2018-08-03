@@ -1,10 +1,9 @@
-package cn.foxconn.matthew.myapp.mobilesafe.activity;
+package cn.foxconn.matthew.myapp.mobilesafe.activity.security;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -14,7 +13,7 @@ import butterknife.ButterKnife;
 import cn.foxconn.matthew.myapp.R;
 import cn.foxconn.matthew.myapp.activity.BaseActivity;
 import cn.foxconn.matthew.myapp.app.AppConst;
-import cn.foxconn.matthew.myapp.mobilesafe.base.MobileSafeBaseActivity;
+import cn.foxconn.matthew.myapp.mobilesafe.activity.security.Setup1Activity;
 
 /**
  * @author:Matthew

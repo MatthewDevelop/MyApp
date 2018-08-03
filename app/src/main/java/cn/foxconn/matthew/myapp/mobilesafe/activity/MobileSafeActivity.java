@@ -2,10 +2,7 @@ package cn.foxconn.matthew.myapp.mobilesafe.activity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,10 +16,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import cn.foxconn.matthew.myapp.R;
+import cn.foxconn.matthew.myapp.mobilesafe.activity.security.LostFindActivity;
+import cn.foxconn.matthew.myapp.mobilesafe.activity.setting.SettingActivity;
 import cn.foxconn.matthew.myapp.mobilesafe.base.MobileSafeBaseActivity;
-import cn.foxconn.matthew.myapp.wanandroid.activity.WanAndroidActivity;
 import cn.foxconn.matthew.myapp.utils.MD5Util;
 
 /**

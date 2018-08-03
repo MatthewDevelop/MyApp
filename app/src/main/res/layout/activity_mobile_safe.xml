@@ -8,6 +8,20 @@
         style="@style/TitleStyle"
         android:text="手机卫士"/>
 
+    <!--<cn.foxconn.matthew.myapp.mobilesafe.widget.FocusTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="3dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"
+        android:ellipsize="marquee"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:singleLine="true"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:text="欢迎使用小胖版手机卫士" />-->
+
 
     <GridView
         android:id="@+id/gridView"
