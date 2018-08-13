@@ -1,13 +1,6 @@
 # Built application files
-*.apk
-*.ap_
-
 # Files for the ART/Dalvik VM
-*.dex
-
 # Java class files
-*.class
-
 # Generated files
 bin/
 gen/
@@ -34,13 +27,8 @@ captures/
 
 # Intellij
 *.iml
-/.idea
-.idea/workspace.xml
+.idea
 .idea/tasks.xml
-.idea/gradle.xml
-.idea/dictionaries
-.idea/libraries
-
 # Keystore files
 *.jks
 
@@ -55,6 +43,5 @@ freeline.py
 freeline/
 freeline_project_description.json
 gradle.properties
-/app/build
 /app/debug
 /app/release

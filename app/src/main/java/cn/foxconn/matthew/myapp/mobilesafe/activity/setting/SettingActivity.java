@@ -12,6 +12,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.foxconn.matthew.myapp.R;
 import cn.foxconn.matthew.myapp.mobilesafe.base.MobileSafeBaseActivity;
+import cn.foxconn.matthew.myapp.mobilesafe.service.AddressService;
 import cn.foxconn.matthew.myapp.mobilesafe.widget.SettingItemView;
 import cn.foxconn.matthew.myapp.utils.AdminManager;
 
@@ -21,6 +22,8 @@ public class SettingActivity extends MobileSafeBaseActivity {
     SettingItemView updateItem;
     @BindView(R.id.item_device_admin)
     SettingItemView deviceAdminItem;
+    @BindView(R.id.item_address)
+    SettingItemView addressShownItem;
     private SharedPreferences preferences;
 
     @Override
@@ -39,7 +42,7 @@ public class SettingActivity extends MobileSafeBaseActivity {
         return R.layout.activity_setting;
     }
 
-    @OnClick({R.id.item_device_admin, R.id.item_update})
+    @OnClick({R.id.item_device_admin, R.id.item_update, R.id.item_address})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.item_update:
@@ -60,6 +63,15 @@ public class SettingActivity extends MobileSafeBaseActivity {
                     AdminManager.getInstance().activeAdmin(this);
                 }
                 break;
+            case R.id.item_address:
+                if (addressShownItem.isChecked()){
+                    addressShownItem.setChecked(false);
+                    stopService(new Intent(this,AddressService.class));
+                }else {
+                    addressShownItem.setChecked(true);
+                    startService(new Intent(this, AddressService.class));
+                }
+                break;
             default:
                 break;
         }
@@ -70,10 +82,10 @@ public class SettingActivity extends MobileSafeBaseActivity {
         super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode) {
             case 0:
-                if(AdminManager.getInstance().isAdminActived()){
+                if (AdminManager.getInstance().isAdminActived()) {
                     deviceAdminItem.setChecked(true);
                     preferences.edit().putBoolean("device_admin_on", true).apply();
-                }else {
+                } else {
                     deviceAdminItem.setChecked(false);
                     preferences.edit().putBoolean("device_admin_on", false).apply();
                 }

@@ -30,8 +30,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.lang.ref.WeakReference;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -57,16 +59,16 @@ public class SplashActivity extends AppCompatActivity {
     private static final int TYPE_ERR_URL = 2;
     private static final int TYPE_ERR_JSON = 3;
     private static final int TYPE_ENTER = 4;
+    private static String mVersionName;
+    private static String mDes;
+    private static String mDownLoadUrl;
     @BindView(R.id.tv_version)
     TextView tvVersion;
     @BindView(R.id.text_progress)
     TextView tvProgress;
     @BindView(R.id.rl_root)
     RelativeLayout mRlRoot;
-    private static String mVersionName;
     private int mVersionCode;
-    private static String mDes;
-    private static String mDownLoadUrl;
     private ExecutorService fixedThreadPool;
 
     private SharedPreferences mPref;
@@ -86,9 +88,10 @@ public class SplashActivity extends AppCompatActivity {
         //        <item name="android:windowFullscreen">true</item>
         //</style>
         ButterKnife.bind(this);
-        mHandler=new MyHandler(this);
+        mHandler = new MyHandler(this);
         tvVersion.setText("版本号：" + getVersionName());
         mPref = getSharedPreferences("config", MODE_PRIVATE);
+        copyDb("address.db");
         boolean isAutoUpdate = mPref.getBoolean("auto_update", true);
         ThreadFactory checkUpdateFactory = new ThreadFactoryBuilder().setNameFormat("checkUpdate-thread").build();
         fixedThreadPool = new ThreadPoolExecutor(1, 1, 0, TimeUnit.MILLISECONDS, new LinkedBlockingDeque<Runnable>(), checkUpdateFactory);
@@ -123,22 +126,27 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     /**
-     * 获取版本名称
-     *
-     * @return
+     * 拷贝数据库到data/data/...
      */
-    private int getVersionCode() {
-        PackageManager packageManager = getPackageManager();
+    private void copyDb(String dbName) {
+        File destFile = new File(getFilesDir(), dbName);
+        if (destFile.exists()){
+            Log.e(TAG, "copyDb: 数据库已经存在" );
+            return;
+        }
+        FileOutputStream fileOutputStream;
+        InputStream inputStream;
         try {
-            //获取包的信息
-            PackageInfo packageInfo = packageManager.getPackageInfo(getPackageName(), 0);
-            int versionCode = packageInfo.versionCode;
-            LogUtil.e(TAG, "" + versionCode);
-            return versionCode;
-        } catch (PackageManager.NameNotFoundException e) {
+            inputStream = getAssets().open(dbName);
+            fileOutputStream = new FileOutputStream(destFile);
+            int len;
+            byte[] buffer = new byte[1024];
+            while ((len = inputStream.read(buffer)) != -1) {
+                fileOutputStream.write(buffer, 0, len);
+            }
+        } catch (IOException e) {
             e.printStackTrace();
         }
-        return -1;
     }
 
     /**
@@ -160,7 +168,7 @@ public class SplashActivity extends AppCompatActivity {
                     connection.setReadTimeout(5000);
                     connection.connect();
                     int responseCode = connection.getResponseCode();
-                    Log.e(TAG, "run: "+responseCode );
+                    Log.e(TAG, "run: " + responseCode);
                     if (responseCode == 200) {
                         InputStream inputStream = connection.getInputStream();
                         String result = StreamUtil.readFromStream(inputStream);
@@ -200,7 +208,7 @@ public class SplashActivity extends AppCompatActivity {
                         }
                     }
                     mHandler.sendMessage(msg);
-                    Log.e(TAG, "run: "+msg.what );
+                    Log.e(TAG, "run: " + msg.what);
                     if (connection != null) {
                         connection.disconnect();
                     }
@@ -208,6 +216,47 @@ public class SplashActivity extends AppCompatActivity {
             }
         };
         fixedThreadPool.execute(runnable);
+    }
+
+    /**
+     * 获取版本名称
+     *
+     * @return
+     */
+    private int getVersionCode() {
+        PackageManager packageManager = getPackageManager();
+        try {
+            //获取包的信息
+            PackageInfo packageInfo = packageManager.getPackageInfo(getPackageName(), 0);
+            int versionCode = packageInfo.versionCode;
+            LogUtil.e(TAG, "" + versionCode);
+            return versionCode;
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        return -1;
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (fixedThreadPool != null) {
+            fixedThreadPool.shutdown();
+            fixedThreadPool = null;
+        }
+    }
+
+    /**
+     * activity跳转回调
+     *
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        enterHome();
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
     /**
@@ -222,6 +271,35 @@ public class SplashActivity extends AppCompatActivity {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         finish();
+    }
+
+    /**
+     * 升级对话框
+     */
+    private void showUpdateDialog() {
+        //使用getApplicationContext会出错
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("最新版本：" + mVersionName);
+        builder.setMessage(mDes);
+        builder.setPositiveButton("立即更新", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                downloadUpdate();
+            }
+        });
+        builder.setNegativeButton("以后再说", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                enterHome();
+            }
+        });
+        builder.setOnCancelListener(new DialogInterface.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialog) {
+                enterHome();
+            }
+        });
+        builder.show();
     }
 
     /**
@@ -264,57 +342,6 @@ public class SplashActivity extends AppCompatActivity {
         }
     }
 
-    /**
-     * activity跳转回调
-     *
-     * @param requestCode
-     * @param resultCode
-     * @param data
-     */
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        enterHome();
-        super.onActivityResult(requestCode, resultCode, data);
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        if (fixedThreadPool != null) {
-            fixedThreadPool.shutdown();
-            fixedThreadPool = null;
-        }
-    }
-
-    /**
-     * 升级对话框
-     */
-    private void showUpdateDialog() {
-        //使用getApplicationContext会出错
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("最新版本：" + mVersionName);
-        builder.setMessage(mDes);
-        builder.setPositiveButton("立即更新", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                downloadUpdate();
-            }
-        });
-        builder.setNegativeButton("以后再说", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                enterHome();
-            }
-        });
-        builder.setOnCancelListener(new DialogInterface.OnCancelListener() {
-            @Override
-            public void onCancel(DialogInterface dialog) {
-                enterHome();
-            }
-        });
-        builder.show();
-    }
-
     private static class MyHandler extends Handler {
 
         private final WeakReference<SplashActivity> mActivityWeakReference;
@@ -326,7 +353,7 @@ public class SplashActivity extends AppCompatActivity {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            if(mActivityWeakReference==null) {
+            if (mActivityWeakReference == null) {
                 return;
             }
             switch (msg.what) {

@@ -8,6 +8,8 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <!--获取手机震动器权限-->
+    <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
@@ -51,6 +53,8 @@
         <activity android:name=".wanandroid.activity.HotActivity" />
         <activity android:name=".expressinquiry.activity.ExpressQueryActivity" />
         <activity android:name=".expressinquiry.activity.CompanySearchActivity" />
+        <activity android:name=".mobilesafe.activity.advancetools.AdvanceToolsActivity" />
+        <activity android:name=".mobilesafe.activity.advancetools.AddressQueryActivity" />
 
         <receiver
             android:name=".mobilesafe.receiver.BootCompleteReceiver"
@@ -65,11 +69,13 @@
                 <action android:name="android.provider.Telephony.SMS_RECEIVED" />
             </intent-filter>
         </receiver>
-        <receiver android:name=".mobilesafe.receiver.AdminReceiver"
-            android:label="@string/sample_device_admin"
+        <receiver
+            android:name=".mobilesafe.receiver.AdminReceiver"
             android:description="@string/sample_device_admin_description"
+            android:label="@string/sample_device_admin"
             android:permission="android.permission.BIND_DEVICE_ADMIN">
-            <meta-data android:name="android.app.device_admin"
+            <meta-data
+                android:name="android.app.device_admin"
                 android:resource="@xml/device_admin_sample" />
             <intent-filter>
                 <action android:name="android.app.action.DEVICE_ADMIN_ENABLED" />
@@ -77,6 +83,7 @@
         </receiver>
 
         <service android:name=".mobilesafe.service.LocationService" />
+        <service android:name=".mobilesafe.service.AddressService"/>
     </application>
 
 </manifest>

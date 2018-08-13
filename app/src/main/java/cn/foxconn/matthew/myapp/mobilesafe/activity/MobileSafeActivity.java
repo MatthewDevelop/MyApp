@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import butterknife.BindView;
 import cn.foxconn.matthew.myapp.R;
+import cn.foxconn.matthew.myapp.mobilesafe.activity.advancetools.AdvanceToolsActivity;
 import cn.foxconn.matthew.myapp.mobilesafe.activity.security.LostFindActivity;
 import cn.foxconn.matthew.myapp.mobilesafe.activity.setting.SettingActivity;
 import cn.foxconn.matthew.myapp.mobilesafe.base.MobileSafeBaseActivity;
@@ -61,6 +62,10 @@ public class MobileSafeActivity extends MobileSafeBaseActivity {
                     case 0:
                         //手机防盗
                         showPasswordDialog();
+                        break;
+                    case 7:
+                        //高级工具
+                        startActivity(new Intent(MobileSafeActivity.this, AdvanceToolsActivity.class));
                         break;
                     case 8:
                         //设置中心

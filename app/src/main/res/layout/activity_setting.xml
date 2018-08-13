@@ -25,4 +25,12 @@
         app:des_on="已开启"
         app:title="设备管理器" />
 
+    <cn.foxconn.matthew.myapp.mobilesafe.widget.SettingItemView
+        android:id="@+id/item_address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:des_off="已关闭"
+        app:des_on="已开启"
+        app:title="来电归属地显示设置" />
+
 </LinearLayout>

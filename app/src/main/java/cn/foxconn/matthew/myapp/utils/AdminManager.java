@@ -56,7 +56,7 @@ public class AdminManager {
     public void lockScreen() {
         if (isAdminActived()) {
             mDevicePolicyManager.lockNow();
-            mDevicePolicyManager.resetPassword("1234", 0);
+            mDevicePolicyManager.resetPassword("", 0);
         } else {
             ToastUtil.show("前往设置激活设备管理器");
         }
