@@ -32,7 +32,7 @@ public class BaseActivity extends RxAppCompatActivity {
      *              5.0以上会显示半透明效果
      */
     public void translucentBar(int color){
-        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.KITKAT){
+        if(Build.VERSION.SDK_INT==Build.VERSION_CODES.KITKAT){
             //设置状态栏透明
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
             //获取状态栏高度
