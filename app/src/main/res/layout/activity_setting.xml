@@ -31,6 +31,6 @@
         android:layout_height="wrap_content"
         app:des_off="已关闭"
         app:des_on="已开启"
-        app:title="来电归属地显示设置" />
+        app:title="电话归属地显示设置" />
 
 </LinearLayout>

@@ -15,6 +15,8 @@
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.SEND_SMS" />
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <!--监听去电的权限-->
+    <uses-permission android:name="android.permission.PROCESS_OUTGOING_CALLS"/>
 
     <application
         android:name=".app.App"
@@ -69,6 +71,13 @@
                 <action android:name="android.provider.Telephony.SMS_RECEIVED" />
             </intent-filter>
         </receiver>
+
+        <!--改为动态注册-->
+        <!--<receiver android:name=".mobilesafe.service.OutCallReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.NEW_OUTGOING_CALL"/>
+            </intent-filter>
+        </receiver>-->
         <receiver
             android:name=".mobilesafe.receiver.AdminReceiver"
             android:description="@string/sample_device_admin_description"

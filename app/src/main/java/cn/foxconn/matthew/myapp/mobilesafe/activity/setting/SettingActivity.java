@@ -15,6 +15,7 @@ import cn.foxconn.matthew.myapp.mobilesafe.base.MobileSafeBaseActivity;
 import cn.foxconn.matthew.myapp.mobilesafe.service.AddressService;
 import cn.foxconn.matthew.myapp.mobilesafe.widget.SettingItemView;
 import cn.foxconn.matthew.myapp.utils.AdminManager;
+import cn.foxconn.matthew.myapp.utils.ServiceUtils;
 
 
 public class SettingActivity extends MobileSafeBaseActivity {
@@ -33,8 +34,11 @@ public class SettingActivity extends MobileSafeBaseActivity {
         //updateItem.setTitle("自动更新设置");
         boolean isAutoUpdate = preferences.getBoolean("auto_update", true);
         boolean isDeviceAdminOn = preferences.getBoolean("device_admin_on", false);
+        boolean isServiceRunning= ServiceUtils.isServiceRunning(this,
+                "cn.foxconn.matthew.myapp.mobilesafe.service.AddressService");
         updateItem.setChecked(isAutoUpdate);
         deviceAdminItem.setChecked(isDeviceAdminOn);
+        addressShownItem.setChecked(isServiceRunning);
     }
 
     @Override
