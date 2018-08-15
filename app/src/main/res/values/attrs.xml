@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <declare-styleable name="SettingItemView">
+    <declare-styleable name="SettingItemCheckView">
         <attr name="title" format="string"/>
         <attr name="des_on" format="string"/>
         <attr name="des_off" format="string"/>

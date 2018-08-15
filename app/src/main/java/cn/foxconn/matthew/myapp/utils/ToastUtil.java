@@ -1,13 +1,19 @@
 package cn.foxconn.matthew.myapp.utils;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.PixelFormat;
+import android.support.v4.content.ContextCompat;
+import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import cn.foxconn.matthew.myapp.R;
 import cn.foxconn.matthew.myapp.app.App;
+import cn.foxconn.matthew.myapp.app.AppConst;
+import cn.foxconn.matthew.myapp.wanandroid.widget.FontTextView;
 
 import static android.content.Context.WINDOW_SERVICE;
 
@@ -19,28 +25,26 @@ import static android.content.Context.WINDOW_SERVICE;
 
 public class ToastUtil {
 
+    public static final boolean isShow = true;
     private static WindowManager sWindowManager;
-    private static TextView sView;
+    private static View sView;
 
     private ToastUtil() {
         /* cannot be instantiated */
         throw new UnsupportedOperationException("cannot be instantiated");
     }
 
-    public static void show(String msg){
+    public static void show(String msg) {
         Toast.makeText(App.getContext(), msg, Toast.LENGTH_SHORT).show();
     }
 
-    public static void showLong(String msg){
+    public static void showLong(String msg) {
         Toast.makeText(App.getContext(), msg, Toast.LENGTH_LONG).show();
     }
 
-
-    public static void show(Context ctx,String msg){
+    public static void show(Context ctx, String msg) {
         Toast.makeText(ctx, msg, Toast.LENGTH_SHORT).show();
     }
-
-    public static final boolean isShow = true;
 
     /**
      * 短时间显示Toast
@@ -119,7 +123,7 @@ public class ToastUtil {
     /**
      * 显示归属地浮窗
      */
-    public static void showToast(Context context,String address) {
+    public static void showToast(Context context, String address) {
         //在第三方app中弹出自己的浮窗
         sWindowManager = (WindowManager) context.getSystemService(WINDOW_SERVICE);
         WindowManager.LayoutParams params = new WindowManager.LayoutParams();
@@ -131,10 +135,14 @@ public class ToastUtil {
         params.flags = WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON
                 | WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
                 | WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE;
-        sView = new TextView(context);
-        sView.setText(address);
-        sView.setTextSize(28);
-        sView.setTextColor(Color.RED);
+        sView = View.inflate(context, R.layout.toast_layout, null);
+        SharedPreferences preferences = context.getSharedPreferences("config", Context.MODE_PRIVATE);
+        int toastThemeNum = preferences.getInt("toast_theme", 0);
+        FontTextView ftIcon = sView.findViewById(R.id.ft_icon);
+        ftIcon.setTextColor(ContextCompat.getColor(context,AppConst.TOAST_THEME_COLOR[toastThemeNum]));
+        TextView tvAddress = sView.findViewById(R.id.tv_address);
+        tvAddress.setText(address);
+        tvAddress.setTextColor(ContextCompat.getColor(context,AppConst.TOAST_THEME_COLOR[toastThemeNum]));
         sWindowManager.addView(sView, params);
     }
 
@@ -142,11 +150,11 @@ public class ToastUtil {
     /**
      * 从window上移除toast
      */
-    public static void hideToast(){
-        if (sWindowManager!=null&&sView!=null){
+    public static void hideToast() {
+        if (sWindowManager != null && sView != null) {
             sWindowManager.removeView(sView);
-            sView=null;
-            sWindowManager=null;
+            sView = null;
+            sWindowManager = null;
         }
     }
 }

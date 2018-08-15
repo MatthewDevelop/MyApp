@@ -9,28 +9,29 @@
         style="@style/TitleStyle"
         android:text="设置中心" />
 
-    <cn.foxconn.matthew.myapp.mobilesafe.widget.SettingItemView
+    <cn.foxconn.matthew.myapp.mobilesafe.widget.SettingItemCheckView
         android:id="@+id/item_update"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        style="@style/setting_item_style"
         app:des_off="已关闭"
         app:des_on="已开启"
         app:title="自动更新设置" />
 
-    <cn.foxconn.matthew.myapp.mobilesafe.widget.SettingItemView
+    <cn.foxconn.matthew.myapp.mobilesafe.widget.SettingItemCheckView
         android:id="@+id/item_device_admin"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        style="@style/setting_item_style"
         app:des_off="已关闭"
         app:des_on="已开启"
         app:title="设备管理器" />
 
-    <cn.foxconn.matthew.myapp.mobilesafe.widget.SettingItemView
+    <cn.foxconn.matthew.myapp.mobilesafe.widget.SettingItemCheckView
         android:id="@+id/item_address"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        style="@style/setting_item_style"
         app:des_off="已关闭"
         app:des_on="已开启"
         app:title="电话归属地显示设置" />
+
+    <cn.foxconn.matthew.myapp.mobilesafe.widget.SettingItemClickView
+        android:id="@+id/item_address_shown_theme"
+        style="@style/setting_item_style" />
 
 </LinearLayout>

@@ -1,44 +1,48 @@
 package cn.foxconn.matthew.myapp.mobilesafe.activity.setting;
 
-import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.foxconn.matthew.myapp.R;
+import cn.foxconn.matthew.myapp.app.AppConst;
 import cn.foxconn.matthew.myapp.mobilesafe.base.MobileSafeBaseActivity;
 import cn.foxconn.matthew.myapp.mobilesafe.service.AddressService;
-import cn.foxconn.matthew.myapp.mobilesafe.widget.SettingItemView;
+import cn.foxconn.matthew.myapp.mobilesafe.widget.SettingItemCheckView;
+import cn.foxconn.matthew.myapp.mobilesafe.widget.SettingItemClickView;
 import cn.foxconn.matthew.myapp.utils.AdminManager;
 import cn.foxconn.matthew.myapp.utils.ServiceUtils;
 
 
 public class SettingActivity extends MobileSafeBaseActivity {
     @BindView(R.id.item_update)
-    SettingItemView updateItem;
+    SettingItemCheckView updateItem;
     @BindView(R.id.item_device_admin)
-    SettingItemView deviceAdminItem;
+    SettingItemCheckView deviceAdminItem;
     @BindView(R.id.item_address)
-    SettingItemView addressShownItem;
+    SettingItemCheckView addressShownItem;
+    @BindView(R.id.item_address_shown_theme)
+    SettingItemClickView addressShownThemeItem;
     private SharedPreferences preferences;
 
     @Override
     protected void init() {
         super.init();
         preferences = getSharedPreferences("config", MODE_PRIVATE);
-        //updateItem.setTitle("自动更新设置");
         boolean isAutoUpdate = preferences.getBoolean("auto_update", true);
         boolean isDeviceAdminOn = preferences.getBoolean("device_admin_on", false);
-        boolean isServiceRunning= ServiceUtils.isServiceRunning(this,
+        boolean isServiceRunning = ServiceUtils.isServiceRunning(this,
                 "cn.foxconn.matthew.myapp.mobilesafe.service.AddressService");
+        int toastThemeNum = preferences.getInt("toast_theme", 0);
         updateItem.setChecked(isAutoUpdate);
         deviceAdminItem.setChecked(isDeviceAdminOn);
         addressShownItem.setChecked(isServiceRunning);
+        addressShownThemeItem.setTitle("来电提示主题");
+        addressShownThemeItem.setDes(AppConst.TOAST_THEME_DES[toastThemeNum]);
     }
 
     @Override
@@ -46,7 +50,7 @@ public class SettingActivity extends MobileSafeBaseActivity {
         return R.layout.activity_setting;
     }
 
-    @OnClick({R.id.item_device_admin, R.id.item_update, R.id.item_address})
+    @OnClick({R.id.item_device_admin, R.id.item_update, R.id.item_address, R.id.item_address_shown_theme})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.item_update:
@@ -68,17 +72,39 @@ public class SettingActivity extends MobileSafeBaseActivity {
                 }
                 break;
             case R.id.item_address:
-                if (addressShownItem.isChecked()){
+                if (addressShownItem.isChecked()) {
                     addressShownItem.setChecked(false);
-                    stopService(new Intent(this,AddressService.class));
-                }else {
+                    stopService(new Intent(this, AddressService.class));
+                } else {
                     addressShownItem.setChecked(true);
                     startService(new Intent(this, AddressService.class));
                 }
                 break;
+            case R.id.item_address_shown_theme:
+                showThemeSelectDialog();
+                break;
             default:
                 break;
         }
+    }
+
+    /**
+     * 设置归属地提示框主题
+     */
+    private void showThemeSelectDialog() {
+        int currentTheme = preferences.getInt("toast_theme", 0);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("归属地提示风格");
+        builder.setSingleChoiceItems(AppConst.TOAST_THEME_DES, currentTheme, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                preferences.edit().putInt("toast_theme", which).apply();
+                addressShownThemeItem.setDes(AppConst.TOAST_THEME_DES[which]);
+                dialog.dismiss();
+            }
+        });
+        builder.setNegativeButton("取消", null);
+        builder.show();
     }
 
     @Override

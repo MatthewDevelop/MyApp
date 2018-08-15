@@ -17,6 +17,8 @@
     <string name="ic_user">&#xe652; </string> <!--用户-->
     <string name="ic_more">&#xe66f; </string> <!--更多-->
     <string name="ic_refresh">&#xe600; </string> <!--刷新-->
+    <string name="ic_right">&#xe609; </string> <!--右箭头-->
+    <string name="ic_call">&#xe626; </string> <!--电话图标-->
 
     <string name="action_share">分享</string>
     <string name="copy_link">复制链接</string>

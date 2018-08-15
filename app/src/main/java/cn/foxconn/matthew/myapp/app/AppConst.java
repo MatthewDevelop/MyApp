@@ -34,10 +34,16 @@ public class AppConst {
 
     public static final int DB_VERSION = 1;
 
-    public static final String COMPANY_NAMES="company_names";
+    public static final String COMPANY_NAMES = "company_names";
 
-    public static final String SELECTED_COMPANY="selected_company";
+    public static final String SELECTED_COMPANY = "selected_company";
 
-    public static final int THEME_COLOR= R.color.main;
+    public static final int THEME_COLOR = R.color.main;
+
+    public static final int[] TOAST_THEME_COLOR = new int[]{R.color.main, R.color.orange
+            , R.color.gray, R.color.violet, R.color.wheat, R.color.white};
+
+    public static final String[] TOAST_THEME_DES = new String[]{"苹果绿", "活力橙"
+            , "金属灰", "罗兰紫", "小麦金", "亮丽白"};
 
 }

@@ -9,12 +9,12 @@ import butterknife.BindView;
 import cn.foxconn.matthew.myapp.R;
 import cn.foxconn.matthew.myapp.mobilesafe.base.BaseSetupActivity;
 import cn.foxconn.matthew.myapp.utils.ToastUtil;
-import cn.foxconn.matthew.myapp.mobilesafe.widget.SettingItemView;
+import cn.foxconn.matthew.myapp.mobilesafe.widget.SettingItemCheckView;
 
 public class Setup2Activity extends BaseSetupActivity {
     private static final String TAG = "Setup2Activity";
     @BindView(R.id.siv_sim)
-    SettingItemView sivSim;
+    SettingItemCheckView sivSim;
 
     @Override
     protected void init() {

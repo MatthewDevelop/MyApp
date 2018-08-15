@@ -1,7 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:drawable="@color/wheat" android:state_pressed="true" />
-    <item android:drawable="@color/wheat" android:state_focused="true" />
+    <item android:state_pressed="true">
+        <shape android:shape="rectangle">
+            <!--圆角-->
+            <corners android:radius="20dp" />
+            <!--填充-->
+            <solid android:color="@color/wheat" />
+        </shape>
+    </item>
+    <item android:state_focused="true">
+        <shape android:shape="rectangle">
+            <!--圆角-->
+            <corners android:radius="20dp" />
+            <!--填充-->
+            <solid android:color="@color/wheat" />
+        </shape>
+    </item>
     <item>
         <shape android:shape="rectangle">
             <!--圆角-->

@@ -18,7 +18,7 @@ import cn.foxconn.matthew.myapp.utils.LogUtil;
  * @email:guocheng0816@163.com
  */
 
-public class SettingItemView extends RelativeLayout {
+public class SettingItemCheckView extends RelativeLayout {
     private static final String TAG = "SettingItemView";
     private static final String NAMESPACE = "http://schemas.android.com/apk/res-auto";
     private TextView mTvTitle;
@@ -28,13 +28,13 @@ public class SettingItemView extends RelativeLayout {
     private String mDesOn;
     private String mDesOff;
 
-    public SettingItemView(Context context) {
+    public SettingItemCheckView(Context context) {
         super(context);
         Log.e(TAG, "SettingItemView: 1" );
         initView();
     }
 
-    public SettingItemView(Context context, AttributeSet attrs) {
+    public SettingItemCheckView(Context context, AttributeSet attrs) {
         super(context, attrs);
         Log.e(TAG, "SettingItemView: 2" );
 //        getAtts(attrs);
@@ -45,7 +45,7 @@ public class SettingItemView extends RelativeLayout {
         initView();
     }
 
-    public SettingItemView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public SettingItemCheckView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         Log.e(TAG, "SettingItemView: 3" );
         initView();
@@ -70,7 +70,7 @@ public class SettingItemView extends RelativeLayout {
      */
     private void initView() {
         //将自定义的布局文件设置给当前的SettingItemView
-        View.inflate(getContext(), R.layout.view_setting_layout,this);
+        View.inflate(getContext(), R.layout.view_setting_item_check,this);
         mTvTitle = findViewById(R.id.tv_title);
         mTvDes = findViewById(R.id.tv_des);
         mCbStatus = findViewById(R.id.cb_status);
