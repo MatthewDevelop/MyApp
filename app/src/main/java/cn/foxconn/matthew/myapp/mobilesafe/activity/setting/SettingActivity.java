@@ -17,7 +17,12 @@ import cn.foxconn.matthew.myapp.mobilesafe.widget.SettingItemClickView;
 import cn.foxconn.matthew.myapp.utils.AdminManager;
 import cn.foxconn.matthew.myapp.utils.ServiceUtils;
 
-
+/**
+ * @author:Matthew
+ * @date:2018/2/3
+ * @email:guocheng0816@163.com
+ * @func:设置界面
+ */
 public class SettingActivity extends MobileSafeBaseActivity {
     @BindView(R.id.item_update)
     SettingItemCheckView updateItem;
@@ -27,6 +32,8 @@ public class SettingActivity extends MobileSafeBaseActivity {
     SettingItemCheckView addressShownItem;
     @BindView(R.id.item_address_shown_theme)
     SettingItemClickView addressShownThemeItem;
+    @BindView(R.id.item_address_shown_location)
+    SettingItemClickView addressShownLocationItem;
     private SharedPreferences preferences;
 
     @Override
@@ -41,8 +48,10 @@ public class SettingActivity extends MobileSafeBaseActivity {
         updateItem.setChecked(isAutoUpdate);
         deviceAdminItem.setChecked(isDeviceAdminOn);
         addressShownItem.setChecked(isServiceRunning);
-        addressShownThemeItem.setTitle("来电提示主题");
+        addressShownThemeItem.setTitle("归属地提示框主题");
         addressShownThemeItem.setDes(AppConst.TOAST_THEME_DES[toastThemeNum]);
+        addressShownLocationItem.setTitle("归属地提示框位置");
+        addressShownLocationItem.setDes("设置归属地提示框的位置");
     }
 
     @Override
@@ -50,7 +59,8 @@ public class SettingActivity extends MobileSafeBaseActivity {
         return R.layout.activity_setting;
     }
 
-    @OnClick({R.id.item_device_admin, R.id.item_update, R.id.item_address, R.id.item_address_shown_theme})
+    @OnClick({R.id.item_device_admin, R.id.item_update,
+            R.id.item_address, R.id.item_address_shown_theme,R.id.item_address_shown_location})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.item_update:
@@ -82,6 +92,9 @@ public class SettingActivity extends MobileSafeBaseActivity {
                 break;
             case R.id.item_address_shown_theme:
                 showThemeSelectDialog();
+                break;
+            case R.id.item_address_shown_location:
+                startActivity(new Intent(this,DragViewActivity.class));
                 break;
             default:
                 break;

@@ -11,6 +11,8 @@ import android.widget.LinearLayout;
 
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 
+import cn.foxconn.matthew.myapp.utils.UIUtil;
+
 /**
  * @author:Matthew
  * @date:2018/4/26
@@ -42,7 +44,7 @@ public class BaseActivity extends RxAppCompatActivity {
             View view=new View(this);
             LinearLayout.LayoutParams layoutParams=new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,statusBarHeight);
             view.setLayoutParams(layoutParams);
-            view.setBackgroundColor(ContextCompat.getColor(this,color));
+            view.setBackgroundColor(UIUtil.getColor(color));
             //添加布局到布局中
             ViewGroup viewGroup= (ViewGroup) getWindow().getDecorView();
             viewGroup.addView(view);

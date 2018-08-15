@@ -84,7 +84,7 @@ public class AddressQueryActivity extends MobileSafeBaseActivity {
     private void vibrate() {
         Vibrator vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
         vibrator.vibrate(2000L);  //震动两秒
-//        vibrator.vibrate(new long[]{1000L, 2000L, 1000L, 2000L}, -1);//规律震动停一秒震动两秒再停一秒震动两秒，参二-1不循环，参二0表示从头开始播放
+//        vibrator.vibrate(new long[]{1000L, 2000L, 1000L, 2000L}, -1);//规律震动停一秒震动两秒再停一秒震动两秒，参二-1不循环，参二0表示从头开始播放，参二其他数字表示从第几个位置开始循环
         //取消震动
 //        vibrator.cancel();
     }

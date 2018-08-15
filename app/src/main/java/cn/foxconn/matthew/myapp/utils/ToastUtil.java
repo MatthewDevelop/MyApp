@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.PixelFormat;
 import android.support.v4.content.ContextCompat;
+import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
@@ -135,14 +136,28 @@ public class ToastUtil {
         params.flags = WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON
                 | WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
                 | WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE;
+
         sView = View.inflate(context, R.layout.toast_layout, null);
         SharedPreferences preferences = context.getSharedPreferences("config", Context.MODE_PRIVATE);
         int toastThemeNum = preferences.getInt("toast_theme", 0);
+        int lastX=preferences.getInt("lastX", 0);
+        int lastY=preferences.getInt("lastY", 0);
+        boolean isCenterHorizontal=preferences.getBoolean("center_horizontal", false);
+        //设置关于原点的偏移量
+        if(isCenterHorizontal){
+            params.gravity=Gravity.CENTER_HORIZONTAL+Gravity.TOP;
+            params.y=lastY;
+        }else {
+            //指定原点坐标为左上角，默认是居中
+            params.gravity= Gravity.LEFT+Gravity.TOP;
+            params.x = lastX;
+            params.y = lastY;
+        }
         FontTextView ftIcon = sView.findViewById(R.id.ft_icon);
-        ftIcon.setTextColor(ContextCompat.getColor(context,AppConst.TOAST_THEME_COLOR[toastThemeNum]));
+        ftIcon.setTextColor(UIUtil.getColor(AppConst.TOAST_THEME_COLOR[toastThemeNum]));
         TextView tvAddress = sView.findViewById(R.id.tv_address);
         tvAddress.setText(address);
-        tvAddress.setTextColor(ContextCompat.getColor(context,AppConst.TOAST_THEME_COLOR[toastThemeNum]));
+        tvAddress.setTextColor(UIUtil.getColor(AppConst.TOAST_THEME_COLOR[toastThemeNum]));
         sWindowManager.addView(sView, params);
     }
 

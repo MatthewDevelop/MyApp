@@ -3,21 +3,27 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
-    </style>
-
-    <style name="AppThemeNoTitle" parent="Theme.AppCompat.Light.NoActionBar">
-        <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/main</item>
         <item name="colorPrimaryDark">@color/main</item>
         <item name="colorAccent">@color/main</item>
+    </style>
+
+    <style name="AppThemeNoTitle" parent="AppTheme">
         <!--去掉系统默认的标题栏-->
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
         <!--activity切换样式-->
         <!--<item name="android:windowAnimationStyle">@style/activityAnimation</item>-->
+    </style>
+
+    <style name="AppThemeNoTitleTransparent" parent="AppThemeNoTitle">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/main_transparent</item>
+        <item name="colorPrimaryDark">@color/main_transparent</item>
+        <item name="colorAccent">@color/main_transparent</item>
+        <item name="android:windowBackground">@color/transparent</item>
+        <item name="android:background">@color/transparent</item>
+        <item name="android:windowIsTranslucent">true</item>
     </style>
 
     <!-- animation 样式 -->

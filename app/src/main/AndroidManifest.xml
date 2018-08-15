@@ -57,6 +57,8 @@
         <activity android:name=".expressinquiry.activity.CompanySearchActivity" />
         <activity android:name=".mobilesafe.activity.advancetools.AdvanceToolsActivity" />
         <activity android:name=".mobilesafe.activity.advancetools.AddressQueryActivity" />
+        <activity android:name=".mobilesafe.activity.setting.DragViewActivity"
+            android:theme="@style/AppThemeNoTitleTransparent"/>
 
         <receiver
             android:name=".mobilesafe.receiver.BootCompleteReceiver"

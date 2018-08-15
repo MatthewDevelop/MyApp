@@ -34,4 +34,8 @@
         android:id="@+id/item_address_shown_theme"
         style="@style/setting_item_style" />
 
+    <cn.foxconn.matthew.myapp.mobilesafe.widget.SettingItemClickView
+        android:id="@+id/item_address_shown_location"
+        style="@style/setting_item_style" />
+
 </LinearLayout>

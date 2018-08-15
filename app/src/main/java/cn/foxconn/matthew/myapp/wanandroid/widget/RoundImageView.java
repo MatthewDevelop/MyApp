@@ -22,6 +22,7 @@ import android.util.TypedValue;
 import android.widget.ImageView;
 
 import cn.foxconn.matthew.myapp.R;
+import cn.foxconn.matthew.myapp.utils.UIUtil;
 
 
 /**
@@ -175,7 +176,7 @@ public class RoundImageView extends ImageView {
             canvas.drawCircle(mRadius + mBorderWidth / 2, mRadius + mBorderWidth / 2, mRadius, mBorderPaint);
 
             //进度
-            mBorderPaint.setColor(ContextCompat.getColor(getContext(),mProgressColor));
+            mBorderPaint.setColor(UIUtil.getColor(mProgressColor));
             RectF rect = new RectF(mBorderWidth/2,mBorderWidth/2,mRadius*2 + mBorderWidth/2,mRadius*2 + mBorderWidth/2);
             canvas.drawArc(rect,-90,mBorderProgress,false,mBorderPaint);
 

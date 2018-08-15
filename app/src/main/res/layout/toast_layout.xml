@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:gravity="center"
     android:orientation="horizontal"
-    android:padding="6dp">
+    android:padding="1dp">
 
     <cn.foxconn.matthew.myapp.wanandroid.widget.FontTextView
         android:id="@+id/ft_icon"
@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="3dp"
         android:text="@string/ic_call"
-        android:textColor="@color/main"
+        android:textColor="@color/wheat"
         android:textSize="38sp" />
 
 
@@ -21,7 +21,8 @@
         android:id="@+id/tv_address"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/main"
-        android:textSize="25sp" />
+        android:textColor="@color/wheat"
+        android:textSize="25sp"
+        android:text="双击居中"/>
 
 </LinearLayout>
