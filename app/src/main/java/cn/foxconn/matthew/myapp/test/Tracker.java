@@ -37,43 +37,43 @@ public class Tracker {
         //---bodyParams
         List<String> bodyParams = new ArrayList();
         String result = null;
-        if (type.equals("post")) {
+        if ("post".equals(type)) {
             String ReqURL = "http://api.trackingmore.com/v2/trackings/post";
             bodyParams.add(requestData);
             result = sendPost(ReqURL, headerparams, bodyParams, "POST");
 
-        } else if (type.equals("get")) {
+        } else if ("get".equals(type)) {
 
             String ReqURL = "http://api.trackingmore.com/v2/trackings/get";
             String RelUrl = ReqURL + urlStr;
             result = sendPost(RelUrl, headerparams, bodyParams, "GET");
 
-        } else if (type.equals("batch")) {
+        } else if ("batch".equals(type)) {
 
             String ReqURL = "http://api.trackingmore.com/v2/trackings/batch";
             bodyParams.add(requestData);
             result = sendPost(ReqURL, headerparams, bodyParams, "POST");
 
-        } else if (type.equals("codeNumberGet")) {
+        } else if ("codeNumberGet".equals(type)) {
 
             String ReqURL = "http://api.trackingmore.com/v2/trackings";
             String RelUrl = ReqURL + urlStr;
             result = sendGet(RelUrl, headerparams, "GET");
 
-        } else if (type.equals("codeNumberPut")) {
+        } else if ("codeNumberPut".equals(type)) {
 
             String ReqURL = "http://api.trackingmore.com/v2/trackings";
             bodyParams.add(requestData);
             String RelUrl = ReqURL + urlStr;
             result = sendPost(RelUrl, headerparams, bodyParams, "PUT");
 
-        } else if (type.equals("codeNumberDelete")) {
+        } else if ("codeNumberDelete".equals(type)) {
 
             String ReqURL = "http://api.trackingmore.com/v2/trackings";
             String RelUrl = ReqURL + urlStr;
             result = sendGet(RelUrl, headerparams, "DELETE");
 
-        } else if (type.equals("realtime")) {
+        } else if ("realtime".equals(type)) {
 
             String ReqURL = "http://api.trackingmore.com/v2/trackings/realtime";
             bodyParams.add(requestData);

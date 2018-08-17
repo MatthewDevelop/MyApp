@@ -1,6 +1,7 @@
 package cn.foxconn.matthew.myapp.utils;
 
-import android.app.Activity;
+import android.content.Context;
+import android.view.WindowManager;
 
 import cn.foxconn.matthew.myapp.app.App;
 
@@ -11,24 +12,28 @@ import cn.foxconn.matthew.myapp.app.App;
  * @func:屏幕工具类
  */
 public class ScreenUtil {
-
     /**
-     * 获取屏幕高度
-     * @param activity
+     * 获取WindowManager
      * @return
      */
-    public static int getScreenHeight(Activity activity){
-        return activity.getWindowManager().getDefaultDisplay().getHeight();
+    private static WindowManager getWindowManager(){
+        return (WindowManager) App.getContext().getSystemService(Context.WINDOW_SERVICE);
+    }
+    /**
+     * 获取屏幕高度
+     * @return
+     */
+    public static int getScreenHeight(){
+        return getWindowManager().getDefaultDisplay().getHeight();
     }
 
 
     /**
      * 获取屏幕宽度
-     * @param activity
      * @return
      */
-    public static int getScreenWidth(Activity activity){
-        return activity.getWindowManager().getDefaultDisplay().getWidth();
+    public static int getScreenWidth(){
+        return getWindowManager().getDefaultDisplay().getWidth();
     }
 
     /**

@@ -15,9 +15,9 @@ public class PinyinComparator implements Comparator<SortBean> {
     @Override
     public int compare(SortBean o1, SortBean o2) {
         //将快递公司按拼音排序
-        if (o1.getSortLetters().equals("#")) {
+        if ("#".equals(o1.getSortLetters())) {
             return 1;
-        } else if (o2.getSortLetters().equals("#")) {
+        } else if ("#".equals(o2.getSortLetters())) {
             return -1;
         } else {
             return o1.getSortLetters().compareTo(o2.getSortLetters());
