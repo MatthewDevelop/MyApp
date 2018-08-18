@@ -19,6 +19,7 @@
     <string name="ic_refresh">&#xe600; </string> <!--刷新-->
     <string name="ic_right">&#xe609; </string> <!--右箭头-->
     <string name="ic_call">&#xe626; </string> <!--电话图标-->
+    <string name="ic_rocket">&#xe68d; </string> <!--小火箭图标-->
 
     <string name="action_share">分享</string>
     <string name="copy_link">复制链接</string>
@@ -27,7 +28,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_login">LoginActivity</string>
-    <string name="sample_device_admin" >超级设备管理器</string>
-    <string name="sample_device_admin_description" >超级设备管理器:一键锁屏，清除数据</string>
+    <string name="sample_device_admin">超级设备管理器</string>
+    <string name="sample_device_admin_description">超级设备管理器:一键锁屏，清除数据</string>
 
 </resources>

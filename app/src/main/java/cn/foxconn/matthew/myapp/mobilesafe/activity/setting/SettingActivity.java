@@ -12,6 +12,7 @@ import cn.foxconn.matthew.myapp.R;
 import cn.foxconn.matthew.myapp.app.AppConst;
 import cn.foxconn.matthew.myapp.mobilesafe.base.MobileSafeBaseActivity;
 import cn.foxconn.matthew.myapp.mobilesafe.service.AddressService;
+import cn.foxconn.matthew.myapp.mobilesafe.service.RocketService;
 import cn.foxconn.matthew.myapp.mobilesafe.widget.SettingItemCheckView;
 import cn.foxconn.matthew.myapp.mobilesafe.widget.SettingItemClickView;
 import cn.foxconn.matthew.myapp.utils.AdminManager;
@@ -34,6 +35,8 @@ public class SettingActivity extends MobileSafeBaseActivity {
     SettingItemClickView addressShownThemeItem;
     @BindView(R.id.item_address_shown_location)
     SettingItemClickView addressShownLocationItem;
+    @BindView(R.id.item_accelerate_rocket)
+    SettingItemCheckView accelerateRocketItem;
     private SharedPreferences preferences;
 
     @Override
@@ -42,12 +45,15 @@ public class SettingActivity extends MobileSafeBaseActivity {
         preferences = getSharedPreferences("config", MODE_PRIVATE);
         boolean isAutoUpdate = preferences.getBoolean("auto_update", true);
         boolean isDeviceAdminOn = preferences.getBoolean("device_admin_on", false);
-        boolean isServiceRunning = ServiceUtils.isServiceRunning(this,
+        boolean isAddressServiceRunning = ServiceUtils.isServiceRunning(this,
                 "cn.foxconn.matthew.myapp.mobilesafe.service.AddressService");
+        boolean isRocketServiceRunning = ServiceUtils.isServiceRunning(this,
+                "cn.foxconn.matthew.myapp.mobilesafe.service.RocketService");
         int toastThemeNum = preferences.getInt("toast_theme", 0);
         updateItem.setChecked(isAutoUpdate);
         deviceAdminItem.setChecked(isDeviceAdminOn);
-        addressShownItem.setChecked(isServiceRunning);
+        addressShownItem.setChecked(isAddressServiceRunning);
+        accelerateRocketItem.setChecked(isRocketServiceRunning);
         addressShownThemeItem.setTitle("归属地提示框主题");
         addressShownThemeItem.setDes(AppConst.TOAST_THEME_DES[toastThemeNum]);
         addressShownLocationItem.setTitle("归属地提示框位置");
@@ -60,7 +66,8 @@ public class SettingActivity extends MobileSafeBaseActivity {
     }
 
     @OnClick({R.id.item_device_admin, R.id.item_update,
-            R.id.item_address, R.id.item_address_shown_theme,R.id.item_address_shown_location})
+            R.id.item_address, R.id.item_address_shown_theme, R.id.item_address_shown_location
+            , R.id.item_accelerate_rocket})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.item_update:
@@ -94,7 +101,16 @@ public class SettingActivity extends MobileSafeBaseActivity {
                 showThemeSelectDialog();
                 break;
             case R.id.item_address_shown_location:
-                startActivity(new Intent(this,DragViewActivity.class));
+                startActivity(new Intent(this, DragViewActivity.class));
+                break;
+            case R.id.item_accelerate_rocket:
+                if (accelerateRocketItem.isChecked()) {
+                    accelerateRocketItem.setChecked(false);
+                    stopService(new Intent(this, RocketService.class));
+                } else {
+                    accelerateRocketItem.setChecked(true);
+                    startService(new Intent(this, RocketService.class));
+                }
                 break;
             default:
                 break;

@@ -16,9 +16,9 @@
     <uses-permission android:name="android.permission.SEND_SMS" />
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
     <!--监听去电的权限-->
-    <uses-permission android:name="android.permission.PROCESS_OUTGOING_CALLS"/>
+    <uses-permission android:name="android.permission.PROCESS_OUTGOING_CALLS" />
     <!--WINDOWS弹出悬浮窗权限-->
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 
     <application
         android:name=".app.App"
@@ -53,14 +53,19 @@
         <activity android:name=".wanandroid.activity.SearchActivity" />
 
 
-        <activity android:name=".websocketdemo.WebSocketActivity"></activity>
+        <activity android:name=".websocketdemo.WebSocketActivity" />
         <activity android:name=".wanandroid.activity.HotActivity" />
         <activity android:name=".expressinquiry.activity.ExpressQueryActivity" />
         <activity android:name=".expressinquiry.activity.CompanySearchActivity" />
         <activity android:name=".mobilesafe.activity.advancetools.AdvanceToolsActivity" />
         <activity android:name=".mobilesafe.activity.advancetools.AddressQueryActivity" />
-        <activity android:name=".mobilesafe.activity.setting.DragViewActivity"
-            android:theme="@style/AppThemeNoTitleTransparent"/>
+        <activity
+            android:name=".mobilesafe.activity.setting.DragViewActivity"
+            android:theme="@style/AppThemeNoTitleTransparent" />
+        <activity
+            android:name=".mobilesafe.activity.setting.SmokeActivity"
+            android:theme="@style/AppThemeNoTitleTransparent"
+            android:launchMode="singleInstance"/>
 
         <receiver
             android:name=".mobilesafe.receiver.BootCompleteReceiver"
@@ -96,7 +101,8 @@
         </receiver>
 
         <service android:name=".mobilesafe.service.LocationService" />
-        <service android:name=".mobilesafe.service.AddressService"/>
+        <service android:name=".mobilesafe.service.AddressService" />
+        <service android:name=".mobilesafe.service.RocketService" />
     </application>
 
 </manifest>

@@ -38,4 +38,12 @@
         android:id="@+id/item_address_shown_location"
         style="@style/setting_item_style" />
 
+    <cn.foxconn.matthew.myapp.mobilesafe.widget.SettingItemCheckView
+        android:id="@+id/item_accelerate_rocket"
+        style="@style/setting_item_style"
+        app:des_off="已关闭"
+        app:des_on="已开启"
+        app:title="加速小火箭"
+        android:visibility="gone"/>
+
 </LinearLayout>
