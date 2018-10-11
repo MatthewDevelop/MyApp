@@ -39,7 +39,7 @@ public class ExpressQueryPresenter {
         mQueryView = expressQueryView;
         mProvider = provider;
         mDataModel = new DataModelImpl();
-        mHelper = new MyDatabaseHelper(App.getContext(), "WanAndroid.db", null, 1);
+        mHelper = new MyDatabaseHelper(App.getContext());
     }
 
     public void getCompanyData() {

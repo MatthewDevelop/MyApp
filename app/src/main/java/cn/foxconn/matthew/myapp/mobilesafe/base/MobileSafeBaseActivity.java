@@ -21,6 +21,15 @@ public abstract class MobileSafeBaseActivity extends BaseActivity {
         translucentBar(AppConst.THEME_COLOR);
         ButterKnife.bind(this);
         init();
+        initView();
+        initData();
+    }
+
+    protected void initData() {
+
+    }
+
+    protected void initView() {
     }
 
     protected void init() {

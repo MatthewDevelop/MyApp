@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item type="id" name="tv_black_num"/>
+    <item type="id" name="tv_guard_mode"/>
+    <item type="id" name="ft_delete"/>
+</resources>

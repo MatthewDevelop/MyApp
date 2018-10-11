@@ -45,5 +45,10 @@
         app:des_on="已开启"
         app:title="加速小火箭"
         android:visibility="gone"/>
-
+    <cn.foxconn.matthew.myapp.mobilesafe.widget.SettingItemCheckView
+        android:id="@+id/item_black_list_block"
+        style="@style/setting_item_style"
+        app:des_off="已关闭"
+        app:des_on="已开启"
+        app:title="黑名单拦截" />
 </LinearLayout>

@@ -12,6 +12,7 @@ import cn.foxconn.matthew.myapp.R;
 import cn.foxconn.matthew.myapp.app.AppConst;
 import cn.foxconn.matthew.myapp.mobilesafe.base.MobileSafeBaseActivity;
 import cn.foxconn.matthew.myapp.mobilesafe.service.AddressService;
+import cn.foxconn.matthew.myapp.mobilesafe.service.CallSafeService;
 import cn.foxconn.matthew.myapp.mobilesafe.service.RocketService;
 import cn.foxconn.matthew.myapp.mobilesafe.widget.SettingItemCheckView;
 import cn.foxconn.matthew.myapp.mobilesafe.widget.SettingItemClickView;
@@ -37,6 +38,8 @@ public class SettingActivity extends MobileSafeBaseActivity {
     SettingItemClickView addressShownLocationItem;
     @BindView(R.id.item_accelerate_rocket)
     SettingItemCheckView accelerateRocketItem;
+    @BindView(R.id.item_black_list_block)
+    SettingItemCheckView blaclListBlockItem;
     private SharedPreferences preferences;
 
     @Override
@@ -45,6 +48,7 @@ public class SettingActivity extends MobileSafeBaseActivity {
         preferences = getSharedPreferences("config", MODE_PRIVATE);
         boolean isAutoUpdate = preferences.getBoolean("auto_update", true);
         boolean isDeviceAdminOn = preferences.getBoolean("device_admin_on", false);
+        boolean isBlackListBlockOn = preferences.getBoolean("black_list_block_on", false);
         boolean isAddressServiceRunning = ServiceUtils.isServiceRunning(this,
                 "cn.foxconn.matthew.myapp.mobilesafe.service.AddressService");
         boolean isRocketServiceRunning = ServiceUtils.isServiceRunning(this,
@@ -54,6 +58,7 @@ public class SettingActivity extends MobileSafeBaseActivity {
         deviceAdminItem.setChecked(isDeviceAdminOn);
         addressShownItem.setChecked(isAddressServiceRunning);
         accelerateRocketItem.setChecked(isRocketServiceRunning);
+        blaclListBlockItem.setChecked(isBlackListBlockOn);
         addressShownThemeItem.setTitle("归属地提示框主题");
         addressShownThemeItem.setDes(AppConst.TOAST_THEME_DES[toastThemeNum]);
         addressShownLocationItem.setTitle("归属地提示框位置");
@@ -67,7 +72,7 @@ public class SettingActivity extends MobileSafeBaseActivity {
 
     @OnClick({R.id.item_device_admin, R.id.item_update,
             R.id.item_address, R.id.item_address_shown_theme, R.id.item_address_shown_location
-            , R.id.item_accelerate_rocket})
+            , R.id.item_accelerate_rocket,R.id.item_black_list_block})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.item_update:
@@ -110,6 +115,17 @@ public class SettingActivity extends MobileSafeBaseActivity {
                 } else {
                     accelerateRocketItem.setChecked(true);
                     startService(new Intent(this, RocketService.class));
+                }
+                break;
+            case R.id.item_black_list_block:
+                if (blaclListBlockItem.isChecked()) {
+                    blaclListBlockItem.setChecked(false);
+                    preferences.edit().putBoolean("black_list_block_on", false).apply();
+                    stopService(new Intent(this, CallSafeService.class));
+                } else {
+                    blaclListBlockItem.setChecked(true);
+                    preferences.edit().putBoolean("black_list_block_on", true).apply();
+                    startService(new Intent(this, CallSafeService.class));
                 }
                 break;
             default:

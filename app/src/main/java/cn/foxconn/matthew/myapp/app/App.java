@@ -72,7 +72,7 @@ public class App extends Application {
         mPreferences = getSharedPreferences("config", MODE_PRIVATE);
         boolean isDbCreated = mPreferences.getBoolean(AppConst.IS_DATABASE_CREATED, false);
         if (!isDbCreated) {
-            SQLiteDatabase database = new MyDatabaseHelper(getContext(), AppConst.DB_NAME, null, AppConst.DB_VERSION).getWritableDatabase();
+            SQLiteDatabase database = new MyDatabaseHelper(getContext()).getWritableDatabase();
             initExpressCompanyData(database);
         }
         mPreferences.edit().putBoolean(AppConst.IS_DATABASE_CREATED,true).apply();

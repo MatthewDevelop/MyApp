@@ -1,0 +1,24 @@
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--pressed按下的图片-->
+    <item android:state_pressed="true">
+        <shape android:shape="rectangle">
+            <corners android:radius="8dp" />
+            <solid android:color="@color/gray" />
+        </shape>
+    </item>
+    <!--focused获取焦点的图片-->
+    <item android:state_focused="true">
+        <shape android:shape="rectangle">
+            <corners android:radius="8dp" />
+            <solid android:color="@color/gray" />
+        </shape>
+    </item>
+    <!--正常的图片-->
+    <item>
+        <shape android:shape="rectangle">
+            <corners android:radius="8dp" />
+            <solid android:color="@color/main" />
+        </shape>
+    </item>
+
+</selector>

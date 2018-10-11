@@ -18,6 +18,8 @@ import android.widget.Toast;
 import butterknife.BindView;
 import cn.foxconn.matthew.myapp.R;
 import cn.foxconn.matthew.myapp.mobilesafe.activity.advancetools.AdvanceToolsActivity;
+import cn.foxconn.matthew.myapp.mobilesafe.activity.callguard.CallGuardActivity;
+import cn.foxconn.matthew.myapp.mobilesafe.activity.callguard.CallGuardActivity2;
 import cn.foxconn.matthew.myapp.mobilesafe.activity.security.LostFindActivity;
 import cn.foxconn.matthew.myapp.mobilesafe.activity.setting.SettingActivity;
 import cn.foxconn.matthew.myapp.mobilesafe.base.MobileSafeBaseActivity;
@@ -44,12 +46,6 @@ public class MobileSafeActivity extends MobileSafeBaseActivity {
             , R.drawable.home_settings};
     private SharedPreferences preferences;
 
-
-    @Override
-    protected int getContentResId() {
-        return R.layout.activity_mobile_safe;
-    }
-
     @Override
     protected void init() {
         super.init();
@@ -62,6 +58,10 @@ public class MobileSafeActivity extends MobileSafeBaseActivity {
                     case 0:
                         //手机防盗
                         showPasswordDialog();
+                        break;
+                    case 1:
+                        //通信卫士
+                        startActivity(new Intent(MobileSafeActivity.this, CallGuardActivity2.class));
                         break;
                     case 7:
                         //高级工具
@@ -76,6 +76,11 @@ public class MobileSafeActivity extends MobileSafeBaseActivity {
                 }
             }
         });
+    }
+
+    @Override
+    protected int getContentResId() {
+        return R.layout.activity_mobile_safe;
     }
 
     /**
