@@ -1,5 +1,6 @@
 package cn.foxconn.matthew.myapp.wanandroid.view;
 
+import cn.foxconn.matthew.myapp.wanandroid.base.BaseView;
 import cn.foxconn.matthew.myapp.wanandroid.bean.pojo.UserBean;
 
 /**
@@ -8,7 +9,7 @@ import cn.foxconn.matthew.myapp.wanandroid.bean.pojo.UserBean;
  * @email:guocheng0816@163.com
  */
 
-public interface LoginView {
+public interface LoginView  extends BaseView {
 
     void showProgress(String tipString);
 

@@ -28,7 +28,7 @@ import cn.foxconn.matthew.myapp.wanandroid.widget.CustomDialog;
  * @email:guocheng0816@163.com
  */
 
-public abstract class WanAndroidBaseActivity<V, T extends BasePresenter<V, ActivityEvent>> extends BaseActivity {
+public abstract class WanAndroidBaseActivity<V extends BaseView, T extends BasePresenter<V, ActivityEvent>> extends BaseActivity  implements BaseView{
     protected T mPresenter;
     CustomDialog mCustomDialog;
 
@@ -121,5 +121,10 @@ public abstract class WanAndroidBaseActivity<V, T extends BasePresenter<V, Activ
             mCustomDialog.dismiss();
             mCustomDialog = null;
         }
+    }
+
+    @Override
+    public void Test() {
+
     }
 }

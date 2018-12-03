@@ -4,6 +4,7 @@ import android.support.design.widget.TabLayout;
 
 import java.util.List;
 
+import cn.foxconn.matthew.myapp.wanandroid.base.BaseView;
 import cn.foxconn.matthew.myapp.wanandroid.bean.pojo.ArticleBean;
 import cn.foxconn.matthew.myapp.wanandroid.adapter.ArticleListAdapter;
 import cn.foxconn.matthew.myapp.wanandroid.bean.pojovo.TypeTagVO;
@@ -15,7 +16,7 @@ import cn.foxconn.matthew.myapp.wanandroid.widget.AutoLinefeedLayout;
  * @email:guocheng0816@163.com
  */
 
-public interface TypeView {
+public interface TypeView  extends BaseView {
     TabLayout getTabLayout();
 
     AutoLinefeedLayout getTagLayout();

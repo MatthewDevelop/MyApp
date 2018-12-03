@@ -11,11 +11,11 @@ import java.lang.ref.WeakReference;
  * @email:guocheng0816@163.com
  */
 
-public class BasePresenter<V,R> {
+public class BasePresenter<V extends BaseView,R> {
 
-    protected Reference<V> mReference;
+    private Reference<V> mReference;
     private LifecycleProvider<R> mProvider;
-    public void attachView(V view){
+    void attachView(V view){
         mReference=new WeakReference(view);
     }
 
@@ -36,7 +36,7 @@ public class BasePresenter<V,R> {
         return mReference!=null&&mReference.get()!=null;
     }
 
-    public void detachView(){
+    void detachView(){
         if(mReference!=null){
             mReference.clear();
             mReference=null;

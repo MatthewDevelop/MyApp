@@ -2,6 +2,7 @@ package cn.foxconn.matthew.myapp.wanandroid.view;
 
 import java.util.List;
 
+import cn.foxconn.matthew.myapp.wanandroid.base.BaseView;
 import cn.foxconn.matthew.myapp.wanandroid.bean.pojo.HotKeyBean;
 
 /**
@@ -10,7 +11,7 @@ import cn.foxconn.matthew.myapp.wanandroid.bean.pojo.HotKeyBean;
  * @email:guocheng0816@163.com
  */
 
-public interface HotView {
+public interface HotView  extends BaseView {
     void showRefreshView(Boolean refresh);
     void loadHotKeySuccess(List<HotKeyBean> hotKeyBeans);
     void loadCommonWebSiteSuccess(List<HotKeyBean> hotKeyBeans);

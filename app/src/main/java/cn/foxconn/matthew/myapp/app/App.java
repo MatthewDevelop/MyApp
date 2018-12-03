@@ -1,5 +1,6 @@
 package cn.foxconn.matthew.myapp.app;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
@@ -36,6 +37,7 @@ public class App extends Application {
 
     private static List<Activity> activities;
 
+    @SuppressLint("StaticFieldLeak")
     private static Context mContext;
 
     private SharedPreferences mPreferences;
@@ -74,8 +76,8 @@ public class App extends Application {
         if (!isDbCreated) {
             SQLiteDatabase database = new MyDatabaseHelper(getContext()).getWritableDatabase();
             initExpressCompanyData(database);
+            mPreferences.edit().putBoolean(AppConst.IS_DATABASE_CREATED,true).apply();
         }
-        mPreferences.edit().putBoolean(AppConst.IS_DATABASE_CREATED,true).apply();
     }
 
     public static void setContextValue(Context contextValue) {

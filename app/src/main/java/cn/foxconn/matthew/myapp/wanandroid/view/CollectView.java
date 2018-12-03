@@ -2,6 +2,7 @@ package cn.foxconn.matthew.myapp.wanandroid.view;
 
 import java.util.List;
 
+import cn.foxconn.matthew.myapp.wanandroid.base.BaseView;
 import cn.foxconn.matthew.myapp.wanandroid.bean.pojo.ArticleBean;
 
 /**
@@ -10,7 +11,7 @@ import cn.foxconn.matthew.myapp.wanandroid.bean.pojo.ArticleBean;
  * @email:guocheng0816@163.com
  */
 
-public interface CollectView {
+public interface CollectView extends BaseView {
 
     /**
      * 刷新状态

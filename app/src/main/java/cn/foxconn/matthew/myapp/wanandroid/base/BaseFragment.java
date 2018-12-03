@@ -18,7 +18,7 @@ import butterknife.ButterKnife;
  * @email:guocheng0816@163.com
  */
 
-public abstract class BaseFragment<V, T extends BasePresenter<V, FragmentEvent>> extends RxFragment {
+public abstract class BaseFragment<V extends BaseView, T extends BasePresenter<V, FragmentEvent>> extends RxFragment implements BaseView{
     private static final String TAG = "BaseFragment";
     protected T mPresenter;
     /**
@@ -128,6 +128,11 @@ public abstract class BaseFragment<V, T extends BasePresenter<V, FragmentEvent>>
     protected abstract int getContentResId();
 
     protected void initView(View rootView) {
+
+    }
+
+    @Override
+    public void Test() {
 
     }
 }

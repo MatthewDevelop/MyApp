@@ -2,6 +2,7 @@ package cn.foxconn.matthew.myapp.wanandroid.view;
 
 import java.util.List;
 
+import cn.foxconn.matthew.myapp.wanandroid.base.BaseView;
 import cn.foxconn.matthew.myapp.wanandroid.bean.pojo.ArticleBean;
 import cn.foxconn.matthew.myapp.wanandroid.bean.pojo.BannerBean;
 
@@ -11,7 +12,7 @@ import cn.foxconn.matthew.myapp.wanandroid.bean.pojo.BannerBean;
  * @email:guocheng0816@163.com
  */
 
-public interface HomeView {
+public interface HomeView  extends BaseView {
 
     void showRefreshView(Boolean refresh);
 
