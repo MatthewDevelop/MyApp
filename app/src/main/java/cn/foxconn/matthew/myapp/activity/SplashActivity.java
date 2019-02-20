@@ -92,7 +92,7 @@ public class SplashActivity extends AppCompatActivity {
         tvVersion.setText("版本号：" + getVersionName());
         mPref = getSharedPreferences("config", MODE_PRIVATE);
         copyDb("address.db");
-        boolean isAutoUpdate = mPref.getBoolean("auto_update", true);
+        boolean isAutoUpdate = mPref.getBoolean("auto_update", false);
         ThreadFactory checkUpdateFactory = new ThreadFactoryBuilder().setNameFormat("checkUpdate-thread").build();
         fixedThreadPool = new ThreadPoolExecutor(1, 1, 0, TimeUnit.MILLISECONDS, new LinkedBlockingDeque<Runnable>(), checkUpdateFactory);
         if (isAutoUpdate) {

@@ -26,6 +26,7 @@ import cn.foxconn.matthew.myapp.test.TrackingMoreApi;
 import cn.foxconn.matthew.myapp.test.CarrierBean;
 import cn.foxconn.matthew.myapp.utils.NetworkUtil;
 import cn.foxconn.matthew.myapp.wanandroid.activity.WanAndroidActivity;
+import cn.foxconn.matthew.myapp.wanandroid.widget.FontTextView;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 
@@ -42,12 +43,9 @@ public class MainActivity extends BaseActivity {
     @BindView(R.id.gridView)
     GridView mGridView;
 
-    //    String[] names = new String[]{"手机卫士", "玩Android","WebSocket"};
-    String[] names = new String[]{"手机卫士", "玩Android", "快递查询",
-            "Test"};
-    int[] imageIds = new int[]{R.drawable.home_callmsgsafe, R.drawable.ic_launcher_round, R.drawable.ic_launcher_round,
-            R.drawable.ic_launcher_round};
-
+    String[] names = new String[]{"玩Android", "快递查询"};
+//    int[] imageIds = new int[]{R.drawable.ic_launcher_round, R.drawable.ic_launcher_round};
+    int[] icons=new int[]{R.string.ic_android,R.string.ic_express};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,16 +57,16 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 switch (position) {
+//                    case 0:
+//                        startActivity(new Intent(MainActivity.this, MobileSafeActivity.class));
+//                        break;
                     case 0:
-                        startActivity(new Intent(MainActivity.this, MobileSafeActivity.class));
-                        break;
-                    case 1:
                         startActivity(new Intent(MainActivity.this, WanAndroidActivity.class));
                         break;
-                    case 2:
+                    case 1:
                         startActivity(new Intent(MainActivity.this, ExpressQueryActivity.class));
                         break;
-                    case 3:
+//                    case 2:
                         //startActivity(new Intent(MainActivity.this, WebSocketActivity.class));
                         /*new Thread(new Runnable() {
                             @Override
@@ -139,7 +137,7 @@ public class MainActivity extends BaseActivity {
 //                                }
 //                            }
 //                        }).start();
-                        break;
+//                        break;
                     default:
                         break;
                 }
@@ -196,9 +194,10 @@ public class MainActivity extends BaseActivity {
         public View getView(int position, View convertView, ViewGroup parent) {
             View view = getLayoutInflater().inflate(R.layout.home_grid_item, parent, false);
             TextView itemName = view.findViewById(R.id.item_name);
-            ImageView itemIcon = view.findViewById(R.id.item_icon);
+            FontTextView itemIcon = view.findViewById(R.id.item_icon);
             itemName.setText(names[position]);
-            itemIcon.setImageResource(imageIds[position]);
+//            itemIcon.setImageResource(imageIds[position]);
+            itemIcon.setText(icons[position]);
             return view;
         }
     }

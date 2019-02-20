@@ -22,6 +22,8 @@
     <string name="ic_rocket">&#xe68d; </string> <!--小火箭图标-->
     <string name="ic_trash">&#xef32; </string> <!--垃圾桶图标-->
     <string name="ic_plus">&#xe601; </string> <!--加号-->
+    <string name="ic_android">&#xe62a; </string> <!--加号-->
+    <string name="ic_express">&#xe644; </string> <!--加号-->
 
     <string name="action_share">分享</string>
     <string name="copy_link">复制链接</string>

@@ -52,7 +52,9 @@
         android:id="@+id/bt_query"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="@color/main"
+        android:background="@drawable/bt_bg"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:text="查询"
         android:textColor="@color/white"
         android:textSize="18sp" />
