@@ -14,6 +14,8 @@ import cn.foxconn.matthew.myapp.R;
 
 public class AppConst {
 
+    public static final String WAN_ANDROID_HTTPS_BASE_URL="https://www.wanandroid.com/";
+
     public static final String WAN_ANDROID_BASE_URL = "http://wanandroid.com/";
 
     public static final String KUAIDI_100_BASE_URL = "http://www.kuaidi100.com/";

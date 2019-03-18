@@ -1,7 +1,9 @@
 package cn.foxconn.matthew.myapp.wanandroid.adapter;
 
 import android.content.Context;
+import android.os.Build;
 import android.support.annotation.Nullable;
+import android.text.Html;
 import android.view.View;
 import android.widget.TextView;
 
@@ -44,10 +46,17 @@ public class ArticleListAdapter extends BaseQuickAdapter<ArticleBean, BaseViewHo
 
     @Override
     protected void convert(BaseViewHolder helper, final ArticleBean item) {
-        helper.setText(R.id.tv_title, item.getTitle())
-                .setText(R.id.tv_author, item.getAuthor())
-                .setText(R.id.tv_time, item.getNiceDate())
-                .setText(R.id.tv_type, item.getChapterName());
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            helper.setText(R.id.tv_title, Html.fromHtml(item.getTitle(),Html.TO_HTML_PARAGRAPH_LINES_CONSECUTIVE))
+                    .setText(R.id.tv_author, item.getAuthor())
+                    .setText(R.id.tv_time, item.getNiceDate())
+                    .setText(R.id.tv_type, item.getChapterName());
+        }else {
+            helper.setText(R.id.tv_title, Html.fromHtml(item.getTitle()))
+                    .setText(R.id.tv_author, item.getAuthor())
+                    .setText(R.id.tv_time, item.getNiceDate())
+                    .setText(R.id.tv_type, item.getChapterName());
+        }
 
         //判断文章是否被收藏
         final TextView tvCollect = helper.getView(R.id.tv_collect);

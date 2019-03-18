@@ -63,7 +63,7 @@ public class RetrofitServiceManager {
         //创建Retrofit
         mRetrofit = new Retrofit.Builder()
                 .client(builder.build())
-                .baseUrl(AppConst.WAN_ANDROID_BASE_URL)
+                .baseUrl(AppConst.WAN_ANDROID_HTTPS_BASE_URL)
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
