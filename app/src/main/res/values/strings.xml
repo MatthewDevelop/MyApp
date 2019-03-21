@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">WanAndroid</string>
+    <string name="app_name">玩Android</string>
 
     <!--iconfont字体图标-->
     <string name="tab_left">&#xe73e; </string> <!--左对齐-->
