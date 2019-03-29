@@ -1,5 +1,6 @@
 package cn.foxconn.matthew.myapp.activity;
 
+import android.app.DownloadManager;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -17,6 +18,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.AlphaAnimation;
+import android.webkit.MimeTypeMap;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -48,6 +50,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import cn.foxconn.matthew.myapp.R;
 import cn.foxconn.matthew.myapp.app.App;
+import cn.foxconn.matthew.myapp.service.UpdateService;
 import cn.foxconn.matthew.myapp.utils.LogUtil;
 import cn.foxconn.matthew.myapp.utils.StreamUtil;
 
@@ -92,10 +95,11 @@ public class SplashActivity extends AppCompatActivity {
         tvVersion.setText("版本号：" + getVersionName());
         mPref = getSharedPreferences("config", MODE_PRIVATE);
         copyDb("address.db");
-        boolean isAutoUpdate = mPref.getBoolean("auto_update", false);
+        boolean isAutoUpdate = mPref.getBoolean("auto_update", true);
         ThreadFactory checkUpdateFactory = new ThreadFactoryBuilder().setNameFormat("checkUpdate-thread").build();
         fixedThreadPool = new ThreadPoolExecutor(1, 1, 0, TimeUnit.MILLISECONDS, new LinkedBlockingDeque<Runnable>(), checkUpdateFactory);
         if (isAutoUpdate) {
+            Log.e(TAG, "onCreate: 检查版本" );
             checkVersion();
         } else {
             mHandler.sendEmptyMessageDelayed(TYPE_ENTER, 2000);
@@ -161,7 +165,7 @@ public class SplashActivity extends AppCompatActivity {
                 Message msg = Message.obtain();
                 HttpURLConnection connection = null;
                 try {
-                    URL url = new URL("http://10.203.146.158:8080/update.json");
+                    URL url = new URL("https://matthewdev.tech/files/update.json");
                     connection = (HttpURLConnection) url.openConnection();
                     connection.setRequestMethod("GET");
                     connection.setConnectTimeout(5000);
@@ -284,7 +288,12 @@ public class SplashActivity extends AppCompatActivity {
         builder.setPositiveButton("立即更新", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                downloadUpdate();
+//                downloadUpdate();
+                Intent intent=new Intent(SplashActivity.this,UpdateService.class);
+                intent.putExtra("URL", mDownLoadUrl);
+                intent.putExtra("VersionName", mVersionName);
+                SplashActivity.this.startService(intent);
+                enterHome();
             }
         });
         builder.setNegativeButton("以后再说", new DialogInterface.OnClickListener() {
