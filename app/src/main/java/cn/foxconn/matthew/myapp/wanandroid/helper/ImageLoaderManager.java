@@ -6,6 +6,7 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.FutureTarget;
+import com.bumptech.glide.request.RequestOptions;
 
 import java.io.File;
 
@@ -29,10 +30,11 @@ public class ImageLoaderManager {
 
         Glide.with(context)
                 .load(imgUrl)
-                .placeholder(R.drawable.default_img)
-                .dontAnimate() //解决圆形图显示占位图问题
-                .error(R.drawable.default_img)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .apply(new RequestOptions()
+                        .placeholder(R.drawable.default_img)
+                        .dontAnimate()
+                        .error(R.drawable.default_img)
+                        .diskCacheStrategy(DiskCacheStrategy.ALL))
                 .into(imageView);
     }
 

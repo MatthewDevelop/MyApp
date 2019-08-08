@@ -10,6 +10,7 @@ import android.support.test.espresso.core.internal.deps.guava.util.concurrent.Th
 import android.util.Log;
 
 import com.google.gson.Gson;
+import com.tencent.bugly.crashreport.CrashReport;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -68,6 +69,11 @@ public class App extends Application {
         ThreadFactory initDatabase = new ThreadFactoryBuilder().setNameFormat("init-database-thread").build();
         fixedThreadPool = new ThreadPoolExecutor(1, 1, 0, TimeUnit.MILLISECONDS, new LinkedBlockingDeque<Runnable>(), initDatabase);
         initDataBase();
+        initBugly();
+    }
+
+    private void initBugly() {
+        CrashReport.initCrashReport(getApplicationContext(), "9ef3850ba1", true);
     }
 
     private void initDataBase() {
